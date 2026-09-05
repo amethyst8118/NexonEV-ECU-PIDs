@@ -5,7 +5,7 @@ on version). Files are plain JSON, so you can edit them in any text editor.
 
 | File | Sensors | Header | Response |
 |------|---------|--------|----------|
-| `NexonEV_BMS_KPD.csp` | 39 | **`785`** (11-bit) | `78D` |
+| `NexonEV_BMS_KPD.csp` | 40 | **`785`** (11-bit) — plus one `7E3` sensor | `78D` / `7EB` |
 | `NexonEV_VECU.csp` | 183 | `7E3` (11-bit) | `7EB` |
 | `NexonEV_VECU_battery.csp` | 23 | `7E3` (11-bit) | `7EB` |
 
@@ -44,6 +44,61 @@ So, in order:
    [`Nexon_EV_All_PIDs.md`](../Nexon_EV_All_PIDs.md) for the 29-bit addressing.
 
 Both transports carry the same `34xx` DID block, so nothing else in the file changes.
+
+## Reading `Cell Balance Status [bits]`
+
+`$3479` packs six flags into one byte, and the profile shows it as a **decimal
+number**, not as separate switches. Decode it by ANDing the masks:
+
+| Mask | Bit | Signal | Set means |
+|------|-----|--------|-----------|
+| `0x01` | 0 | BMS_DerateFlag | power derating active |
+| `0x02` | 1 | **BMS_CellBalanceStatus** | **balancing running now** |
+| `0x04` | 2 | HSC_BCM_LEAKAGE_ENA | leakage detection enabled |
+| `0x08` | 3 | VCU_Charging_Flag | charging |
+| `0x10` | 4 | VCU_HVILDetect | HVIL detection enabled |
+| `0x20` | 5 | **VCU_EqualizationTrigger** | VCU requested balancing |
+
+Common values, in decimal as CarScanner shows them:
+
+| Shows | Meaning |
+|-------|---------|
+| `0` | parked, idle |
+| `8` | charging, not balancing |
+| `40` | charging, VCU asked — BMS declined, conditions not met |
+| `42` | charging **and balancing** |
+| `16` | driving |
+| `17` | driving, power derating active |
+
+**On the range.** The six documented masks OR together to `0x3F`, so any combination
+of *known* flags lands between 0 and 63. The DID is a full byte, though, and bits 6
+and 7 (`0x40`, `0x80`) are **not defined in any Tata database** — the ECU may still
+use them. The sensor is therefore left at 0–255 rather than clamped to 63, so that
+an undocumented bit shows up as a value above 63 instead of being silently hidden.
+If you ever see one, that is a real finding worth reporting.
+
+### The VECU side of the same signal
+
+`VECU Equalization Cmd [code]` is `$34BC` on the VECU, header **`7E3`** — the only
+sensor in this file that is not on `785`. It is the *request* half of the pair:
+`$3479` bit 5 is the BMS confirming it received a trigger, and `$34BC` is the VECU
+issuing one.
+
+It is included here deliberately, because the VECU is reachable from OBD pins 6/14
+even where the BMS is not. If the rest of this profile is blank but this sensor
+reads, you can still see when the car asks for balancing — just not whether the
+battery acted on it.
+
+Reading the two together:
+
+| `$34BC` | `$3479` bit 5 | Meaning |
+|---------|---------------|---------|
+| active | set | VECU asked, BMS heard it |
+| active | clear | request not reaching the BMS |
+| idle | set | trigger latched from an earlier request |
+
+No database defines the value set for `$34BC`, so it is shown as a raw code rather
+than a decoded on/off. Watch it across a charge to learn its states.
 
 ## Known limitations
 
