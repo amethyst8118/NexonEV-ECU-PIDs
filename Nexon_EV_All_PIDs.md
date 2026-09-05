@@ -209,82 +209,187 @@ Most ECUs use **500 kbps CAN, Extended Frame (29-bit)**. The **VECU** answers on
 
 ---
 
-## 1B. BMS (Nexon EV Max — KPD / K1AIO-K2AIO variant)
+## 1B. BMS — Nexon EV Max (KPD / K1AIO-K2AIO)
 
-> The Nexon EV Max battery. Distinct from the Gotion BMS above: `34xx` DID block,
-> target `0x96`. Cross-verified against the community `tata-ev-bms` project
-> (reverse-engineered on a 2023 Nexon EV Max) — DID map matches.
+> The Nexon EV Max battery pack. Distinct from the Gotion BMS above: `34xx` DID
+> block, target `0x96`. Extracted from `KPD_EV_BMS.inf` (TDS 8.9S) — all three DID
+> tables (identifiers, value-type, byte-type) — and cross-verified against the
+> community `tata-ev-bms` project (2023 Nexon EV Max).
 
-### CAN IDs
-| Direction | CAN ID |
-|-----------|--------|
+### Bus / session
+| Setting | Value |
+|---------|-------|
 | Request (Tester → ECU) | `0x1BDA96F1` |
 | Response (ECU → Tester) | `0x1BDAF196` |
+| Frame format | **29-bit extended** |
+| Bit rate | 500 kbps |
+| Physical bus | **Powertrain CAN — OBD pins 3 (H) / 11 (L)** |
+| Session | `10 03` (extended) before reads |
+| Service | `22` ReadDataByIdentifier |
 
-### Identification PIDs (Service 0x22)
+> ⚠️ Not reachable from OBD pins 6/14 — the gateway does not route diagnostics
+> to the BMS. Verified by live sweep: only the VECU (`0x7E3`) answers there.
+
+### Key live values
+
+The 19 worth logging. `raw` = the big-endian integer from the response payload.
+
+| DID | Signal | B | Unit | Conversion |
+|-----|--------|---|------|------------|
+| `3400` | BMS_BattCurVoltage | 2 | V | `raw × 0.1` |
+| `3401` | BMS_BattCurCurrent | 2 | A | `raw × 0.1 − 3200` |
+| `3402` | BMS_SOC | 2 | % | `raw × 0.1` |
+| `3403` | BMS_SOH | 2 | % | `raw × 0.1` |
+| `3409` | BMS_MaxPresentTemp | 1 | °C | `raw − 40` |
+| `340B` | BMS_MinPresentTemp | 1 | °C | `raw − 40` |
+| `3410` | BMS_InletTemp | 1 | °C | `raw − 40` |
+| `3411` | BMS_OutletTemp | 1 | °C | `raw − 40` |
+| `3412` | BMS_BattPresentAverageTemp | 1 | °C | `raw − 40` |
+| `3413` | BMS_InsulationResValue | 2 | kΩ | `raw` |
+| `3415` | BMS_MaxCellVolt | 2 | mV | `raw` |
+| `3417` | BMS_MinCellVolt | 2 | mV | `raw` |
+| `3419` | BMS_MaxCellVoltNo | 1 | – | `raw` |
+| `341A` | BMS_MinCellVoltNo | 1 | – | `raw` |
+| `3492` | BMS_PowerSupply voltage | 2 | V | `raw × 0.001` |
+| `34D5` | BMS_CellVolDiff | 2 | mV | `raw` |
+
+### All scalar PIDs
+
+| DID | Signal | B | Unit | Conversion | Range |
+|-----|--------|---|------|------------|-------|
+| `3400` | BMS_BattCurVoltage | 2 | V | `raw × 0.1` | 0 … 6553.5 |
+| `3401` | BMS_BattCurCurrent | 2 | A | `raw × 0.1 − 3200` | -3200 … 3353.5 |
+| `3402` | BMS_SOC | 2 | % | `raw × 0.1` | 0 … 6553.5 |
+| `3403` | BMS_SOH | 2 | % | `raw × 0.1` | 0 … 6553.5 |
+| `3406` | BMS_HeartbeatSignal | 1 | – | `raw` | 0 … 255 |
+| `3409` | BMS_MaxPresentTemp | 1 | °C | `raw − 40` | -40 … 215 |
+| `340A` | BMS_MaxTempProbeNo | 1 | – | `raw` | 0 … 255 |
+| `340B` | BMS_MinPresentTemp | 1 | °C | `raw − 40` | -40 … 215 |
+| `340C` | BMS_MinTempProbeNo | 1 | – | `raw` | 0 … 255 |
+| `340D` | BMS_FltRank | 1 | – | `raw` | 0 … 255 |
+| `3410` | BMS_InletTemp | 1 | °C | `raw − 40` | -40 … 215 |
+| `3411` | BMS_OutletTemp | 1 | °C | `raw − 40` | -40 … 215 |
+| `3412` | BMS_BattPresentAverageTemp | 1 | °C | `raw − 40` | -40 … 215 |
+| `3413` | BMS_InsulationResValue | 2 | kΩ | `raw` | 0 … 65535 |
+| `3415` | BMS_MaxCellVolt | 2 | mV | `raw` | 0 … 65535 |
+| `3417` | BMS_MinCellVolt | 2 | mV | `raw` | 0 … 65535 |
+| `3419` | BMS_MaxCellVoltNo | 1 | – | `raw` | 0 … 255 |
+| `341A` | BMS_MinCellVoltNo | 1 | – | `raw` | 0 … 255 |
+| `341B` | BMS_TotalTempProbeNumber | 1 | – | `raw` | 0 … 255 |
+| `347A` | BMS_OperMod | 1 | – | `raw` | 0 … 255 |
+| `347B` | BMS_MaxAllowContinusChrgCurr | 2 | A | `raw × 0.1` | 0 … 6553.5 |
+| `347C` | BMS_MaxAllowContinusDisChrgCurr | 2 | A | `raw × 0.1` | 0 … 6553.5 |
+| `347D` | BMS_AllowedMaxContinusOutPower ¹ | 2 | kW | `raw × 0.1` | 0 … 6553.5 |
+| `347E` | BMS_AllowedMaxPeakOutPower ¹ | 2 | kW | `raw × 0.1` | 0 … 6553.5 |
+| `347F` | BMS_AllowedMaxPeakFBPower ¹ | 2 | kW | `raw × 0.1` | 0 … 6553.5 |
+| `3480` | BMS_AllowedMaxContinusFBPower ¹ | 2 | kW | `raw × 0.1` | 0 … 6553.5 |
+| `3481` | VeDATM_U_NegBusbarVolt1 | 2 | V | `raw × 0.1` | 0 … 6553.5 |
+| `3482` | VeDATM_U_PosBusbarVolt1 | 2 | V | `raw × 0.1` | 0 … 6553.5 |
+| `3483` | VCU_BMSModeReq | 1 | – | `raw` | 0 … 255 |
+| `3484` | MCU_Vdc | 2 | V | `raw` | 0 … 65535 |
+| `3485` | BMS_RealTime | 6 | – | 6-byte packed (date/time) | – |
+| `3492` | BMS_PowerSupply voltage | 2 | V | `raw × 0.001` | 0 … 65.535 |
+| `34D5` | BMS_CellVolDiff | 2 | mV | `raw` | 0 … 65535 |
+
+¹ DB declares the unit as `A`, but the signal names say *power*. Read as **kW**
+  (0.1 kW/bit) and sanity-check against pack V × A on the car.
+
+### State / enumerated PIDs
+
+These decode to text, not numbers — they are why a plain scalar dump looks wrong.
+
+**`3404` BMS_MaiRlyNClsd** (1 byte)
+
+| Signal | Value | Meaning |
+|--------|-------|---------|
+| BMS_MaiRlyNClsd | `0` | open |
+| BMS_MaiRlyNClsd | `1` | close |
+| BMS_MaiRlyPClsd | `0` | open |
+| BMS_MaiRlyPClsd | `1` | close |
+| BMS_PreRlyClsd | `0` | open |
+| BMS_PreRlyClsd | `1` | close |
+
+> ⚠️ The DB lists all three relay signals on this one DID with mask `FF`.
+> That is almost certainly an authoring slip — in the real frame they are
+> bit 0 / bit 1 / bit 2 of the single byte. Verify on the car before trusting.
+
+**`3405` BMS_InitState** (1 byte)
+
+| Value | Meaning |
+|-------|---------|
+| `0` | initialing |
+| `1` | init OK |
+
+**`3493` BMS_SOC_CalibrationFlag** (1 byte)
+
+| Value | Meaning |
+|-------|---------|
+| `0` | not reached |
+| `1` | reached |
+
+**`3494` BMS_SOCCalActFlag** (1 byte)
+
+| Value | Meaning |
+|-------|---------|
+| `0` | Not Calibrated |
+| `1` | SOC 100% calibration |
+| `2` | SOC 99% calibration |
+| `3` | SOC 95% calibration |
+| `4` | SOC 0% calibration |
+
+**`3414` BMS_Insulation_Enable** (1 byte)
+
+| Value | Meaning |
+|-------|---------|
+| `0` | disable |
+| `1` | enable |
+
+**`341C` BMS_ChargingPortConnectionStatus** (1 byte)
+
+| Value | Meaning |
+|-------|---------|
+| `0` | connect |
+| `1` | disconnect |
+
+> ⚠️ Note the polarity: **`0` = connected**, `1` = disconnected.
+
+**`3479` BMS_CellBalanceStatus** (1 byte — packed bit flags)
+
+| Mask | Bit | Signal | 0 | 1 |
+|------|-----|--------|---|---|
+| `0x01` | 0 | BMS_DerateFlag | disable | enable |
+| `0x02` | 1 | BMS_CellBalanceStatus | disable | enable |
+| `0x04` | 2 | HSC_BCM_LEAKAGE_ENA | disable | enable |
+| `0x08` | 3 | VCU_Charging_Flag | disable | enable |
+| `0x10` | 4 | VCU_HVILDetect | disable | enable |
+| `0x20` | 5 | VCU_EqualizationTrigger | disable | enable |
+
+> One read of `22 3479` gives you all six flags. Six separate signals were
+> collapsed into this byte — earlier extracts reported only the DID name.
+
+### Identification PIDs
+
 | DID | Name | Bytes |
 |-----|------|-------|
-| `$F18C` | Supplier ECU Serial Number | 8 |
-| `$F192` | Supplier ECU part number | 8 |
-| `$F191` | TML ECU hardware number | 15 |
-| `$F187` | TML Container Part Number ( Assembly No) | 15 |
-| `$F19C` | TML Software calibration identification Number | 16 |
-| `$F188` | TML ECU software number | 15 |
-| `$F198` | Reprogramming Counter | 2 |
-| `$F199` | Date of Last Programming in the format [ DD - MM - YYYY ] | 4 |
-| `$F190` | Vehicle Identification Number | 17 |
-| `$F197` | Variant Dataset Identification Number (Variant Coding) | 5 |
-| `$F1A0` | Vehicle configuration Number | 15 |
-| `$F1A1` | Parameter Part Number | 17 |
-| `$F1A2` | Programming Shop Code | 5 |
-| `$F1A3` | Unique ID for Flashing / OTA | 20 |
-| `$F1A4` | Reserved for Future Use | 20 |
+| `F18C` | Supplier ECU Serial Number | 8 |
+| `F192` | Supplier ECU part number | 8 |
+| `F191` | TML ECU hardware number | 15 |
+| `F187` | TML Container Part Number ( Assembly No) | 15 |
+| `F19C` | TML Software calibration identification Number | 16 |
+| `F188` | TML ECU software number | 15 |
+| `F198` | Reprogramming Counter | 2 |
+| `F199` | Date of Last Programming in the format [ DD - MM - YYYY ] | 4 |
+| `F190` | Vehicle Identification Number | 17 |
+| `F197` | Variant Dataset Identification Number (Variant Coding) | 5 |
+| `F1A0` | Vehicle configuration Number | 15 |
+| `F1A1` | Parameter Part Number | 17 |
+| `F1A2` | Programming Shop Code | 5 |
+| `F1A3` | Unique ID for Flashing / OTA | 20 |
+| `F1A4` | Reserved for Future Use | 20 |
 
-### Live Data PIDs (Service 0x22)
-| DID | Name | Bytes | Unit | Formula |
-|-----|------|-------|------|---------|
-| `$3400` | BMS_BattCurVoltage | 2 | V | ×0.1 |
-| `$3401` | BMS_BattCurCurrent | 2 | A | ×0.1 - 3200 |
-| `$3402` | BMS_SOC | 2 | % | ×0.1 |
-| `$3403` | BMS_SOH | 2 | % | ×0.1 |
-| `$3404` | BMS_MaiRlyNClsd | 1 | - | direct |
-| `$3405` | BMS_InitState | 1 | - | direct |
-| `$3406` | BMS_HeartbeatSignal | 1 | - | direct |
-| `$3409` | BMS_MaxPresentTemp | 1 | °C | -40 offset |
-| `$340A` | BMS_MaxTempProbeNo | 1 | - | direct |
-| `$340B` | BMS_MinPresentTemp | 1 | °C | -40 offset |
-| `$340C` | BMS_MinTempProbeNo | 1 | - | direct |
-| `$3493` | BMS_SOC_CalibrationFlag | 1 | - | direct |
-| `$340D` | BMS_FltRank | 1 | - | direct |
-| `$3494` | BMS_SOCCalActFlag | 1 | - | direct |
-| `$3410` | BMS_InletTemp | 1 | °C | -40 offset |
-| `$3411` | BMS_OutletTemp | 1 | °C | -40 offset |
-| `$3412` | BMS_BattPresentAverageTemp | 1 | °C | -40 offset |
-| `$3413` | BMS_InsulationResValue | 2 | kΩ | direct |
-| `$3414` | BMS_Insulation_Enable | 1 | - | direct |
-| `$3415` | BMS_MaxCellVolt | 2 | mV | direct |
-| `$3417` | BMS_MinCellVolt | 2 | mV | direct |
-| `$3419` | BMS_MaxCellVoltNo | 1 | - | direct |
-| `$341A` | BMS_MinCellVoltNo | 1 | - | direct |
-| `$341B` | BMS_TotalTempProbeNumber | 1 | - | direct |
-| `$341C` | BMS_ChargingPortConnectionStatus | 1 | - | direct |
-| `$3479` | BMS_CellBalanceStatus | 1 | - | direct |
-| `$347A` | BMS_OperMod | 1 | - | direct |
-| `$347B` | BMS_MaxAllowContinusChrgCurr | 2 | A | ×0.1 |
-| `$347C` | BMS_MaxAllowContinusDisChrgCurr | 2 | A | ×0.1 |
-| `$347D` | BMS_AllowedMaxContinusOutPower | 2 | A | ×0.1 |
-| `$347E` | BMS_AllowedMaxPeakOutPower | 2 | A | ×0.1 |
-| `$347F` | BMS_AllowedMaxPeakFBPower | 2 | A | ×0.1 |
-| `$3480` | BMS_AllowedMaxContinusFBPower | 2 | A | ×0.1 |
-| `$3481` | VeDATM_U_NegBusbarVolt1 | 2 | V | ×0.1 |
-| `$3482` | VeDATM_U_PosBusbarVolt1 | 2 | V | ×0.1 |
-| `$3483` | VCU_BMSModeReq | 1 | - | direct |
-| `$3484` | MCU_Vdc | 2 | V | direct |
-| `$3485` | BMS_RealTime | 6 | - | direct |
-| `$3492` | BMS_PowerSupply voltage | 2 | V | ×0.001 |
-| `$34D5` | BMS_CellVolDiff | 2 | mV | direct |
+`22 F197` returns the variant-coding string — use it to confirm you are talking
+to the BMS and not another ECU.
 
----
 
 ## 2. VECU (Vehicle Control Unit) — Nexon EV (VECU_R15.2)
 
