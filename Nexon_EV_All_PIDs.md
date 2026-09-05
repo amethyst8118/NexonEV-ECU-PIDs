@@ -211,149 +211,126 @@ Most ECUs use **500 kbps CAN, Extended Frame (29-bit)**. The **VECU** answers on
 
 ## 1B. BMS — Nexon EV Max (KPD / K1AIO-K2AIO)
 
-> The Nexon EV Max battery pack. Distinct from the Gotion BMS above: `34xx` DID
-> block, target `0x96`. Extracted from `KPD_EV_BMS.inf` (TDS 8.9S) — all three DID
-> tables (identifiers, value-type, byte-type) — and cross-verified against the
-> community `tata-ev-bms` project (2023 Nexon EV Max).
+> The Nexon EV Max battery pack, `34xx` DID block, target `0x96`. Extracted from
+> all four DID tables of `KPD_EV_BMS.inf` (TDS 8.9S), cross-checked against the
+> Gotion, CESL and Kratos BMS databases and against Tata's own BMS DTC service
+> manuals, and independently corroborated by the community `tata-ev-bms` project
+> (reverse-engineered on a 2023 Nexon EV Max).
 
-### Bus / session
+Confidence markers used below: ✔ corroborated by an independent source ·
+△ corrected or adjusted, with the reason given · ? unverified, calibrate on
+the car.
+
+### Bus, session and transport
+
 | Setting | Value |
 |---------|-------|
 | Request (Tester → ECU) | `0x1BDA96F1` |
 | Response (ECU → Tester) | `0x1BDAF196` |
-| Frame format | **29-bit extended** |
+| Frame format | **29-bit extended** (`CanFrameFormat=2`) |
 | Bit rate | 500 kbps |
 | Physical bus | **Powertrain CAN — OBD pins 3 (H) / 11 (L)** |
-| Session | `10 03` (extended) before reads |
-| Service | `22` ReadDataByIdentifier |
+| Session | `10 03` extended (`DiagnosticMode=0x03`) |
+| Padding | pad every frame to 8 bytes (`SendAlways8Bytes=TRUE`) |
+| Inter-byte delay | 3 ms |
 
-> ⚠️ Not reachable from OBD pins 6/14 — the gateway does not route diagnostics
-> to the BMS. Verified by live sweep: only the VECU (`0x7E3`) answers there.
+> ⚠️ **Not reachable from OBD pins 6/14.** The gateway does not route
+> diagnostic requests to the BMS. Verified by live sweep: on pins 6/14 only the
+> VECU (`0x7E3`) answers — an 11-bit sweep of `780`–`7E7` and a 29-bit sweep
+> including `1BDA96F1` were both silent for the BMS.
+
+Any response longer than 7 payload bytes uses ISO-TP: the ECU sends a First Frame
+(`10 LL ...`) and will not continue until you reply with a Flow Control frame
+(`30 00 00`). Every identification PID below is multi-frame.
+
+### Services
+
+| Purpose | Request |
+|---------|---------|
+| Read data by identifier | `22 <DID>` |
+| Read DTCs | `19 02 FF` |
+| Read freeze-frame / environment data | `19 06 <DTC hi> <DTC mid> <DTC lo> 03` |
+| Clear DTCs | `14 FF FF FF` |
+| Routine — Save Parameter | `31 01 02 22`; `31 02 02 22` stop, `31 03 02 22` status |
 
 ### Key live values
 
-The 19 worth logging. `raw` = the big-endian integer from the response payload.
+The subset worth logging. `raw` is the big-endian integer of the payload bytes,
+which begin at byte 4 of the response (`62 <hi> <lo> <data…>`).
 
-| DID | Signal | B | Unit | Conversion |
-|-----|--------|---|------|------------|
-| `3400` | BMS_BattCurVoltage | 2 | V | `raw × 0.1` |
-| `3401` | BMS_BattCurCurrent | 2 | A | `raw × 0.1 − 3200` |
-| `3402` | BMS_SOC | 2 | % | `raw × 0.1` |
-| `3403` | BMS_SOH | 2 | % | `raw × 0.1` |
-| `3409` | BMS_MaxPresentTemp | 1 | °C | `raw − 40` |
-| `340B` | BMS_MinPresentTemp | 1 | °C | `raw − 40` |
-| `3410` | BMS_InletTemp | 1 | °C | `raw − 40` |
-| `3411` | BMS_OutletTemp | 1 | °C | `raw − 40` |
-| `3412` | BMS_BattPresentAverageTemp | 1 | °C | `raw − 40` |
-| `3413` | BMS_InsulationResValue | 2 | kΩ | `raw` |
-| `3415` | BMS_MaxCellVolt | 2 | mV | `raw` |
-| `3417` | BMS_MinCellVolt | 2 | mV | `raw` |
-| `3419` | BMS_MaxCellVoltNo | 1 | – | `raw` |
-| `341A` | BMS_MinCellVoltNo | 1 | – | `raw` |
-| `3492` | BMS_PowerSupply voltage | 2 | V | `raw × 0.001` |
-| `34D5` | BMS_CellVolDiff | 2 | mV | `raw` |
+| DID | Signal | B | Unit | Conversion | |
+|-----|--------|---|------|------------|---|
+| `3400` | BMS_BattCurVoltage | 2 | V | `raw × 0.1` | ✔ |
+| `3401` | BMS_BattCurCurrent | 2 | A | `raw × 0.1 − 3200` | ✔ |
+| `3402` | BMS_SOC | 2 | % | `raw × 0.1` | ✔ |
+| `3403` | BMS_SOH | 2 | % | `raw × 0.1` | ✔ |
+| `3415` | BMS_MaxCellVolt | 2 | mV | `raw` | ✔ |
+| `3417` | BMS_MinCellVolt | 2 | mV | `raw` | ✔ |
+| `34D5` | BMS_CellVolDiff | 2 | mV | `raw` | ✔ |
+| `3419` | BMS_MaxCellVoltNo | 1 | – | `raw` | ✔ |
+| `341A` | BMS_MinCellVoltNo | 1 | – | `raw` | ✔ |
+| `3409` | BMS_MaxPresentTemp | 1 | °C | `raw − 40` | ✔ |
+| `340B` | BMS_MinPresentTemp | 1 | °C | `raw − 40` | ✔ |
+| `3412` | BMS_BattPresentAverageTemp | 1 | °C | `raw − 40` | ✔ |
+| `3413` | BMS_InsulationResValue | 2 | kΩ | `raw` |  |
+| `3492` | BMS_PowerSupply voltage | 2 | V | `raw × 0.001` | △ |
 
 ### All scalar PIDs
 
-| DID | Signal | B | Unit | Conversion | Range |
-|-----|--------|---|------|------------|-------|
-| `3400` | BMS_BattCurVoltage | 2 | V | `raw × 0.1` | 0 … 6553.5 |
-| `3401` | BMS_BattCurCurrent | 2 | A | `raw × 0.1 − 3200` | -3200 … 3353.5 |
-| `3402` | BMS_SOC | 2 | % | `raw × 0.1` | 0 … 6553.5 |
-| `3403` | BMS_SOH | 2 | % | `raw × 0.1` | 0 … 6553.5 |
-| `3406` | BMS_HeartbeatSignal | 1 | – | `raw` | 0 … 255 |
-| `3409` | BMS_MaxPresentTemp | 1 | °C | `raw − 40` | -40 … 215 |
-| `340A` | BMS_MaxTempProbeNo | 1 | – | `raw` | 0 … 255 |
-| `340B` | BMS_MinPresentTemp | 1 | °C | `raw − 40` | -40 … 215 |
-| `340C` | BMS_MinTempProbeNo | 1 | – | `raw` | 0 … 255 |
-| `340D` | BMS_FltRank | 1 | – | `raw` | 0 … 255 |
-| `3410` | BMS_InletTemp | 1 | °C | `raw − 40` | -40 … 215 |
-| `3411` | BMS_OutletTemp | 1 | °C | `raw − 40` | -40 … 215 |
-| `3412` | BMS_BattPresentAverageTemp | 1 | °C | `raw − 40` | -40 … 215 |
-| `3413` | BMS_InsulationResValue | 2 | kΩ | `raw` | 0 … 65535 |
-| `3415` | BMS_MaxCellVolt | 2 | mV | `raw` | 0 … 65535 |
-| `3417` | BMS_MinCellVolt | 2 | mV | `raw` | 0 … 65535 |
-| `3419` | BMS_MaxCellVoltNo | 1 | – | `raw` | 0 … 255 |
-| `341A` | BMS_MinCellVoltNo | 1 | – | `raw` | 0 … 255 |
-| `341B` | BMS_TotalTempProbeNumber | 1 | – | `raw` | 0 … 255 |
-| `347A` | BMS_OperMod | 1 | – | `raw` | 0 … 255 |
-| `347B` | BMS_MaxAllowContinusChrgCurr | 2 | A | `raw × 0.1` | 0 … 6553.5 |
-| `347C` | BMS_MaxAllowContinusDisChrgCurr | 2 | A | `raw × 0.1` | 0 … 6553.5 |
-| `347D` | BMS_AllowedMaxContinusOutPower ¹ | 2 | kW | `raw × 0.1` | 0 … 6553.5 |
-| `347E` | BMS_AllowedMaxPeakOutPower ¹ | 2 | kW | `raw × 0.1` | 0 … 6553.5 |
-| `347F` | BMS_AllowedMaxPeakFBPower ¹ | 2 | kW | `raw × 0.1` | 0 … 6553.5 |
-| `3480` | BMS_AllowedMaxContinusFBPower ¹ | 2 | kW | `raw × 0.1` | 0 … 6553.5 |
-| `3481` | VeDATM_U_NegBusbarVolt1 | 2 | V | `raw × 0.1` | 0 … 6553.5 |
-| `3482` | VeDATM_U_PosBusbarVolt1 | 2 | V | `raw × 0.1` | 0 … 6553.5 |
-| `3483` | VCU_BMSModeReq | 1 | – | `raw` | 0 … 255 |
-| `3484` | MCU_Vdc | 2 | V | `raw` | 0 … 65535 |
-| `3485` | BMS_RealTime | 6 | – | 6-byte packed (date/time) | – |
-| `3492` | BMS_PowerSupply voltage | 2 | V | `raw × 0.001` | 0 … 65.535 |
-| `34D5` | BMS_CellVolDiff | 2 | mV | `raw` | 0 … 65535 |
+| DID | Signal | B | Unit | Conversion | Plausible range | |
+|-----|--------|---|------|------------|-----------------|---|
+| `3400` | BMS_BattCurVoltage | 2 | V | `raw × 0.1` | 0 … 450 | ✔ |
+| `3401` | BMS_BattCurCurrent | 2 | A | `raw × 0.1 − 3200` | -400 … 400 | ✔ |
+| `3402` | BMS_SOC | 2 | % | `raw × 0.1` | 0 … 100 | ✔ |
+| `3403` | BMS_SOH | 2 | % | `raw × 0.1` | 0 … 100 | ✔ |
+| `3406` | BMS_HeartbeatSignal | 1 | – | `raw` | 0 … 255 |  |
+| `3409` | BMS_MaxPresentTemp | 1 | °C | `raw − 40` | -40 … 80 | ✔ |
+| `340A` | BMS_MaxTempProbeNo | 1 | – | `raw` | 0 … 255 |  |
+| `340B` | BMS_MinPresentTemp | 1 | °C | `raw − 40` | -40 … 80 | ✔ |
+| `340C` | BMS_MinTempProbeNo | 1 | – | `raw` | 0 … 255 |  |
+| `340D` | BMS_FltRank | 1 | – | `raw` | 0 … 255 |  |
+| `3410` | BMS_InletTemp | 1 | °C | `raw − 40` | -40 … 80 |  |
+| `3411` | BMS_OutletTemp | 1 | °C | `raw − 40` | -40 … 80 | ✔ |
+| `3412` | BMS_BattPresentAverageTemp | 1 | °C | `raw − 40` | -40 … 80 | ✔ |
+| `3413` | BMS_InsulationResValue | 2 | kΩ | `raw` | 0 … 10000 |  |
+| `3415` | BMS_MaxCellVolt | 2 | mV | `raw` | 2500 … 4500 | ✔ |
+| `3417` | BMS_MinCellVolt | 2 | mV | `raw` | 2500 … 4500 | ✔ |
+| `3419` | BMS_MaxCellVoltNo | 1 | – | `raw` | 0 … 255 | ✔ |
+| `341A` | BMS_MinCellVoltNo | 1 | – | `raw` | 0 … 255 | ✔ |
+| `341B` | BMS_TotalTempProbeNumber | 1 | – | `raw` | 0 … 255 |  |
+| `347A` | BMS_OperMod | 1 | – | `raw` | 0 … 255 |  |
+| `347B` | BMS_MaxAllowContinusChrgCurr | 2 | A | `raw × 0.1` | 0 … 400 |  |
+| `347C` | BMS_MaxAllowContinusDisChrgCurr | 2 | A | `raw × 0.1` | 0 … 400 |  |
+| `347D` | BMS_AllowedMaxContinusOutPower | 2 | kW | `raw × 0.1` | 0 … 150 | △ |
+| `347E` | BMS_AllowedMaxPeakOutPower | 2 | kW | `raw × 0.1` | 0 … 150 | △ |
+| `347F` | BMS_AllowedMaxPeakFBPower | 2 | kW | `raw × 0.1` | 0 … 150 | △ |
+| `3480` | BMS_AllowedMaxContinusFBPower | 2 | kW | `raw × 0.1` | 0 … 150 | △ |
+| `3481` | VeDATM_U_NegBusbarVolt1 | 2 | V | `raw × 0.1` | 0 … 450 |  |
+| `3482` | VeDATM_U_PosBusbarVolt1 | 2 | V | `raw × 0.1` | 0 … 450 |  |
+| `3483` | VCU_BMSModeReq | 1 | – | `raw` | 0 … 255 |  |
+| `3484` | MCU_Vdc | 2 | V | `raw` | 0 … 450 | ? |
+| `3492` | BMS_PowerSupply voltage | 2 | V | `raw × 0.001` | 0 … 16 | △ |
+| `34D5` | BMS_CellVolDiff | 2 | mV | `raw` | 0 … 500 | ✔ |
 
-¹ DB declares the unit as `A`, but the signal names say *power*. Read as **kW**
-  (0.1 kW/bit) and sanity-check against pack V × A on the car.
+Ranges are sensible display bounds, not database values — the DB records only
+the raw integer span.
 
-### State / enumerated PIDs
+- `347D` **BMS_AllowedMaxContinusOutPower** — unit corrected — the DB says A, but Gotion's BMS DB carries the same four signal names at the same 0.1 resolution with unit KW
+- `347E` **BMS_AllowedMaxPeakOutPower** — unit corrected — the DB says A, but Gotion's BMS DB carries the same four signal names at the same 0.1 resolution with unit KW
+- `347F` **BMS_AllowedMaxPeakFBPower** — unit corrected — the DB says A, but Gotion's BMS DB carries the same four signal names at the same 0.1 resolution with unit KW
+- `3480` **BMS_AllowedMaxContinusFBPower** — unit corrected — the DB says A, but Gotion's BMS DB carries the same four signal names at the same 0.1 resolution with unit KW
+- `3484` **MCU_Vdc** — res=1 V per the DB; no sibling database defines this signal — verify against pack voltage
+- `3492` **BMS_PowerSupply voltage** — res 0.001 means the raw value is millivolts; other packs use 0.1 or 0.01, so do not substitute theirs
 
-These decode to text, not numbers — they are why a plain scalar dump looks wrong.
+`3485` **BMS_RealTime** is 6 bytes and is not a scalar. CESL's BMS splits the same clock
+into six DIDs — seconds, minutes, hours, month, day, year — so these are
+almost certainly the same six fields packed into one read. The byte order is
+not recorded in the database.
 
-**`3404` BMS_MaiRlyNClsd** (1 byte)
+### Bit-packed status — `$3479`
 
-| Signal | Value | Meaning |
-|--------|-------|---------|
-| BMS_MaiRlyNClsd | `0` | open |
-| BMS_MaiRlyNClsd | `1` | close |
-| BMS_MaiRlyPClsd | `0` | open |
-| BMS_MaiRlyPClsd | `1` | close |
-| BMS_PreRlyClsd | `0` | open |
-| BMS_PreRlyClsd | `1` | close |
-
-> ⚠️ The DB lists all three relay signals on this one DID with mask `FF`.
-> That is almost certainly an authoring slip — in the real frame they are
-> bit 0 / bit 1 / bit 2 of the single byte. Verify on the car before trusting.
-
-**`3405` BMS_InitState** (1 byte)
-
-| Value | Meaning |
-|-------|---------|
-| `0` | initialing |
-| `1` | init OK |
-
-**`3493` BMS_SOC_CalibrationFlag** (1 byte)
-
-| Value | Meaning |
-|-------|---------|
-| `0` | not reached |
-| `1` | reached |
-
-**`3494` BMS_SOCCalActFlag** (1 byte)
-
-| Value | Meaning |
-|-------|---------|
-| `0` | Not Calibrated |
-| `1` | SOC 100% calibration |
-| `2` | SOC 99% calibration |
-| `3` | SOC 95% calibration |
-| `4` | SOC 0% calibration |
-
-**`3414` BMS_Insulation_Enable** (1 byte)
-
-| Value | Meaning |
-|-------|---------|
-| `0` | disable |
-| `1` | enable |
-
-**`341C` BMS_ChargingPortConnectionStatus** (1 byte)
-
-| Value | Meaning |
-|-------|---------|
-| `0` | connect |
-| `1` | disconnect |
-
-> ⚠️ Note the polarity: **`0` = connected**, `1` = disconnected.
-
-**`3479` BMS_CellBalanceStatus** (1 byte — packed bit flags)
+One read of `22 3479` returns six independent flags in a single byte. The masks
+are explicit in the database, so this decode is reliable.
 
 | Mask | Bit | Signal | 0 | 1 |
 |------|-----|--------|---|---|
@@ -364,8 +341,187 @@ These decode to text, not numbers — they are why a plain scalar dump looks wro
 | `0x10` | 4 | VCU_HVILDetect | disable | enable |
 | `0x20` | 5 | VCU_EqualizationTrigger | disable | enable |
 
-> One read of `22 3479` gives you all six flags. Six separate signals were
-> collapsed into this byte — earlier extracts reported only the DID name.
+#### Reading cell balancing
+
+Bits 5 and 1 are a command/response pair and say more together than apart:
+
+| `0x20` trigger | `0x02` status | Meaning |
+|---|---|---|
+| set | clear | VCU asked for balancing, BMS declined — conditions not met |
+| set | set | balancing actively running |
+| clear | set | BMS balancing on its own logic |
+| clear | clear | idle |
+
+The VECU carries the same command as **`$34BC` HV Battery cell equalization
+command** on 11-bit `0x7E3`, so the request side is visible from OBD pins 6/14
+even though the BMS's own status is not.
+
+Balancing on this pack is **passive (dissipative)**. Tata's BMS DTC manual states
+the BMS *"perform the balancing by dissipating the heat through balancing
+resistor"*, which is why balancing raises board temperature. Three consequences:
+
+- it can only bleed **high** cells down, never raise a low one — a low outlier
+  cell will never be corrected by balancing;
+- it is slow (tens of mA), so closing a 50 mV gap takes hours, not minutes;
+- it runs during and after **charging** — `0x08 VCU_Charging_Flag` in the same
+  byte is the gate — so bit 1 clear while driving is normal, not a fault.
+
+Read `$34D5` cell-voltage difference **at rest**. The manuals separate static
+(at-rest, `P3007`) from dynamic (under-load, `P3009`) difference faults; a large
+delta under load is mostly internal-resistance spread and shrinks when you stop.
+
+> KPD's DTC list contains **no cell-balancing hardware fault**, while Gotion has
+> `P3054-96` and Kratos has per-pack slave balancing faults. On this pack `$3479`
+> bit 1 is the only visibility into whether the balancing hardware still works.
+
+### State / enumerated PIDs
+
+**`3404` BMS_MaiRlyNClsd**
+
+| Signal | Value | Meaning |
+|--------|-------|---------|
+| BMS_MaiRlyNClsd | `0` | open |
+| BMS_MaiRlyNClsd | `1` | close |
+| BMS_MaiRlyPClsd | `0` | open |
+| BMS_MaiRlyPClsd | `1` | close |
+| BMS_PreRlyClsd | `0` | open |
+| BMS_PreRlyClsd | `1` | close |
+
+> ⚠️ Three relay signals share this one DID, all carrying mask `FF`.
+> Every other Tata BMS gives the three relays **separate DIDs**
+> (`$3006` positive, `$3007` negative, `$3008` pre-charge), so this is a
+> packed byte and the `FF` masks are an authoring slip. The bit assignment
+> is **not recoverable from the database**: in `$3479`, where the masks were
+> filled in properly, the row order (`02 10 01 04 20 08`) does not follow bit
+> order — so row order here proves nothing. Read the raw byte and toggle
+> each relay to map the bits.
+
+**`3405` BMS_InitState**
+
+| Value | Meaning |
+|-------|---------|
+| `0` | initialing |
+| `1` | init OK |
+
+**`3493` BMS_SOC_CalibrationFlag**
+
+| Value | Meaning |
+|-------|---------|
+| `0` | not reached |
+| `1` | reached |
+
+**`3494` BMS_SOCCalActFlag**
+
+| Value | Meaning |
+|-------|---------|
+| `0` | Not Calibrated |
+| `1` | SOC 100% calibration |
+| `2` | SOC 99% calibration |
+| `3` | SOC 95% calibration |
+| `4` | SOC 0% calibration |
+
+**`3414` BMS_Insulation_Enable**
+
+| Value | Meaning |
+|-------|---------|
+| `0` | disable |
+| `1` | enable |
+
+**`341C` BMS_ChargingPortConnectionStatus**
+
+| Value | Meaning |
+|-------|---------|
+| `0` | connect |
+| `1` | disconnect |
+
+> ⚠️ Polarity is inverted from the obvious reading: **`0` = connected**.
+
+### Codes with no decode table in this database
+
+Three single-byte codes have no enum in `KPD_EV_BMS.inf`. Sibling databases define
+the same signal names, which gives a probable but unconfirmed decode.
+
+**`$340D` BMS_FltRank** — CESL's identically-named signal enumerates as below,
+and the levels line up with the "first / second / third level alarm" wording used
+throughout Tata's BMS DTC manuals:
+
+| Value | Meaning |
+|-------|---------|
+| `0` | NO FAULT |
+| `1` | FIRST FAULT LEVEL |
+| `2` | SECOND FAULT LEVEL |
+| `3` | THIRD FAULT LEVEL |
+| `4` | FOURTH FAULT LEVEL |
+
+**`$347A` BMS_OperMod** — do **not** assume a mapping here. Kratos and Gotion
+both define `BMS_OperMod` and they disagree outright, so KPD's is unknown:
+
+| Value | Kratos | Gotion |
+|-------|--------|--------|
+| `0` | Initializing | Initializing |
+| `1` | Ready | Standby |
+| `2` | Charging | PreCharge |
+| `3` | Run | HVActive |
+| `4` | Error | Emergency Power down |
+| `5` | Sleep | PreChargeFailure |
+| `6` | Fault | Fault |
+| `7` | Ready to Sleep | – |
+| `8` | Insulation check routine | – |
+
+**`$3483` VCU_BMSModeReq** — the mode the VCU is requesting; no sibling database
+defines an enum for it.
+
+### Diagnostic trouble codes
+
+45 codes, read with `19 02 FF`. `$340D` reports the current fault level.
+
+| Code | Description |
+|------|-------------|
+| `P3001-00` | Highest Cell Voltage Too High Fault |
+| `P3002-00` | Lowest Cell voltage too low fault |
+| `P3003-00` | BMS cell Voltage difference fault |
+| `P3004-00` | Pack Over Voltage fault |
+| `P3005-00` | Pack Under voltage fault |
+| `P3006-00` | Pack Voltage Mismatch Error |
+| `P3007-00` | Fast Charge Over Current Fault |
+| `P3008-00` | Slow Charge Over Current Fault |
+| `P3009-00` | Discharge Over Current Fault |
+| `P300A-00` | Current Sensor fault |
+| `P300B-00` | Current sensor Offline failure |
+| `P300C-00` | Highest Cell temperature too high fault |
+| `P300D-00` | Lowest Cell temperature Too Low Fault |
+| `P300E-00` | Battery Circuit High Voltage Interlock Fault |
+| `P300F-00` | Positive Contactor Hardware Fault |
+| `P3010-00` | Negative Contactor Hardware Fault |
+| `P3011-00` | BCS Node Absent |
+| `P3012-00` | Pre-Charge Fault |
+| `P3013-00` | High Voltage Isolation Fault (Insulation fault) |
+| `P3014-00` | External Communication fault |
+| `P3015-00` | LV Power Supply High Fault |
+| `P3016-00` | LV Power Supply Low Fault |
+| `P3017-00` | Cell Voltage Samplying Fault |
+| `P3018-00` | BMS Hardware fault |
+| `P3019-00` | AFE Communication fault |
+| `P3020-00` | SOC Jump |
+| `P3021-00` | Low SOC |
+| `P3022-00` | SOH Low Alarm |
+| `P3023-00` | EEPROM Read or Write fault |
+| `P3024-00` | BMS Onboard Temperature fault |
+| `P3025-00` | Cell Temperature Sensor Failure |
+| `P3026-00` | Over Discharge Regen Current Fault |
+| `P3027-00` | TempDiff Alarm(dT) |
+| `P3028-00` | Battery Pack Undervoltage Alarm |
+| `P3029-00` | Module Under voltage 2 |
+| `P302A-00` | Module charging Over current 2 |
+| `P302B-00` | Module Discharging Over current 2 |
+| `P302C-00` | Module SOC Low 2 |
+| `P302D-00` | Insulation Resistance Low2 (kΩ) |
+| `P302E-00` | Cell Voltage Under Voltage Alarm |
+| `P302F-00` | Battery Under Voltage 2 |
+| `P3030-00` | Battery Charging Over Temperature 2 |
+| `P3031-00` | Battery Charging/discharging Under Temperature 2 |
+| `P3032-00` | Battery Discharging Over Temperature 2 |
+| `P3033-00` | Difference of Battery Voltage 2 |
 
 ### Identification PIDs
 
@@ -389,6 +545,22 @@ These decode to text, not numbers — they are why a plain scalar dump looks wro
 
 `22 F197` returns the variant-coding string — use it to confirm you are talking
 to the BMS and not another ECU.
+
+### Do not borrow scalings from another Tata pack
+
+The four BMS suppliers use genuinely different calibrations for identically-named
+signals. Applying the wrong one produces plausible-looking but wrong numbers:
+
+| Signal | KPD (this pack) | Gotion | CESL | Kratos |
+|--------|-----------------|--------|------|--------|
+| Pack current | `×0.1 − 3200` | `×0.1 − 600` | `×0.5 − 1000` | `×0.5 − 1000` |
+| SOC | `×0.1` | `×0.1` | `×0.5` | `×0.5` |
+| Cell voltage | `raw` mV | `×0.01` V | `×0.001` V | `×0.001` V |
+| Temperature | `raw − 40` | `raw − 50` | `raw − 40` | `raw − 40` |
+
+The KPD column is the one corroborated by `tata-ev-bms`, which independently
+derived `(raw − 32000) × 0.1` for pack current — algebraically identical to
+`raw × 0.1 − 3200`.
 
 
 ## 2. VECU (Vehicle Control Unit) — Nexon EV (VECU_R15.2)
