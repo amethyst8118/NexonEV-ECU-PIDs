@@ -217,7 +217,10 @@ you will actually reach from an OBD adapter answer on **11-bit**: the **VECU** a
 > all four DID tables of `KPD_EV_BMS.inf` (TDS 8.9S), cross-checked against the
 > Gotion, CESL and Kratos BMS databases and against Tata's own BMS DTC service
 > manuals, and independently corroborated by the community `tata-ev-bms` project
-> (reverse-engineered on a 2023 Nexon EV Max).
+> (reverse-engineered on a 2023 Nexon EV Max). DID assignments are further confirmed
+> by Tata's own *Kanger1.0 AIO BMS DTC Troubleshooting Document* v2.0 shipped inside
+> TDS 20.0 (`Reference Files/OSPREY/BMS/BMS_K1AIO_DTC.pdf`, and the K2AIO twin), which
+> names `3400`, `3404`, `3409`, `340B`, `3415` and `3417` explicitly.
 
 Confidence markers used below: ✔ corroborated by an independent source ·
 △ corrected or adjusted, with the reason given · ? unverified, calibrate on
@@ -408,10 +411,14 @@ delta under load is mostly internal-resistance spread and shrinks when you stop.
 | BMS_PreRlyClsd | `0` | open |
 | BMS_PreRlyClsd | `1` | close |
 
-> ⚠️ Three relay signals share this one DID, all carrying mask `FF`.
-> Every other Tata BMS gives the three relays **separate DIDs**
-> (`$3006` positive, `$3007` negative, `$3008` pre-charge), so this is a
-> packed byte and the `FF` masks are an authoring slip. The bit assignment
+> ✔ **Confirmed packed.** Tata's Kanger1.0 AIO BMS DTC document states, for the
+> negative contactor (`P1235`, `P3072`) *and* separately for the positive contactor
+> (`P1236`), that "its ON/OFF status will be populated in diagnostics through DID
+> parameter 3404" — so one DID genuinely reports multiple contactors.
+>
+> ⚠️ All three signals carry mask `FF`, which every other Tata BMS avoids by
+> giving the relays **separate DIDs** (`$3006` positive, `$3007` negative,
+> `$3008` pre-charge). The `FF` masks are an authoring slip. The bit assignment
 > is **not recoverable from the database**: in `$3479`, where the masks were
 > filled in properly, the row order (`02 10 01 04 20 08`) does not follow bit
 > order — so row order here proves nothing. Read the raw byte and toggle
@@ -491,6 +498,28 @@ both define `BMS_OperMod` and they disagree outright, so KPD's is unknown:
 
 **`$3483` VCU_BMSModeReq** — the mode the VCU is requesting; no sibling database
 defines an enum for it.
+
+### Documented thresholds
+
+Values Tata publishes in the Kanger1.0 AIO BMS DTC document. The `34xx` calibration
+limits themselves are not published, but these are:
+
+| Quantity | DIDs | Threshold | Source |
+|----------|------|-----------|--------|
+| Pack temperature spread | `$3409` − `$340B` | **> 6 °C** after a 6-hour rest = replace pack | `P1220-22` |
+| LV supply high | `$3492` | **> 32 V** | `P1233-17` |
+| LV supply low | `$3492` | **< 9 V** (BMS will not wake below 9 V; charge back above 12 V) | `P1234-16` |
+
+The temperature check has a defined procedure: leave the vehicle **isolated for at
+least 6 hours** without operating, then read `$3409` and `$340B` and take the
+difference. Below 6 °C the pack is considered recoverable.
+
+Cell-voltage difference is split the same way as on the other packs — **static**
+(`P3069-1C`, at rest) and **dynamic** (`P1208-1C`, under load), both reading
+`$3415` and `$3417`. Notably the dynamic fault's documented healing condition is
+*"vehicle slow charging over next few ignition cycles"* — i.e. it is expected to
+clear itself through **balancing during slow charge**, which is the clearest
+statement in any of these manuals of what balancing is actually for.
 
 ### Diagnostic trouble codes
 
