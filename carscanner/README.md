@@ -3,38 +3,47 @@
 Import via **Settings → Custom PIDs → Import** (or Profile → Custom PIDs, depending
 on version). Files are plain JSON, so you can edit them in any text editor.
 
-| File | Sensors | Header | Reachable from |
-|------|---------|--------|----------------|
-| `NexonEV_VECU.csp` | 183 | `7E3` (11-bit) | **standard OBD port, pins 6/14** |
-| `NexonEV_VECU_battery.csp` | 23 | `7E3` (11-bit) | standard OBD port — battery-related subset of the above |
-| `NexonEV_BMS_KPD.csp` | 39 | `785` (11-bit) | see the warning below |
+| File | Sensors | Header | Response |
+|------|---------|--------|----------|
+| `NexonEV_BMS_KPD.csp` | 39 | **`785`** (11-bit) | `78D` |
+| `NexonEV_VECU.csp` | 183 | `7E3` (11-bit) | `7EB` |
+| `NexonEV_VECU_battery.csp` | 23 | `7E3` (11-bit) | `7EB` |
 
-Start with `NexonEV_VECU.csp`. It is the only one confirmed to answer from an
-ordinary ELM327 plugged into the OBD socket.
+All three use **11-bit (standard) addressing** — `HDR` is a three-digit ID with
+`FHID` false. CarScanner derives the response header automatically (request + 8).
 
 ## Which one do I want?
 
-- **Just want data that works** → `NexonEV_VECU.csp`. Verified live: this address
-  self-identifies as `VECU_R15.2` via `22 F197`.
-- **Only battery figures, less clutter** → `NexonEV_VECU_battery.csp`. Pack
-  temperatures, busbar voltage, cumulative charge/discharge and the HV fault flags.
-  No SOC and no per-cell millivolts — the VECU does not expose those.
-- **Real BMS data** (SOC, cell min/max mV, pack current) → `NexonEV_BMS_KPD.csp`,
-  but read the warning first.
+- **Battery data** — SOC, cell min/max millivolts, pack current, temperatures →
+  `NexonEV_BMS_KPD.csp` on header **`785`**.
+- **Everything else** — motor, charging, thermal, vehicle state →
+  `NexonEV_VECU.csp` on `7E3`. Verified live: this address self-identifies as
+  `VECU_R15.2` via `22 F197`.
+- **Battery figures from the VECU instead** → `NexonEV_VECU_battery.csp`. Pack
+  temperatures, busbar voltage, cumulative charge/discharge and HV fault flags. No
+  SOC and no per-cell millivolts — the VECU does not expose those.
 
-## ⚠️ About the BMS profile
+## If the BMS profile returns nothing
 
-On a Nexon EV the BMS sits on the **Powertrain CAN — OBD pins 3 (CAN-H) and
-11 (CAN-L)** — at 29-bit address `0x1BDA96F1`. The gateway does not route
-diagnostic requests to it, so a normal adapter wired to pins 6/14 **will not reach
-it**. This was checked directly: an 11-bit sweep of `780`–`7E7` and a 29-bit sweep
-including `1BDA96F1` were both silent, while `7E3` answered on the same run.
+`785` is the right header for this DID set — it is what the Tata Punch EV answers on
+and what the community `tata-ev-bms` app uses on a Nexon EV Max (via `ATSP6`, i.e.
+11-bit). If your car does not respond there, the DIDs and scalings in the file are
+still correct; the problem is the bus your adapter is on.
 
-The profile ships with header `785` because that is the address the Tata Punch EV
-and the community `tata-ev-bms` app use for the same DID set. If your car answers
-there, everything in the file works as-is. If it does not, the DIDs and scalings are
-still correct — you need an adapter tapped to pins 3/11, and CarScanner cannot send
-29-bit headers, so an ESP32 on the powertrain bus is the practical route.
+The KPD BMS database also defines a **29-bit** identity for the same ECU —
+`0x1BDA96F1` request / `0x1BDAF196` response — on the **Powertrain CAN, OBD pins
+3 (CAN-H) and 11 (CAN-L)**. On the car this was tested against, a sweep from pins
+6/14 found `785` silent while `7E3` answered on the same run, which means that
+gateway was not forwarding diagnostics to the BMS.
+
+So, in order:
+
+1. Try `785` as shipped. On many cars this is all you need.
+2. If silent, the BMS is on pins 3/11. CarScanner cannot send 29-bit headers, so an
+   ESP32 tapped to pins 3/11 is the practical route — see
+   [`Nexon_EV_All_PIDs.md`](../Nexon_EV_All_PIDs.md) for the 29-bit addressing.
+
+Both transports carry the same `34xx` DID block, so nothing else in the file changes.
 
 ## Known limitations
 

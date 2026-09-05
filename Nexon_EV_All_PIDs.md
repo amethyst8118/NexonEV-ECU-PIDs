@@ -1,6 +1,8 @@
 # Nexon EV - Complete ECU Diagnostic PIDs Reference
 
-Most ECUs use **500 kbps CAN, Extended Frame (29-bit)**. The **VECU** answers on **11-bit** addressing (`0x7E3` / `0x7EB`).
+All ECUs run **500 kbps CAN**. Most use **Extended Frame (29-bit)** addressing, but the two
+you will actually reach from an OBD adapter answer on **11-bit**: the **VECU** at `0x7E3` /
+`0x7EB`, and the **BMS** at `0x785` / `0x78D`.
 
 ---
 
@@ -223,21 +225,40 @@ the car.
 
 ### Bus, session and transport
 
+The same `34xx` DID block is reachable two ways. Try 11-bit first — it needs no
+special wiring.
+
+**11-bit (standard) — use this with generic tools**
+
+| Setting | Value |
+|---------|-------|
+| Request (Tester → ECU) | **`0x785`** |
+| Response (ECU → Tester) | `0x78D` |
+| Frame format | 11-bit standard (`ATSP6`) |
+| Physical bus | diagnostic CAN — OBD pins 6 / 14 |
+
+This is the address the Tata Punch EV answers on, and the one the community
+`tata-ev-bms` app uses on a Nexon EV Max. It is what the CarScanner profile in
+[`carscanner/`](carscanner/) ships with.
+
+**29-bit (extended) — the factory tool's identity**
+
 | Setting | Value |
 |---------|-------|
 | Request (Tester → ECU) | `0x1BDA96F1` |
 | Response (ECU → Tester) | `0x1BDAF196` |
-| Frame format | **29-bit extended** (`CanFrameFormat=2`) |
-| Bit rate | 500 kbps |
+| Frame format | 29-bit extended (`CanFrameFormat=2`) |
 | Physical bus | **Powertrain CAN — OBD pins 3 (H) / 11 (L)** |
-| Session | `10 03` extended (`DiagnosticMode=0x03`) |
-| Padding | pad every frame to 8 bytes (`SendAlways8Bytes=TRUE`) |
-| Inter-byte delay | 3 ms |
 
-> ⚠️ **Not reachable from OBD pins 6/14.** The gateway does not route
-> diagnostic requests to the BMS. Verified by live sweep: on pins 6/14 only the
-> VECU (`0x7E3`) answers — an 11-bit sweep of `780`–`7E7` and a 29-bit sweep
-> including `1BDA96F1` were both silent for the BMS.
+Common to both: **500 kbps**, session `10 03` extended (`DiagnosticMode=0x03`),
+frames padded to 8 bytes (`SendAlways8Bytes=TRUE`), 3 ms inter-byte delay.
+
+> ⚠️ If `0x785` is silent, your gateway is not forwarding diagnostics to the
+> BMS and you need the 29-bit route on pins 3/11. On the car this was tested
+> against, a sweep from pins 6/14 found `785` silent while `7E3` answered on the
+> same run; an 11-bit sweep of `780`–`7E7` and a 29-bit sweep including
+> `1BDA96F1` were both silent there. The DIDs and scalings are identical either
+> way — only the transport changes.
 
 Any response longer than 7 payload bytes uses ISO-TP: the ECU sends a First Frame
 (`10 LL ...`) and will not continue until you reply with a Flow Control frame
