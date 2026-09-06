@@ -1,0 +1,31 @@
+{
+ "_comment": [
+  "Corrections applied on top of the raw database exports in this folder.",
+  "The *_Unified_PIDs.json files are left exactly as the Tata databases have them,",
+  "so it stays clear what came from Tata and what came from us. Anything generated",
+  "for downstream use - the CarScanner profiles, the markdown reference - applies",
+  "this overlay. Every entry states its evidence. See ../CORRECTIONS.md."
+ ],
+ "unit_fix": {
+  "BMS:347D": {"from": "W", "to": "kW", "why": "same DB lists $347E as both W and kW; 0.1 W/bit cannot represent a 105 kW pack in 2 bytes, 0.1 kW/bit can"},
+  "BMS:347E": {"from": "W", "to": "kW", "why": "the DB carries two rows for this DID, one W one kW; kW is the consistent reading"},
+  "BMS:347F": {"from": "kW", "to": "kW", "why": "already correct - listed for completeness of the power group"},
+  "BMS:3480": {"from": "W", "to": "kW", "why": "same signal family as $347D-$347F"},
+  "VECU:35B0": {"from": "C", "to": "Ah", "why": "the BMS defines the identical signal at $353E as Ah; this is charge throughput, not a temperature"},
+  "VECU:35B1": {"from": "C", "to": "Ah", "why": "the BMS defines the identical signal at $353F as Ah"}
+ },
+ "unit_add": {
+  "VECU:3421": {"to": "%", "why": "HV Battery SOC, resolution 0.1"},
+  "BMS:3568":  {"to": "%", "why": "BMS Calculated SOC Reference"},
+  "BMS:3492":  {"to": "V", "why": "BMS Power Supply voltage, resolution 0.001 - raw is millivolts"},
+  "VECU:34BF": {"to": "V", "why": "VECU Supply Voltage"},
+  "BMS:3497":  {"to": "C", "why": "BMS_InletTemp2"},
+  "BMS:3498":  {"to": "C", "why": "BMS_OutletTemp2"}
+ },
+ "suspect": {
+  "VECU:3428": {"issue": "1-byte charging current limit carrying a 40 offset, which is the coolant-temperature scaling pattern", "advice": "prefer $352F 'Charging current limit requested by VCU', 2 bytes at resolution 0.1 with no offset - same signal, sane scaling", "changed": false},
+  "BMS:3497":  {"issue": "offset 50 where $3410 and $3411 and every other coolant temperature in every Tata database use 40", "advice": "verify against $3410 on the car; if it reads 10 C high, the offset is 40", "changed": false},
+  "BMS:3498":  {"issue": "offset 50, same as $3497", "advice": "verify against $3411 on the car", "changed": false},
+  "BMS:3481":  {"issue": "TDS 20.0 says resolution 1 in mV; TDS 8.9S said 0.1 in V - a factor of 100", "advice": "TDS 20.0 is preferred. The negative busbar sits near chassis potential, so a millivolt scale is physically sensible where a 0.1 V scale is not", "changed": false}
+ }
+}
