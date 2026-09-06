@@ -1,0 +1,14 @@
+# CarScanner profiles are single-line JSON with no trailing newline. Marking
+# them binary stops git from ever applying EOL normalisation to them and stops
+# GitHub attempting a line diff on a 166 KB single line.
+*.csp   binary
+*.csp   linguist-language=JSON
+*.csp   linguist-generated=true
+
+# Keep the machine-readable exports out of language stats - they are data.
+data/*.json          linguist-generated=true
+DECODE_TABLES.md     linguist-generated=true
+
+# Binary payloads
+*.zip   binary
+*.dll   binary

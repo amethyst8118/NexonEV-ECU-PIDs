@@ -3,6 +3,19 @@
 Import via **Settings → Custom PIDs → Import**. Files are plain JSON, editable in
 any text editor.
 
+## Downloading
+
+**Grab [`NexonEV_CarScanner_Profiles.zip`](NexonEV_CarScanner_Profiles.zip)** and
+extract it. That is the reliable route.
+
+GitHub serves any extension it does not recognise as `text/plain`, so downloading
+a `.csp` on its own arrives as **`NexonEV_BMS.csp.txt`** and CarScanner will not
+offer it in the import picker. Nothing is wrong with the file — rename it back to
+`.csp` and it imports fine. On Windows you may need to turn off *Hide extensions
+for known file types* in Explorer's View options to do that.
+
+The zip sidesteps it entirely.
+
 | File | Sensors | Header | Response | ECU |
 |------|--------:|--------|----------|-----|
 | `NexonEV_BMS.csp` | 65 | `785` | `78D` | Battery Management |
@@ -10,7 +23,7 @@ any text editor.
 | `NexonEV_OBC.csp` | 47 | `786` | `78E` | On Board Charger |
 | `NexonEV_DCDC.csp` | 20 | `784` | `78C` | DC-DC Converter |
 | `NexonEV_MCU.csp` | 15 | `783` | `78B` | Motor Control |
-| `NexonEV_VECU_battery.csp` | 23 | `7E3` | `7EB` | VECU, battery subset |
+| `NexonEV_VECU_battery.csp` | 26 | `7E3` | `7EB` | VECU, battery subset |
 
 All 11-bit at 500 kbps, generated from the **TDS 20.0** databases. `BCM` is set to
 the session command each ECU's database specifies (`1003`, or `1001` for VECU and

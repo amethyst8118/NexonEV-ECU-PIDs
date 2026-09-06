@@ -10,7 +10,7 @@ older material kept for reference and marked as such.
 - [`CELL_BALANCING.md`](CELL_BALANCING.md) — `$3479` in detail
 - [`CORRECTIONS.md`](CORRECTIONS.md) — database errors found, fixed and flagged
 - [`data/`](data/) — machine-readable DID definitions, 1,168 DIDs across eight ECUs
-- [`carscanner/`](carscanner/) — importable CarScanner profiles
+- [`carscanner/`](carscanner/) — importable CarScanner profiles ([zip](carscanner/NexonEV_CarScanner_Profiles.zip) — single files download as `.txt`)
 - [`elm327-patch/`](elm327-patch/) — J2534 shim so TDS itself runs on an ELM327
 
 ---
