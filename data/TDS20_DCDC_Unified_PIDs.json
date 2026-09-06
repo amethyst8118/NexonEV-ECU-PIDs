@@ -1,0 +1,1485 @@
+[
+ {
+  "ParameterID": 1,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0xF187",
+  "ParameterName": "vehicleManufacturerSparePartNumberDataIdentifier",
+  "TotalByteLength": "15",
+  "ReadPermission": "Y",
+  "WritePermission": "N",
+  "ValueParameters": [
+   {
+    "SubFunctionID": 1,
+    "ParameterName": "vehicleManufacturerSparePartNumberDataIdentifier",
+    "BytePosition": 3,
+    "ByteLength": 15,
+    "Resolution": "1",
+    "Offset": null,
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": null,
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": "-",
+    "MaximumValue": "-",
+    "DataType": "1",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 2,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0xF18A",
+  "ParameterName": "systemSupplierIdentifierDataIdentifier",
+  "TotalByteLength": "10",
+  "ReadPermission": "N",
+  "WritePermission": "N",
+  "ValueParameters": [
+   {
+    "SubFunctionID": 2,
+    "ParameterName": "systemSupplierIdentifierDataIdentifier",
+    "BytePosition": 3,
+    "ByteLength": 10,
+    "Resolution": "1",
+    "Offset": null,
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": null,
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": "-",
+    "MaximumValue": "-",
+    "DataType": "1",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 3,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0xF197",
+  "ParameterName": "SystemName",
+  "TotalByteLength": "10",
+  "ReadPermission": "N",
+  "WritePermission": "N",
+  "ValueParameters": [
+   {
+    "SubFunctionID": 3,
+    "ParameterName": "SystemName",
+    "BytePosition": 3,
+    "ByteLength": 10,
+    "Resolution": "1",
+    "Offset": null,
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": null,
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": "-",
+    "MaximumValue": "-",
+    "DataType": "1",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 4,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0xF193",
+  "ParameterName": "systemSupplierECUHardwareVersionNumberDataIdentifier",
+  "TotalByteLength": "8",
+  "ReadPermission": "N",
+  "WritePermission": "N",
+  "ValueParameters": [
+   {
+    "SubFunctionID": 4,
+    "ParameterName": "systemSupplierECUHardwareVersionNumberDataIdentifier",
+    "BytePosition": 3,
+    "ByteLength": 8,
+    "Resolution": "1",
+    "Offset": null,
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": null,
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": "-",
+    "MaximumValue": "-",
+    "DataType": "1",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 5,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0xF195",
+  "ParameterName": "SystemSupplierECUSoftwareVersionNumberDataIdentifier",
+  "TotalByteLength": "21",
+  "ReadPermission": "N",
+  "WritePermission": "N",
+  "ValueParameters": [
+   {
+    "SubFunctionID": 5,
+    "ParameterName": "SystemSupplierECUSoftwareVersionNumberDataIdentifier",
+    "BytePosition": 3,
+    "ByteLength": 21,
+    "Resolution": "1",
+    "Offset": null,
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": null,
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": "-",
+    "MaximumValue": "-",
+    "DataType": "1",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 6,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0xF18C",
+  "ParameterName": "ECUSerialNumberDataIdentifier",
+  "TotalByteLength": "8",
+  "ReadPermission": "N",
+  "WritePermission": "N",
+  "ValueParameters": [
+   {
+    "SubFunctionID": 6,
+    "ParameterName": "ECUSerialNumberDataIdentifier",
+    "BytePosition": 3,
+    "ByteLength": 8,
+    "Resolution": "1",
+    "Offset": null,
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": null,
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": "-",
+    "MaximumValue": "-",
+    "DataType": "1",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 7,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0xF190",
+  "ParameterName": "Vehicle Identification Number",
+  "TotalByteLength": "24",
+  "ReadPermission": "Y",
+  "WritePermission": "Y",
+  "ValueParameters": [
+   {
+    "SubFunctionID": 7,
+    "ParameterName": "Vehicle Identification Number",
+    "BytePosition": 3,
+    "ByteLength": 17,
+    "Resolution": "1",
+    "Offset": null,
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": null,
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": "-",
+    "MaximumValue": "-",
+    "DataType": "1",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 8,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0xF010",
+  "ParameterName": "EOL DataIdentifier",
+  "TotalByteLength": "8",
+  "ReadPermission": "N",
+  "WritePermission": "N",
+  "ValueParameters": [
+   {
+    "SubFunctionID": 8,
+    "ParameterName": "EOL DataIdentifier",
+    "BytePosition": 3,
+    "ByteLength": 8,
+    "Resolution": "1",
+    "Offset": null,
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": null,
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": "-",
+    "MaximumValue": "-",
+    "DataType": "1",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 9,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0xF180",
+  "ParameterName": "BootLoaderVersionNumberDataIdentifier",
+  "TotalByteLength": "18",
+  "ReadPermission": "Y",
+  "WritePermission": "N",
+  "ValueParameters": [
+   {
+    "SubFunctionID": 9,
+    "ParameterName": "BootLoaderVersionNumberDataIdentifier",
+    "BytePosition": 3,
+    "ByteLength": 18,
+    "Resolution": "1",
+    "Offset": null,
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": null,
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": "-",
+    "MaximumValue": "-",
+    "DataType": "1",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 10,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0xF184",
+  "ParameterName": "Fingerprint",
+  "TotalByteLength": "10",
+  "ReadPermission": "Y",
+  "WritePermission": "N",
+  "ValueParameters": [
+   {
+    "SubFunctionID": 10,
+    "ParameterName": "Fingerprint",
+    "BytePosition": 3,
+    "ByteLength": 10,
+    "Resolution": "1",
+    "Offset": null,
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": null,
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": "-",
+    "MaximumValue": "-",
+    "DataType": "1",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 11,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x0C0",
+  "ParameterName": "DCDC work status",
+  "TotalByteLength": "1",
+  "ReadPermission": "N",
+  "WritePermission": "N",
+  "ValueParameters": [],
+  "ByteParameters": [
+   {
+    "SubFunctionID": 1,
+    "ParameterName": "DCDC work status",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "F",
+    "ResultByte": "0",
+    "ResultDescription": "DCDC_INIT_STATE = 0",
+    "LanguageCode": "DCDC_0011"
+   },
+   {
+    "SubFunctionID": 2,
+    "ParameterName": "DCDC work status",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "F",
+    "ResultByte": "1",
+    "ResultDescription": "DCDC_STANDBY_STATE",
+    "LanguageCode": "DCDC_0011"
+   },
+   {
+    "SubFunctionID": 3,
+    "ParameterName": "DCDC work status",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "F",
+    "ResultByte": "2",
+    "ResultDescription": "DCDC_WORK_STATE",
+    "LanguageCode": "DCDC_0011"
+   },
+   {
+    "SubFunctionID": 4,
+    "ParameterName": "DCDC work status",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "F",
+    "ResultByte": "5",
+    "ResultDescription": "DCDC_SLEEP_STATE",
+    "LanguageCode": "DCDC_0011"
+   },
+   {
+    "SubFunctionID": 5,
+    "ParameterName": "DCDC work status",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "F",
+    "ResultByte": "6",
+    "ResultDescription": "DCDC_RECV_FAULT_STATE",
+    "LanguageCode": "DCDC_0011"
+   },
+   {
+    "SubFunctionID": 6,
+    "ParameterName": "DCDC work status",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "F",
+    "ResultByte": "7",
+    "ResultDescription": "DCDC_LOCK_FAULT_STATE",
+    "LanguageCode": "DCDC_0011"
+   }
+  ]
+ },
+ {
+  "ParameterID": 43,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0xF0F4",
+  "ParameterName": "DCDC Gateway Software Version",
+  "TotalByteLength": "2",
+  "ReadPermission": "Y",
+  "WritePermission": "N",
+  "ValueParameters": [
+   {
+    "SubFunctionID": 37,
+    "ParameterName": "DCDC Gateway Software Version",
+    "BytePosition": 3,
+    "ByteLength": 2,
+    "Resolution": "1",
+    "Offset": null,
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": null,
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": "-",
+    "MaximumValue": "-",
+    "DataType": "5",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 13,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x0C2",
+  "ParameterName": "DCDC derating mode",
+  "TotalByteLength": "1",
+  "ReadPermission": "N",
+  "WritePermission": "N",
+  "ValueParameters": [],
+  "ByteParameters": [
+   {
+    "SubFunctionID": 20,
+    "ParameterName": "DCDC derating mode",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "1",
+    "ResultByte": "0",
+    "ResultDescription": "Normal",
+    "LanguageCode": "DCDC_0013"
+   },
+   {
+    "SubFunctionID": 21,
+    "ParameterName": "DCDC derating mode",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "1",
+    "ResultByte": "1",
+    "ResultDescription": "Derating mode",
+    "LanguageCode": "DCDC_0013"
+   }
+  ]
+ },
+ {
+  "ParameterID": 14,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x0C3",
+  "ParameterName": "DCDC temperature",
+  "TotalByteLength": "2",
+  "ReadPermission": "N",
+  "WritePermission": "N",
+  "ValueParameters": [
+   {
+    "SubFunctionID": 11,
+    "ParameterName": "DCDC temperature",
+    "BytePosition": 3,
+    "ByteLength": 2,
+    "Resolution": "1",
+    "Offset": null,
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": "deg C",
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": "-40",
+    "MaximumValue": "120",
+    "DataType": "5",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 15,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x0C4",
+  "ParameterName": "DCDC output voltage",
+  "TotalByteLength": "1",
+  "ReadPermission": "N",
+  "WritePermission": "N",
+  "ValueParameters": [
+   {
+    "SubFunctionID": 12,
+    "ParameterName": "DCDC output voltage",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "Resolution": "0.1",
+    "Offset": null,
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": "V",
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": "0",
+    "MaximumValue": "25.6",
+    "DataType": "5",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 16,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x0C5",
+  "ParameterName": "DCDC output current",
+  "TotalByteLength": "2",
+  "ReadPermission": "N",
+  "WritePermission": "N",
+  "ValueParameters": [
+   {
+    "SubFunctionID": 13,
+    "ParameterName": "DCDC output current",
+    "BytePosition": 3,
+    "ByteLength": 2,
+    "Resolution": "0.1",
+    "Offset": null,
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": "A",
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": "0",
+    "MaximumValue": "409.5",
+    "DataType": "5",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 17,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x0C6",
+  "ParameterName": "DCDC input voltage",
+  "TotalByteLength": "2",
+  "ReadPermission": "N",
+  "WritePermission": "N",
+  "ValueParameters": [
+   {
+    "SubFunctionID": 14,
+    "ParameterName": "DCDC input voltage",
+    "BytePosition": 3,
+    "ByteLength": 2,
+    "Resolution": "0.1",
+    "Offset": null,
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": "V",
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": "0",
+    "MaximumValue": "6553.6",
+    "DataType": "5",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 18,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x0C7",
+  "ParameterName": "DCDC input current",
+  "TotalByteLength": "1",
+  "ReadPermission": "N",
+  "WritePermission": "N",
+  "ValueParameters": [
+   {
+    "SubFunctionID": 15,
+    "ParameterName": "DCDC input current",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "Resolution": "0.1",
+    "Offset": null,
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": "A",
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": "0",
+    "MaximumValue": "25.6",
+    "DataType": "5",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 19,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x0C8",
+  "ParameterName": "DCDC work time",
+  "TotalByteLength": "2",
+  "ReadPermission": "N",
+  "WritePermission": "N",
+  "ValueParameters": [
+   {
+    "SubFunctionID": 16,
+    "ParameterName": "DCDC work time",
+    "BytePosition": 3,
+    "ByteLength": 2,
+    "Resolution": "1",
+    "Offset": null,
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": "h",
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": "0",
+    "MaximumValue": "65536",
+    "DataType": "5",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 20,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x0C9",
+  "ParameterName": "FPC voltage",
+  "TotalByteLength": "2",
+  "ReadPermission": "N",
+  "WritePermission": "N",
+  "ValueParameters": [
+   {
+    "SubFunctionID": 17,
+    "ParameterName": "FPC voltage",
+    "BytePosition": 3,
+    "ByteLength": 2,
+    "Resolution": "0.1",
+    "Offset": null,
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": "V",
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": "0",
+    "MaximumValue": "6553.6",
+    "DataType": "5",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 21,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x7241",
+  "ParameterName": "ECU Application Software Number",
+  "TotalByteLength": "20",
+  "ReadPermission": "Y",
+  "WritePermission": "N",
+  "ValueParameters": [
+   {
+    "SubFunctionID": 18,
+    "ParameterName": "ECU Application Software Number",
+    "BytePosition": 3,
+    "ByteLength": 15,
+    "Resolution": "1",
+    "Offset": null,
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": null,
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": "-",
+    "MaximumValue": "-",
+    "DataType": "1",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 22,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x7234",
+  "ParameterName": "ECU Assembly Number",
+  "TotalByteLength": "17",
+  "ReadPermission": "Y",
+  "WritePermission": "N",
+  "ValueParameters": [
+   {
+    "SubFunctionID": 19,
+    "ParameterName": "ECU Assembly Number",
+    "BytePosition": 3,
+    "ByteLength": 17,
+    "Resolution": "1",
+    "Offset": null,
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": null,
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": "-",
+    "MaximumValue": "-",
+    "DataType": "1",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 23,
+  "ServiceId": "0x19",
+  "ServiceName": "Service 0x19",
+  "DidHex": "0x04-",
+  "ParameterName": "Snapshot Data",
+  "TotalByteLength": "50",
+  "ReadPermission": "N",
+  "WritePermission": "N",
+  "ValueParameters": [
+   {
+    "SubFunctionID": 20,
+    "ParameterName": "DCDC output current",
+    "BytePosition": 13,
+    "ByteLength": 2,
+    "Resolution": "0.1",
+    "Offset": null,
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": "A",
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": "0",
+    "MaximumValue": "409.5",
+    "DataType": "5",
+    "BitPosition": null
+   },
+   {
+    "SubFunctionID": 21,
+    "ParameterName": "DCDC output voltage",
+    "BytePosition": 17,
+    "ByteLength": 1,
+    "Resolution": "0.1",
+    "Offset": null,
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": "V",
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": "0",
+    "MaximumValue": "25.6",
+    "DataType": "5",
+    "BitPosition": null
+   },
+   {
+    "SubFunctionID": 22,
+    "ParameterName": "DCDC temperature",
+    "BytePosition": 20,
+    "ByteLength": 2,
+    "Resolution": "1",
+    "Offset": null,
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": "deg C",
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": "-40",
+    "MaximumValue": "120",
+    "DataType": "5",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": [
+   {
+    "SubFunctionID": 22,
+    "ParameterName": "DCDC work status",
+    "BytePosition": 10,
+    "ByteLength": 1,
+    "MaskingCondition": "F",
+    "ResultByte": "0",
+    "ResultDescription": "DCDC_INIT_STATE = 0",
+    "LanguageCode": "DCDC_0011"
+   },
+   {
+    "SubFunctionID": 23,
+    "ParameterName": "DCDC work status",
+    "BytePosition": 10,
+    "ByteLength": 1,
+    "MaskingCondition": "F",
+    "ResultByte": "1",
+    "ResultDescription": "DCDC_STANDBY_STATE",
+    "LanguageCode": "DCDC_0011"
+   },
+   {
+    "SubFunctionID": 24,
+    "ParameterName": "DCDC work status",
+    "BytePosition": 10,
+    "ByteLength": 1,
+    "MaskingCondition": "F",
+    "ResultByte": "2",
+    "ResultDescription": "DCDC_WORK_STATE",
+    "LanguageCode": "DCDC_0011"
+   },
+   {
+    "SubFunctionID": 25,
+    "ParameterName": "DCDC work status",
+    "BytePosition": 10,
+    "ByteLength": 1,
+    "MaskingCondition": "F",
+    "ResultByte": "5",
+    "ResultDescription": "DCDC_SLEEP_STATE",
+    "LanguageCode": "DCDC_0011"
+   },
+   {
+    "SubFunctionID": 26,
+    "ParameterName": "DCDC work status",
+    "BytePosition": 10,
+    "ByteLength": 1,
+    "MaskingCondition": "F",
+    "ResultByte": "6",
+    "ResultDescription": "DCDC_RECV_FAULT_STATE",
+    "LanguageCode": "DCDC_0011"
+   },
+   {
+    "SubFunctionID": 27,
+    "ParameterName": "DCDC work status",
+    "BytePosition": 10,
+    "ByteLength": 1,
+    "MaskingCondition": "F",
+    "ResultByte": "7",
+    "ResultDescription": "DCDC_LOCK_FAULT_STATE",
+    "LanguageCode": "DCDC_0011"
+   }
+  ]
+ },
+ {
+  "ParameterID": 24,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x130E",
+  "ParameterName": "DCDC working states",
+  "TotalByteLength": "1",
+  "ReadPermission": "Y",
+  "WritePermission": "N",
+  "ValueParameters": [],
+  "ByteParameters": [
+   {
+    "SubFunctionID": 28,
+    "ParameterName": "DCDC working states",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "0",
+    "ResultDescription": "standby",
+    "LanguageCode": "DCDC_0045"
+   },
+   {
+    "SubFunctionID": 29,
+    "ParameterName": "DCDC working states",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "1",
+    "ResultDescription": "Working",
+    "LanguageCode": "DCDC_0045"
+   },
+   {
+    "SubFunctionID": 30,
+    "ParameterName": "DCDC working states",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "2",
+    "ResultDescription": "sleep",
+    "LanguageCode": "DCDC_0045"
+   },
+   {
+    "SubFunctionID": 31,
+    "ParameterName": "DCDC working states",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "3",
+    "ResultDescription": "Fault",
+    "LanguageCode": "DCDC_0045"
+   }
+  ]
+ },
+ {
+  "ParameterID": 25,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x130F",
+  "ParameterName": "DCDC Enable Command",
+  "TotalByteLength": "1",
+  "ReadPermission": "Y",
+  "WritePermission": "N",
+  "ValueParameters": [],
+  "ByteParameters": [
+   {
+    "SubFunctionID": 32,
+    "ParameterName": "DCDC Enable Command",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "00",
+    "ResultDescription": "Disable",
+    "LanguageCode": "DCDC_0046"
+   },
+   {
+    "SubFunctionID": 33,
+    "ParameterName": "DCDC Enable Command",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "1",
+    "ResultDescription": "Enable",
+    "LanguageCode": "DCDC_0046"
+   },
+   {
+    "SubFunctionID": 34,
+    "ParameterName": "DCDC Enable Command",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "2",
+    "ResultDescription": "Sleep",
+    "LanguageCode": "DCDC_0046"
+   }
+  ]
+ },
+ {
+  "ParameterID": 26,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x1325",
+  "ParameterName": "DCDC derating mode",
+  "TotalByteLength": "1",
+  "ReadPermission": "Y",
+  "WritePermission": "N",
+  "ValueParameters": [],
+  "ByteParameters": [
+   {
+    "SubFunctionID": 35,
+    "ParameterName": "DCDC derating mode",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "0",
+    "ResultDescription": "Normal",
+    "LanguageCode": "DCDC_0047"
+   },
+   {
+    "SubFunctionID": 36,
+    "ParameterName": "DCDC derating mode",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "01",
+    "ResultDescription": "Derating",
+    "LanguageCode": "DCDC_0047"
+   }
+  ]
+ },
+ {
+  "ParameterID": 27,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x1326",
+  "ParameterName": "DCDC error flag",
+  "TotalByteLength": "1",
+  "ReadPermission": "Y",
+  "WritePermission": "N",
+  "ValueParameters": [],
+  "ByteParameters": [
+   {
+    "SubFunctionID": 37,
+    "ParameterName": "DCDC error flag",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "01",
+    "ResultByte": "0",
+    "ResultDescription": "Normal",
+    "LanguageCode": "DCDC_0048"
+   },
+   {
+    "SubFunctionID": 38,
+    "ParameterName": "DCDC error flag",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "01",
+    "ResultByte": "1",
+    "ResultDescription": "Error",
+    "LanguageCode": "DCDC_0048"
+   }
+  ]
+ },
+ {
+  "ParameterID": 28,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x1329",
+  "ParameterName": "DCDC VCU CRC FAIL",
+  "TotalByteLength": "1",
+  "ReadPermission": "Y",
+  "WritePermission": "N",
+  "ValueParameters": [],
+  "ByteParameters": [
+   {
+    "SubFunctionID": 39,
+    "ParameterName": "DCDC VCU CRC FAIL",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "0",
+    "ResultDescription": "Normal",
+    "LanguageCode": "DCDC_0049"
+   },
+   {
+    "SubFunctionID": 40,
+    "ParameterName": "DCDC VCU CRC FAIL",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "1",
+    "ResultDescription": "Error",
+    "LanguageCode": "DCDC_0049"
+   }
+  ]
+ },
+ {
+  "ParameterID": 29,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x1310",
+  "ParameterName": "DCDC Input Voltage",
+  "TotalByteLength": "2",
+  "ReadPermission": "Y",
+  "WritePermission": "N",
+  "ValueParameters": [
+   {
+    "SubFunctionID": 23,
+    "ParameterName": "DCDC Input Voltage",
+    "BytePosition": 3,
+    "ByteLength": 2,
+    "Resolution": "0.1",
+    "Offset": null,
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": "V",
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": "0",
+    "MaximumValue": "6553.5",
+    "DataType": "5",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 30,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x1311",
+  "ParameterName": "DCDC Input Current",
+  "TotalByteLength": "2",
+  "ReadPermission": "Y",
+  "WritePermission": "N",
+  "ValueParameters": [
+   {
+    "SubFunctionID": 24,
+    "ParameterName": "DCDC Input Current",
+    "BytePosition": 3,
+    "ByteLength": 2,
+    "Resolution": "0.1",
+    "Offset": null,
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": "A",
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": "0",
+    "MaximumValue": "6553.5",
+    "DataType": "5",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 31,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x1312",
+  "ParameterName": "DCDC Output Voltage",
+  "TotalByteLength": "1",
+  "ReadPermission": "Y",
+  "WritePermission": "N",
+  "ValueParameters": [
+   {
+    "SubFunctionID": 25,
+    "ParameterName": "DCDC Output Voltage",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "Resolution": "0.1",
+    "Offset": null,
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": "V",
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": "0",
+    "MaximumValue": "25.5",
+    "DataType": "5",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 32,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x1313",
+  "ParameterName": "DCDC Output Current",
+  "TotalByteLength": "2",
+  "ReadPermission": "Y",
+  "WritePermission": "N",
+  "ValueParameters": [
+   {
+    "SubFunctionID": 26,
+    "ParameterName": "DCDC Output Current",
+    "BytePosition": 3,
+    "ByteLength": 2,
+    "Resolution": "0.1",
+    "Offset": null,
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": "A",
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": "0",
+    "MaximumValue": "6553.5",
+    "DataType": "5",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 33,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x1314",
+  "ParameterName": "DCDC Internal SR MOS Temperature",
+  "TotalByteLength": "1",
+  "ReadPermission": "Y",
+  "WritePermission": "N",
+  "ValueParameters": [
+   {
+    "SubFunctionID": 27,
+    "ParameterName": "DCDC Internal SR MOS Temperature",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "Resolution": "1",
+    "Offset": null,
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": "oC",
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": "-48",
+    "MaximumValue": "207",
+    "DataType": "5",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 34,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x1315",
+  "ParameterName": "DCDC Internal MT MOS Temperature",
+  "TotalByteLength": "1",
+  "ReadPermission": "Y",
+  "WritePermission": "N",
+  "ValueParameters": [
+   {
+    "SubFunctionID": 28,
+    "ParameterName": "DCDC Internal MT MOS Temperature",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "Resolution": "1",
+    "Offset": null,
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": "oC",
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": "-48",
+    "MaximumValue": "207",
+    "DataType": "5",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 35,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x1316",
+  "ParameterName": "DCDC Internal Pri MOS Temperature",
+  "TotalByteLength": "1",
+  "ReadPermission": "Y",
+  "WritePermission": "N",
+  "ValueParameters": [
+   {
+    "SubFunctionID": 29,
+    "ParameterName": "DCDC Internal Pri MOS Temperature",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "Resolution": "1",
+    "Offset": null,
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": "oC",
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": "-48",
+    "MaximumValue": "207",
+    "DataType": "5",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 36,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x1317",
+  "ParameterName": "12V Power Supply Voltage",
+  "TotalByteLength": "1",
+  "ReadPermission": "Y",
+  "WritePermission": "N",
+  "ValueParameters": [
+   {
+    "SubFunctionID": 30,
+    "ParameterName": "12V Power Supply Voltage",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "Resolution": "0.1",
+    "Offset": null,
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": "V",
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": "0",
+    "MaximumValue": "25.5",
+    "DataType": "5",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 37,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x1318",
+  "ParameterName": "KL15 Wake Up Voltage",
+  "TotalByteLength": "1",
+  "ReadPermission": "Y",
+  "WritePermission": "N",
+  "ValueParameters": [
+   {
+    "SubFunctionID": 31,
+    "ParameterName": "KL15 Wake Up Voltage",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "Resolution": "0.1",
+    "Offset": null,
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": "V",
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": "0",
+    "MaximumValue": "25.5",
+    "DataType": "5",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 38,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x1327",
+  "ParameterName": "DCDC output current request",
+  "TotalByteLength": "2",
+  "ReadPermission": "Y",
+  "WritePermission": "N",
+  "ValueParameters": [
+   {
+    "SubFunctionID": 32,
+    "ParameterName": "DCDC output current request",
+    "BytePosition": 3,
+    "ByteLength": 2,
+    "Resolution": "0.01",
+    "Offset": null,
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": "A",
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": "0",
+    "MaximumValue": "655.35",
+    "DataType": "5",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 39,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x1328",
+  "ParameterName": "DCDC output power request",
+  "TotalByteLength": "2",
+  "ReadPermission": "Y",
+  "WritePermission": "N",
+  "ValueParameters": [
+   {
+    "SubFunctionID": 33,
+    "ParameterName": "DCDC output power request",
+    "BytePosition": 3,
+    "ByteLength": 2,
+    "Resolution": "1",
+    "Offset": null,
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": "W",
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": "0",
+    "MaximumValue": "65535",
+    "DataType": "5",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 40,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0xF0F1",
+  "ParameterName": "DCDC internal status 1",
+  "TotalByteLength": "2",
+  "ReadPermission": "Y",
+  "WritePermission": "N",
+  "ValueParameters": [
+   {
+    "SubFunctionID": 34,
+    "ParameterName": "DCDC internal status 1",
+    "BytePosition": 3,
+    "ByteLength": 2,
+    "Resolution": "1",
+    "Offset": null,
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": null,
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": "0",
+    "MaximumValue": "65535",
+    "DataType": "5",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 41,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0xF0F2",
+  "ParameterName": "DCDC internal status 2",
+  "TotalByteLength": "2",
+  "ReadPermission": "Y",
+  "WritePermission": "N",
+  "ValueParameters": [
+   {
+    "SubFunctionID": 35,
+    "ParameterName": "DCDC internal status 2",
+    "BytePosition": 3,
+    "ByteLength": 2,
+    "Resolution": "1",
+    "Offset": null,
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": null,
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": "0",
+    "MaximumValue": "65535",
+    "DataType": "5",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 42,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0xF0F3",
+  "ParameterName": "DCDC internal status 3",
+  "TotalByteLength": "2",
+  "ReadPermission": "Y",
+  "WritePermission": "N",
+  "ValueParameters": [
+   {
+    "SubFunctionID": 36,
+    "ParameterName": "DCDC internal status 3",
+    "BytePosition": 3,
+    "ByteLength": 2,
+    "Resolution": "1",
+    "Offset": null,
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": null,
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": "0",
+    "MaximumValue": "65535",
+    "DataType": "5",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ }
+]

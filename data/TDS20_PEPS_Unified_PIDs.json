@@ -1,0 +1,7209 @@
+[
+ {
+  "ParameterID": 1,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x4015",
+  "ParameterName": "ESCL Lock Unlock State",
+  "TotalByteLength": "1",
+  "ReadPermission": null,
+  "WritePermission": null,
+  "ValueParameters": [],
+  "ByteParameters": [
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "LockStateESCL",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "1",
+    "ResultByte": "0",
+    "ResultDescription": "No Lock",
+    "LanguageCode": "PEPS_DIB_0001"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "LockStateESCL",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "1",
+    "ResultByte": "1",
+    "ResultDescription": "Lock",
+    "LanguageCode": "PEPS_DIB_0001"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "UnLockStateESCL",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "2",
+    "ResultByte": "0",
+    "ResultDescription": "No Unlock",
+    "LanguageCode": "PEPS_DIB_0002"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "UnLockStateESCL",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "2",
+    "ResultByte": "2",
+    "ResultDescription": "Unlock",
+    "LanguageCode": "PEPS_DIB_0002"
+   }
+  ]
+ },
+ {
+  "ParameterID": 2,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x4016",
+  "ParameterName": "Clamp Configuration Control",
+  "TotalByteLength": "4",
+  "ReadPermission": null,
+  "WritePermission": null,
+  "ValueParameters": [
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "MaximumOutputTimeForClampStateCRANK",
+    "BytePosition": 1,
+    "ByteLength": 1,
+    "Resolution": "1",
+    "Offset": "0",
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": "s",
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": "1",
+    "MaximumValue": "20",
+    "DataType": "5",
+    "BitPosition": null
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "TimeAfterEngineOFFToStartEngineWithoutUIDAuthenticationEmergencyStart",
+    "BytePosition": 2,
+    "ByteLength": 1,
+    "Resolution": "1",
+    "Offset": "0",
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": "s",
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": "1",
+    "MaximumValue": "10",
+    "DataType": "5",
+    "BitPosition": null
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "WheelSpeedThresholdForEmergencyStop",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "Resolution": "10",
+    "Offset": "0",
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": "rpm",
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": "0",
+    "MaximumValue": "2000",
+    "DataType": "5",
+    "BitPosition": null
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "TimeDelayForClampStateIGNBeforeCRANK",
+    "BytePosition": 4,
+    "ByteLength": 1,
+    "Resolution": "50",
+    "Offset": "0",
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": "ms",
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": "50",
+    "MaximumValue": "500",
+    "DataType": "5",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 3,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x4017",
+  "ParameterName": "Start Stop Switch Dead Time",
+  "TotalByteLength": "1",
+  "ReadPermission": null,
+  "WritePermission": null,
+  "ValueParameters": [
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "Start Stop Switch Dead Time",
+    "BytePosition": 4,
+    "ByteLength": 1,
+    "Resolution": "10",
+    "Offset": "0",
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": "ms",
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": "100",
+    "MaximumValue": "500",
+    "DataType": "5",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 4,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x420F",
+  "ParameterName": "Pairing Status of PEPS Enabled Key Lines",
+  "TotalByteLength": "1",
+  "ReadPermission": null,
+  "WritePermission": null,
+  "ValueParameters": [],
+  "ByteParameters": [
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "PairingStatusOfKeyLine01",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "1",
+    "ResultByte": "0",
+    "ResultDescription": "Not Paired",
+    "LanguageCode": "PEPS_DIB_0003"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "PairingStatusOfKeyLine01",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "1",
+    "ResultByte": "1",
+    "ResultDescription": "Paired",
+    "LanguageCode": "PEPS_DIB_0003"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "PairingStatusOfKeyLine02",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "2",
+    "ResultByte": "0",
+    "ResultDescription": "Not Paired",
+    "LanguageCode": "PEPS_DIB_0004"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "PairingStatusOfKeyLine02",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "2",
+    "ResultByte": "2",
+    "ResultDescription": "Paired",
+    "LanguageCode": "PEPS_DIB_0004"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "PairingStatusOfKeyLine03",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "4",
+    "ResultByte": "0",
+    "ResultDescription": "Not Paired",
+    "LanguageCode": "PEPS_DIB_0005"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "PairingStatusOfKeyLine03",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "4",
+    "ResultByte": "4",
+    "ResultDescription": "Paired",
+    "LanguageCode": "PEPS_DIB_0005"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "PairingStatusOfKeyLine04",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "8",
+    "ResultByte": "0",
+    "ResultDescription": "Not Paired",
+    "LanguageCode": "PEPS_DIB_0006"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "PairingStatusOfKeyLine04",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "8",
+    "ResultByte": "8",
+    "ResultDescription": "Paired",
+    "LanguageCode": "PEPS_DIB_0006"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "PairingStatusOfKeyLine05",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "10",
+    "ResultByte": "0",
+    "ResultDescription": "Not Paired",
+    "LanguageCode": "PEPS_DIB_0007"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "PairingStatusOfKeyLine05",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "10",
+    "ResultByte": "10",
+    "ResultDescription": "Paired",
+    "LanguageCode": "PEPS_DIB_0007"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "PairingStatusOfKeyLine06",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "20",
+    "ResultByte": "0",
+    "ResultDescription": "Not Paired",
+    "LanguageCode": "PEPS_DIB_0008"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "PairingStatusOfKeyLine06",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "20",
+    "ResultByte": "20",
+    "ResultDescription": "Paired",
+    "LanguageCode": "PEPS_DIB_0008"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "PairingStatusOfKeyLine07",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "40",
+    "ResultByte": "0",
+    "ResultDescription": "Not Paired",
+    "LanguageCode": "PEPS_DIB_0009"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "PairingStatusOfKeyLine07",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "40",
+    "ResultByte": "40",
+    "ResultDescription": "Paired",
+    "LanguageCode": "PEPS_DIB_0009"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "PairingStatusOfKeyLine08",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "80",
+    "ResultByte": "0",
+    "ResultDescription": "Not Paired",
+    "LanguageCode": "PEPS_DIB_0010"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "PairingStatusOfKeyLine08",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "80",
+    "ResultByte": "80",
+    "ResultDescription": "Paired",
+    "LanguageCode": "PEPS_DIB_0010"
+   }
+  ]
+ },
+ {
+  "ParameterID": 5,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x4210",
+  "ParameterName": "PEPS HW Inputs Status",
+  "TotalByteLength": "2",
+  "ReadPermission": null,
+  "WritePermission": null,
+  "ValueParameters": [],
+  "ByteParameters": [
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "DriverDoorHandleSwitch",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "1",
+    "ResultByte": "0",
+    "ResultDescription": "Not Pressed",
+    "LanguageCode": "PEPS_DI_490"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "DriverDoorHandleSwitch",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "1",
+    "ResultByte": "1",
+    "ResultDescription": "Pressed",
+    "LanguageCode": "PEPS_DI_490"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "CoDriverDoorHandleSwitch",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "2",
+    "ResultByte": "0",
+    "ResultDescription": "Not Pressed",
+    "LanguageCode": "PEPS_DI_491"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "CoDriverDoorHandleSwitch",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "2",
+    "ResultByte": "2",
+    "ResultDescription": "Pressed",
+    "LanguageCode": "PEPS_DI_491"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "RearRHDoorHandleSwitch",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "4",
+    "ResultByte": "0",
+    "ResultDescription": "Not Pressed",
+    "LanguageCode": "PEPS_DIB_0013"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "RearRHDoorHandleSwitch",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "4",
+    "ResultByte": "4",
+    "ResultDescription": "Pressed",
+    "LanguageCode": "PEPS_DIB_0013"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "RearLHDoorHandleSwitch",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "8",
+    "ResultByte": "0",
+    "ResultDescription": "Not Pressed",
+    "LanguageCode": "PEPS_DIB_0014"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "RearLHDoorHandleSwitch",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "8",
+    "ResultByte": "8",
+    "ResultDescription": "Pressed",
+    "LanguageCode": "PEPS_DIB_0014"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "TailgateTrunkHandleSwitch",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "10",
+    "ResultByte": "0",
+    "ResultDescription": "Not Pressed",
+    "LanguageCode": "PEPS_DIB_0015"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "TailgateTrunkHandleSwitch",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "10",
+    "ResultByte": "10",
+    "ResultDescription": "Pressed",
+    "LanguageCode": "PEPS_DIB_0015"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "ClutchSwitch90PercPress",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "20",
+    "ResultByte": "0",
+    "ResultDescription": "Not Pressed",
+    "LanguageCode": "PEPS_DIB_0016"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "ClutchSwitch90PercPress",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "20",
+    "ResultByte": "20",
+    "ResultDescription": "Pressed",
+    "LanguageCode": "PEPS_DIB_0016"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "ClutchSwitch10PercPress",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "40",
+    "ResultByte": "0",
+    "ResultDescription": "Not Pressed",
+    "LanguageCode": "PEPS_DIB_0017"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "ClutchSwitch10PercPress",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "40",
+    "ResultByte": "40",
+    "ResultDescription": "Pressed",
+    "LanguageCode": "PEPS_DIB_0017"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "BrakeSwitch",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "80",
+    "ResultByte": "0",
+    "ResultDescription": "Not Pressed",
+    "LanguageCode": "PEPS_DIB_0018"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "BrakeSwitch",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "80",
+    "ResultByte": "80",
+    "ResultDescription": "Pressed",
+    "LanguageCode": "PEPS_DIB_0018"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "StartStopSwitchInput1",
+    "BytePosition": 4,
+    "ByteLength": 1,
+    "MaskingCondition": "1",
+    "ResultByte": "0",
+    "ResultDescription": "Not Pressed",
+    "LanguageCode": "PEPS_DIB_0019"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "StartStopSwitchInput1",
+    "BytePosition": 4,
+    "ByteLength": 1,
+    "MaskingCondition": "1",
+    "ResultByte": "1",
+    "ResultDescription": "Pressed",
+    "LanguageCode": "PEPS_DIB_0019"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "StartStopSwitchInput2",
+    "BytePosition": 4,
+    "ByteLength": 1,
+    "MaskingCondition": "2",
+    "ResultByte": "0",
+    "ResultDescription": "Not Pressed",
+    "LanguageCode": "PEPS_DIB_0020"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "StartStopSwitchInput2",
+    "BytePosition": 4,
+    "ByteLength": 1,
+    "MaskingCondition": "2",
+    "ResultByte": "2",
+    "ResultDescription": "Pressed",
+    "LanguageCode": "PEPS_DIB_0020"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "WakeupInputFromBCM",
+    "BytePosition": 4,
+    "ByteLength": 1,
+    "MaskingCondition": "4",
+    "ResultByte": "0",
+    "ResultDescription": "Off",
+    "LanguageCode": "PEPS_DIB_0021"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "WakeupInputFromBCM",
+    "BytePosition": 4,
+    "ByteLength": 1,
+    "MaskingCondition": "4",
+    "ResultByte": "4",
+    "ResultDescription": "On",
+    "LanguageCode": "PEPS_DIB_0021"
+   }
+  ]
+ },
+ {
+  "ParameterID": 6,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x4211",
+  "ParameterName": "Stuck Monitoring Time",
+  "TotalByteLength": "3",
+  "ReadPermission": null,
+  "WritePermission": null,
+  "ValueParameters": [
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "DoorOrTailgateHandleSwitchStuckMonitoringTime",
+    "BytePosition": 1,
+    "ByteLength": 1,
+    "Resolution": "10",
+    "Offset": "0",
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": "s",
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": "10",
+    "MaximumValue": "100",
+    "DataType": "5",
+    "BitPosition": null
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "StartStopSwitchStuckMonitoringTime",
+    "BytePosition": 2,
+    "ByteLength": 1,
+    "Resolution": "10",
+    "Offset": "0",
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": "s",
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": "10",
+    "MaximumValue": "100",
+    "DataType": "5",
+    "BitPosition": null
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "ClutchSwitchBrakeSwitchMonitoringTime",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "Resolution": "1",
+    "Offset": "0",
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": "min",
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": "1",
+    "MaximumValue": "10",
+    "DataType": "5",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 7,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x4214",
+  "ParameterName": "RKE Command Received To PEPS",
+  "TotalByteLength": "1",
+  "ReadPermission": null,
+  "WritePermission": null,
+  "ValueParameters": [],
+  "ByteParameters": [
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "RKE Command Received To PEPS",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "0",
+    "ResultDescription": "Status Not Available",
+    "LanguageCode": "PEPS_DIB_0022"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "RKE Command Received To PEPS",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "1",
+    "ResultDescription": "Lock",
+    "LanguageCode": "PEPS_DIB_0022"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "RKE Command Received To PEPS",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "2",
+    "ResultDescription": "Unlock",
+    "LanguageCode": "PEPS_DIB_0022"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "RKE Command Received To PEPS",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "3",
+    "ResultDescription": "Tailgate Unlock",
+    "LanguageCode": "PEPS_DIB_0022"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "RKE Command Received To PEPS",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "4",
+    "ResultDescription": "Approach Light",
+    "LanguageCode": "PEPS_DIB_0022"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "RKE Command Received To PEPS",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "5",
+    "ResultDescription": "Force Panic",
+    "LanguageCode": "PEPS_DIB_0022"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "RKE Command Received To PEPS",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "6",
+    "ResultDescription": "Window Up",
+    "LanguageCode": "PEPS_DIB_0022"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "RKE Command Received To PEPS",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "7",
+    "ResultDescription": "Window Down",
+    "LanguageCode": "PEPS_DIB_0022"
+   }
+  ]
+ },
+ {
+  "ParameterID": 8,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x4215",
+  "ParameterName": "Double Stage Unlocking Time",
+  "TotalByteLength": "1",
+  "ReadPermission": null,
+  "WritePermission": null,
+  "ValueParameters": [
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "Double Stage Unlocking Time",
+    "BytePosition": 4,
+    "ByteLength": 1,
+    "Resolution": "1",
+    "Offset": "0",
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": "s",
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": "1",
+    "MaximumValue": "60",
+    "DataType": "5",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 9,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x4216",
+  "ParameterName": "Start Stop Sw Long Press Detection Time",
+  "TotalByteLength": "1",
+  "ReadPermission": null,
+  "WritePermission": null,
+  "ValueParameters": [
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "Start Stop Sw Long Press Detection Time",
+    "BytePosition": 4,
+    "ByteLength": 1,
+    "Resolution": "1",
+    "Offset": "0",
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": "s",
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": "1",
+    "MaximumValue": "10",
+    "DataType": "5",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 10,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x4217",
+  "ParameterName": "Type of Door Handle Switch",
+  "TotalByteLength": "1",
+  "ReadPermission": null,
+  "WritePermission": null,
+  "ValueParameters": [],
+  "ByteParameters": [
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "Type of Door Handle Switch",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "0",
+    "ResultDescription": "Push Button",
+    "LanguageCode": "PEPS_DIB_0023"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "Type of Door Handle Switch",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "1",
+    "ResultDescription": "Capacitive Sensor",
+    "LanguageCode": "PEPS_DIB_0023"
+   }
+  ]
+ },
+ {
+  "ParameterID": 11,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x4218",
+  "ParameterName": "Door Handle Sw Installed",
+  "TotalByteLength": "5",
+  "ReadPermission": null,
+  "WritePermission": null,
+  "ValueParameters": [],
+  "ByteParameters": [
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "DriverDoorHandleSwitch Installed",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "1",
+    "ResultByte": "0",
+    "ResultDescription": "No",
+    "LanguageCode": "PEPS_DIB_0011"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "DriverDoorHandleSwitch Installed",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "1",
+    "ResultByte": "1",
+    "ResultDescription": "Yes",
+    "LanguageCode": "PEPS_DIB_0011"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "CoDriverDoorHandleSwitch Installed",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "2",
+    "ResultByte": "0",
+    "ResultDescription": "No",
+    "LanguageCode": "PEPS_DIB_0012"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "CoDriverDoorHandleSwitch Installed",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "2",
+    "ResultByte": "2",
+    "ResultDescription": "Yes",
+    "LanguageCode": "PEPS_DIB_0012"
+   }
+  ]
+ },
+ {
+  "ParameterID": 12,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x4219",
+  "ParameterName": "Door States Received From BCM",
+  "TotalByteLength": "5",
+  "ReadPermission": null,
+  "WritePermission": null,
+  "ValueParameters": [],
+  "ByteParameters": [
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "DriverDoorState",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "1",
+    "ResultByte": "0",
+    "ResultDescription": "Closed",
+    "LanguageCode": "PEPS_DIB_0024"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "DriverDoorState",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "1",
+    "ResultByte": "1",
+    "ResultDescription": "Open",
+    "LanguageCode": "PEPS_DIB_0024"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "CoDriverDoorState",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "2",
+    "ResultByte": "0",
+    "ResultDescription": "Closed",
+    "LanguageCode": "PEPS_DIB_0025"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "CoDriverDoorState",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "2",
+    "ResultByte": "2",
+    "ResultDescription": "Open",
+    "LanguageCode": "PEPS_DIB_0025"
+   }
+  ]
+ },
+ {
+  "ParameterID": 13,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x421A",
+  "ParameterName": "Lock States Received From BCM",
+  "TotalByteLength": "1",
+  "ReadPermission": null,
+  "WritePermission": null,
+  "ValueParameters": [],
+  "ByteParameters": [
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "Lock States Received From BCM",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "1",
+    "ResultDescription": "Externally Locked",
+    "LanguageCode": "PEPS_DIB_0026"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "Lock States Received From BCM",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "2",
+    "ResultDescription": "Internally Locked",
+    "LanguageCode": "PEPS_DIB_0026"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "Lock States Received From BCM",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "3",
+    "ResultDescription": "Unlocked",
+    "LanguageCode": "PEPS_DIB_0026"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "Lock States Received From BCM",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "4",
+    "ResultDescription": "Crash Unlocked",
+    "LanguageCode": "PEPS_DIB_0026"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "Lock States Received From BCM",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "5",
+    "ResultDescription": "Reverse Unlocked",
+    "LanguageCode": "PEPS_DIB_0026"
+   }
+  ]
+ },
+ {
+  "ParameterID": 14,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x421B",
+  "ParameterName": "UnLock Type Configuration Received From BCM",
+  "TotalByteLength": "1",
+  "ReadPermission": null,
+  "WritePermission": null,
+  "ValueParameters": [],
+  "ByteParameters": [
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "UnLock Type Configuration Received From BCM",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "0",
+    "ResultDescription": "Single stage",
+    "LanguageCode": "PEPS_DIB_0027"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "UnLock Type Configuration Received From BCM",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "1",
+    "ResultDescription": "Double stage",
+    "LanguageCode": "PEPS_DIB_0027"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "UnLock Type Configuration Received From BCM",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "2",
+    "ResultDescription": "Single stage with Tailgate Unlock",
+    "LanguageCode": "PEPS_DIB_0027"
+   }
+  ]
+ },
+ {
+  "ParameterID": 15,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x421C",
+  "ParameterName": "PEPS Commands To BCM",
+  "TotalByteLength": "2",
+  "ReadPermission": null,
+  "WritePermission": null,
+  "ValueParameters": [],
+  "ByteParameters": [
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "VehicleLockCommand",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "1",
+    "ResultByte": "0",
+    "ResultDescription": "No Lock",
+    "LanguageCode": "PEPS_DIB_0028"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "VehicleLockCommand",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "1",
+    "ResultByte": "1",
+    "ResultDescription": "Lock",
+    "LanguageCode": "PEPS_DIB_0028"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "UnlockDriveDoorCommand",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "2",
+    "ResultByte": "0",
+    "ResultDescription": "No Unlock",
+    "LanguageCode": "PEPS_DIB_0029"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "UnlockDriveDoorCommand",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "2",
+    "ResultByte": "2",
+    "ResultDescription": "Unlock",
+    "LanguageCode": "PEPS_DIB_0029"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "UnlockAllDoorCommand",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "4",
+    "ResultByte": "0",
+    "ResultDescription": "No Unlock",
+    "LanguageCode": "PEPS_DIB_0030"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "UnlockAllDoorCommand",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "4",
+    "ResultByte": "4",
+    "ResultDescription": "Unlock",
+    "LanguageCode": "PEPS_DIB_0030"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "UnlockTailgateCommand",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "8",
+    "ResultByte": "0",
+    "ResultDescription": "No Unlock",
+    "LanguageCode": "PEPS_DIB_0031"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "UnlockTailgateCommand",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "8",
+    "ResultByte": "8",
+    "ResultDescription": "Unlock",
+    "LanguageCode": "PEPS_DIB_0031"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "ApproachLightCommand",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "10",
+    "ResultByte": "0",
+    "ResultDescription": "Off",
+    "LanguageCode": "PEPS_DIB_0032"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "ApproachLightCommand",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "10",
+    "ResultByte": "10",
+    "ResultDescription": "On",
+    "LanguageCode": "PEPS_DIB_0032"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "ForcePanicCommand",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "20",
+    "ResultByte": "0",
+    "ResultDescription": "Off",
+    "LanguageCode": "PEPS_DIB_0033"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "ForcePanicCommand",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "20",
+    "ResultByte": "20",
+    "ResultDescription": "On",
+    "LanguageCode": "PEPS_DIB_0033"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "WindowDownCommand",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "40",
+    "ResultByte": "0",
+    "ResultDescription": "No Window Down",
+    "LanguageCode": "PEPS_DIB_0034"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "WindowDownCommand",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "40",
+    "ResultByte": "40",
+    "ResultDescription": "Execute Window Down",
+    "LanguageCode": "PEPS_DIB_0034"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "WindowUpCommand",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "80",
+    "ResultByte": "0",
+    "ResultDescription": "No Window Close",
+    "LanguageCode": "PEPS_DIB_0035"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "WindowUpCommand",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "80",
+    "ResultByte": "80",
+    "ResultDescription": "Execute Window Close",
+    "LanguageCode": "PEPS_DIB_0035"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "VehicleSeekCommand",
+    "BytePosition": 4,
+    "ByteLength": 1,
+    "MaskingCondition": "1",
+    "ResultByte": "0",
+    "ResultDescription": "Off",
+    "LanguageCode": "PEPS_DIB_0036"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "VehicleSeekCommand",
+    "BytePosition": 4,
+    "ByteLength": 1,
+    "MaskingCondition": "1",
+    "ResultByte": "1",
+    "ResultDescription": "On",
+    "LanguageCode": "PEPS_DIB_0036"
+   }
+  ]
+ },
+ {
+  "ParameterID": 16,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x4414",
+  "ParameterName": "Homologation number",
+  "TotalByteLength": "2",
+  "ReadPermission": null,
+  "WritePermission": null,
+  "ValueParameters": [
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "Homologation number",
+    "BytePosition": 4,
+    "ByteLength": 2,
+    "Resolution": "1",
+    "Offset": "0",
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": null,
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": "0",
+    "MaximumValue": "65534",
+    "DataType": "5",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 17,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x4415",
+  "ParameterName": "PEPS Status indicator lamp",
+  "TotalByteLength": "1",
+  "ReadPermission": null,
+  "WritePermission": null,
+  "ValueParameters": [],
+  "ByteParameters": [
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "PEPS Status indicator lamp",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "1",
+    "ResultByte": "0",
+    "ResultDescription": "Active",
+    "LanguageCode": "PEPS_DIB_0037"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "PEPS Status indicator lamp",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "1",
+    "ResultByte": "1",
+    "ResultDescription": "Inactive",
+    "LanguageCode": "PEPS_DIB_0037"
+   }
+  ]
+ },
+ {
+  "ParameterID": 18,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x4418",
+  "ParameterName": "PEPS ECU Status",
+  "TotalByteLength": "1",
+  "ReadPermission": null,
+  "WritePermission": null,
+  "ValueParameters": [],
+  "ByteParameters": [
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "PEPS ECU Status",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "0",
+    "ResultDescription": "Engine starting Disabled",
+    "LanguageCode": "PEPS_DIB_0038"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "PEPS ECU Status",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "1",
+    "ResultDescription": "Engine Stating Enabled",
+    "LanguageCode": "PEPS_DIB_0038"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "PEPS ECU Status",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "2",
+    "ResultDescription": "Key learning",
+    "LanguageCode": "PEPS_DIB_0038"
+   }
+  ]
+ },
+ {
+  "ParameterID": 19,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x441A",
+  "ParameterName": "PEPS EMS status",
+  "TotalByteLength": "1",
+  "ReadPermission": null,
+  "WritePermission": null,
+  "ValueParameters": [],
+  "ByteParameters": [
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "StatusOfAuthenticationBetweenPEPSAndEMS",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "1",
+    "ResultByte": "0",
+    "ResultDescription": "Fail",
+    "LanguageCode": "PEPS_DIB_0039"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "StatusOfAuthenticationBetweenPEPSAndEMS",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "1",
+    "ResultByte": "1",
+    "ResultDescription": "Pass",
+    "LanguageCode": "PEPS_DIB_0039"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "AESSKKeyLearntStatusOfPEPS",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "2",
+    "ResultByte": "0",
+    "ResultDescription": "Virgin ECU",
+    "LanguageCode": "PEPS_DIB_0040"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "AESSKKeyLearntStatusOfPEPS",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "2",
+    "ResultByte": "2",
+    "ResultDescription": "Programmed ECU",
+    "LanguageCode": "PEPS_DIB_0040"
+   }
+  ]
+ },
+ {
+  "ParameterID": 20,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x441C",
+  "ParameterName": "Status of AES SK Key",
+  "TotalByteLength": "1",
+  "ReadPermission": null,
+  "WritePermission": null,
+  "ValueParameters": [],
+  "ByteParameters": [
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "Status of AES SK Key",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "1",
+    "ResultByte": "0",
+    "ResultDescription": "Locked",
+    "LanguageCode": "PEPS_DIB_0041"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "Status of AES SK Key",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "1",
+    "ResultByte": "1",
+    "ResultDescription": "Unlocked",
+    "LanguageCode": "PEPS_DIB_0041"
+   }
+  ]
+ },
+ {
+  "ParameterID": 21,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x442A",
+  "ParameterName": "PEPS Modes",
+  "TotalByteLength": "1",
+  "ReadPermission": null,
+  "WritePermission": null,
+  "ValueParameters": [],
+  "ByteParameters": [
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "PEPS Modes",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "0",
+    "ResultDescription": "PEPS status OK",
+    "LanguageCode": "PEPS_DIB_0042"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "PEPS Modes",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "1",
+    "ResultDescription": "Operational Fault in PEPS",
+    "LanguageCode": "PEPS_DIB_0042"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "PEPS Modes",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "3",
+    "ResultDescription": "Transponder Key Learning Mode",
+    "LanguageCode": "PEPS_DIB_0042"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "PEPS Modes",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "4",
+    "ResultDescription": "Anti-Scanning Mode",
+    "LanguageCode": "PEPS_DIB_0042"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "PEPS Modes",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "6",
+    "ResultDescription": "Transport Mode",
+    "LanguageCode": "PEPS_DIB_0042"
+   }
+  ]
+ },
+ {
+  "ParameterID": 22,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x4430",
+  "ParameterName": "Wakeup Reason",
+  "TotalByteLength": "2",
+  "ReadPermission": null,
+  "WritePermission": null,
+  "ValueParameters": [],
+  "ByteParameters": [
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "CANWakeup",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "1",
+    "ResultByte": "0",
+    "ResultDescription": "Inactive",
+    "LanguageCode": "PEPS_DIB_0043"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "CANWakeup",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "1",
+    "ResultByte": "1",
+    "ResultDescription": "Active",
+    "LanguageCode": "PEPS_DIB_0043"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "RKEWakeup",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "2",
+    "ResultByte": "0",
+    "ResultDescription": "Inactive",
+    "LanguageCode": "PEPS_DIB_0044"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "RKEWakeup",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "2",
+    "ResultByte": "2",
+    "ResultDescription": "Active",
+    "LanguageCode": "PEPS_DIB_0044"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "StartStopSwitch1Wakeup",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "4",
+    "ResultByte": "0",
+    "ResultDescription": "Inactive",
+    "LanguageCode": "PEPS_DIB_0045"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "StartStopSwitch1Wakeup",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "4",
+    "ResultByte": "4",
+    "ResultDescription": "Active",
+    "LanguageCode": "PEPS_DIB_0045"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "StartStopSwitch2Wakeup",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "8",
+    "ResultByte": "0",
+    "ResultDescription": "Inactive",
+    "LanguageCode": "PEPS_DIB_0046"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "StartStopSwitch2Wakeup",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "8",
+    "ResultByte": "8",
+    "ResultDescription": "Active",
+    "LanguageCode": "PEPS_DIB_0046"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "DriverDoorHandleSwitchWakeup",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "10",
+    "ResultByte": "0",
+    "ResultDescription": "Inactive",
+    "LanguageCode": "PEPS_DIB_0047"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "DriverDoorHandleSwitchWakeup",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "10",
+    "ResultByte": "10",
+    "ResultDescription": "Active",
+    "LanguageCode": "PEPS_DIB_0047"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "CoDriverDoorHandleSwitchWakeup",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "20",
+    "ResultByte": "0",
+    "ResultDescription": "Inactive",
+    "LanguageCode": "PEPS_DIB_0048"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "CoDriverDoorHandleSwitchWakeup",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "20",
+    "ResultByte": "20",
+    "ResultDescription": "Active",
+    "LanguageCode": "PEPS_DIB_0048"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "RearRHDoorHandleSwitchWakeup",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "40",
+    "ResultByte": "0",
+    "ResultDescription": "Inactive",
+    "LanguageCode": "PEPS_DIB_0049"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "RearRHDoorHandleSwitchWakeup",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "40",
+    "ResultByte": "40",
+    "ResultDescription": "Active",
+    "LanguageCode": "PEPS_DIB_0049"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "RearLHDoorHandleSwitchWakeup",
+    "BytePosition": 4,
+    "ByteLength": 1,
+    "MaskingCondition": "1",
+    "ResultByte": "0",
+    "ResultDescription": "Inactive",
+    "LanguageCode": "PEPS_DIB_0050"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "RearLHDoorHandleSwitchWakeup",
+    "BytePosition": 4,
+    "ByteLength": 1,
+    "MaskingCondition": "1",
+    "ResultByte": "1",
+    "ResultDescription": "Active",
+    "LanguageCode": "PEPS_DIB_0050"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "TailgateTrunkHandleSwitchWakeup",
+    "BytePosition": 4,
+    "ByteLength": 1,
+    "MaskingCondition": "2",
+    "ResultByte": "0",
+    "ResultDescription": "Inactive",
+    "LanguageCode": "PEPS_DIB_0051"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "TailgateTrunkHandleSwitchWakeup",
+    "BytePosition": 4,
+    "ByteLength": 1,
+    "MaskingCondition": "2",
+    "ResultByte": "2",
+    "ResultDescription": "Active",
+    "LanguageCode": "PEPS_DIB_0051"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "ClutchSwitch90PercPressWakeup",
+    "BytePosition": 4,
+    "ByteLength": 1,
+    "MaskingCondition": "4",
+    "ResultByte": "0",
+    "ResultDescription": "Inactive",
+    "LanguageCode": "PEPS_DIB_0052"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "ClutchSwitch90PercPressWakeup",
+    "BytePosition": 4,
+    "ByteLength": 1,
+    "MaskingCondition": "4",
+    "ResultByte": "4",
+    "ResultDescription": "Active",
+    "LanguageCode": "PEPS_DIB_0052"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "ClutchSwitch10PercPressWakeup",
+    "BytePosition": 4,
+    "ByteLength": 1,
+    "MaskingCondition": "8",
+    "ResultByte": "0",
+    "ResultDescription": "Inactive",
+    "LanguageCode": "PEPS_DIB_0053"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "ClutchSwitch10PercPressWakeup",
+    "BytePosition": 4,
+    "ByteLength": 1,
+    "MaskingCondition": "8",
+    "ResultByte": "8",
+    "ResultDescription": "Active",
+    "LanguageCode": "PEPS_DIB_0053"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "BrakeSwitchWakeup",
+    "BytePosition": 4,
+    "ByteLength": 1,
+    "MaskingCondition": "10",
+    "ResultByte": "0",
+    "ResultDescription": "Inactive",
+    "LanguageCode": "PEPS_DIB_0054"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "BrakeSwitchWakeup",
+    "BytePosition": 4,
+    "ByteLength": 1,
+    "MaskingCondition": "10",
+    "ResultByte": "10",
+    "ResultDescription": "Active",
+    "LanguageCode": "PEPS_DIB_0054"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "BCMWakeup",
+    "BytePosition": 4,
+    "ByteLength": 1,
+    "MaskingCondition": "20",
+    "ResultByte": "0",
+    "ResultDescription": "Inactive",
+    "LanguageCode": "PEPS_DIB_0055"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "BCMWakeup",
+    "BytePosition": 4,
+    "ByteLength": 1,
+    "MaskingCondition": "20",
+    "ResultByte": "20",
+    "ResultDescription": "Active",
+    "LanguageCode": "PEPS_DIB_0055"
+   }
+  ]
+ },
+ {
+  "ParameterID": 23,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x4431",
+  "ParameterName": "CAN Communication Deactivation Time",
+  "TotalByteLength": "1",
+  "ReadPermission": null,
+  "WritePermission": null,
+  "ValueParameters": [
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "CAN Communication Deactivation Time",
+    "BytePosition": 4,
+    "ByteLength": 1,
+    "Resolution": "1",
+    "Offset": "0",
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": "s",
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": "0",
+    "MaximumValue": "120",
+    "DataType": "5",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 24,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x4433",
+  "ParameterName": "Reset Reason",
+  "TotalByteLength": "2",
+  "ReadPermission": null,
+  "WritePermission": null,
+  "ValueParameters": [],
+  "ByteParameters": [
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "PowerONReset",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "1",
+    "ResultByte": "0",
+    "ResultDescription": "Inactive",
+    "LanguageCode": "PEPS_DIB_0056"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "PowerONReset",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "1",
+    "ResultByte": "1",
+    "ResultDescription": "Active",
+    "LanguageCode": "PEPS_DIB_0056"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "ExternalWatchdogReset",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "2",
+    "ResultByte": "0",
+    "ResultDescription": "Inactive",
+    "LanguageCode": "PEPS_DIB_0057"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "ExternalWatchdogReset",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "2",
+    "ResultByte": "2",
+    "ResultDescription": "Active",
+    "LanguageCode": "PEPS_DIB_0057"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "InternalWatchdogReset",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "4",
+    "ResultByte": "0",
+    "ResultDescription": "Inactive",
+    "LanguageCode": "PEPS_DIB_0058"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "InternalWatchdogReset",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "4",
+    "ResultByte": "4",
+    "ResultDescription": "Active",
+    "LanguageCode": "PEPS_DIB_0058"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "SoftReset",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "8",
+    "ResultByte": "0",
+    "ResultDescription": "Inactive",
+    "LanguageCode": "PEPS_DIB_0059"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "SoftReset",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "8",
+    "ResultByte": "8",
+    "ResultDescription": "Active",
+    "LanguageCode": "PEPS_DIB_0059"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "HardReset",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "10",
+    "ResultByte": "0",
+    "ResultDescription": "Inactive",
+    "LanguageCode": "PEPS_DIB_0060"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "HardReset",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "10",
+    "ResultByte": "10",
+    "ResultDescription": "Active",
+    "LanguageCode": "PEPS_DIB_0060"
+   }
+  ]
+ },
+ {
+  "ParameterID": 25,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x4434",
+  "ParameterName": "PEPS Clamp Control Outputs State",
+  "TotalByteLength": "1",
+  "ReadPermission": null,
+  "WritePermission": null,
+  "ValueParameters": [],
+  "ByteParameters": [
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "ACCRelayOutput",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "1",
+    "ResultByte": "0",
+    "ResultDescription": "Off",
+    "LanguageCode": "PEPS_DIB_0061"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "ACCRelayOutput",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "1",
+    "ResultByte": "1",
+    "ResultDescription": "On",
+    "LanguageCode": "PEPS_DIB_0061"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "IGNRelayOutput",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "2",
+    "ResultByte": "0",
+    "ResultDescription": "Off",
+    "LanguageCode": "PEPS_DIB_0062"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "IGNRelayOutput",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "2",
+    "ResultByte": "2",
+    "ResultDescription": "On",
+    "LanguageCode": "PEPS_DIB_0062"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "CrankRelayOutput",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "4",
+    "ResultByte": "0",
+    "ResultDescription": "Off",
+    "LanguageCode": "PEPS_DIB_0063"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "CrankRelayOutput",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "4",
+    "ResultByte": "4",
+    "ResultDescription": "On",
+    "LanguageCode": "PEPS_DIB_0063"
+   }
+  ]
+ },
+ {
+  "ParameterID": 26,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x4435",
+  "ParameterName": "PEPS Wakeup Output Pulse ON Time",
+  "TotalByteLength": "1",
+  "ReadPermission": null,
+  "WritePermission": null,
+  "ValueParameters": [
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "PEPS Wakeup Output Pulse ON Time",
+    "BytePosition": 4,
+    "ByteLength": 1,
+    "Resolution": "10",
+    "Offset": "0",
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": "ms",
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": "10",
+    "MaximumValue": "500",
+    "DataType": "5",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 27,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x4436",
+  "ParameterName": "Vehicle Steering Position LHD_RHD",
+  "TotalByteLength": "1",
+  "ReadPermission": null,
+  "WritePermission": null,
+  "ValueParameters": [],
+  "ByteParameters": [
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "Vehicle Steering Position LHD_RHD",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "1",
+    "ResultByte": "0",
+    "ResultDescription": "RHD",
+    "LanguageCode": "PEPS_DIB_0064"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "Vehicle Steering Position LHD_RHD",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "1",
+    "ResultByte": "1",
+    "ResultDescription": "LHD",
+    "LanguageCode": "PEPS_DIB_0064"
+   }
+  ]
+ },
+ {
+  "ParameterID": 28,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x4437",
+  "ParameterName": "Awake Mode Timeout",
+  "TotalByteLength": "1",
+  "ReadPermission": null,
+  "WritePermission": null,
+  "ValueParameters": [
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "Awake Mode Timeout",
+    "BytePosition": 4,
+    "ByteLength": 1,
+    "Resolution": "1",
+    "Offset": "0",
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": "min",
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": "1",
+    "MaximumValue": "10",
+    "DataType": "5",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 29,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x4439",
+  "ParameterName": "PEPS Operations",
+  "TotalByteLength": "2",
+  "ReadPermission": null,
+  "WritePermission": null,
+  "ValueParameters": [],
+  "ByteParameters": [
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "PassiveEntryExit",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "1",
+    "ResultByte": "0",
+    "ResultDescription": "Disabled",
+    "LanguageCode": "PEPS_DIB_0065"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "PassiveEntryExit",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "1",
+    "ResultByte": "1",
+    "ResultDescription": "Enabled",
+    "LanguageCode": "PEPS_DIB_0065"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "PassiveStartStop",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "2",
+    "ResultByte": "0",
+    "ResultDescription": "Disabled",
+    "LanguageCode": "PEPS_DIB_0066"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "PassiveStartStop",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "2",
+    "ResultByte": "2",
+    "ResultDescription": "Enabled",
+    "LanguageCode": "PEPS_DIB_0066"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "PEPSRKEOperation",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "4",
+    "ResultByte": "0",
+    "ResultDescription": "Disabled",
+    "LanguageCode": "PEPS_DIB_0067"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "PEPSRKEOperation",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "4",
+    "ResultByte": "4",
+    "ResultDescription": "Enabled",
+    "LanguageCode": "PEPS_DIB_0067"
+   }
+  ]
+ },
+ {
+  "ParameterID": 30,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x443A",
+  "ParameterName": "Number Of LF Antennas Installed",
+  "TotalByteLength": "1",
+  "ReadPermission": null,
+  "WritePermission": null,
+  "ValueParameters": [],
+  "ByteParameters": [
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "Number Of LF Antennas Installed",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "0",
+    "ResultDescription": "3 - RH Door, Center Console & Trunk",
+    "LanguageCode": "PEPS_DIB_0068"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "Number Of LF Antennas Installed",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "1",
+    "ResultDescription": "4 - RH Door, LH Door, Center Console & Trunk",
+    "LanguageCode": "PEPS_DIB_0068"
+   }
+  ]
+ },
+ {
+  "ParameterID": 31,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x443B",
+  "ParameterName": "Total Number of Keys Paired",
+  "TotalByteLength": "1",
+  "ReadPermission": null,
+  "WritePermission": null,
+  "ValueParameters": [
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "Total Number of Keys Paired",
+    "BytePosition": 4,
+    "ByteLength": 1,
+    "Resolution": "1",
+    "Offset": "0",
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": null,
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": "1",
+    "MaximumValue": "8",
+    "DataType": "5",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 32,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x443C",
+  "ParameterName": "Total Number of keys to be learnt with PEPS",
+  "TotalByteLength": "1",
+  "ReadPermission": null,
+  "WritePermission": null,
+  "ValueParameters": [
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "Total Number of keys to be learnt with PEPS",
+    "BytePosition": 4,
+    "ByteLength": 1,
+    "Resolution": "1",
+    "Offset": "0",
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": null,
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": "0",
+    "MaximumValue": "8",
+    "DataType": "5",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 33,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x443D",
+  "ParameterName": "Paired UID ID",
+  "TotalByteLength": "64",
+  "ReadPermission": null,
+  "WritePermission": null,
+  "ValueParameters": [
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "PairedUIDIDKeyLine01",
+    "BytePosition": 1,
+    "ByteLength": 8,
+    "Resolution": "1",
+    "Offset": "0",
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": null,
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": null,
+    "MaximumValue": null,
+    "DataType": "1",
+    "BitPosition": null
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "PairedUIDIDKeyLine02",
+    "BytePosition": 9,
+    "ByteLength": 8,
+    "Resolution": "1",
+    "Offset": "0",
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": null,
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": null,
+    "MaximumValue": null,
+    "DataType": "1",
+    "BitPosition": null
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "PairedUIDIDKeyLine03",
+    "BytePosition": 17,
+    "ByteLength": 8,
+    "Resolution": "1",
+    "Offset": "0",
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": null,
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": null,
+    "MaximumValue": null,
+    "DataType": "1",
+    "BitPosition": null
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "PairedUIDIDKeyLine04",
+    "BytePosition": 25,
+    "ByteLength": 8,
+    "Resolution": "1",
+    "Offset": "0",
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": null,
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": null,
+    "MaximumValue": null,
+    "DataType": "1",
+    "BitPosition": null
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "PairedUIDIDKeyLine05",
+    "BytePosition": 33,
+    "ByteLength": 8,
+    "Resolution": "1",
+    "Offset": "0",
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": null,
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": null,
+    "MaximumValue": null,
+    "DataType": "1",
+    "BitPosition": null
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "PairedUIDIDKeyLine06",
+    "BytePosition": 41,
+    "ByteLength": 8,
+    "Resolution": "1",
+    "Offset": "0",
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": null,
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": null,
+    "MaximumValue": null,
+    "DataType": "1",
+    "BitPosition": null
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "PairedUIDIDKeyLine07",
+    "BytePosition": 49,
+    "ByteLength": 8,
+    "Resolution": "1",
+    "Offset": "0",
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": null,
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": null,
+    "MaximumValue": null,
+    "DataType": "1",
+    "BitPosition": null
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "PairedUIDIDKeyLine08",
+    "BytePosition": 57,
+    "ByteLength": 8,
+    "Resolution": "1",
+    "Offset": "0",
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": null,
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": null,
+    "MaximumValue": null,
+    "DataType": "1",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 34,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x443E",
+  "ParameterName": "PEPS RF-Config",
+  "TotalByteLength": "1",
+  "ReadPermission": null,
+  "WritePermission": null,
+  "ValueParameters": [],
+  "ByteParameters": [
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "RFPower",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "1",
+    "ResultByte": "0",
+    "ResultDescription": "Power Setting 0",
+    "LanguageCode": "PEPS_DIB_0069"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "RFPower",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "1",
+    "ResultByte": "1",
+    "ResultDescription": "Power Setting 1",
+    "LanguageCode": "PEPS_DIB_0069"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "FFBTimeout",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "2",
+    "ResultByte": "0",
+    "ResultDescription": "Timeout Setting 0",
+    "LanguageCode": "PEPS_DIB_0070"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "FFBTimeout",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "2",
+    "ResultByte": "2",
+    "ResultDescription": "Timeout Setting 1",
+    "LanguageCode": "PEPS_DIB_0070"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "RFChannel3",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "4",
+    "ResultByte": "0",
+    "ResultDescription": "Off",
+    "LanguageCode": "PEPS_DIB_0071"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "RFChannel3",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "4",
+    "ResultByte": "4",
+    "ResultDescription": "On",
+    "LanguageCode": "PEPS_DIB_0071"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "RFChannel2",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "8",
+    "ResultByte": "0",
+    "ResultDescription": "Off",
+    "LanguageCode": "PEPS_DIB_0072"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "RFChannel2",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "8",
+    "ResultByte": "8",
+    "ResultDescription": "On",
+    "LanguageCode": "PEPS_DIB_0072"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "RFChannel1",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "10",
+    "ResultByte": "0",
+    "ResultDescription": "Off",
+    "LanguageCode": "PEPS_DIB_0073"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "RFChannel1",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "10",
+    "ResultByte": "10",
+    "ResultDescription": "On",
+    "LanguageCode": "PEPS_DIB_0073"
+   }
+  ]
+ },
+ {
+  "ParameterID": 35,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x443F",
+  "ParameterName": "Clutch Input Configuration",
+  "TotalByteLength": "2",
+  "ReadPermission": null,
+  "WritePermission": null,
+  "ValueParameters": [],
+  "ByteParameters": [
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "Clutch Input Configuration",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "1",
+    "ResultByte": "0",
+    "ResultDescription": "Switch",
+    "LanguageCode": "PEPS_DIB_0074"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "Clutch Input Configuration",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "1",
+    "ResultByte": "1",
+    "ResultDescription": "Sensor",
+    "LanguageCode": "PEPS_DIB_0074"
+   }
+  ]
+ },
+ {
+  "ParameterID": 36,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x4441",
+  "ParameterName": "Number of free IGN ON if no UID paired",
+  "TotalByteLength": "1",
+  "ReadPermission": null,
+  "WritePermission": null,
+  "ValueParameters": [
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "Number of free IGN ON if no UID paired",
+    "BytePosition": 4,
+    "ByteLength": 1,
+    "Resolution": "1",
+    "Offset": "0",
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": null,
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": "0",
+    "MaximumValue": "50",
+    "DataType": "5",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 37,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x4442",
+  "ParameterName": "PEPS Lifecycle with UID",
+  "TotalByteLength": "1",
+  "ReadPermission": null,
+  "WritePermission": null,
+  "ValueParameters": [],
+  "ByteParameters": [
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "PEPS Lifecycle with UID",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "0",
+    "ResultDescription": "Blank",
+    "LanguageCode": "PEPS_DIB_0075"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "PEPS Lifecycle with UID",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "1",
+    "ResultDescription": "Learned",
+    "LanguageCode": "PEPS_DIB_0075"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "PEPS Lifecycle with UID",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "2",
+    "ResultDescription": "Paired",
+    "LanguageCode": "PEPS_DIB_0075"
+   }
+  ]
+ },
+ {
+  "ParameterID": 38,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x4443",
+  "ParameterName": "PEPS Lifecycle with EMS",
+  "TotalByteLength": "1",
+  "ReadPermission": null,
+  "WritePermission": null,
+  "ValueParameters": [],
+  "ByteParameters": [
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "PEPS Lifecycle with EMS",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "0",
+    "ResultDescription": "Blank",
+    "LanguageCode": "PEPS_DIB_0076"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "PEPS Lifecycle with EMS",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "1",
+    "ResultDescription": "Paired",
+    "LanguageCode": "PEPS_DIB_0076"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "PEPS Lifecycle with EMS",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "2",
+    "ResultDescription": "Not Auth",
+    "LanguageCode": "PEPS_DIB_0076"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "PEPS Lifecycle with EMS",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "3",
+    "ResultDescription": "Auth",
+    "LanguageCode": "PEPS_DIB_0076"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "PEPS Lifecycle with EMS",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "4",
+    "ResultDescription": "Anti Scanning Mode",
+    "LanguageCode": "PEPS_DIB_0076"
+   }
+  ]
+ },
+ {
+  "ParameterID": 39,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x4444",
+  "ParameterName": "Configuration of Clutch Switch input 10% Press",
+  "TotalByteLength": "2",
+  "ReadPermission": null,
+  "WritePermission": null,
+  "ValueParameters": [],
+  "ByteParameters": [
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "Configuration of Clutch Switch input 10% Press",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "1",
+    "ResultByte": "0",
+    "ResultDescription": "Not present",
+    "LanguageCode": "PEPS_DIB_0077"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "Configuration of Clutch Switch input 10% Press",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "1",
+    "ResultByte": "1",
+    "ResultDescription": "Present",
+    "LanguageCode": "PEPS_DIB_0077"
+   }
+  ]
+ },
+ {
+  "ParameterID": 40,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x4445",
+  "ParameterName": "PEPS Wakeup Output State",
+  "TotalByteLength": "1",
+  "ReadPermission": null,
+  "WritePermission": null,
+  "ValueParameters": [],
+  "ByteParameters": [
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "PEPS Wakeup Output State",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "1",
+    "ResultByte": "0",
+    "ResultDescription": "Low",
+    "LanguageCode": "PEPS_DIB_0078"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "PEPS Wakeup Output State",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "1",
+    "ResultByte": "1",
+    "ResultDescription": "High",
+    "LanguageCode": "PEPS_DIB_0078"
+   }
+  ]
+ },
+ {
+  "ParameterID": 41,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x4446",
+  "ParameterName": "Automatic Odometer learning feature Configuration",
+  "TotalByteLength": "1",
+  "ReadPermission": null,
+  "WritePermission": null,
+  "ValueParameters": [],
+  "ByteParameters": [
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "Automatic Odometer learning feature Configuration",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "1",
+    "ResultByte": "0",
+    "ResultDescription": "Disabled",
+    "LanguageCode": "PEPS_DIB_0079"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "Automatic Odometer learning feature Configuration",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "1",
+    "ResultByte": "1",
+    "ResultDescription": "Enabled",
+    "LanguageCode": "PEPS_DIB_0079"
+   }
+  ]
+ },
+ {
+  "ParameterID": 42,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x4447",
+  "ParameterName": "Number of AES keys write left out",
+  "TotalByteLength": "1",
+  "ReadPermission": null,
+  "WritePermission": null,
+  "ValueParameters": [
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "Number of AES keys write left out",
+    "BytePosition": 4,
+    "ByteLength": 1,
+    "Resolution": "1",
+    "Offset": "0",
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": null,
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": "0",
+    "MaximumValue": "255",
+    "DataType": "5",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 43,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x4448",
+  "ParameterName": "Unlocking Type configuration",
+  "TotalByteLength": "4",
+  "ReadPermission": null,
+  "WritePermission": null,
+  "ValueParameters": [],
+  "ByteParameters": [
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "Unlocking Type configuration",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "0",
+    "ResultDescription": "Single stage",
+    "LanguageCode": "PEPS_DIB_0080"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "Unlocking Type configuration",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "1",
+    "ResultDescription": "Double stage",
+    "LanguageCode": "PEPS_DIB_0080"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "Unlocking Type configuration",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "2",
+    "ResultDescription": "Single stage with Tailgate Unlock",
+    "LanguageCode": "PEPS_DIB_0080"
+   }
+  ]
+ },
+ {
+  "ParameterID": 44,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x4449",
+  "ParameterName": "ESCL Failure Display Time",
+  "TotalByteLength": "1",
+  "ReadPermission": null,
+  "WritePermission": null,
+  "ValueParameters": [
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "ESCL Failure Display Time",
+    "BytePosition": 4,
+    "ByteLength": 1,
+    "Resolution": "1",
+    "Offset": "0",
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": "s",
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": "1",
+    "MaximumValue": "30",
+    "DataType": "5",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 45,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x4AA9",
+  "ParameterName": "PEPS Audio Warning ON Time",
+  "TotalByteLength": "1",
+  "ReadPermission": null,
+  "WritePermission": null,
+  "ValueParameters": [
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "PEPS Audio Warning ON Time",
+    "BytePosition": 4,
+    "ByteLength": 1,
+    "Resolution": "1",
+    "Offset": "0",
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": "s",
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": "1",
+    "MaximumValue": "20",
+    "DataType": "5",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 46,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x4AAA",
+  "ParameterName": "PEPS Telltale Text Display Time",
+  "TotalByteLength": "1",
+  "ReadPermission": null,
+  "WritePermission": null,
+  "ValueParameters": [
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "PEPS Telltale Text Display Time",
+    "BytePosition": 4,
+    "ByteLength": 1,
+    "Resolution": "1",
+    "Offset": "0",
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": "s",
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": "0",
+    "MaximumValue": "20",
+    "DataType": "5",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 47,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x5246",
+  "ParameterName": "Value of AES SK key",
+  "TotalByteLength": "19",
+  "ReadPermission": null,
+  "WritePermission": null,
+  "ValueParameters": [
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "Value of AES SK key",
+    "BytePosition": 4,
+    "ByteLength": 16,
+    "Resolution": "1",
+    "Offset": "0",
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": null,
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": null,
+    "MaximumValue": null,
+    "DataType": "3",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 48,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x5294",
+  "ParameterName": "Watchdog-Reset-Counter Read",
+  "TotalByteLength": "1",
+  "ReadPermission": null,
+  "WritePermission": null,
+  "ValueParameters": [
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "Watchdog-Reset-Counter Read",
+    "BytePosition": 4,
+    "ByteLength": 1,
+    "Resolution": "1",
+    "Offset": "0",
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": null,
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": "0",
+    "MaximumValue": "254",
+    "DataType": "5",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 49,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x5295",
+  "ParameterName": "Watchdog-Reset-Counter Reset",
+  "TotalByteLength": "1",
+  "ReadPermission": null,
+  "WritePermission": null,
+  "ValueParameters": [
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "Watchdog-Reset-Counter Reset",
+    "BytePosition": 4,
+    "ByteLength": 1,
+    "Resolution": "1",
+    "Offset": "0",
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": null,
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": "0",
+    "MaximumValue": "254",
+    "DataType": "5",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 50,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x5296",
+  "ParameterName": "UID Battery Level Indication",
+  "TotalByteLength": "1",
+  "ReadPermission": null,
+  "WritePermission": null,
+  "ValueParameters": [],
+  "ByteParameters": [
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "UID Battery Level Indication",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "0",
+    "ResultDescription": "Normal/Full",
+    "LanguageCode": "PEPS_DIB_0081"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "UID Battery Level Indication",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "1",
+    "ResultDescription": "Used 1",
+    "LanguageCode": "PEPS_DIB_0081"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "UID Battery Level Indication",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "2",
+    "ResultDescription": "Used 2",
+    "LanguageCode": "PEPS_DIB_0081"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "UID Battery Level Indication",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "3",
+    "ResultDescription": "Used 3/Empty",
+    "LanguageCode": "PEPS_DIB_0081"
+   }
+  ]
+ },
+ {
+  "ParameterID": 51,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x5298",
+  "ParameterName": "PEPS Clamp State",
+  "TotalByteLength": "1",
+  "ReadPermission": null,
+  "WritePermission": null,
+  "ValueParameters": [],
+  "ByteParameters": [
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "PEPS Clamp State",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "0",
+    "ResultDescription": "Off",
+    "LanguageCode": "PEPS_DIB_0082"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "PEPS Clamp State",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "1",
+    "ResultDescription": "Accessory",
+    "LanguageCode": "PEPS_DIB_0082"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "PEPS Clamp State",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "2",
+    "ResultDescription": "Ignition",
+    "LanguageCode": "PEPS_DIB_0082"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "PEPS Clamp State",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "3",
+    "ResultDescription": "Crank",
+    "LanguageCode": "PEPS_DIB_0082"
+   }
+  ]
+ },
+ {
+  "ParameterID": 52,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x5299",
+  "ParameterName": "ASIC Version",
+  "TotalByteLength": "1",
+  "ReadPermission": null,
+  "WritePermission": null,
+  "ValueParameters": [
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "ASIC Version",
+    "BytePosition": 4,
+    "ByteLength": 1,
+    "Resolution": "1",
+    "Offset": "0",
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": null,
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": null,
+    "MaximumValue": null,
+    "DataType": "3",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 53,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x529A",
+  "ParameterName": "PEPS ASIC Measurement Data",
+  "TotalByteLength": "20",
+  "ReadPermission": null,
+  "WritePermission": null,
+  "ValueParameters": [
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "PEPS ASIC Measurement Data",
+    "BytePosition": 4,
+    "ByteLength": 20,
+    "Resolution": "1",
+    "Offset": "0",
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": null,
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": null,
+    "MaximumValue": null,
+    "DataType": "3",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 54,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x529B",
+  "ParameterName": "Start Stop Switch ADC Input Values",
+  "TotalByteLength": "2",
+  "ReadPermission": null,
+  "WritePermission": null,
+  "ValueParameters": [
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "ADCInputValuesOfStartStopSwitchInput1",
+    "BytePosition": 1,
+    "ByteLength": 1,
+    "Resolution": "100",
+    "Offset": "0",
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": "mV",
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": "0",
+    "MaximumValue": "5000",
+    "DataType": "5",
+    "BitPosition": null
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "ADCInputValuesOfStartStopSwitchInput2",
+    "BytePosition": 2,
+    "ByteLength": 1,
+    "Resolution": "100",
+    "Offset": "0",
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": "mV",
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": "0",
+    "MaximumValue": "5000",
+    "DataType": "5",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 55,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x529C",
+  "ParameterName": "PEPS Mechanic Version",
+  "TotalByteLength": "3",
+  "ReadPermission": null,
+  "WritePermission": null,
+  "ValueParameters": [
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "Year",
+    "BytePosition": 4,
+    "ByteLength": 1,
+    "Resolution": "1",
+    "Offset": "0",
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": null,
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": "0",
+    "MaximumValue": "255",
+    "DataType": "5",
+    "BitPosition": null
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "CalenderWeek",
+    "BytePosition": 5,
+    "ByteLength": 1,
+    "Resolution": "1",
+    "Offset": "0",
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": null,
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": "0",
+    "MaximumValue": "255",
+    "DataType": "5",
+    "BitPosition": null
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "Patchlevel",
+    "BytePosition": 6,
+    "ByteLength": 1,
+    "Resolution": "1",
+    "Offset": "0",
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": null,
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": "0",
+    "MaximumValue": "255",
+    "DataType": "5",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 56,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x529D",
+  "ParameterName": "PEPS Compile Date",
+  "TotalByteLength": "7",
+  "ReadPermission": null,
+  "WritePermission": null,
+  "ValueParameters": [
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "PEPS Compile Date",
+    "BytePosition": 4,
+    "ByteLength": 7,
+    "Resolution": "1",
+    "Offset": "0",
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": null,
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": null,
+    "MaximumValue": null,
+    "DataType": "1",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 57,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x529E",
+  "ParameterName": "PEPS Final test byte",
+  "TotalByteLength": "3",
+  "ReadPermission": null,
+  "WritePermission": null,
+  "ValueParameters": [
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "PEPS Final test byte",
+    "BytePosition": 4,
+    "ByteLength": 3,
+    "Resolution": "1",
+    "Offset": "0",
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": null,
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": null,
+    "MaximumValue": null,
+    "DataType": "1",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 58,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x529F",
+  "ParameterName": "Engine RPM Threshold For Crank Deactivation",
+  "TotalByteLength": "2",
+  "ReadPermission": null,
+  "WritePermission": null,
+  "ValueParameters": [
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "Engine RPM Threshold For Crank Deactivation",
+    "BytePosition": 4,
+    "ByteLength": 2,
+    "Resolution": "1",
+    "Offset": "0",
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": "rpm",
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": "0",
+    "MaximumValue": "10000",
+    "DataType": "5",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 59,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x52A0",
+  "ParameterName": "Transmission Control Module Available",
+  "TotalByteLength": "1",
+  "ReadPermission": null,
+  "WritePermission": null,
+  "ValueParameters": [],
+  "ByteParameters": [
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "Transmission Control Module Available",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "0",
+    "ResultDescription": "Not present",
+    "LanguageCode": "PEPS_DIB_0083"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "Transmission Control Module Available",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "1",
+    "ResultDescription": "Present",
+    "LanguageCode": "PEPS_DIB_0083"
+   }
+  ]
+ },
+ {
+  "ParameterID": 60,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x52A1",
+  "ParameterName": "PEPS Supervision Frame",
+  "TotalByteLength": "1",
+  "ReadPermission": null,
+  "WritePermission": null,
+  "ValueParameters": [],
+  "ByteParameters": [
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "PEPS Supervision Frame",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "0",
+    "ResultDescription": "Disabled",
+    "LanguageCode": "PEPS_DIB_0084"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "PEPS Supervision Frame",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "1",
+    "ResultDescription": "Enabled",
+    "LanguageCode": "PEPS_DIB_0084"
+   }
+  ]
+ },
+ {
+  "ParameterID": 61,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x52A5",
+  "ParameterName": "Debug message feature Configuration",
+  "TotalByteLength": "2",
+  "ReadPermission": null,
+  "WritePermission": null,
+  "ValueParameters": [],
+  "ByteParameters": [
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "Debug message feature Configuration",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "1",
+    "ResultByte": "0",
+    "ResultDescription": "Disabled",
+    "LanguageCode": "PEPS_DIB_0085"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "Debug message feature Configuration",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "1",
+    "ResultByte": "1",
+    "ResultDescription": "Enabled",
+    "LanguageCode": "PEPS_DIB_0085"
+   }
+  ]
+ },
+ {
+  "ParameterID": 62,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x7001",
+  "ParameterName": "Control Module Input Power \"A\"",
+  "TotalByteLength": "1",
+  "ReadPermission": null,
+  "WritePermission": null,
+  "ValueParameters": [
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "Control Module Input Power \"A\"",
+    "BytePosition": 4,
+    "ByteLength": 1,
+    "Resolution": "0.1",
+    "Offset": "0",
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": "volt",
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": "8",
+    "MaximumValue": "15",
+    "DataType": "5",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 63,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x7004",
+  "ParameterName": "Time since Ignition On",
+  "TotalByteLength": "3",
+  "ReadPermission": null,
+  "WritePermission": null,
+  "ValueParameters": [
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "Time since Ignition On",
+    "BytePosition": 4,
+    "ByteLength": 3,
+    "Resolution": "1",
+    "Offset": "0",
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": null,
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": null,
+    "MaximumValue": null,
+    "DataType": "2",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 64,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x7204",
+  "ParameterName": "Calibration Fingerprint Data",
+  "TotalByteLength": "31",
+  "ReadPermission": null,
+  "WritePermission": null,
+  "ValueParameters": [
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "CalibrationFingerprintDataDate",
+    "BytePosition": 1,
+    "ByteLength": 10,
+    "Resolution": "1",
+    "Offset": "0",
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": null,
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": null,
+    "MaximumValue": null,
+    "DataType": "1",
+    "BitPosition": null
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "CalibrationFingerprintDataRepairShopCode",
+    "BytePosition": 11,
+    "ByteLength": 10,
+    "Resolution": "1",
+    "Offset": "0",
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": null,
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": null,
+    "MaximumValue": null,
+    "DataType": "1",
+    "BitPosition": null
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "CalibrationFingerprintDataTesterSerialNumber",
+    "BytePosition": 21,
+    "ByteLength": 10,
+    "Resolution": "1",
+    "Offset": "0",
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": null,
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": null,
+    "MaximumValue": null,
+    "DataType": "1",
+    "BitPosition": null
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "CalibrationFingerprintDataReprogrammingSequences",
+    "BytePosition": 31,
+    "ByteLength": 10,
+    "Resolution": "1",
+    "Offset": "0",
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": null,
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": "0",
+    "MaximumValue": "254",
+    "DataType": "5",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 65,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x7205",
+  "ParameterName": "Calibration Version",
+  "TotalByteLength": "5",
+  "ReadPermission": null,
+  "WritePermission": null,
+  "ValueParameters": [
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "Calibration Version",
+    "BytePosition": 4,
+    "ByteLength": 5,
+    "Resolution": "1",
+    "Offset": "0",
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": null,
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": null,
+    "MaximumValue": null,
+    "DataType": "1",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 66,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x7206",
+  "ParameterName": "Application Software Status",
+  "TotalByteLength": "1",
+  "ReadPermission": null,
+  "WritePermission": null,
+  "ValueParameters": [],
+  "ByteParameters": [
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "Application Software Status",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "0",
+    "ResultDescription": "Component Erased",
+    "LanguageCode": "PEPS_DIB_0086"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "Application Software Status",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "1",
+    "ResultDescription": "Request Download Complete",
+    "LanguageCode": "PEPS_DIB_0086"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "Application Software Status",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "2",
+    "ResultDescription": "Request Upload Complete",
+    "LanguageCode": "PEPS_DIB_0086"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "Application Software Status",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "3",
+    "ResultDescription": "Transfer data Complete",
+    "LanguageCode": "PEPS_DIB_0086"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "Application Software Status",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "4",
+    "ResultDescription": "Transfer Exit Complete",
+    "LanguageCode": "PEPS_DIB_0086"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "Application Software Status",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "5",
+    "ResultDescription": "Software Valid",
+    "LanguageCode": "PEPS_DIB_0086"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "Application Software Status",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "6",
+    "ResultDescription": "Software Invalid",
+    "LanguageCode": "PEPS_DIB_0086"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "Application Software Status",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "15",
+    "ResultDescription": "Virgin Component",
+    "LanguageCode": "PEPS_DIB_0086"
+   }
+  ]
+ },
+ {
+  "ParameterID": 67,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x7207",
+  "ParameterName": "Calibration Software Status",
+  "TotalByteLength": "1",
+  "ReadPermission": null,
+  "WritePermission": null,
+  "ValueParameters": [],
+  "ByteParameters": [
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "Calibration Software Status",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "0",
+    "ResultDescription": "Component Erased",
+    "LanguageCode": "PEPS_DIB_0087"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "Calibration Software Status",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "1",
+    "ResultDescription": "Request Download Complete",
+    "LanguageCode": "PEPS_DIB_0087"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "Calibration Software Status",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "2",
+    "ResultDescription": "Request Upload Complete",
+    "LanguageCode": "PEPS_DIB_0087"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "Calibration Software Status",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "3",
+    "ResultDescription": "Transfer data Complete",
+    "LanguageCode": "PEPS_DIB_0087"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "Calibration Software Status",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "4",
+    "ResultDescription": "Transfer Exit Complete",
+    "LanguageCode": "PEPS_DIB_0087"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "Calibration Software Status",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "5",
+    "ResultDescription": "Software Valid",
+    "LanguageCode": "PEPS_DIB_0087"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "Calibration Software Status",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "6",
+    "ResultDescription": "Software Invalid",
+    "LanguageCode": "PEPS_DIB_0087"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "Calibration Software Status",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "15",
+    "ResultDescription": "Virgin Component",
+    "LanguageCode": "PEPS_DIB_0087"
+   }
+  ]
+ },
+ {
+  "ParameterID": 68,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x7212",
+  "ParameterName": "Vehicle Mode",
+  "TotalByteLength": "1",
+  "ReadPermission": null,
+  "WritePermission": null,
+  "ValueParameters": [],
+  "ByteParameters": [
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "Vehicle Mode",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "0",
+    "ResultDescription": "Customer",
+    "LanguageCode": "PEPS_DIB_0088"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "Vehicle Mode",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "1",
+    "ResultDescription": "Transport",
+    "LanguageCode": "PEPS_DIB_0088"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "Vehicle Mode",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "2",
+    "ResultDescription": "Factory",
+    "LanguageCode": "PEPS_DIB_0088"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "Vehicle Mode",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "3",
+    "ResultDescription": "Crash",
+    "LanguageCode": "PEPS_DIB_0088"
+   }
+  ]
+ },
+ {
+  "ParameterID": 69,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x7213",
+  "ParameterName": "Global Real Time At The Last Clear Diagnostic Request",
+  "TotalByteLength": "4",
+  "ReadPermission": null,
+  "WritePermission": null,
+  "ValueParameters": [
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "Global Real Time At The Last Clear Diagnostic Request",
+    "BytePosition": 3,
+    "ByteLength": 4,
+    "Resolution": "1",
+    "Offset": "0",
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": "min",
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": "0",
+    "MaximumValue": "4294967294",
+    "DataType": "5",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 70,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x7214",
+  "ParameterName": "Number Of Diagnostic Trouble Codes Set Due to Diagnostic Routine",
+  "TotalByteLength": "1",
+  "ReadPermission": null,
+  "WritePermission": null,
+  "ValueParameters": [
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "Number Of Diagnostic Trouble Codes Set Due to Diagnostic Routine",
+    "BytePosition": 4,
+    "ByteLength": 1,
+    "Resolution": "1",
+    "Offset": "0",
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": null,
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": "0",
+    "MaximumValue": "254",
+    "DataType": "5",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 71,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x7215",
+  "ParameterName": "Active Software Component",
+  "TotalByteLength": "1",
+  "ReadPermission": null,
+  "WritePermission": null,
+  "ValueParameters": [],
+  "ByteParameters": [
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "Active Software Component",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "0",
+    "ResultDescription": "Unknown",
+    "LanguageCode": "PEPS_DIB_0089"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "Active Software Component",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "1",
+    "ResultDescription": "Application",
+    "LanguageCode": "PEPS_DIB_0089"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "Active Software Component",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "2",
+    "ResultDescription": "Primary Bootloader",
+    "LanguageCode": "PEPS_DIB_0089"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "Active Software Component",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "3",
+    "ResultDescription": "Secondary Bootloader",
+    "LanguageCode": "PEPS_DIB_0089"
+   }
+  ]
+ },
+ {
+  "ParameterID": 72,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x721B",
+  "ParameterName": "Application Software Data - Date",
+  "TotalByteLength": "10",
+  "ReadPermission": null,
+  "WritePermission": null,
+  "ValueParameters": [
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "Application Software Data - Date",
+    "BytePosition": 4,
+    "ByteLength": 10,
+    "Resolution": "1",
+    "Offset": "0",
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": null,
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": null,
+    "MaximumValue": null,
+    "DataType": "1",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 73,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x721C",
+  "ParameterName": "Application Software Data - Tester Serial Number",
+  "TotalByteLength": "10",
+  "ReadPermission": null,
+  "WritePermission": null,
+  "ValueParameters": [
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "Application Software Data - Tester Serial Number",
+    "BytePosition": 4,
+    "ByteLength": 10,
+    "Resolution": "1",
+    "Offset": "0",
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": null,
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": null,
+    "MaximumValue": null,
+    "DataType": "1",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 74,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x721D",
+  "ParameterName": "Application Software Data - Repair Shop Code",
+  "TotalByteLength": "10",
+  "ReadPermission": null,
+  "WritePermission": null,
+  "ValueParameters": [
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "Application Software Data - Repair Shop Code",
+    "BytePosition": 4,
+    "ByteLength": 10,
+    "Resolution": "1",
+    "Offset": "0",
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": null,
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": null,
+    "MaximumValue": null,
+    "DataType": "1",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 75,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x721E",
+  "ParameterName": "Application Software Data - Reprogramming Sequences",
+  "TotalByteLength": "1",
+  "ReadPermission": null,
+  "WritePermission": null,
+  "ValueParameters": [
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "Application Software Data - Reprogramming Sequences",
+    "BytePosition": 4,
+    "ByteLength": 1,
+    "Resolution": "1",
+    "Offset": "0",
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": null,
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": "0",
+    "MaximumValue": "254",
+    "DataType": "5",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 76,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x7223",
+  "ParameterName": "Calibration Data - Date",
+  "TotalByteLength": "10",
+  "ReadPermission": null,
+  "WritePermission": null,
+  "ValueParameters": [
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "Calibration Data - Date",
+    "BytePosition": 4,
+    "ByteLength": 10,
+    "Resolution": "1",
+    "Offset": "0",
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": null,
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": null,
+    "MaximumValue": null,
+    "DataType": "1",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 77,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x7224",
+  "ParameterName": "Calibration Data - Tester Serial Number",
+  "TotalByteLength": "10",
+  "ReadPermission": null,
+  "WritePermission": null,
+  "ValueParameters": [
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "Calibration Data - Tester Serial Number",
+    "BytePosition": 4,
+    "ByteLength": 10,
+    "Resolution": "1",
+    "Offset": "0",
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": null,
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": null,
+    "MaximumValue": null,
+    "DataType": "1",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 78,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x7225",
+  "ParameterName": "Calibration Data - Repair Shop Code",
+  "TotalByteLength": "10",
+  "ReadPermission": null,
+  "WritePermission": null,
+  "ValueParameters": [
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "Calibration Data - Repair Shop Code",
+    "BytePosition": 4,
+    "ByteLength": 10,
+    "Resolution": "1",
+    "Offset": "0",
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": null,
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": null,
+    "MaximumValue": null,
+    "DataType": "1",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 79,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x7226",
+  "ParameterName": "Calibration Data - Reprogramming Sequences",
+  "TotalByteLength": "1",
+  "ReadPermission": null,
+  "WritePermission": null,
+  "ValueParameters": [
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "Calibration Data - Reprogramming Sequences",
+    "BytePosition": 4,
+    "ByteLength": 1,
+    "Resolution": "1",
+    "Offset": "0",
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": null,
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": "0",
+    "MaximumValue": "254",
+    "DataType": "5",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 80,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x722D",
+  "ParameterName": "DTC Masking (Writeable)",
+  "TotalByteLength": "4",
+  "ReadPermission": null,
+  "WritePermission": null,
+  "ValueParameters": [],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 81,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x7234",
+  "ParameterName": "ECU Assembly Number",
+  "TotalByteLength": "15",
+  "ReadPermission": null,
+  "WritePermission": null,
+  "ValueParameters": [
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "ECU Assembly Number",
+    "BytePosition": 4,
+    "ByteLength": 15,
+    "Resolution": "1",
+    "Offset": "0",
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": null,
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": null,
+    "MaximumValue": null,
+    "DataType": "1",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 82,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x7235",
+  "ParameterName": "Vehicle_Configuration_Number",
+  "TotalByteLength": "18",
+  "ReadPermission": null,
+  "WritePermission": null,
+  "ValueParameters": [
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "Vehicle Configuration Number",
+    "BytePosition": 4,
+    "ByteLength": 9,
+    "Resolution": "1",
+    "Offset": "0",
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": null,
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": null,
+    "MaximumValue": null,
+    "DataType": "1",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 83,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x723E",
+  "ParameterName": "ECU PBL Software Number",
+  "TotalByteLength": "15",
+  "ReadPermission": null,
+  "WritePermission": null,
+  "ValueParameters": [
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "ECU PBL Software Number",
+    "BytePosition": 4,
+    "ByteLength": 15,
+    "Resolution": "1",
+    "Offset": "0",
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": null,
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": null,
+    "MaximumValue": null,
+    "DataType": "1",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 84,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x723F",
+  "ParameterName": "ECU SBL Software Number",
+  "TotalByteLength": "15",
+  "ReadPermission": null,
+  "WritePermission": null,
+  "ValueParameters": [
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "ECU SBL Software Number",
+    "BytePosition": 4,
+    "ByteLength": 15,
+    "Resolution": "1",
+    "Offset": "0",
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": null,
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": null,
+    "MaximumValue": null,
+    "DataType": "1",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 85,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x7241",
+  "ParameterName": "ECU Application Software Number",
+  "TotalByteLength": "15",
+  "ReadPermission": null,
+  "WritePermission": null,
+  "ValueParameters": [
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "ECU Application Software Number",
+    "BytePosition": 4,
+    "ByteLength": 15,
+    "Resolution": "1",
+    "Offset": "0",
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": null,
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": null,
+    "MaximumValue": null,
+    "DataType": "1",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 86,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x7242",
+  "ParameterName": "ECU Calibration Software Number",
+  "TotalByteLength": "15",
+  "ReadPermission": null,
+  "WritePermission": null,
+  "ValueParameters": [
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "ECU Calibration Software Number",
+    "BytePosition": 4,
+    "ByteLength": 15,
+    "Resolution": "1",
+    "Offset": "0",
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": null,
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": null,
+    "MaximumValue": null,
+    "DataType": "1",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 87,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x7244",
+  "ParameterName": "ECU Parameterization Software Number",
+  "TotalByteLength": "15",
+  "ReadPermission": null,
+  "WritePermission": null,
+  "ValueParameters": [
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "ECU Parameterization Software Number",
+    "BytePosition": 4,
+    "ByteLength": 17,
+    "Resolution": "1",
+    "Offset": "0",
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": null,
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": null,
+    "MaximumValue": null,
+    "DataType": "1",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 88,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x724A",
+  "ParameterName": "ECU Parameterization Software Number History",
+  "TotalByteLength": "85",
+  "ReadPermission": null,
+  "WritePermission": null,
+  "ValueParameters": [
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "ECUParameterizationSoftwareNumberHistory1",
+    "BytePosition": 1,
+    "ByteLength": 17,
+    "Resolution": "1",
+    "Offset": "0",
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": null,
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": null,
+    "MaximumValue": null,
+    "DataType": "1",
+    "BitPosition": null
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "ECUParameterizationSoftwareNumberHistory2",
+    "BytePosition": 18,
+    "ByteLength": 17,
+    "Resolution": "1",
+    "Offset": "0",
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": null,
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": null,
+    "MaximumValue": null,
+    "DataType": "1",
+    "BitPosition": null
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "ECUParameterizationSoftwareNumberHistory3",
+    "BytePosition": 35,
+    "ByteLength": 17,
+    "Resolution": "1",
+    "Offset": "0",
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": null,
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": null,
+    "MaximumValue": null,
+    "DataType": "1",
+    "BitPosition": null
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "ECUParameterizationSoftwareNumberHistory4",
+    "BytePosition": 52,
+    "ByteLength": 17,
+    "Resolution": "1",
+    "Offset": "0",
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": null,
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": null,
+    "MaximumValue": null,
+    "DataType": "1",
+    "BitPosition": null
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "ECUParameterizationSoftwareNumberHistory5",
+    "BytePosition": 69,
+    "ByteLength": 17,
+    "Resolution": "1",
+    "Offset": "0",
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": null,
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": null,
+    "MaximumValue": null,
+    "DataType": "1",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 89,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x7400",
+  "ParameterName": "Diagnostic Version",
+  "TotalByteLength": "4",
+  "ReadPermission": null,
+  "WritePermission": null,
+  "ValueParameters": [
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "Diagnostic Version",
+    "BytePosition": 4,
+    "ByteLength": 4,
+    "Resolution": "1",
+    "Offset": "0",
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": null,
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": null,
+    "MaximumValue": null,
+    "DataType": "1",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 90,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0xA000",
+  "ParameterName": "Global Real Time",
+  "TotalByteLength": "4",
+  "ReadPermission": null,
+  "WritePermission": null,
+  "ValueParameters": [
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "Global Real Time",
+    "BytePosition": 4,
+    "ByteLength": 4,
+    "Resolution": "1",
+    "Offset": "0",
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": "min",
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": "0",
+    "MaximumValue": "4294967294",
+    "DataType": "5",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 91,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0xA001",
+  "ParameterName": "Total Distance Travelled",
+  "TotalByteLength": "3",
+  "ReadPermission": null,
+  "WritePermission": null,
+  "ValueParameters": [
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "Total Distance Travelled",
+    "BytePosition": 4,
+    "ByteLength": 3,
+    "Resolution": "1",
+    "Offset": "0",
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": "km",
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": "0",
+    "MaximumValue": "16777214",
+    "DataType": "5",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 92,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0xA002",
+  "ParameterName": "Master Electronic Control Unit Supply Voltage",
+  "TotalByteLength": "1",
+  "ReadPermission": null,
+  "WritePermission": null,
+  "ValueParameters": [
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "Master Electronic Control Unit Supply Voltage",
+    "BytePosition": 4,
+    "ByteLength": 1,
+    "Resolution": "0.1",
+    "Offset": "0",
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": "volt",
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": "0",
+    "MaximumValue": "5",
+    "DataType": "5",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 93,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0xA004",
+  "ParameterName": "Vehicle Interior Temperature",
+  "TotalByteLength": "1",
+  "ReadPermission": null,
+  "WritePermission": null,
+  "ValueParameters": [
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "Vehicle Interior Temperature",
+    "BytePosition": 4,
+    "ByteLength": 1,
+    "Resolution": "1",
+    "Offset": "40",
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": "°C",
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": "-30",
+    "MaximumValue": "80",
+    "DataType": "5",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 94,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0xA005",
+  "ParameterName": "Ambient Air Temperature",
+  "TotalByteLength": "1",
+  "ReadPermission": null,
+  "WritePermission": null,
+  "ValueParameters": [
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "Ambient Air Temperature",
+    "BytePosition": 4,
+    "ByteLength": 1,
+    "Resolution": "1",
+    "Offset": "40",
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": "°C",
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": "-40",
+    "MaximumValue": "100",
+    "DataType": "5",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 95,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0xA006",
+  "ParameterName": "Vehicle Power mode",
+  "TotalByteLength": "1",
+  "ReadPermission": null,
+  "WritePermission": null,
+  "ValueParameters": [],
+  "ByteParameters": [
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "Vehicle Power mode",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "0",
+    "ResultDescription": "Pre-Stand By",
+    "LanguageCode": "PEPS_DIB_0090"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "Vehicle Power mode",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "1",
+    "ResultDescription": "Awake",
+    "LanguageCode": "PEPS_DIB_0090"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "Vehicle Power mode",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "2",
+    "ResultDescription": "Transport Park",
+    "LanguageCode": "PEPS_DIB_0090"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "Vehicle Power mode",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "3",
+    "ResultDescription": "KeyIn",
+    "LanguageCode": "PEPS_DIB_0090"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "Vehicle Power mode",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "4",
+    "ResultDescription": "Accessory",
+    "LanguageCode": "PEPS_DIB_0090"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "Vehicle Power mode",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "5",
+    "ResultDescription": "Accessory Delay",
+    "LanguageCode": "PEPS_DIB_0090"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "Vehicle Power mode",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "6",
+    "ResultDescription": "Active (Ignition ON)",
+    "LanguageCode": "PEPS_DIB_0090"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "Vehicle Power mode",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "7",
+    "ResultDescription": "Transport Drive",
+    "LanguageCode": "PEPS_DIB_0090"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "Vehicle Power mode",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "8",
+    "ResultDescription": "Run (Engine Run)",
+    "LanguageCode": "PEPS_DIB_0090"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "Vehicle Power mode",
+    "BytePosition": 4,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "9",
+    "ResultDescription": "Start (Crank)",
+    "LanguageCode": "PEPS_DIB_0090"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "Vehicle Power mode",
+    "BytePosition": 4,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "10",
+    "ResultDescription": "Transport Drive CRANK",
+    "LanguageCode": "PEPS_DIB_0090"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "Vehicle Power mode",
+    "BytePosition": 4,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "11",
+    "ResultDescription": "Transport Drive RUN",
+    "LanguageCode": "PEPS_DIB_0090"
+   }
+  ]
+ },
+ {
+  "ParameterID": 96,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0xA007",
+  "ParameterName": "Engine Speed",
+  "TotalByteLength": "2",
+  "ReadPermission": null,
+  "WritePermission": null,
+  "ValueParameters": [
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "Engine Speed",
+    "BytePosition": 4,
+    "ByteLength": 2,
+    "Resolution": "10",
+    "Offset": "0",
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": "rpm",
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": "0",
+    "MaximumValue": "7000",
+    "DataType": "5",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 97,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0xA008",
+  "ParameterName": "Vehicle Speed",
+  "TotalByteLength": "1",
+  "ReadPermission": null,
+  "WritePermission": null,
+  "ValueParameters": [
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "Vehicle Speed",
+    "BytePosition": 4,
+    "ByteLength": 1,
+    "Resolution": "1",
+    "Offset": "0",
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": "km\\h",
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": "0",
+    "MaximumValue": "249",
+    "DataType": "5",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 98,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0xA009",
+  "ParameterName": "Engine Coolant Temperature",
+  "TotalByteLength": "1",
+  "ReadPermission": null,
+  "WritePermission": null,
+  "ValueParameters": [
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "Engine Coolant Temperature",
+    "BytePosition": 4,
+    "ByteLength": 1,
+    "Resolution": "1",
+    "Offset": "40",
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": "°C",
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": "-40",
+    "MaximumValue": "100",
+    "DataType": "5",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 99,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0xA00B",
+  "ParameterName": "Vehicle Identification Number GSD",
+  "TotalByteLength": "5",
+  "ReadPermission": null,
+  "WritePermission": null,
+  "ValueParameters": [
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "Vehicle Identification Number GSD",
+    "BytePosition": 4,
+    "ByteLength": 5,
+    "Resolution": "1",
+    "Offset": "0",
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": null,
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": null,
+    "MaximumValue": null,
+    "DataType": "1",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 100,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0xA00C",
+  "ParameterName": "Accelerator Pedal Position",
+  "TotalByteLength": "1",
+  "ReadPermission": null,
+  "WritePermission": null,
+  "ValueParameters": [
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "Accelerator Pedal Position",
+    "BytePosition": 4,
+    "ByteLength": 1,
+    "Resolution": "0.5",
+    "Offset": "0",
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": "%",
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": "0",
+    "MaximumValue": "127",
+    "DataType": "5",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 101,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0xA00D",
+  "ParameterName": "Park Brake State",
+  "TotalByteLength": "1",
+  "ReadPermission": null,
+  "WritePermission": null,
+  "ValueParameters": [],
+  "ByteParameters": [
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "Park Brake State",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "0",
+    "ResultDescription": "Parking OFF",
+    "LanguageCode": "PEPS_DIB_0091"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "Park Brake State",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "1",
+    "ResultDescription": "Parking ON",
+    "LanguageCode": "PEPS_DIB_0091"
+   }
+  ]
+ },
+ {
+  "ParameterID": 102,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0xF180",
+  "ParameterName": "Boot Software Identification",
+  "TotalByteLength": "14",
+  "ReadPermission": null,
+  "WritePermission": null,
+  "ValueParameters": [
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "NumberOfModules",
+    "BytePosition": 4,
+    "ByteLength": 1,
+    "Resolution": "1",
+    "Offset": "0",
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": null,
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": null,
+    "MaximumValue": null,
+    "DataType": "5",
+    "BitPosition": null
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "BootSoftwareIdentification",
+    "BytePosition": 4,
+    "ByteLength": 14,
+    "Resolution": "1",
+    "Offset": "0",
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": null,
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": null,
+    "MaximumValue": null,
+    "DataType": "1",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 103,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0xF181",
+  "ParameterName": "Application Software Identification",
+  "TotalByteLength": "14",
+  "ReadPermission": null,
+  "WritePermission": null,
+  "ValueParameters": [
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "NumberOfModules",
+    "BytePosition": 4,
+    "ByteLength": 1,
+    "Resolution": "1",
+    "Offset": "0",
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": null,
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": null,
+    "MaximumValue": null,
+    "DataType": "5",
+    "BitPosition": null
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "ApplicationSoftwareIdentification",
+    "BytePosition": 4,
+    "ByteLength": 14,
+    "Resolution": "1",
+    "Offset": "0",
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": null,
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": null,
+    "MaximumValue": null,
+    "DataType": "1",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 104,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0xF184",
+  "ParameterName": "Application Software Fingerprint Data",
+  "TotalByteLength": "31",
+  "ReadPermission": null,
+  "WritePermission": null,
+  "ValueParameters": [
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "ApplicationSoftwareFingerprintDataDate",
+    "BytePosition": 3,
+    "ByteLength": 10,
+    "Resolution": "1",
+    "Offset": "0",
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": null,
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": null,
+    "MaximumValue": null,
+    "DataType": "1",
+    "BitPosition": null
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "ApplicationSoftwareFingerprintDataRepairShopCode",
+    "BytePosition": 13,
+    "ByteLength": 10,
+    "Resolution": "1",
+    "Offset": "0",
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": null,
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": null,
+    "MaximumValue": null,
+    "DataType": "1",
+    "BitPosition": null
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "ApplicationSoftwareFingerprintDataTesterSerialNumber",
+    "BytePosition": 23,
+    "ByteLength": 10,
+    "Resolution": "1",
+    "Offset": "0",
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": null,
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": null,
+    "MaximumValue": null,
+    "DataType": "1",
+    "BitPosition": null
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "ApplicationSoftwareFingerprintDataReprogrammingSequences",
+    "BytePosition": 33,
+    "ByteLength": 10,
+    "Resolution": "1",
+    "Offset": "0",
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": null,
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": "0",
+    "MaximumValue": "254",
+    "DataType": "5",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 105,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0xF186",
+  "ParameterName": "Active Diagnostic Session",
+  "TotalByteLength": "1",
+  "ReadPermission": null,
+  "WritePermission": null,
+  "ValueParameters": [],
+  "ByteParameters": [
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "Active Diagnostic Session",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "1",
+    "ResultDescription": "Default",
+    "LanguageCode": "PEPS_DIV_0090"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "Active Diagnostic Session",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "3",
+    "ResultDescription": "Extended",
+    "LanguageCode": "PEPS_DIV_0090"
+   }
+  ]
+ },
+ {
+  "ParameterID": 106,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0xF187",
+  "ParameterName": "Vehicle Manufacturer Spare Part Number",
+  "TotalByteLength": "15",
+  "ReadPermission": null,
+  "WritePermission": null,
+  "ValueParameters": [
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "Vehicle Manufacturer Spare Part Number",
+    "BytePosition": 3,
+    "ByteLength": 17,
+    "Resolution": "1",
+    "Offset": "0",
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": null,
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": null,
+    "MaximumValue": null,
+    "DataType": "1",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 107,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0xF188",
+  "ParameterName": "Vehicle Manufacturer ECU Software Number",
+  "TotalByteLength": "15",
+  "ReadPermission": null,
+  "WritePermission": null,
+  "ValueParameters": [
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "Vehicle Manufacturer ECU Software Number",
+    "BytePosition": 3,
+    "ByteLength": 17,
+    "Resolution": "1",
+    "Offset": "0",
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": null,
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": null,
+    "MaximumValue": null,
+    "DataType": "1",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 108,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0xF189",
+  "ParameterName": "Vehicle Manufacturer ECU Software Version Number",
+  "TotalByteLength": "6",
+  "ReadPermission": null,
+  "WritePermission": null,
+  "ValueParameters": [
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "Vehicle Manufacturer ECU Software Version Number",
+    "BytePosition": 3,
+    "ByteLength": 9,
+    "Resolution": "1",
+    "Offset": "0",
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": null,
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": null,
+    "MaximumValue": null,
+    "DataType": "1",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 109,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0xF18A",
+  "ParameterName": "System Supplier",
+  "TotalByteLength": "9",
+  "ReadPermission": null,
+  "WritePermission": null,
+  "ValueParameters": [
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "System Supplier",
+    "BytePosition": 3,
+    "ByteLength": 10,
+    "Resolution": "1",
+    "Offset": "0",
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": null,
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": null,
+    "MaximumValue": null,
+    "DataType": "1",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 110,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0xF18B",
+  "ParameterName": "ECU Manufacturing Date",
+  "TotalByteLength": "10",
+  "ReadPermission": null,
+  "WritePermission": null,
+  "ValueParameters": [
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "ECU Manufacturing Date",
+    "BytePosition": 3,
+    "ByteLength": 10,
+    "Resolution": "1",
+    "Offset": "0",
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": null,
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": null,
+    "MaximumValue": null,
+    "DataType": "1",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 111,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0xF18C",
+  "ParameterName": "ECU Serial Number",
+  "TotalByteLength": "21",
+  "ReadPermission": null,
+  "WritePermission": null,
+  "ValueParameters": [
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "ECU Serial Number",
+    "BytePosition": 3,
+    "ByteLength": 18,
+    "Resolution": "1",
+    "Offset": "0",
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": null,
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": null,
+    "MaximumValue": null,
+    "DataType": "1",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 112,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0xF190",
+  "ParameterName": "Vehicle Identification Number",
+  "TotalByteLength": "27",
+  "ReadPermission": null,
+  "WritePermission": null,
+  "ValueParameters": [
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "Vehicle Identification Number",
+    "BytePosition": 3,
+    "ByteLength": 17,
+    "Resolution": "1",
+    "Offset": "0",
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": null,
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": null,
+    "MaximumValue": null,
+    "DataType": "1",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 113,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0xF191",
+  "ParameterName": "Vehicle Manufacturer ECU Hardware Number",
+  "TotalByteLength": "15",
+  "ReadPermission": null,
+  "WritePermission": null,
+  "ValueParameters": [
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "Vehicle Manufacturer ECU Hardware Number",
+    "BytePosition": 3,
+    "ByteLength": 16,
+    "Resolution": "1",
+    "Offset": "0",
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": null,
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": null,
+    "MaximumValue": null,
+    "DataType": "1",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 114,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0xF192",
+  "ParameterName": "System Supplier ECU Hardware Number",
+  "TotalByteLength": "12",
+  "ReadPermission": null,
+  "WritePermission": null,
+  "ValueParameters": [
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "System Supplier ECU Hardware Number",
+    "BytePosition": 3,
+    "ByteLength": 13,
+    "Resolution": "1",
+    "Offset": "0",
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": null,
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": null,
+    "MaximumValue": null,
+    "DataType": "1",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 115,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0xF193",
+  "ParameterName": "System Supplier ECU Hardware Version Number",
+  "TotalByteLength": "8",
+  "ReadPermission": null,
+  "WritePermission": null,
+  "ValueParameters": [
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "System Supplier ECU Hardware Version Number",
+    "BytePosition": 3,
+    "ByteLength": 9,
+    "Resolution": "1",
+    "Offset": "0",
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": null,
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": null,
+    "MaximumValue": null,
+    "DataType": "1",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 116,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0xF194",
+  "ParameterName": "System Supplier ECU Software Number",
+  "TotalByteLength": "11",
+  "ReadPermission": null,
+  "WritePermission": null,
+  "ValueParameters": [
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "System Supplier ECU Software Number",
+    "BytePosition": 3,
+    "ByteLength": 12,
+    "Resolution": "1",
+    "Offset": "0",
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": null,
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": null,
+    "MaximumValue": null,
+    "DataType": "1",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 117,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0xF195",
+  "ParameterName": "System Supplier ECU Software Version Number",
+  "TotalByteLength": "8",
+  "ReadPermission": null,
+  "WritePermission": null,
+  "ValueParameters": [
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "System Supplier ECU Software Version Number",
+    "BytePosition": 3,
+    "ByteLength": 9,
+    "Resolution": "1",
+    "Offset": "0",
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": null,
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": null,
+    "MaximumValue": null,
+    "DataType": "1",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 118,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0xF197",
+  "ParameterName": "System Name",
+  "TotalByteLength": "17",
+  "ReadPermission": null,
+  "WritePermission": null,
+  "ValueParameters": [
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "System Name",
+    "BytePosition": 3,
+    "ByteLength": 8,
+    "Resolution": "1",
+    "Offset": "0",
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": null,
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": null,
+    "MaximumValue": null,
+    "DataType": "1",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 119,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0xF19D",
+  "ParameterName": "ECU Installation Date",
+  "TotalByteLength": "10",
+  "ReadPermission": null,
+  "WritePermission": null,
+  "ValueParameters": [
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "ECU Installation Date",
+    "BytePosition": 3,
+    "ByteLength": 10,
+    "Resolution": "1",
+    "Offset": "0",
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": null,
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": null,
+    "MaximumValue": null,
+    "DataType": "1",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 120,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0xF281",
+  "ParameterName": "PEPS_PeriodicDID_F281",
+  "TotalByteLength": "4",
+  "ReadPermission": null,
+  "WritePermission": null,
+  "ValueParameters": [],
+  "ByteParameters": [
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "ActiveDiagnosticSession",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "2",
+    "ResultByte": "2",
+    "ResultDescription": "Default Session",
+    "LanguageCode": "PEPS_DIB_0092"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "ActiveDiagnosticSession",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "8",
+    "ResultByte": "8",
+    "ResultDescription": "Extended Session",
+    "LanguageCode": "PEPS_DIB_0092"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "Vehicle Mode",
+    "BytePosition": 4,
+    "ByteLength": 1,
+    "MaskingCondition": "1",
+    "ResultByte": "1",
+    "ResultDescription": "Customer",
+    "LanguageCode": "PEPS_DIB_0088"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "Vehicle Mode",
+    "BytePosition": 4,
+    "ByteLength": 1,
+    "MaskingCondition": "2",
+    "ResultByte": "2",
+    "ResultDescription": "Transport",
+    "LanguageCode": "PEPS_DIB_0088"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "Vehicle Mode",
+    "BytePosition": 4,
+    "ByteLength": 1,
+    "MaskingCondition": "4",
+    "ResultByte": "4",
+    "ResultDescription": "Factory",
+    "LanguageCode": "PEPS_DIB_0088"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "Vehicle Mode",
+    "BytePosition": 4,
+    "ByteLength": 1,
+    "MaskingCondition": "8",
+    "ResultByte": "8",
+    "ResultDescription": "Crash",
+    "LanguageCode": "PEPS_DIB_0088"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "CANWakeup",
+    "BytePosition": 5,
+    "ByteLength": 1,
+    "MaskingCondition": "1",
+    "ResultByte": "0",
+    "ResultDescription": "Inactive",
+    "LanguageCode": "PEPS_DIB_0043"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "CANWakeup",
+    "BytePosition": 5,
+    "ByteLength": 1,
+    "MaskingCondition": "1",
+    "ResultByte": "1",
+    "ResultDescription": "Active",
+    "LanguageCode": "PEPS_DIB_0043"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "RKEWakeup",
+    "BytePosition": 5,
+    "ByteLength": 1,
+    "MaskingCondition": "2",
+    "ResultByte": "0",
+    "ResultDescription": "Inactive",
+    "LanguageCode": "PEPS_DIB_0044"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "RKEWakeup",
+    "BytePosition": 5,
+    "ByteLength": 1,
+    "MaskingCondition": "2",
+    "ResultByte": "2",
+    "ResultDescription": "Active",
+    "LanguageCode": "PEPS_DIB_0044"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "StartStopSwitch1Wakeup",
+    "BytePosition": 5,
+    "ByteLength": 1,
+    "MaskingCondition": "4",
+    "ResultByte": "0",
+    "ResultDescription": "Inactive",
+    "LanguageCode": "PEPS_DIB_0045"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "StartStopSwitch1Wakeup",
+    "BytePosition": 5,
+    "ByteLength": 1,
+    "MaskingCondition": "4",
+    "ResultByte": "4",
+    "ResultDescription": "Active",
+    "LanguageCode": "PEPS_DIB_0045"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "StartStopSwitch2Wakeup",
+    "BytePosition": 5,
+    "ByteLength": 1,
+    "MaskingCondition": "8",
+    "ResultByte": "0",
+    "ResultDescription": "Inactive",
+    "LanguageCode": "PEPS_DIB_0046"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "StartStopSwitch2Wakeup",
+    "BytePosition": 5,
+    "ByteLength": 1,
+    "MaskingCondition": "8",
+    "ResultByte": "8",
+    "ResultDescription": "Active",
+    "LanguageCode": "PEPS_DIB_0046"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "DriverDoorHandleSwitchWakeup",
+    "BytePosition": 5,
+    "ByteLength": 1,
+    "MaskingCondition": "10",
+    "ResultByte": "0",
+    "ResultDescription": "Inactive",
+    "LanguageCode": "PEPS_DIB_0047"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "DriverDoorHandleSwitchWakeup",
+    "BytePosition": 5,
+    "ByteLength": 1,
+    "MaskingCondition": "10",
+    "ResultByte": "10",
+    "ResultDescription": "Active",
+    "LanguageCode": "PEPS_DIB_0047"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "CoDriverDoorHandleSwitchWakeup",
+    "BytePosition": 5,
+    "ByteLength": 1,
+    "MaskingCondition": "20",
+    "ResultByte": "0",
+    "ResultDescription": "Inactive",
+    "LanguageCode": "PEPS_DIB_0048"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "CoDriverDoorHandleSwitchWakeup",
+    "BytePosition": 5,
+    "ByteLength": 1,
+    "MaskingCondition": "20",
+    "ResultByte": "20",
+    "ResultDescription": "Active",
+    "LanguageCode": "PEPS_DIB_0048"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "RearRHDoorHandleSwitchWakeup",
+    "BytePosition": 5,
+    "ByteLength": 1,
+    "MaskingCondition": "40",
+    "ResultByte": "0",
+    "ResultDescription": "Inactive",
+    "LanguageCode": "PEPS_DIB_0049"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "RearRHDoorHandleSwitchWakeup",
+    "BytePosition": 5,
+    "ByteLength": 1,
+    "MaskingCondition": "40",
+    "ResultByte": "40",
+    "ResultDescription": "Active",
+    "LanguageCode": "PEPS_DIB_0049"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "RearLHDoorHandleSwitchWakeup",
+    "BytePosition": 6,
+    "ByteLength": 1,
+    "MaskingCondition": "1",
+    "ResultByte": "0",
+    "ResultDescription": "Inactive",
+    "LanguageCode": "PEPS_DIB_0050"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "RearLHDoorHandleSwitchWakeup",
+    "BytePosition": 6,
+    "ByteLength": 1,
+    "MaskingCondition": "1",
+    "ResultByte": "1",
+    "ResultDescription": "Active",
+    "LanguageCode": "PEPS_DIB_0050"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "TailgateTrunkHandleSwitchWakeup",
+    "BytePosition": 6,
+    "ByteLength": 1,
+    "MaskingCondition": "2",
+    "ResultByte": "0",
+    "ResultDescription": "Inactive",
+    "LanguageCode": "PEPS_DIB_0051"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "TailgateTrunkHandleSwitchWakeup",
+    "BytePosition": 6,
+    "ByteLength": 1,
+    "MaskingCondition": "2",
+    "ResultByte": "2",
+    "ResultDescription": "Active",
+    "LanguageCode": "PEPS_DIB_0051"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "ClutchSwitch90PercPressWakeup",
+    "BytePosition": 6,
+    "ByteLength": 1,
+    "MaskingCondition": "4",
+    "ResultByte": "0",
+    "ResultDescription": "Inactive",
+    "LanguageCode": "PEPS_DIB_0052"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "ClutchSwitch90PercPressWakeup",
+    "BytePosition": 6,
+    "ByteLength": 1,
+    "MaskingCondition": "4",
+    "ResultByte": "4",
+    "ResultDescription": "Active",
+    "LanguageCode": "PEPS_DIB_0052"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "ClutchSwitch10PercPressWakeup",
+    "BytePosition": 6,
+    "ByteLength": 1,
+    "MaskingCondition": "8",
+    "ResultByte": "0",
+    "ResultDescription": "Inactive",
+    "LanguageCode": "PEPS_DIB_0053"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "ClutchSwitch10PercPressWakeup",
+    "BytePosition": 6,
+    "ByteLength": 1,
+    "MaskingCondition": "8",
+    "ResultByte": "8",
+    "ResultDescription": "Active",
+    "LanguageCode": "PEPS_DIB_0053"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "BrakeSwitchWakeup",
+    "BytePosition": 6,
+    "ByteLength": 1,
+    "MaskingCondition": "10",
+    "ResultByte": "0",
+    "ResultDescription": "Inactive",
+    "LanguageCode": "PEPS_DIB_0054"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "BrakeSwitchWakeup",
+    "BytePosition": 6,
+    "ByteLength": 1,
+    "MaskingCondition": "10",
+    "ResultByte": "10",
+    "ResultDescription": "Active",
+    "LanguageCode": "PEPS_DIB_0054"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "BCMWakeup",
+    "BytePosition": 6,
+    "ByteLength": 1,
+    "MaskingCondition": "20",
+    "ResultByte": "0",
+    "ResultDescription": "Inactive",
+    "LanguageCode": "PEPS_DIB_0055"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "BCMWakeup",
+    "BytePosition": 6,
+    "ByteLength": 1,
+    "MaskingCondition": "20",
+    "ResultByte": "20",
+    "ResultDescription": "Active",
+    "LanguageCode": "PEPS_DIB_0055"
+   }
+  ]
+ },
+ {
+  "ParameterID": 121,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0xF282",
+  "ParameterName": "PEPS_PeriodicDID_F282",
+  "TotalByteLength": "3",
+  "ReadPermission": null,
+  "WritePermission": null,
+  "ValueParameters": [],
+  "ByteParameters": [
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "PEPSClampState",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "1",
+    "ResultByte": "1",
+    "ResultDescription": "Off",
+    "LanguageCode": "PEPS_DIB_0093"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "PEPSClampState",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "2",
+    "ResultByte": "2",
+    "ResultDescription": "Accessory",
+    "LanguageCode": "PEPS_DIB_0093"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "PEPSClampState",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "4",
+    "ResultByte": "4",
+    "ResultDescription": "Ignition",
+    "LanguageCode": "PEPS_DIB_0093"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "PEPSClampState",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "8",
+    "ResultByte": "8",
+    "ResultDescription": "Crank",
+    "LanguageCode": "PEPS_DIB_0093"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "ACCRelayOutput",
+    "BytePosition": 4,
+    "ByteLength": 1,
+    "MaskingCondition": "1",
+    "ResultByte": "0",
+    "ResultDescription": "Off",
+    "LanguageCode": "PEPS_DIB_0061"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "ACCRelayOutput",
+    "BytePosition": 4,
+    "ByteLength": 1,
+    "MaskingCondition": "1",
+    "ResultByte": "1",
+    "ResultDescription": "On",
+    "LanguageCode": "PEPS_DIB_0061"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "IGNRelayOutput",
+    "BytePosition": 4,
+    "ByteLength": 1,
+    "MaskingCondition": "2",
+    "ResultByte": "0",
+    "ResultDescription": "Off",
+    "LanguageCode": "PEPS_DIB_0062"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "IGNRelayOutput",
+    "BytePosition": 4,
+    "ByteLength": 1,
+    "MaskingCondition": "2",
+    "ResultByte": "2",
+    "ResultDescription": "On",
+    "LanguageCode": "PEPS_DIB_0062"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "CrankRelayOutput",
+    "BytePosition": 4,
+    "ByteLength": 1,
+    "MaskingCondition": "4",
+    "ResultByte": "0",
+    "ResultDescription": "Off",
+    "LanguageCode": "PEPS_DIB_0063"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "CrankRelayOutput",
+    "BytePosition": 4,
+    "ByteLength": 1,
+    "MaskingCondition": "4",
+    "ResultByte": "4",
+    "ResultDescription": "On",
+    "LanguageCode": "PEPS_DIB_0063"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "Vehicle Power mode",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "1",
+    "ResultByte": "1",
+    "ResultDescription": "Pre-Stand By",
+    "LanguageCode": "PEPS_DIB_0090"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "Vehicle Power mode",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "2",
+    "ResultByte": "2",
+    "ResultDescription": "Awake",
+    "LanguageCode": "PEPS_DIB_0090"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "Vehicle Power mode",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "4",
+    "ResultByte": "4",
+    "ResultDescription": "Transport Park",
+    "LanguageCode": "PEPS_DIB_0090"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "Vehicle Power mode",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "8",
+    "ResultByte": "8",
+    "ResultDescription": "KeyIn",
+    "LanguageCode": "PEPS_DIB_0090"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "Vehicle Power mode",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "10",
+    "ResultByte": "10",
+    "ResultDescription": "Accessory",
+    "LanguageCode": "PEPS_DIB_0090"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "Vehicle Power mode",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "20",
+    "ResultByte": "20",
+    "ResultDescription": "Accessory Delay",
+    "LanguageCode": "PEPS_DIB_0090"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "Vehicle Power mode",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "40",
+    "ResultByte": "40",
+    "ResultDescription": "Active (Ignition ON)",
+    "LanguageCode": "PEPS_DIB_0090"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "Vehicle Power mode",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "80",
+    "ResultByte": "80",
+    "ResultDescription": "Transport Drive",
+    "LanguageCode": "PEPS_DIB_0090"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "Vehicle Power mode",
+    "BytePosition": 4,
+    "ByteLength": 1,
+    "MaskingCondition": "1",
+    "ResultByte": "1",
+    "ResultDescription": "Run (Engine Run)",
+    "LanguageCode": "PEPS_DIB_0090"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "Vehicle Power mode",
+    "BytePosition": 4,
+    "ByteLength": 1,
+    "MaskingCondition": "2",
+    "ResultByte": "2",
+    "ResultDescription": "Start (Crank)",
+    "LanguageCode": "PEPS_DIB_0090"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "Vehicle Power mode",
+    "BytePosition": 4,
+    "ByteLength": 1,
+    "MaskingCondition": "4",
+    "ResultByte": "4",
+    "ResultDescription": "Transport Drive CRANK",
+    "LanguageCode": "PEPS_DIB_0090"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "Vehicle Power mode",
+    "BytePosition": 4,
+    "ByteLength": 1,
+    "MaskingCondition": "8",
+    "ResultByte": "8",
+    "ResultDescription": "Transport Drive RUN",
+    "LanguageCode": "PEPS_DIB_0090"
+   }
+  ]
+ },
+ {
+  "ParameterID": 122,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0xF283",
+  "ParameterName": "PEPS_PeriodicDID_F283",
+  "TotalByteLength": "4",
+  "ReadPermission": null,
+  "WritePermission": null,
+  "ValueParameters": [
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "ADCInputValuesOfStartStopSwitchInput1",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "Resolution": "100",
+    "Offset": "0",
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": "mV",
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": "0",
+    "MaximumValue": "5000",
+    "DataType": "5",
+    "BitPosition": null
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "ADCInputValuesOfStartStopSwitchInput2",
+    "BytePosition": 4,
+    "ByteLength": 1,
+    "Resolution": "100",
+    "Offset": "0",
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": "mV",
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": "0",
+    "MaximumValue": "5000",
+    "DataType": "5",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": [
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "DriverDoorHandleSwitch",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "1",
+    "ResultByte": "0",
+    "ResultDescription": "Not Pressed",
+    "LanguageCode": "PEPS_DIB_0011"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "DriverDoorHandleSwitch",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "1",
+    "ResultByte": "1",
+    "ResultDescription": "Pressed",
+    "LanguageCode": "PEPS_DIB_0011"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "CoDriverDoorHandleSwitch",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "2",
+    "ResultByte": "0",
+    "ResultDescription": "Not Pressed",
+    "LanguageCode": "PEPS_DIB_0012"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "CoDriverDoorHandleSwitch",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "2",
+    "ResultByte": "2",
+    "ResultDescription": "Pressed",
+    "LanguageCode": "PEPS_DIB_0012"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "RearRHDoorHandleSwitch",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "4",
+    "ResultByte": "0",
+    "ResultDescription": "Not Pressed",
+    "LanguageCode": "PEPS_DIB_0013"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "RearRHDoorHandleSwitch",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "4",
+    "ResultByte": "4",
+    "ResultDescription": "Pressed",
+    "LanguageCode": "PEPS_DIB_0013"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "RearLHDoorHandleSwitch",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "8",
+    "ResultByte": "0",
+    "ResultDescription": "Not Pressed",
+    "LanguageCode": "PEPS_DIB_0014"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "RearLHDoorHandleSwitch",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "8",
+    "ResultByte": "8",
+    "ResultDescription": "Pressed",
+    "LanguageCode": "PEPS_DIB_0014"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "TailgateTrunkHandleSwitch",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "10",
+    "ResultByte": "0",
+    "ResultDescription": "Not Pressed",
+    "LanguageCode": "PEPS_DIB_0015"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "TailgateTrunkHandleSwitch",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "10",
+    "ResultByte": "10",
+    "ResultDescription": "Pressed",
+    "LanguageCode": "PEPS_DIB_0015"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "ClutchSwitch90PercPress",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "20",
+    "ResultByte": "0",
+    "ResultDescription": "Not Pressed",
+    "LanguageCode": "PEPS_DIB_0016"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "ClutchSwitch90PercPress",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "20",
+    "ResultByte": "20",
+    "ResultDescription": "Pressed",
+    "LanguageCode": "PEPS_DIB_0016"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "ClutchSwitch10PercPress",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "40",
+    "ResultByte": "0",
+    "ResultDescription": "Not Pressed",
+    "LanguageCode": "PEPS_DIB_0017"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "ClutchSwitch10PercPress",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "40",
+    "ResultByte": "40",
+    "ResultDescription": "Pressed",
+    "LanguageCode": "PEPS_DIB_0017"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "BrakeSwitch",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "80",
+    "ResultByte": "0",
+    "ResultDescription": "Not Pressed",
+    "LanguageCode": "PEPS_DIB_0018"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "BrakeSwitch",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "80",
+    "ResultByte": "80",
+    "ResultDescription": "Pressed",
+    "LanguageCode": "PEPS_DIB_0018"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "StartStopSwitchInput1",
+    "BytePosition": 4,
+    "ByteLength": 1,
+    "MaskingCondition": "1",
+    "ResultByte": "0",
+    "ResultDescription": "Not Pressed",
+    "LanguageCode": "PEPS_DIB_0019"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "StartStopSwitchInput1",
+    "BytePosition": 4,
+    "ByteLength": 1,
+    "MaskingCondition": "1",
+    "ResultByte": "1",
+    "ResultDescription": "Pressed",
+    "LanguageCode": "PEPS_DIB_0019"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "StartStopSwitchInput2",
+    "BytePosition": 4,
+    "ByteLength": 1,
+    "MaskingCondition": "2",
+    "ResultByte": "0",
+    "ResultDescription": "Not Pressed",
+    "LanguageCode": "PEPS_DIB_0020"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "StartStopSwitchInput2",
+    "BytePosition": 4,
+    "ByteLength": 1,
+    "MaskingCondition": "2",
+    "ResultByte": "2",
+    "ResultDescription": "Pressed",
+    "LanguageCode": "PEPS_DIB_0020"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "WakeupInputFromBCM",
+    "BytePosition": 4,
+    "ByteLength": 1,
+    "MaskingCondition": "4",
+    "ResultByte": "0",
+    "ResultDescription": "Off",
+    "LanguageCode": "PEPS_DIB_0021"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "WakeupInputFromBCM",
+    "BytePosition": 4,
+    "ByteLength": 1,
+    "MaskingCondition": "4",
+    "ResultByte": "4",
+    "ResultDescription": "On",
+    "LanguageCode": "PEPS_DIB_0021"
+   }
+  ]
+ },
+ {
+  "ParameterID": 123,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0xF284",
+  "ParameterName": "PEPS_PeriodicDID_F284",
+  "TotalByteLength": "3",
+  "ReadPermission": null,
+  "WritePermission": null,
+  "ValueParameters": [],
+  "ByteParameters": [
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "DriverDoorState",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "1",
+    "ResultByte": "0",
+    "ResultDescription": "Closed",
+    "LanguageCode": "PEPS_DIB_0024"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "DriverDoorState",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "1",
+    "ResultByte": "1",
+    "ResultDescription": "Open",
+    "LanguageCode": "PEPS_DIB_0024"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "CoDriverDoorState",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "2",
+    "ResultByte": "0",
+    "ResultDescription": "Closed",
+    "LanguageCode": "PEPS_DIB_0025"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "CoDriverDoorState",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "2",
+    "ResultByte": "2",
+    "ResultDescription": "Open",
+    "LanguageCode": "PEPS_DIB_0025"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "RearRHDoorState",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "4",
+    "ResultByte": "0",
+    "ResultDescription": "Closed",
+    "LanguageCode": "PEPS_DIB_0094"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "RearRHDoorState",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "4",
+    "ResultByte": "4",
+    "ResultDescription": "Open",
+    "LanguageCode": "PEPS_DIB_0094"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "RearLHDoorState",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "8",
+    "ResultByte": "0",
+    "ResultDescription": "Closed",
+    "LanguageCode": "PEPS_DIB_0095"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "RearLHDoorState",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "8",
+    "ResultByte": "8",
+    "ResultDescription": "Open",
+    "LanguageCode": "PEPS_DIB_0095"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "TailgateState",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "10",
+    "ResultByte": "0",
+    "ResultDescription": "Closed",
+    "LanguageCode": "PEPS_DIB_0096"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "TailgateState",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "10",
+    "ResultByte": "10",
+    "ResultDescription": "Open",
+    "LanguageCode": "PEPS_DIB_0096"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "Lock States Received From BCM",
+    "BytePosition": 4,
+    "ByteLength": 1,
+    "MaskingCondition": "2",
+    "ResultByte": "2",
+    "ResultDescription": "Externally Locked",
+    "LanguageCode": "PEPS_DIB_0026"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "Lock States Received From BCM",
+    "BytePosition": 4,
+    "ByteLength": 1,
+    "MaskingCondition": "4",
+    "ResultByte": "4",
+    "ResultDescription": "Internally Locked",
+    "LanguageCode": "PEPS_DIB_0026"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "Lock States Received From BCM",
+    "BytePosition": 4,
+    "ByteLength": 1,
+    "MaskingCondition": "8",
+    "ResultByte": "8",
+    "ResultDescription": "Unlocked",
+    "LanguageCode": "PEPS_DIB_0026"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "Lock States Received From BCM",
+    "BytePosition": 4,
+    "ByteLength": 1,
+    "MaskingCondition": "10",
+    "ResultByte": "10",
+    "ResultDescription": "Crash Unlocked",
+    "LanguageCode": "PEPS_DIB_0026"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "Lock States Received From BCM",
+    "BytePosition": 4,
+    "ByteLength": 1,
+    "MaskingCondition": "20",
+    "ResultByte": "20",
+    "ResultDescription": "Reverse Unlocked",
+    "LanguageCode": "PEPS_DIB_0026"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "PassiveEntryExit",
+    "BytePosition": 5,
+    "ByteLength": 1,
+    "MaskingCondition": "1",
+    "ResultByte": "0",
+    "ResultDescription": "Disabled",
+    "LanguageCode": "PEPS_DIB_0065"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "PassiveEntryExit",
+    "BytePosition": 5,
+    "ByteLength": 1,
+    "MaskingCondition": "1",
+    "ResultByte": "1",
+    "ResultDescription": "Enabled",
+    "LanguageCode": "PEPS_DIB_0065"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "PassiveStartStop",
+    "BytePosition": 5,
+    "ByteLength": 1,
+    "MaskingCondition": "2",
+    "ResultByte": "0",
+    "ResultDescription": "Disabled",
+    "LanguageCode": "PEPS_DIB_0066"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "PassiveStartStop",
+    "BytePosition": 5,
+    "ByteLength": 1,
+    "MaskingCondition": "2",
+    "ResultByte": "2",
+    "ResultDescription": "Enabled",
+    "LanguageCode": "PEPS_DIB_0066"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "PEPSRKEOperation",
+    "BytePosition": 5,
+    "ByteLength": 1,
+    "MaskingCondition": "4",
+    "ResultByte": "0",
+    "ResultDescription": "Disabled",
+    "LanguageCode": "PEPS_DIB_0067"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "PEPSRKEOperation",
+    "BytePosition": 5,
+    "ByteLength": 1,
+    "MaskingCondition": "4",
+    "ResultByte": "4",
+    "ResultDescription": "Enabled",
+    "LanguageCode": "PEPS_DIB_0067"
+   }
+  ]
+ },
+ {
+  "ParameterID": 125,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x421D",
+  "ParameterName": "LF Antenna Failure Limited Function Config",
+  "TotalByteLength": "1",
+  "ReadPermission": null,
+  "WritePermission": null,
+  "ValueParameters": [
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "LF Antena Failure Function Config",
+    "BytePosition": 4,
+    "ByteLength": 1,
+    "Resolution": "1",
+    "Offset": "0",
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": null,
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": null,
+    "MaximumValue": null,
+    "DataType": "5",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 126,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x4450",
+  "ParameterName": "EMS Feature configuration",
+  "TotalByteLength": "1",
+  "ReadPermission": null,
+  "WritePermission": null,
+  "ValueParameters": [],
+  "ByteParameters": [
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "IACFeatureAvailable",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "1",
+    "ResultByte": "0",
+    "ResultDescription": "Disabled",
+    "LanguageCode": "PEPS_DI_0216"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "IACFeatureAvailable",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "1",
+    "ResultByte": "1",
+    "ResultDescription": "Enabled",
+    "LanguageCode": "PEPS_DI_0216"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "ESSFeatureAvailable",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "2",
+    "ResultByte": "0",
+    "ResultDescription": "Disabled",
+    "LanguageCode": "PEPS_DI_0217"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "ESSFeatureAvailable",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "2",
+    "ResultByte": "2",
+    "ResultDescription": "Enabled",
+    "LanguageCode": "PEPS_DI_0217"
+   }
+  ]
+ },
+ {
+  "ParameterID": 130,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x421E",
+  "ParameterName": "BCM_PEPS Encrypted Communication State",
+  "TotalByteLength": "1",
+  "ReadPermission": null,
+  "WritePermission": null,
+  "ValueParameters": [],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 131,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x52F6",
+  "ParameterName": "PEPS support for Telematic features",
+  "TotalByteLength": "1",
+  "ReadPermission": null,
+  "WritePermission": null,
+  "ValueParameters": [],
+  "ByteParameters": [
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "PEPS support for Telematic features",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "1",
+    "ResultByte": "0",
+    "ResultDescription": "Disabled",
+    "LanguageCode": "PEPS_001"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "PEPS support for Telematic features",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "1",
+    "ResultByte": "1",
+    "ResultDescription": "Enabled",
+    "LanguageCode": "PEPS_001"
+   }
+  ]
+ },
+ {
+  "ParameterID": 134,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x52F7",
+  "ParameterName": "Max allowed time for FOTA IGN feature",
+  "TotalByteLength": "1",
+  "ReadPermission": null,
+  "WritePermission": null,
+  "ValueParameters": [
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "Max allowed time for FOTA IGN feature",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "Resolution": "1",
+    "Offset": "0",
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": null,
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": null,
+    "MaximumValue": null,
+    "DataType": "5",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 135,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x52F8",
+  "ParameterName": "Wait time in IGN OFF mode during IGN re-cycle",
+  "TotalByteLength": "1",
+  "ReadPermission": null,
+  "WritePermission": null,
+  "ValueParameters": [
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "Wait time in IGN OFF mode during IGN re-cycle",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "Resolution": "1",
+    "Offset": "0",
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": null,
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": null,
+    "MaximumValue": null,
+    "DataType": "5",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 136,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x52F2",
+  "ParameterName": "ReCranking Inhibit Timer",
+  "TotalByteLength": "1",
+  "ReadPermission": null,
+  "WritePermission": null,
+  "ValueParameters": [
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "ReCranking Inhibit Timer",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "Resolution": "100",
+    "Offset": "0",
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": "ms",
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": null,
+    "MaximumValue": null,
+    "DataType": "5",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 138,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x4457",
+  "ParameterName": "TCU Immobilizer Feature configuration",
+  "TotalByteLength": "1",
+  "ReadPermission": null,
+  "WritePermission": null,
+  "ValueParameters": [],
+  "ByteParameters": [
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "TCU Immobilizer Feature configuration",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "1",
+    "ResultByte": "0",
+    "ResultDescription": "Disabled",
+    "LanguageCode": "PEPS_005"
+   },
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "TCU Immobilizer Feature configuration",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "1",
+    "ResultByte": "1",
+    "ResultDescription": "Enabled",
+    "LanguageCode": "PEPS_005"
+   }
+  ]
+ },
+ {
+  "ParameterID": 139,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x52EF",
+  "ParameterName": "Minimum Crank On Time AMT",
+  "TotalByteLength": "1",
+  "ReadPermission": null,
+  "WritePermission": null,
+  "ValueParameters": [
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "Minimum Crank On Time AMT",
+    "BytePosition": 4,
+    "ByteLength": 1,
+    "Resolution": "50",
+    "Offset": "0",
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": null,
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": null,
+    "MaximumValue": null,
+    "DataType": "5",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 140,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x5300",
+  "ParameterName": "PEPS support for RESS",
+  "TotalByteLength": "1",
+  "ReadPermission": null,
+  "WritePermission": null,
+  "ValueParameters": [
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "PEPS Support RESS",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "Resolution": "1",
+    "Offset": "0",
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": null,
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": null,
+    "MaximumValue": null,
+    "DataType": "3",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 141,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x445A",
+  "ParameterName": "Power Operated Tailgate feature configuration",
+  "TotalByteLength": "1",
+  "ReadPermission": null,
+  "WritePermission": null,
+  "ValueParameters": [
+   {
+    "SubFunctionID": 0,
+    "ParameterName": "Power Operated Tailgate feature configuration",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "Resolution": "1",
+    "Offset": "0",
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": null,
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": null,
+    "MaximumValue": null,
+    "DataType": "3",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 142,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x445B",
+  "ParameterName": "Power Operated Tailgate Trigger Stop from Kick Sensor",
+  "TotalByteLength": "1",
+  "ReadPermission": null,
+  "WritePermission": null,
+  "ValueParameters": [],
+  "ByteParameters": []
+ }
+]

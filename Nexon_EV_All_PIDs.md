@@ -6,6 +6,56 @@ you will actually reach from an OBD adapter answer on **11-bit**: the **VECU** a
 
 ---
 
+## 0. ECU map and DTC reading
+
+Every diagnosable ECU on this car answers on **11-bit addressing at 500 kbps**, and
+the EV powertrain occupies a contiguous block. Addresses below are read straight
+from each ECU's `DiagnocommSettings` table in the TDS 20.0 databases.
+
+| ECU | Request | Response | Session | DIDs | DTCs |
+|-----|---------|----------|---------|-----:|-----:|
+| BCM — Body Control | `0x701` | `0x709` | `10 03` | 232 | 352 |
+| IMMO — Immobiliser | `0x704` | `0x70C` | `10 03` | 41 | 25 |
+| PEPS — Passive Entry/Start | `0x710` | `0x718` | `10 03` | 135 | 103 |
+| **MCU** — Motor Control | `0x783` | `0x78B` | `10 03` | 27 | 89 |
+| **DCDC** — DC-DC Converter | `0x784` | `0x78C` | `10 03` | 42 | 17 |
+| **BMS** — Battery Management | `0x785` | `0x78D` | `10 03` | 114 | 256 |
+| **OBC** — On Board Charger | `0x786` | `0x78E` | `10 01` | 75 | 31 |
+| **VECU** — Vehicle Control | `0x7E3` | `0x7EB` | `10 01` | 502 | 252 |
+
+The powertrain runs `783` MCU → `784` DCDC → `785` BMS → `786` OBC, response
+always request + 8.
+
+### Reading DTCs
+
+All eight use standard UDS `ReadDTCInformation`. From an ELM327:
+
+```
+ATSP6            # 11-bit, 500 kbps
+ATSH785          # pick the ECU from the table above
+ATCRA78D         # its response id
+1003             # extended session (1001 for OBC and VECU)
+1902FF           # report DTCs by status mask FF
+```
+
+| Purpose | Request | Notes |
+|---------|---------|-------|
+| Read DTCs | `19 02 FF` | status mask `FF` = every status bit |
+| Read DTCs (BCM) | `19 02 09` | BCM uses mask `09` — confirmed + test-failed |
+| Freeze frame | `19 04 <3-byte DTC> 01` | snapshot stored with the fault |
+| Clear DTCs | `14 FF FF FF` | ⚠️ clears across all groups |
+
+The reply is `59 02 <mask> <DTC hi> <mid> <status>` repeated per fault, and is
+almost always multi-frame — send flow control (`30 00 00`) or let the adapter
+handle it. Tata's codes are 3-byte: the `DTCMaster` tables in
+[`data/`](data/) map them to text, e.g. BMS `P3069-1C` = static cell voltage
+difference, first level.
+
+`14 FF FF FF` erases stored faults and freeze frames. It does not fix anything, and
+clearing an active fault only hides it until the next drive cycle.
+
+---
+
 ## 1. BMS (Battery Management System) - Gotion ECU
 
 ### CAN IDs

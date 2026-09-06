@@ -1,0 +1,1601 @@
+[
+ {
+  "ParameterID": 1,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x7234",
+  "ParameterName": "ECU Assembly Number",
+  "TotalByteLength": null,
+  "ReadPermission": "Y",
+  "WritePermission": "N",
+  "ValueParameters": [
+   {
+    "SubFunctionID": 95,
+    "ParameterName": "ECU Assembly Number",
+    "BytePosition": 3,
+    "ByteLength": 15,
+    "Resolution": "1",
+    "Offset": "0",
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": "N.A.",
+    "FormulaType": null,
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": null,
+    "MinimumValue": "-",
+    "MaximumValue": "-",
+    "DataType": "1",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 2,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x7241",
+  "ParameterName": "ECU Application Software Number",
+  "TotalByteLength": null,
+  "ReadPermission": "Y",
+  "WritePermission": "N",
+  "ValueParameters": [
+   {
+    "SubFunctionID": 96,
+    "ParameterName": "ECU Application Software Number",
+    "BytePosition": 3,
+    "ByteLength": 15,
+    "Resolution": "1",
+    "Offset": "0",
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": "N.A.",
+    "FormulaType": null,
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": null,
+    "MinimumValue": "-",
+    "MaximumValue": "-",
+    "DataType": "1",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 3,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0xF181",
+  "ParameterName": "Number Of Modules",
+  "TotalByteLength": null,
+  "ReadPermission": "Y",
+  "WritePermission": "N",
+  "ValueParameters": [
+   {
+    "SubFunctionID": 97,
+    "ParameterName": "Number Of Modules",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "Resolution": "1",
+    "Offset": "0",
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": "N.A.",
+    "FormulaType": null,
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": null,
+    "MinimumValue": "-",
+    "MaximumValue": "-",
+    "DataType": "1",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 4,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0xF181",
+  "ParameterName": "Application Software Identification",
+  "TotalByteLength": null,
+  "ReadPermission": "Y",
+  "WritePermission": "N",
+  "ValueParameters": [
+   {
+    "SubFunctionID": 98,
+    "ParameterName": "Application Software Identification",
+    "BytePosition": 4,
+    "ByteLength": 13,
+    "Resolution": "1",
+    "Offset": "0",
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": "N.A.",
+    "FormulaType": null,
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": null,
+    "MinimumValue": "0",
+    "MaximumValue": "255",
+    "DataType": "1",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 5,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0xF187",
+  "ParameterName": "TML Part Number",
+  "TotalByteLength": null,
+  "ReadPermission": "Y",
+  "WritePermission": "N",
+  "ValueParameters": [
+   {
+    "SubFunctionID": 99,
+    "ParameterName": "TML Part Number",
+    "BytePosition": 3,
+    "ByteLength": 15,
+    "Resolution": "1",
+    "Offset": "0",
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": "N.A.",
+    "FormulaType": null,
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": null,
+    "MinimumValue": "-",
+    "MaximumValue": "-",
+    "DataType": "1",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 6,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0xF188",
+  "ParameterName": "Vehicle Manufacturer ECU Software Number",
+  "TotalByteLength": null,
+  "ReadPermission": "Y",
+  "WritePermission": "N",
+  "ValueParameters": [
+   {
+    "SubFunctionID": 100,
+    "ParameterName": "Vehicle Manufacturer ECU Software Number",
+    "BytePosition": 3,
+    "ByteLength": 15,
+    "Resolution": "1",
+    "Offset": "0",
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": "N.A.",
+    "FormulaType": null,
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": null,
+    "MinimumValue": "-",
+    "MaximumValue": "-",
+    "DataType": "1",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 7,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0xF18A",
+  "ParameterName": "System Supplier",
+  "TotalByteLength": null,
+  "ReadPermission": "Y",
+  "WritePermission": "N",
+  "ValueParameters": [
+   {
+    "SubFunctionID": 101,
+    "ParameterName": "System Supplier",
+    "BytePosition": 3,
+    "ByteLength": 11,
+    "Resolution": "1",
+    "Offset": "0",
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": "N.A.",
+    "FormulaType": null,
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": null,
+    "MinimumValue": "-",
+    "MaximumValue": "-",
+    "DataType": "1",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 8,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0xF18B",
+  "ParameterName": "ECU Manufacturing Date",
+  "TotalByteLength": null,
+  "ReadPermission": "Y",
+  "WritePermission": "N",
+  "ValueParameters": [
+   {
+    "SubFunctionID": 102,
+    "ParameterName": "ECU Manufacturing Date",
+    "BytePosition": 3,
+    "ByteLength": 10,
+    "Resolution": "1",
+    "Offset": "0",
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": "N.A.",
+    "FormulaType": null,
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": null,
+    "MinimumValue": "-",
+    "MaximumValue": "-",
+    "DataType": "1",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 9,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0xF18C",
+  "ParameterName": "ECU Serial Number",
+  "TotalByteLength": null,
+  "ReadPermission": "Y",
+  "WritePermission": "N",
+  "ValueParameters": [
+   {
+    "SubFunctionID": 103,
+    "ParameterName": "ECU Serial Number",
+    "BytePosition": 3,
+    "ByteLength": 4,
+    "Resolution": "1",
+    "Offset": "0",
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": "N.A.",
+    "FormulaType": null,
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": null,
+    "MinimumValue": "-",
+    "MaximumValue": "-",
+    "DataType": "3",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 10,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0xF190",
+  "ParameterName": "Vehicle Identification Number (VIN)",
+  "TotalByteLength": null,
+  "ReadPermission": "Y",
+  "WritePermission": "Y",
+  "ValueParameters": [
+   {
+    "SubFunctionID": 104,
+    "ParameterName": "Vehicle Identification Number (VIN)",
+    "BytePosition": 3,
+    "ByteLength": 17,
+    "Resolution": "1",
+    "Offset": "0",
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": "N.A.",
+    "FormulaType": null,
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": null,
+    "MinimumValue": "-",
+    "MaximumValue": "-",
+    "DataType": "0",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 11,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0xF191",
+  "ParameterName": "Vehicle Manufacturer ECU Hardware Number",
+  "TotalByteLength": null,
+  "ReadPermission": "Y",
+  "WritePermission": "N",
+  "ValueParameters": [
+   {
+    "SubFunctionID": 105,
+    "ParameterName": "Vehicle Manufacturer ECU Hardware Number",
+    "BytePosition": 3,
+    "ByteLength": 15,
+    "Resolution": "1",
+    "Offset": "0",
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": "N.A.",
+    "FormulaType": null,
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": null,
+    "MinimumValue": "-",
+    "MaximumValue": "-",
+    "DataType": "1",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 12,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0xF192",
+  "ParameterName": "System Supplier ECU Hardware Number",
+  "TotalByteLength": null,
+  "ReadPermission": "Y",
+  "WritePermission": "N",
+  "ValueParameters": [
+   {
+    "SubFunctionID": 106,
+    "ParameterName": "System Supplier ECU Hardware Number",
+    "BytePosition": 3,
+    "ByteLength": 5,
+    "Resolution": "1",
+    "Offset": "0",
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": "N.A.",
+    "FormulaType": null,
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": null,
+    "MinimumValue": "-",
+    "MaximumValue": "-",
+    "DataType": "1",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 13,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0xF197",
+  "ParameterName": "System Name",
+  "TotalByteLength": null,
+  "ReadPermission": "Y",
+  "WritePermission": "N",
+  "ValueParameters": [
+   {
+    "SubFunctionID": 107,
+    "ParameterName": "System Name",
+    "BytePosition": 3,
+    "ByteLength": 17,
+    "Resolution": "1",
+    "Offset": "0",
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": "N.A.",
+    "FormulaType": null,
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": null,
+    "MinimumValue": "-",
+    "MaximumValue": "-",
+    "DataType": "1",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 14,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0xF19D",
+  "ParameterName": "ECU Installation Date",
+  "TotalByteLength": null,
+  "ReadPermission": "Y",
+  "WritePermission": "N",
+  "ValueParameters": [
+   {
+    "SubFunctionID": 108,
+    "ParameterName": "ECU Installation Date",
+    "BytePosition": 3,
+    "ByteLength": 10,
+    "Resolution": "1",
+    "Offset": "0",
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": "N.A.",
+    "FormulaType": null,
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": null,
+    "MinimumValue": "-",
+    "MaximumValue": "-",
+    "DataType": "1",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 15,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x4410",
+  "ParameterName": "Auto Key Learning Functionality Status",
+  "TotalByteLength": null,
+  "ReadPermission": "Y",
+  "WritePermission": "N",
+  "ValueParameters": [],
+  "ByteParameters": [
+   {
+    "SubFunctionID": 101,
+    "ParameterName": "Status of Auto Key Learning Process Function",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "1",
+    "ResultByte": "0",
+    "ResultDescription": "ENABLED",
+    "LanguageCode": "30"
+   },
+   {
+    "SubFunctionID": 102,
+    "ParameterName": "Status of Auto Key Learning Process Function",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "1",
+    "ResultByte": "1",
+    "ResultDescription": "DISABLED",
+    "LanguageCode": "30"
+   },
+   {
+    "SubFunctionID": 103,
+    "ParameterName": "Status of Auto Key Learning between IMMO and Transponder",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "2",
+    "ResultByte": "0",
+    "ResultDescription": "PASSED",
+    "LanguageCode": "31"
+   },
+   {
+    "SubFunctionID": 104,
+    "ParameterName": "Status of Auto Key Learning between IMMO and Transponder",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "2",
+    "ResultByte": "2",
+    "ResultDescription": "FAILED",
+    "LanguageCode": "31"
+   }
+  ]
+ },
+ {
+  "ParameterID": 16,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x4411",
+  "ParameterName": "Number of Keys Learnt",
+  "TotalByteLength": null,
+  "ReadPermission": "Y",
+  "WritePermission": "N",
+  "ValueParameters": [
+   {
+    "SubFunctionID": 109,
+    "ParameterName": "Pre defined number of keys to be programed",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "Resolution": "1",
+    "Offset": "0",
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": "N.A.",
+    "FormulaType": null,
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": null,
+    "MinimumValue": "-",
+    "MaximumValue": "-",
+    "DataType": "3",
+    "BitPosition": null
+   },
+   {
+    "SubFunctionID": 110,
+    "ParameterName": "Number of Keys Learnt",
+    "BytePosition": 4,
+    "ByteLength": 1,
+    "Resolution": "1",
+    "Offset": "0",
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": "N.A.",
+    "FormulaType": null,
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": null,
+    "MinimumValue": "-",
+    "MaximumValue": "-",
+    "DataType": "3",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 17,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x4412",
+  "ParameterName": "Status of Transponder Secret Code",
+  "TotalByteLength": null,
+  "ReadPermission": "Y",
+  "WritePermission": "N",
+  "ValueParameters": [],
+  "ByteParameters": [
+   {
+    "SubFunctionID": 105,
+    "ParameterName": "Status Of Transponder Secret Code",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "1",
+    "ResultByte": "0",
+    "ResultDescription": "LOCKED",
+    "LanguageCode": "17"
+   },
+   {
+    "SubFunctionID": 106,
+    "ParameterName": "Status Of Transponder Secret Code",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "1",
+    "ResultByte": "1",
+    "ResultDescription": "UnLOCKED",
+    "LanguageCode": "17"
+   },
+   {
+    "SubFunctionID": 107,
+    "ParameterName": "Status Of Transponder ID Code Learned By IMMO",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "1",
+    "ResultByte": "0",
+    "ResultDescription": "LOCKED",
+    "LanguageCode": "32"
+   },
+   {
+    "SubFunctionID": 108,
+    "ParameterName": "Status Of Transponder ID Code Learned By IMMO",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "1",
+    "ResultByte": "1",
+    "ResultDescription": "UnLOCKED",
+    "LanguageCode": "32"
+   }
+  ]
+ },
+ {
+  "ParameterID": 18,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x4414",
+  "ParameterName": "Homologation Number",
+  "TotalByteLength": null,
+  "ReadPermission": "Y",
+  "WritePermission": "N",
+  "ValueParameters": [
+   {
+    "SubFunctionID": 111,
+    "ParameterName": "Homologation Number",
+    "BytePosition": 3,
+    "ByteLength": 17,
+    "Resolution": "1",
+    "Offset": "0",
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": "N.A.",
+    "FormulaType": null,
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": null,
+    "MinimumValue": "-",
+    "MaximumValue": "-",
+    "DataType": "1",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 19,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x4415",
+  "ParameterName": "IMMO Status Indicator Lamp",
+  "TotalByteLength": null,
+  "ReadPermission": "Y",
+  "WritePermission": "N",
+  "ValueParameters": [],
+  "ByteParameters": [
+   {
+    "SubFunctionID": 109,
+    "ParameterName": "VCIM Status Indicator Lamp",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "1",
+    "ResultByte": "0",
+    "ResultDescription": "ACTIVE",
+    "LanguageCode": "19"
+   },
+   {
+    "SubFunctionID": 110,
+    "ParameterName": "VCIM Status Indicator Lamp",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "1",
+    "ResultByte": "1",
+    "ResultDescription": "IN-ACTIVE",
+    "LanguageCode": "19"
+   }
+  ]
+ },
+ {
+  "ParameterID": 20,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x4416",
+  "ParameterName": "Transponder Phase Value",
+  "TotalByteLength": null,
+  "ReadPermission": "Y",
+  "WritePermission": "N",
+  "ValueParameters": [
+   {
+    "SubFunctionID": 112,
+    "ParameterName": "Transponder Phase",
+    "BytePosition": 3,
+    "ByteLength": 2,
+    "Resolution": "0.1",
+    "Offset": "0",
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": "Degree",
+    "FormulaType": null,
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": null,
+    "MinimumValue": "0",
+    "MaximumValue": "360",
+    "DataType": "5",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 21,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x4417",
+  "ParameterName": "Status of EMS-IMMO CAN communication",
+  "TotalByteLength": null,
+  "ReadPermission": "Y",
+  "WritePermission": "N",
+  "ValueParameters": [],
+  "ByteParameters": [
+   {
+    "SubFunctionID": 111,
+    "ParameterName": "Status of EMS-IMMO CAN communication",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "1",
+    "ResultByte": "0",
+    "ResultDescription": "ENABLED",
+    "LanguageCode": "21"
+   },
+   {
+    "SubFunctionID": 112,
+    "ParameterName": "Status of EMS-IMMO CAN communication",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "1",
+    "ResultByte": "1",
+    "ResultDescription": "DISABLED",
+    "LanguageCode": "21"
+   }
+  ]
+ },
+ {
+  "ParameterID": 22,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x4418",
+  "ParameterName": "IMMO Status",
+  "TotalByteLength": null,
+  "ReadPermission": "Y",
+  "WritePermission": "N",
+  "ValueParameters": [],
+  "ByteParameters": [
+   {
+    "SubFunctionID": 113,
+    "ParameterName": "IMMO Status",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "0",
+    "ResultDescription": "Engine Starting Disabled",
+    "LanguageCode": "35"
+   },
+   {
+    "SubFunctionID": 114,
+    "ParameterName": "IMMO Status",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "1",
+    "ResultDescription": "Engine Starting Enabled",
+    "LanguageCode": "35"
+   },
+   {
+    "SubFunctionID": 115,
+    "ParameterName": "IMMO Status",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "2",
+    "ResultDescription": "Key Learning",
+    "LanguageCode": "35"
+   }
+  ]
+ },
+ {
+  "ParameterID": 23,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x441A",
+  "ParameterName": "Status of Authentication between Transponder and IMMO",
+  "TotalByteLength": null,
+  "ReadPermission": "Y",
+  "WritePermission": "N",
+  "ValueParameters": [],
+  "ByteParameters": [
+   {
+    "SubFunctionID": 116,
+    "ParameterName": "Status of Authentication between Transponder and IMMO",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "1",
+    "ResultByte": "0",
+    "ResultDescription": "FAILED",
+    "LanguageCode": "23"
+   },
+   {
+    "SubFunctionID": 117,
+    "ParameterName": "Status of Authentication between Transponder and IMMO",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "1",
+    "ResultByte": "1",
+    "ResultDescription": "PASSED",
+    "LanguageCode": "23"
+   },
+   {
+    "SubFunctionID": 118,
+    "ParameterName": "Status of Authentication between IMMO and EMS",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "1",
+    "ResultByte": "0",
+    "ResultDescription": "FAILED",
+    "LanguageCode": "33"
+   },
+   {
+    "SubFunctionID": 119,
+    "ParameterName": "Status of Authentication between IMMO and EMS",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "1",
+    "ResultByte": "1",
+    "ResultDescription": "PASSED",
+    "LanguageCode": "33"
+   },
+   {
+    "SubFunctionID": 120,
+    "ParameterName": "Status of IMMO ECU",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "1",
+    "ResultByte": "0",
+    "ResultDescription": "Virgin ECU",
+    "LanguageCode": "34"
+   },
+   {
+    "SubFunctionID": 121,
+    "ParameterName": "Status of IMMO ECU",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "1",
+    "ResultByte": "1",
+    "ResultDescription": "Programmed ECU",
+    "LanguageCode": "34"
+   }
+  ]
+ },
+ {
+  "ParameterID": 24,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x441C",
+  "ParameterName": "Status of AES SK Key",
+  "TotalByteLength": null,
+  "ReadPermission": "Y",
+  "WritePermission": "N",
+  "ValueParameters": [],
+  "ByteParameters": [
+   {
+    "SubFunctionID": 122,
+    "ParameterName": "Status of AES SK Key",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "1",
+    "ResultByte": "0",
+    "ResultDescription": "LOCKED",
+    "LanguageCode": "24"
+   },
+   {
+    "SubFunctionID": 123,
+    "ParameterName": "Status of AES SK Key",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "1",
+    "ResultByte": "1",
+    "ResultDescription": "UnLOCKED",
+    "LanguageCode": "24"
+   }
+  ]
+ },
+ {
+  "ParameterID": 25,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x442A",
+  "ParameterName": "IIMMO Modes",
+  "TotalByteLength": null,
+  "ReadPermission": "Y",
+  "WritePermission": "N",
+  "ValueParameters": [],
+  "ByteParameters": [
+   {
+    "SubFunctionID": 124,
+    "ParameterName": "IMMO status",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "1",
+    "ResultByte": "0",
+    "ResultDescription": "OK",
+    "LanguageCode": "35"
+   },
+   {
+    "SubFunctionID": 125,
+    "ParameterName": "IMMO status",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "1",
+    "ResultByte": "1",
+    "ResultDescription": "NOT OK",
+    "LanguageCode": "35"
+   },
+   {
+    "SubFunctionID": 126,
+    "ParameterName": "Operational Fault on IMMO",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "1",
+    "ResultByte": "0",
+    "ResultDescription": "NOT PRESENT",
+    "LanguageCode": "36"
+   },
+   {
+    "SubFunctionID": 127,
+    "ParameterName": "Operational Fault on IMMO",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "1",
+    "ResultByte": "1",
+    "ResultDescription": "PRESENT",
+    "LanguageCode": "36"
+   },
+   {
+    "SubFunctionID": 128,
+    "ParameterName": "IMMO Transponder key  learning mode",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "1",
+    "ResultByte": "0",
+    "ResultDescription": "IN-ACTIVE",
+    "LanguageCode": "37"
+   },
+   {
+    "SubFunctionID": 129,
+    "ParameterName": "IMMO Transponder key  learning mode",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "1",
+    "ResultByte": "1",
+    "ResultDescription": "ACTIVE",
+    "LanguageCode": "37"
+   },
+   {
+    "SubFunctionID": 130,
+    "ParameterName": "IMMO Antiscan mode",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "1",
+    "ResultByte": "0",
+    "ResultDescription": "IN-ACTIVE",
+    "LanguageCode": "38"
+   },
+   {
+    "SubFunctionID": 131,
+    "ParameterName": "IMMO Antiscan mode",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "1",
+    "ResultByte": "1",
+    "ResultDescription": "ACTIVE",
+    "LanguageCode": "38"
+   },
+   {
+    "SubFunctionID": 132,
+    "ParameterName": "IMMO Transport mode",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "1",
+    "ResultByte": "0",
+    "ResultDescription": "IN-ACTIVE",
+    "LanguageCode": "39"
+   },
+   {
+    "SubFunctionID": 133,
+    "ParameterName": "IMMO Transport mode",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "1",
+    "ResultByte": "1",
+    "ResultDescription": "ACTIVE",
+    "LanguageCode": "39"
+   }
+  ]
+ },
+ {
+  "ParameterID": 26,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x7001",
+  "ParameterName": "Battery Voltage input to IMMO",
+  "TotalByteLength": null,
+  "ReadPermission": "Y",
+  "WritePermission": "N",
+  "ValueParameters": [
+   {
+    "SubFunctionID": 113,
+    "ParameterName": "Battery Voltage input to IMMO",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "Resolution": "0.1",
+    "Offset": "0",
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": "V",
+    "FormulaType": null,
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": null,
+    "MinimumValue": "8",
+    "MaximumValue": "15",
+    "DataType": "5",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 27,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x7211",
+  "ParameterName": "Communication Status",
+  "TotalByteLength": null,
+  "ReadPermission": "Y",
+  "WritePermission": "N",
+  "ValueParameters": [],
+  "ByteParameters": [
+   {
+    "SubFunctionID": 134,
+    "ParameterName": "Communication Status",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "0",
+    "ResultDescription": "RX and TX Enabled",
+    "LanguageCode": "27"
+   },
+   {
+    "SubFunctionID": 135,
+    "ParameterName": "Communication Status",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "1",
+    "ResultDescription": "RX Enabled and TX Disabled",
+    "LanguageCode": "27"
+   },
+   {
+    "SubFunctionID": 136,
+    "ParameterName": "Communication Status",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "2",
+    "ResultDescription": "RX Disabled and TX Enabled",
+    "LanguageCode": "27"
+   },
+   {
+    "SubFunctionID": 137,
+    "ParameterName": "Communication Status",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "3",
+    "ResultDescription": "RX Disabled and TX Disabled",
+    "LanguageCode": "27"
+   }
+  ]
+ },
+ {
+  "ParameterID": 29,
+  "ServiceId": "0xDTCFF",
+  "ServiceName": "Service 0xDTCFF",
+  "DidHex": "0xA00",
+  "ParameterName": "Global Real Time",
+  "TotalByteLength": null,
+  "ReadPermission": "Y",
+  "WritePermission": "N",
+  "ValueParameters": [
+   {
+    "SubFunctionID": 114,
+    "ParameterName": "Global Real Time",
+    "BytePosition": 10,
+    "ByteLength": 3,
+    "Resolution": "1",
+    "Offset": "0",
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": "min",
+    "FormulaType": null,
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": null,
+    "MinimumValue": "0",
+    "MaximumValue": "16777214",
+    "DataType": "5",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 30,
+  "ServiceId": "0xDTCFF",
+  "ServiceName": "Service 0xDTCFF",
+  "DidHex": "0xA01",
+  "ParameterName": "Total Distance Travelled",
+  "TotalByteLength": null,
+  "ReadPermission": "Y",
+  "WritePermission": "N",
+  "ValueParameters": [
+   {
+    "SubFunctionID": 115,
+    "ParameterName": "Total Distance Travelled",
+    "BytePosition": 15,
+    "ByteLength": 3,
+    "Resolution": "1",
+    "Offset": "0",
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": "km",
+    "FormulaType": null,
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": null,
+    "MinimumValue": "0",
+    "MaximumValue": "16777214",
+    "DataType": "5",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 31,
+  "ServiceId": "0xDTCFF",
+  "ServiceName": "Service 0xDTCFF",
+  "DidHex": "0xA02",
+  "ParameterName": "Master ECU Supply Voltage",
+  "TotalByteLength": null,
+  "ReadPermission": "Y",
+  "WritePermission": "N",
+  "ValueParameters": [
+   {
+    "SubFunctionID": 116,
+    "ParameterName": "Master ECU Supply Voltage",
+    "BytePosition": 20,
+    "ByteLength": 1,
+    "Resolution": "0.1",
+    "Offset": "0",
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": "V",
+    "FormulaType": null,
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": null,
+    "MinimumValue": "8",
+    "MaximumValue": "16",
+    "DataType": "5",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 32,
+  "ServiceId": "0xDTCFF",
+  "ServiceName": "Service 0xDTCFF",
+  "DidHex": "0xA04",
+  "ParameterName": "Vehicle Interior Temperature",
+  "TotalByteLength": null,
+  "ReadPermission": "Y",
+  "WritePermission": "N",
+  "ValueParameters": [
+   {
+    "SubFunctionID": 117,
+    "ParameterName": "Vehicle Interior Temperature",
+    "BytePosition": 23,
+    "ByteLength": 1,
+    "Resolution": "1",
+    "Offset": "40",
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": "°C",
+    "FormulaType": null,
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": null,
+    "MinimumValue": "-30",
+    "MaximumValue": "80",
+    "DataType": "5",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 33,
+  "ServiceId": "0xDTCFF",
+  "ServiceName": "Service 0xDTCFF",
+  "DidHex": "0xA05",
+  "ParameterName": "Ambient Air Temperature",
+  "TotalByteLength": null,
+  "ReadPermission": "Y",
+  "WritePermission": "N",
+  "ValueParameters": [
+   {
+    "SubFunctionID": 118,
+    "ParameterName": "Ambient Air Temperature",
+    "BytePosition": 26,
+    "ByteLength": 1,
+    "Resolution": "1",
+    "Offset": "40",
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": "°C",
+    "FormulaType": null,
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": null,
+    "MinimumValue": "-30",
+    "MaximumValue": "80",
+    "DataType": "5",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 34,
+  "ServiceId": "0xDTCFF",
+  "ServiceName": "Service 0xDTCFF",
+  "DidHex": "0xA06",
+  "ParameterName": "Vehicle Power Mode",
+  "TotalByteLength": null,
+  "ReadPermission": "Y",
+  "WritePermission": "N",
+  "ValueParameters": [],
+  "ByteParameters": [
+   {
+    "SubFunctionID": 151,
+    "ParameterName": "Vehicle Power Mode",
+    "BytePosition": 29,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "0",
+    "ResultDescription": "Pre-Standby",
+    "LanguageCode": "67"
+   },
+   {
+    "SubFunctionID": 152,
+    "ParameterName": "Vehicle Power Mode",
+    "BytePosition": 29,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "1",
+    "ResultDescription": "Awake",
+    "LanguageCode": "67"
+   },
+   {
+    "SubFunctionID": 153,
+    "ParameterName": "Vehicle Power Mode",
+    "BytePosition": 29,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "2",
+    "ResultDescription": "Transport Park",
+    "LanguageCode": "67"
+   },
+   {
+    "SubFunctionID": 154,
+    "ParameterName": "Vehicle Power Mode",
+    "BytePosition": 29,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "3",
+    "ResultDescription": "Key In",
+    "LanguageCode": "67"
+   },
+   {
+    "SubFunctionID": 155,
+    "ParameterName": "Vehicle Power Mode",
+    "BytePosition": 29,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "4",
+    "ResultDescription": "Accessory",
+    "LanguageCode": "67"
+   },
+   {
+    "SubFunctionID": 156,
+    "ParameterName": "Vehicle Power Mode",
+    "BytePosition": 29,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "5",
+    "ResultDescription": "Accessory Delay",
+    "LanguageCode": "67"
+   },
+   {
+    "SubFunctionID": 157,
+    "ParameterName": "Vehicle Power Mode",
+    "BytePosition": 29,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "6",
+    "ResultDescription": "Active (Ignition ON)",
+    "LanguageCode": "67"
+   },
+   {
+    "SubFunctionID": 158,
+    "ParameterName": "Vehicle Power Mode",
+    "BytePosition": 29,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "7",
+    "ResultDescription": "Transport Drive",
+    "LanguageCode": "67"
+   },
+   {
+    "SubFunctionID": 159,
+    "ParameterName": "Vehicle Power Mode",
+    "BytePosition": 29,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "8",
+    "ResultDescription": "Run (Engine Run)",
+    "LanguageCode": "67"
+   },
+   {
+    "SubFunctionID": 160,
+    "ParameterName": "Vehicle Power Mode",
+    "BytePosition": 29,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "9",
+    "ResultDescription": "Start (Crank)",
+    "LanguageCode": "67"
+   },
+   {
+    "SubFunctionID": 161,
+    "ParameterName": "Vehicle Power Mode",
+    "BytePosition": 29,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "10",
+    "ResultDescription": "Transport Drive CRANK",
+    "LanguageCode": "67"
+   },
+   {
+    "SubFunctionID": 162,
+    "ParameterName": "Vehicle Power Mode",
+    "BytePosition": 29,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "11",
+    "ResultDescription": "Transport Drive RUN",
+    "LanguageCode": "67"
+   }
+  ]
+ },
+ {
+  "ParameterID": 35,
+  "ServiceId": "0xDTCFF",
+  "ServiceName": "Service 0xDTCFF",
+  "DidHex": "0xA07",
+  "ParameterName": "Engine Speed",
+  "TotalByteLength": null,
+  "ReadPermission": "Y",
+  "WritePermission": "N",
+  "ValueParameters": [
+   {
+    "SubFunctionID": 119,
+    "ParameterName": "Engine Speed",
+    "BytePosition": 32,
+    "ByteLength": 2,
+    "Resolution": "10",
+    "Offset": "0",
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": "rpm",
+    "FormulaType": null,
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": null,
+    "MinimumValue": "0",
+    "MaximumValue": "7000",
+    "DataType": "5",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 36,
+  "ServiceId": "0xDTCFF",
+  "ServiceName": "Service 0xDTCFF",
+  "DidHex": "0xA08",
+  "ParameterName": "Vehicle Speed",
+  "TotalByteLength": null,
+  "ReadPermission": "Y",
+  "WritePermission": "N",
+  "ValueParameters": [
+   {
+    "SubFunctionID": 120,
+    "ParameterName": "Vehicle Speed",
+    "BytePosition": 36,
+    "ByteLength": 1,
+    "Resolution": "1",
+    "Offset": "0",
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": "km/h",
+    "FormulaType": null,
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": null,
+    "MinimumValue": "0",
+    "MaximumValue": "200",
+    "DataType": "5",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 37,
+  "ServiceId": "0xDTCFF",
+  "ServiceName": "Service 0xDTCFF",
+  "DidHex": "0xA09",
+  "ParameterName": "Engine Coolant Temperature",
+  "TotalByteLength": null,
+  "ReadPermission": "Y",
+  "WritePermission": "N",
+  "ValueParameters": [
+   {
+    "SubFunctionID": 121,
+    "ParameterName": "Engine Coolant Temperature",
+    "BytePosition": 38,
+    "ByteLength": 1,
+    "Resolution": "1",
+    "Offset": "40",
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": "°C",
+    "FormulaType": null,
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": null,
+    "MinimumValue": "-20",
+    "MaximumValue": "120",
+    "DataType": "5",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 38,
+  "ServiceId": "0xDTCFF",
+  "ServiceName": "Service 0xDTCFF",
+  "DidHex": "0xA00A",
+  "ParameterName": "Throttle Position",
+  "TotalByteLength": null,
+  "ReadPermission": "Y",
+  "WritePermission": "N",
+  "ValueParameters": [
+   {
+    "SubFunctionID": 122,
+    "ParameterName": "Throttle Position",
+    "BytePosition": 42,
+    "ByteLength": 1,
+    "Resolution": "0.5",
+    "Offset": "0",
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": "%",
+    "FormulaType": null,
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": null,
+    "MinimumValue": "0",
+    "MaximumValue": "100",
+    "DataType": "5",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 39,
+  "ServiceId": "0xDTCFF",
+  "ServiceName": "Service 0xDTCFF",
+  "DidHex": "0xA00B",
+  "ParameterName": "Vehicle Identification Number (VIN - Last 5 digits)",
+  "TotalByteLength": null,
+  "ReadPermission": "Y",
+  "WritePermission": "N",
+  "ValueParameters": [
+   {
+    "SubFunctionID": 123,
+    "ParameterName": "VIN - (Last 5 digits)",
+    "BytePosition": 45,
+    "ByteLength": 5,
+    "Resolution": "1",
+    "Offset": "0",
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": "N.A.",
+    "FormulaType": null,
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": null,
+    "MinimumValue": "-",
+    "MaximumValue": "-",
+    "DataType": "0",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 41,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x5246",
+  "ParameterName": "Value of AES SK key",
+  "TotalByteLength": null,
+  "ReadPermission": "Y",
+  "WritePermission": "N",
+  "ValueParameters": [
+   {
+    "SubFunctionID": 125,
+    "ParameterName": "Value of AESk Key",
+    "BytePosition": 3,
+    "ByteLength": 16,
+    "Resolution": "1",
+    "Offset": "0",
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": "N.A.",
+    "FormulaType": null,
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": null,
+    "MinimumValue": "-",
+    "MaximumValue": "-",
+    "DataType": "3",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 42,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x7235",
+  "ParameterName": "Vehicle Configuration Number",
+  "TotalByteLength": "9",
+  "ReadPermission": "Y",
+  "WritePermission": "Y",
+  "ValueParameters": [
+   {
+    "SubFunctionID": 126,
+    "ParameterName": "Vehicle Configuration Number",
+    "BytePosition": 3,
+    "ByteLength": 9,
+    "Resolution": "1",
+    "Offset": "0",
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": "N.A.",
+    "FormulaType": null,
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": null,
+    "MinimumValue": "-",
+    "MaximumValue": "-",
+    "DataType": "1",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 40,
+  "ServiceId": "0xDTCFF_E",
+  "ServiceName": "Service 0xDTCFF_E",
+  "DidHex": "0x701",
+  "ParameterName": "Battery Voltage input to IMMO",
+  "TotalByteLength": null,
+  "ReadPermission": "Y",
+  "WritePermission": "N",
+  "ValueParameters": [
+   {
+    "SubFunctionID": 124,
+    "ParameterName": "Battery Voltage input to IMMO",
+    "BytePosition": 53,
+    "ByteLength": 1,
+    "Resolution": "0.1",
+    "Offset": "0",
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": "V",
+    "FormulaType": null,
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": null,
+    "MinimumValue": "8",
+    "MaximumValue": "15",
+    "DataType": "5",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ }
+]

@@ -3,11 +3,23 @@
 Import via **Settings → Custom PIDs → Import** (or Profile → Custom PIDs, depending
 on version). Files are plain JSON, so you can edit them in any text editor.
 
-| File | Sensors | Header | Response |
-|------|---------|--------|----------|
-| `NexonEV_BMS_KPD.csp` | 40 | **`785`** (11-bit) — plus one `7E3` sensor | `78D` / `7EB` |
-| `NexonEV_VECU.csp` | 183 | `7E3` (11-bit) | `7EB` |
-| `NexonEV_VECU_battery.csp` | 23 | `7E3` (11-bit) | `7EB` |
+| File | Sensors | Header | Response | ECU |
+|------|---------|--------|----------|-----|
+| `NexonEV_BMS.csp` | 65 | **`785`** | `78D` | Battery Management |
+| `NexonEV_VECU.csp` | 462 | `7E3` | `7EB` | Vehicle Control |
+| `NexonEV_MCU.csp` | 15 | `783` | `78B` | Motor Control |
+| `NexonEV_DCDC.csp` | 20 | `784` | `78C` | DC-DC Converter |
+| `NexonEV_OBC.csp` | 47 | `786` | `78E` | On Board Charger |
+| `NexonEV_VECU_battery.csp` | 23 | `7E3` | `7EB` | VECU, battery subset |
+
+All are generated from the **TDS 20.0** databases (`BMS_DB.sdf`,
+`DB_VECU_DiagnosticsDB.mdb`, `MCU_DiagnosticsDB.sdf`, `DCDC_EV.sdf`, `OBC_EV.sdf`),
+which is what the current factory tool ships. Earlier profiles were built from the
+older TDS 8.9S files and had fewer signals.
+
+> `NexonEV_VECU.csp` carries 462 sensors. CarScanner polls every visible sensor in
+> a round-robin, so adding all of them at once makes each one update slowly — put
+> the handful you care about on a dashboard page and leave the rest hidden.
 
 All three use **11-bit (standard) addressing** — `HDR` is a three-digit ID with
 `FHID` false. CarScanner derives the response header automatically (request + 8).

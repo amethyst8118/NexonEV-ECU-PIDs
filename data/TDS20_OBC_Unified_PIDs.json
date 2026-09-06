@@ -1,0 +1,4763 @@
+[
+ {
+  "ParameterID": 1,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0xF10D",
+  "ParameterName": "diagnostic Specification Version DataIdentifier",
+  "TotalByteLength": "3",
+  "ReadPermission": "N",
+  "WritePermission": "N",
+  "ValueParameters": [
+   {
+    "SubFunctionID": 1,
+    "ParameterName": "Diagnostic Speicification Version",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "Resolution": "1",
+    "Offset": null,
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": null,
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": "0",
+    "MaximumValue": "255",
+    "DataType": "5",
+    "BitPosition": null
+   },
+   {
+    "SubFunctionID": 2,
+    "ParameterName": "ECU Reprogramming requirements-Specification version",
+    "BytePosition": 4,
+    "ByteLength": 1,
+    "Resolution": "1",
+    "Offset": null,
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": null,
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": "0",
+    "MaximumValue": "255",
+    "DataType": "5",
+    "BitPosition": null
+   },
+   {
+    "SubFunctionID": 3,
+    "ParameterName": "Diagnostic Performance Requirements Standard",
+    "BytePosition": 5,
+    "ByteLength": 1,
+    "Resolution": "1",
+    "Offset": null,
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": null,
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": "0",
+    "MaximumValue": "255",
+    "DataType": "5",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 2,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0xF18C",
+  "ParameterName": "ECUSerialNumberDataIdentifier",
+  "TotalByteLength": "17",
+  "ReadPermission": "Y",
+  "WritePermission": "N",
+  "ValueParameters": [
+   {
+    "SubFunctionID": 4,
+    "ParameterName": "Product Serial Number",
+    "BytePosition": 3,
+    "ByteLength": 3,
+    "Resolution": "1",
+    "Offset": null,
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": null,
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": "0",
+    "MaximumValue": "65535",
+    "DataType": "5",
+    "BitPosition": null
+   },
+   {
+    "SubFunctionID": 5,
+    "ParameterName": "Production Line Number",
+    "BytePosition": 6,
+    "ByteLength": 2,
+    "Resolution": "1",
+    "Offset": null,
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": null,
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": null,
+    "MaximumValue": null,
+    "DataType": "1",
+    "BitPosition": null
+   },
+   {
+    "SubFunctionID": 6,
+    "ParameterName": "Years",
+    "BytePosition": 8,
+    "ByteLength": 1,
+    "Resolution": "1",
+    "Offset": null,
+    "DivisionFactor": "1",
+    "AdditionFactor": "2000",
+    "Units": null,
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": "2000",
+    "MaximumValue": "2255",
+    "DataType": "1",
+    "BitPosition": null
+   },
+   {
+    "SubFunctionID": 7,
+    "ParameterName": "Months",
+    "BytePosition": 9,
+    "ByteLength": 1,
+    "Resolution": "1",
+    "Offset": null,
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": null,
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": "1",
+    "MaximumValue": "12",
+    "DataType": "5",
+    "BitPosition": null
+   },
+   {
+    "SubFunctionID": 8,
+    "ParameterName": "Days",
+    "BytePosition": 10,
+    "ByteLength": 1,
+    "Resolution": "1",
+    "Offset": null,
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": null,
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": "1",
+    "MaximumValue": "31",
+    "DataType": "5",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 3,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0xF199",
+  "ParameterName": "programmingDateDataIdentifier",
+  "TotalByteLength": "4",
+  "ReadPermission": "Y",
+  "WritePermission": "Y",
+  "ValueParameters": [
+   {
+    "SubFunctionID": 9,
+    "ParameterName": "Year-High Byte",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "Resolution": "1",
+    "Offset": null,
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": null,
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": "0",
+    "MaximumValue": "99",
+    "DataType": "2",
+    "BitPosition": null
+   },
+   {
+    "SubFunctionID": 10,
+    "ParameterName": "Year-Low Byte",
+    "BytePosition": 4,
+    "ByteLength": 1,
+    "Resolution": "1",
+    "Offset": null,
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": null,
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": "0",
+    "MaximumValue": "99",
+    "DataType": "2",
+    "BitPosition": null
+   },
+   {
+    "SubFunctionID": 11,
+    "ParameterName": "Months",
+    "BytePosition": 5,
+    "ByteLength": 1,
+    "Resolution": "1",
+    "Offset": null,
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": null,
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": "0",
+    "MaximumValue": "12",
+    "DataType": "2",
+    "BitPosition": null
+   },
+   {
+    "SubFunctionID": 12,
+    "ParameterName": "Days",
+    "BytePosition": 6,
+    "ByteLength": 1,
+    "Resolution": "1",
+    "Offset": null,
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": null,
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": "0",
+    "MaximumValue": "31",
+    "DataType": "2",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 4,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0xF187",
+  "ParameterName": "TML Part Number",
+  "TotalByteLength": "15",
+  "ReadPermission": "Y",
+  "WritePermission": "N",
+  "ValueParameters": [
+   {
+    "SubFunctionID": 13,
+    "ParameterName": "TML Part Number",
+    "BytePosition": 3,
+    "ByteLength": 15,
+    "Resolution": "1",
+    "Offset": null,
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": null,
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": null,
+    "MaximumValue": null,
+    "DataType": "1",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 5,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0xF180",
+  "ParameterName": "bootSoftwareIdentification",
+  "TotalByteLength": "18",
+  "ReadPermission": "Y",
+  "WritePermission": "N",
+  "ValueParameters": [
+   {
+    "SubFunctionID": 35,
+    "ParameterName": "bootSoftwareIdentification",
+    "BytePosition": 3,
+    "ByteLength": 18,
+    "Resolution": "1",
+    "Offset": null,
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": null,
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": null,
+    "MaximumValue": null,
+    "DataType": "1",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 6,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0xF189",
+  "ParameterName": "Vehicle Manufacturer ECU Software Number",
+  "TotalByteLength": "17",
+  "ReadPermission": "Y",
+  "WritePermission": "N",
+  "ValueParameters": [
+   {
+    "SubFunctionID": 36,
+    "ParameterName": "Vehicle Manufacturer ECU Software Number",
+    "BytePosition": 3,
+    "ByteLength": 17,
+    "Resolution": "1",
+    "Offset": null,
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": null,
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": null,
+    "MaximumValue": null,
+    "DataType": "1",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 7,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0xF17F",
+  "ParameterName": "ECUHardwareVersionNumberDataIdentifier",
+  "TotalByteLength": "17",
+  "ReadPermission": "Y",
+  "WritePermission": "N",
+  "ValueParameters": [
+   {
+    "SubFunctionID": 37,
+    "ParameterName": "ECUHardwareVersionNumberDataIdentifier",
+    "BytePosition": 3,
+    "ByteLength": 17,
+    "Resolution": "1",
+    "Offset": null,
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": null,
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": null,
+    "MaximumValue": null,
+    "DataType": "1",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 8,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0xF184",
+  "ParameterName": "Fingerprint",
+  "TotalByteLength": "10",
+  "ReadPermission": "Y",
+  "WritePermission": "Y",
+  "ValueParameters": [
+   {
+    "SubFunctionID": 14,
+    "ParameterName": "Tool Supplier Identification",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "Resolution": "1",
+    "Offset": null,
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": null,
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": null,
+    "MaximumValue": null,
+    "DataType": "5",
+    "BitPosition": null
+   },
+   {
+    "SubFunctionID": 15,
+    "ParameterName": "Programming Date",
+    "BytePosition": 4,
+    "ByteLength": 3,
+    "Resolution": "1",
+    "Offset": null,
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": null,
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": null,
+    "MaximumValue": null,
+    "DataType": "2",
+    "BitPosition": null
+   },
+   {
+    "SubFunctionID": 16,
+    "ParameterName": "Tester Serial Number",
+    "BytePosition": 7,
+    "ByteLength": 6,
+    "Resolution": "1",
+    "Offset": null,
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": null,
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": null,
+    "MaximumValue": null,
+    "DataType": "3",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 9,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x0201",
+  "ParameterName": "Reprogramming attempt counter",
+  "TotalByteLength": "2",
+  "ReadPermission": "Y",
+  "WritePermission": "N",
+  "ValueParameters": [
+   {
+    "SubFunctionID": 17,
+    "ParameterName": "Reprogramming attempt counter",
+    "BytePosition": 3,
+    "ByteLength": 2,
+    "Resolution": "1",
+    "Offset": null,
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": null,
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": null,
+    "MaximumValue": null,
+    "DataType": "5",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 10,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x0200",
+  "ParameterName": "Reprogramming counter (successfully reprogramming)",
+  "TotalByteLength": "2",
+  "ReadPermission": "Y",
+  "WritePermission": "N",
+  "ValueParameters": [
+   {
+    "SubFunctionID": 18,
+    "ParameterName": "Reprogramming counter (successfully reprogramming)",
+    "BytePosition": 3,
+    "ByteLength": 2,
+    "Resolution": "1",
+    "Offset": null,
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": null,
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": null,
+    "MaximumValue": null,
+    "DataType": "5",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 11,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x0110",
+  "ParameterName": "Manufactory mode",
+  "TotalByteLength": "1",
+  "ReadPermission": "Y",
+  "WritePermission": "Y",
+  "ValueParameters": [],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 12,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0xF186",
+  "ParameterName": "ActiveDiagnosticSessionDataIdentifier",
+  "TotalByteLength": "1",
+  "ReadPermission": "Y",
+  "WritePermission": "N",
+  "ValueParameters": [],
+  "ByteParameters": [
+   {
+    "SubFunctionID": 1,
+    "ParameterName": "ActiveDiagnosticSessionDataIdentifier",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "1",
+    "ResultDescription": "Default Session",
+    "LanguageCode": "OBC_0012"
+   },
+   {
+    "SubFunctionID": 2,
+    "ParameterName": "ActiveDiagnosticSessionDataIdentifier",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "2",
+    "ResultDescription": "Programming Session",
+    "LanguageCode": "OBC_0012"
+   },
+   {
+    "SubFunctionID": 3,
+    "ParameterName": "ActiveDiagnosticSessionDataIdentifier",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "3",
+    "ResultDescription": "Extended Diagnostic Session",
+    "LanguageCode": "OBC_0012"
+   }
+  ]
+ },
+ {
+  "ParameterID": 13,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x1000",
+  "ParameterName": "12V power supply voltage",
+  "TotalByteLength": "1",
+  "ReadPermission": "Y",
+  "WritePermission": "N",
+  "ValueParameters": [
+   {
+    "SubFunctionID": 19,
+    "ParameterName": "12V power supply voltage",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "Resolution": "1",
+    "Offset": null,
+    "DivisionFactor": "4",
+    "AdditionFactor": "0",
+    "Units": "V",
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": "0",
+    "MaximumValue": "16",
+    "DataType": "5",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 14,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x0210",
+  "ParameterName": "CP line status",
+  "TotalByteLength": "1",
+  "ReadPermission": "Y",
+  "WritePermission": "Y",
+  "ValueParameters": [],
+  "ByteParameters": [
+   {
+    "SubFunctionID": 4,
+    "ParameterName": "CP line status",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "0",
+    "ResultDescription": "not connected",
+    "LanguageCode": "OBC_0014"
+   },
+   {
+    "SubFunctionID": 5,
+    "ParameterName": "CP line status",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "1",
+    "ResultDescription": "connected",
+    "LanguageCode": "OBC_0014"
+   },
+   {
+    "SubFunctionID": 6,
+    "ParameterName": "CP line status",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "2",
+    "ResultDescription": "Voltage/Frequency error",
+    "LanguageCode": "OBC_0014"
+   },
+   {
+    "SubFunctionID": 7,
+    "ParameterName": "CP line status",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "3",
+    "ResultDescription": "indeterminate",
+    "LanguageCode": "OBC_0014"
+   }
+  ]
+ },
+ {
+  "ParameterID": 15,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x0211",
+  "ParameterName": "Charger state",
+  "TotalByteLength": "1",
+  "ReadPermission": "Y",
+  "WritePermission": "N",
+  "ValueParameters": [],
+  "ByteParameters": [
+   {
+    "SubFunctionID": 8,
+    "ParameterName": "Charging state",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "1",
+    "ResultDescription": "Init",
+    "LanguageCode": "OBC_0062"
+   },
+   {
+    "SubFunctionID": 9,
+    "ParameterName": "Charging state",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "2",
+    "ResultDescription": "Standby",
+    "LanguageCode": "OBC_0062"
+   },
+   {
+    "SubFunctionID": 10,
+    "ParameterName": "Charging state",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "4",
+    "ResultDescription": "Charging",
+    "LanguageCode": "OBC_0062"
+   },
+   {
+    "SubFunctionID": 11,
+    "ParameterName": "Charging state",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "8",
+    "ResultDescription": "Fault",
+    "LanguageCode": "OBC_0062"
+   },
+   {
+    "SubFunctionID": 12,
+    "ParameterName": "Charging state",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "0B",
+    "ResultDescription": "Shutdown",
+    "LanguageCode": "OBC_0062"
+   },
+   {
+    "SubFunctionID": 13,
+    "ParameterName": "Charging state",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "0C",
+    "ResultDescription": "Off",
+    "LanguageCode": "OBC_0062"
+   },
+   {
+    "SubFunctionID": 14,
+    "ParameterName": "Charging state",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "0F",
+    "ResultDescription": "Diagnostic",
+    "LanguageCode": "OBC_0062"
+   }
+  ]
+ },
+ {
+  "ParameterID": 16,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x0212",
+  "ParameterName": "Internal CAN status",
+  "TotalByteLength": "1",
+  "ReadPermission": "Y",
+  "WritePermission": "N",
+  "ValueParameters": [],
+  "ByteParameters": [
+   {
+    "SubFunctionID": 15,
+    "ParameterName": "Internal CAN status",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "0",
+    "ResultDescription": "Normal",
+    "LanguageCode": "OBC_0016"
+   },
+   {
+    "SubFunctionID": 16,
+    "ParameterName": "Internal CAN status",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "1",
+    "ResultDescription": "Failed",
+    "LanguageCode": "OBC_0016"
+   }
+  ]
+ },
+ {
+  "ParameterID": 17,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x0213",
+  "ParameterName": "External CAN status",
+  "TotalByteLength": "1",
+  "ReadPermission": "Y",
+  "WritePermission": "N",
+  "ValueParameters": [],
+  "ByteParameters": [
+   {
+    "SubFunctionID": 17,
+    "ParameterName": "External CAN status",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "0",
+    "ResultDescription": "Normal",
+    "LanguageCode": "OBC_0017"
+   },
+   {
+    "SubFunctionID": 18,
+    "ParameterName": "External CAN status",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "1",
+    "ResultDescription": "Failed",
+    "LanguageCode": "OBC_0017"
+   }
+  ]
+ },
+ {
+  "ParameterID": 18,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x0214",
+  "ParameterName": "External CAN transceiver status",
+  "TotalByteLength": "1",
+  "ReadPermission": "Y",
+  "WritePermission": "N",
+  "ValueParameters": [],
+  "ByteParameters": [
+   {
+    "SubFunctionID": 19,
+    "ParameterName": "External CAN transceiver status",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "0",
+    "ResultDescription": "Normal",
+    "LanguageCode": "OBC_0018"
+   },
+   {
+    "SubFunctionID": 20,
+    "ParameterName": "External CAN transceiver status",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "1",
+    "ResultDescription": "Failed",
+    "LanguageCode": "OBC_0018"
+   }
+  ]
+ },
+ {
+  "ParameterID": 19,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x0215",
+  "ParameterName": "FEE status",
+  "TotalByteLength": "1",
+  "ReadPermission": "Y",
+  "WritePermission": "N",
+  "ValueParameters": [],
+  "ByteParameters": [
+   {
+    "SubFunctionID": 21,
+    "ParameterName": "FEE status",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "0",
+    "ResultDescription": "Normal",
+    "LanguageCode": "OBC_0019"
+   },
+   {
+    "SubFunctionID": 22,
+    "ParameterName": "FEE status",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "1",
+    "ResultDescription": "Failed",
+    "LanguageCode": "OBC_0019"
+   }
+  ]
+ },
+ {
+  "ParameterID": 20,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x0216",
+  "ParameterName": "EEPROM Write Error",
+  "TotalByteLength": "1",
+  "ReadPermission": "Y",
+  "WritePermission": "N",
+  "ValueParameters": [],
+  "ByteParameters": [
+   {
+    "SubFunctionID": 23,
+    "ParameterName": "EEPROM Write Error",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "0",
+    "ResultDescription": "Normal",
+    "LanguageCode": "OBC_0020"
+   },
+   {
+    "SubFunctionID": 24,
+    "ParameterName": "EEPROM Write Error",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "1",
+    "ResultDescription": "Failed",
+    "LanguageCode": "OBC_0020"
+   }
+  ]
+ },
+ {
+  "ParameterID": 21,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x0217",
+  "ParameterName": "Internal SCI communication FAIL",
+  "TotalByteLength": "1",
+  "ReadPermission": "Y",
+  "WritePermission": "N",
+  "ValueParameters": [],
+  "ByteParameters": [
+   {
+    "SubFunctionID": 25,
+    "ParameterName": "Internal SCI communication FAIL",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "0",
+    "ResultDescription": "Normal",
+    "LanguageCode": "OBC_0021"
+   },
+   {
+    "SubFunctionID": 26,
+    "ParameterName": "Internal SCI communication FAIL",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "1",
+    "ResultDescription": "Failed",
+    "LanguageCode": "OBC_0021"
+   }
+  ]
+ },
+ {
+  "ParameterID": 22,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x0218",
+  "ParameterName": "Internal SCI communication CRC FAIL",
+  "TotalByteLength": "1",
+  "ReadPermission": "Y",
+  "WritePermission": "N",
+  "ValueParameters": [],
+  "ByteParameters": [
+   {
+    "SubFunctionID": 27,
+    "ParameterName": "Internal SCI communication CRC FAIL",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "0",
+    "ResultDescription": "Normal",
+    "LanguageCode": "OBC_0022"
+   },
+   {
+    "SubFunctionID": 28,
+    "ParameterName": "Internal SCI communication CRC FAIL",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "1",
+    "ResultDescription": "Failed",
+    "LanguageCode": "OBC_0022"
+   }
+  ]
+ },
+ {
+  "ParameterID": 23,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x0219",
+  "ParameterName": "OBD sensors",
+  "TotalByteLength": "16",
+  "ReadPermission": "Y",
+  "WritePermission": "N",
+  "ValueParameters": [],
+  "ByteParameters": [
+   {
+    "SubFunctionID": 29,
+    "ParameterName": "12V Primary sensor",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "0",
+    "ResultDescription": "Normal",
+    "LanguageCode": "OBC_0077"
+   },
+   {
+    "SubFunctionID": 30,
+    "ParameterName": "12V Primary sensor",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "1",
+    "ResultDescription": "Too low out of range",
+    "LanguageCode": "OBC_0077"
+   },
+   {
+    "SubFunctionID": 31,
+    "ParameterName": "12V Primary sensor",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "2",
+    "ResultDescription": "Too high out of range",
+    "LanguageCode": "OBC_0077"
+   },
+   {
+    "SubFunctionID": 32,
+    "ParameterName": "12V Primary sensor",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "3",
+    "ResultDescription": "Short to ground",
+    "LanguageCode": "OBC_0077"
+   },
+   {
+    "SubFunctionID": 33,
+    "ParameterName": "12V Primary sensor",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "4",
+    "ResultDescription": "Short to battery",
+    "LanguageCode": "OBC_0077"
+   },
+   {
+    "SubFunctionID": 34,
+    "ParameterName": "3.3V Primary sensor",
+    "BytePosition": 4,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "0",
+    "ResultDescription": "Normal",
+    "LanguageCode": "OBC_0078"
+   },
+   {
+    "SubFunctionID": 35,
+    "ParameterName": "3.3V Primary sensor",
+    "BytePosition": 4,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "1",
+    "ResultDescription": "Too low out of range",
+    "LanguageCode": "OBC_0078"
+   },
+   {
+    "SubFunctionID": 36,
+    "ParameterName": "3.3V Primary sensor",
+    "BytePosition": 4,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "2",
+    "ResultDescription": "Too high out of range",
+    "LanguageCode": "OBC_0078"
+   },
+   {
+    "SubFunctionID": 37,
+    "ParameterName": "3.3V Primary sensor",
+    "BytePosition": 4,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "3",
+    "ResultDescription": "Short to ground",
+    "LanguageCode": "OBC_0078"
+   },
+   {
+    "SubFunctionID": 38,
+    "ParameterName": "3.3V Primary sensor",
+    "BytePosition": 4,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "4",
+    "ResultDescription": "Short to battery",
+    "LanguageCode": "OBC_0078"
+   },
+   {
+    "SubFunctionID": 39,
+    "ParameterName": "3.3V Secondary sensor",
+    "BytePosition": 5,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "0",
+    "ResultDescription": "Normal",
+    "LanguageCode": "OBC_0079"
+   },
+   {
+    "SubFunctionID": 40,
+    "ParameterName": "3.3V Secondary sensor",
+    "BytePosition": 5,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "1",
+    "ResultDescription": "Too low out of range",
+    "LanguageCode": "OBC_0079"
+   },
+   {
+    "SubFunctionID": 41,
+    "ParameterName": "3.3V Secondary sensor",
+    "BytePosition": 5,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "2",
+    "ResultDescription": "Too high out of range",
+    "LanguageCode": "OBC_0079"
+   },
+   {
+    "SubFunctionID": 42,
+    "ParameterName": "3.3V Secondary sensor",
+    "BytePosition": 5,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "3",
+    "ResultDescription": "Short to ground",
+    "LanguageCode": "OBC_0079"
+   },
+   {
+    "SubFunctionID": 43,
+    "ParameterName": "3.3V Secondary sensor",
+    "BytePosition": 5,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "4",
+    "ResultDescription": "Short to battery",
+    "LanguageCode": "OBC_0079"
+   },
+   {
+    "SubFunctionID": 44,
+    "ParameterName": "Tranasformer temperature sensor",
+    "BytePosition": 6,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "0",
+    "ResultDescription": "Normal",
+    "LanguageCode": "OBC_0080"
+   },
+   {
+    "SubFunctionID": 45,
+    "ParameterName": "Tranasformer temperature sensor",
+    "BytePosition": 6,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "1",
+    "ResultDescription": "Too low out of range",
+    "LanguageCode": "OBC_0080"
+   },
+   {
+    "SubFunctionID": 46,
+    "ParameterName": "Tranasformer temperature sensor",
+    "BytePosition": 6,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "2",
+    "ResultDescription": "Too high out of range",
+    "LanguageCode": "OBC_0080"
+   },
+   {
+    "SubFunctionID": 47,
+    "ParameterName": "Tranasformer temperature sensor",
+    "BytePosition": 6,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "3",
+    "ResultDescription": "Short to ground",
+    "LanguageCode": "OBC_0080"
+   },
+   {
+    "SubFunctionID": 48,
+    "ParameterName": "Tranasformer temperature sensor",
+    "BytePosition": 6,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "4",
+    "ResultDescription": "Short to battery",
+    "LanguageCode": "OBC_0080"
+   },
+   {
+    "SubFunctionID": 49,
+    "ParameterName": "Secondary board temperature sensor",
+    "BytePosition": 7,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "0",
+    "ResultDescription": "Normal",
+    "LanguageCode": "OBC_0081"
+   },
+   {
+    "SubFunctionID": 50,
+    "ParameterName": "Secondary board temperature sensor",
+    "BytePosition": 7,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "1",
+    "ResultDescription": "Too low out of range",
+    "LanguageCode": "OBC_0081"
+   },
+   {
+    "SubFunctionID": 51,
+    "ParameterName": "Secondary board temperature sensor",
+    "BytePosition": 7,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "2",
+    "ResultDescription": "Too high out of range",
+    "LanguageCode": "OBC_0081"
+   },
+   {
+    "SubFunctionID": 52,
+    "ParameterName": "Secondary board temperature sensor",
+    "BytePosition": 7,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "3",
+    "ResultDescription": "Short to ground",
+    "LanguageCode": "OBC_0081"
+   },
+   {
+    "SubFunctionID": 53,
+    "ParameterName": "Secondary board temperature sensor",
+    "BytePosition": 7,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "4",
+    "ResultDescription": "Short to battery",
+    "LanguageCode": "OBC_0081"
+   },
+   {
+    "SubFunctionID": 54,
+    "ParameterName": "Output voltage sensor 3",
+    "BytePosition": 8,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "0",
+    "ResultDescription": "Normal",
+    "LanguageCode": "OBC_0082"
+   },
+   {
+    "SubFunctionID": 55,
+    "ParameterName": "Output voltage sensor 3",
+    "BytePosition": 8,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "1",
+    "ResultDescription": "Too low out of range",
+    "LanguageCode": "OBC_0082"
+   },
+   {
+    "SubFunctionID": 56,
+    "ParameterName": "Output voltage sensor 3",
+    "BytePosition": 8,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "2",
+    "ResultDescription": "Too high out of range",
+    "LanguageCode": "OBC_0082"
+   },
+   {
+    "SubFunctionID": 57,
+    "ParameterName": "Output voltage sensor 3",
+    "BytePosition": 8,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "3",
+    "ResultDescription": "Short to ground",
+    "LanguageCode": "OBC_0082"
+   },
+   {
+    "SubFunctionID": 58,
+    "ParameterName": "Output voltage sensor 3",
+    "BytePosition": 8,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "4",
+    "ResultDescription": "Short to battery",
+    "LanguageCode": "OBC_0082"
+   },
+   {
+    "SubFunctionID": 59,
+    "ParameterName": "Output voltage sensor 2",
+    "BytePosition": 9,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "0",
+    "ResultDescription": "Normal",
+    "LanguageCode": "OBC_0083"
+   },
+   {
+    "SubFunctionID": 60,
+    "ParameterName": "Output voltage sensor 2",
+    "BytePosition": 9,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "1",
+    "ResultDescription": "Too low out of range",
+    "LanguageCode": "OBC_0083"
+   },
+   {
+    "SubFunctionID": 61,
+    "ParameterName": "Output voltage sensor 2",
+    "BytePosition": 9,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "2",
+    "ResultDescription": "Too high out of range",
+    "LanguageCode": "OBC_0083"
+   },
+   {
+    "SubFunctionID": 62,
+    "ParameterName": "Output voltage sensor 2",
+    "BytePosition": 9,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "3",
+    "ResultDescription": "Short to ground",
+    "LanguageCode": "OBC_0083"
+   },
+   {
+    "SubFunctionID": 63,
+    "ParameterName": "Output voltage sensor 2",
+    "BytePosition": 9,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "4",
+    "ResultDescription": "Short to battery",
+    "LanguageCode": "OBC_0083"
+   },
+   {
+    "SubFunctionID": 64,
+    "ParameterName": "Output current sensor 2",
+    "BytePosition": 10,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "0",
+    "ResultDescription": "Normal",
+    "LanguageCode": "OBC_0084"
+   },
+   {
+    "SubFunctionID": 65,
+    "ParameterName": "Output current sensor 2",
+    "BytePosition": 10,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "1",
+    "ResultDescription": "Too low out of range",
+    "LanguageCode": "OBC_0084"
+   },
+   {
+    "SubFunctionID": 66,
+    "ParameterName": "Output current sensor 2",
+    "BytePosition": 10,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "2",
+    "ResultDescription": "Too high out of range",
+    "LanguageCode": "OBC_0084"
+   },
+   {
+    "SubFunctionID": 67,
+    "ParameterName": "Output current sensor 2",
+    "BytePosition": 10,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "3",
+    "ResultDescription": "Short to ground",
+    "LanguageCode": "OBC_0084"
+   },
+   {
+    "SubFunctionID": 68,
+    "ParameterName": "Output current sensor 2",
+    "BytePosition": 10,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "4",
+    "ResultDescription": "Short to battery",
+    "LanguageCode": "OBC_0084"
+   },
+   {
+    "SubFunctionID": 69,
+    "ParameterName": "Output current sensor 1",
+    "BytePosition": 11,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "0",
+    "ResultDescription": "Normal",
+    "LanguageCode": "OBC_0085"
+   },
+   {
+    "SubFunctionID": 70,
+    "ParameterName": "Output current sensor 1",
+    "BytePosition": 11,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "1",
+    "ResultDescription": "Too low out of range",
+    "LanguageCode": "OBC_0085"
+   },
+   {
+    "SubFunctionID": 71,
+    "ParameterName": "Output current sensor 1",
+    "BytePosition": 11,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "2",
+    "ResultDescription": "Too high out of range",
+    "LanguageCode": "OBC_0085"
+   },
+   {
+    "SubFunctionID": 72,
+    "ParameterName": "Output current sensor 1",
+    "BytePosition": 11,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "3",
+    "ResultDescription": "Short to ground",
+    "LanguageCode": "OBC_0085"
+   },
+   {
+    "SubFunctionID": 73,
+    "ParameterName": "Output current sensor 1",
+    "BytePosition": 11,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "4",
+    "ResultDescription": "Short to battery",
+    "LanguageCode": "OBC_0085"
+   },
+   {
+    "SubFunctionID": 74,
+    "ParameterName": "Primary board temperature sensor",
+    "BytePosition": 12,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "0",
+    "ResultDescription": "Normal",
+    "LanguageCode": "OBC_0086"
+   },
+   {
+    "SubFunctionID": 75,
+    "ParameterName": "Primary board temperature sensor",
+    "BytePosition": 12,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "1",
+    "ResultDescription": "Too low out of range",
+    "LanguageCode": "OBC_0086"
+   },
+   {
+    "SubFunctionID": 76,
+    "ParameterName": "Primary board temperature sensor",
+    "BytePosition": 12,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "2",
+    "ResultDescription": "Too high out of range",
+    "LanguageCode": "OBC_0086"
+   },
+   {
+    "SubFunctionID": 77,
+    "ParameterName": "Primary board temperature sensor",
+    "BytePosition": 12,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "3",
+    "ResultDescription": "Short to ground",
+    "LanguageCode": "OBC_0086"
+   },
+   {
+    "SubFunctionID": 78,
+    "ParameterName": "Primary board temperature sensor",
+    "BytePosition": 12,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "4",
+    "ResultDescription": "Short to battery",
+    "LanguageCode": "OBC_0086"
+   },
+   {
+    "SubFunctionID": 79,
+    "ParameterName": "VBOVS sensor",
+    "BytePosition": 13,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "0",
+    "ResultDescription": "Normal",
+    "LanguageCode": "OBC_0087"
+   },
+   {
+    "SubFunctionID": 80,
+    "ParameterName": "VBOVS sensor",
+    "BytePosition": 13,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "1",
+    "ResultDescription": "Too low out of range",
+    "LanguageCode": "OBC_0087"
+   },
+   {
+    "SubFunctionID": 81,
+    "ParameterName": "VBOVS sensor",
+    "BytePosition": 13,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "2",
+    "ResultDescription": "Too high out of range",
+    "LanguageCode": "OBC_0087"
+   },
+   {
+    "SubFunctionID": 82,
+    "ParameterName": "VBOVS sensor",
+    "BytePosition": 13,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "3",
+    "ResultDescription": "Short to ground",
+    "LanguageCode": "OBC_0087"
+   },
+   {
+    "SubFunctionID": 83,
+    "ParameterName": "VBOVS sensor",
+    "BytePosition": 13,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "4",
+    "ResultDescription": "Short to battery",
+    "LanguageCode": "OBC_0087"
+   },
+   {
+    "SubFunctionID": 84,
+    "ParameterName": "VB PFC voltage sensor",
+    "BytePosition": 14,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "0",
+    "ResultDescription": "Normal",
+    "LanguageCode": "OBC_0088"
+   },
+   {
+    "SubFunctionID": 85,
+    "ParameterName": "VB PFC voltage sensor",
+    "BytePosition": 14,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "1",
+    "ResultDescription": "Too low out of range",
+    "LanguageCode": "OBC_0088"
+   },
+   {
+    "SubFunctionID": 86,
+    "ParameterName": "VB PFC voltage sensor",
+    "BytePosition": 14,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "2",
+    "ResultDescription": "Too high out of range",
+    "LanguageCode": "OBC_0088"
+   },
+   {
+    "SubFunctionID": 87,
+    "ParameterName": "VB PFC voltage sensor",
+    "BytePosition": 14,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "3",
+    "ResultDescription": "Short to ground",
+    "LanguageCode": "OBC_0088"
+   },
+   {
+    "SubFunctionID": 88,
+    "ParameterName": "VB PFC voltage sensor",
+    "BytePosition": 14,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "4",
+    "ResultDescription": "Short to battery",
+    "LanguageCode": "OBC_0088"
+   },
+   {
+    "SubFunctionID": 89,
+    "ParameterName": "AC current sensor 2",
+    "BytePosition": 15,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "0",
+    "ResultDescription": "Normal",
+    "LanguageCode": "OBC_0089"
+   },
+   {
+    "SubFunctionID": 90,
+    "ParameterName": "AC current sensor 2",
+    "BytePosition": 15,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "1",
+    "ResultDescription": "Too low out of range",
+    "LanguageCode": "OBC_0089"
+   },
+   {
+    "SubFunctionID": 91,
+    "ParameterName": "AC current sensor 2",
+    "BytePosition": 15,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "2",
+    "ResultDescription": "Too high out of range",
+    "LanguageCode": "OBC_0089"
+   },
+   {
+    "SubFunctionID": 92,
+    "ParameterName": "AC current sensor 2",
+    "BytePosition": 15,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "3",
+    "ResultDescription": "Short to ground",
+    "LanguageCode": "OBC_0089"
+   },
+   {
+    "SubFunctionID": 93,
+    "ParameterName": "AC current sensor 2",
+    "BytePosition": 15,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "4",
+    "ResultDescription": "Short to battery",
+    "LanguageCode": "OBC_0089"
+   },
+   {
+    "SubFunctionID": 94,
+    "ParameterName": "AC current sensor 1",
+    "BytePosition": 16,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "0",
+    "ResultDescription": "Normal",
+    "LanguageCode": "OBC_0090"
+   },
+   {
+    "SubFunctionID": 95,
+    "ParameterName": "AC current sensor 1",
+    "BytePosition": 16,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "1",
+    "ResultDescription": "Too low out of range",
+    "LanguageCode": "OBC_0090"
+   },
+   {
+    "SubFunctionID": 96,
+    "ParameterName": "AC current sensor 1",
+    "BytePosition": 16,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "2",
+    "ResultDescription": "Too high out of range",
+    "LanguageCode": "OBC_0090"
+   },
+   {
+    "SubFunctionID": 97,
+    "ParameterName": "AC current sensor 1",
+    "BytePosition": 16,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "3",
+    "ResultDescription": "Short to ground",
+    "LanguageCode": "OBC_0090"
+   },
+   {
+    "SubFunctionID": 98,
+    "ParameterName": "AC current sensor 1",
+    "BytePosition": 16,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "4",
+    "ResultDescription": "Short to battery",
+    "LanguageCode": "OBC_0090"
+   },
+   {
+    "SubFunctionID": 99,
+    "ParameterName": "PH2MEAS input AC voltage sensor 2",
+    "BytePosition": 17,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "0",
+    "ResultDescription": "Normal",
+    "LanguageCode": "OBC_0091"
+   },
+   {
+    "SubFunctionID": 100,
+    "ParameterName": "PH2MEAS input AC voltage sensor 2",
+    "BytePosition": 17,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "1",
+    "ResultDescription": "Too low out of range",
+    "LanguageCode": "OBC_0091"
+   },
+   {
+    "SubFunctionID": 101,
+    "ParameterName": "PH2MEAS input AC voltage sensor 2",
+    "BytePosition": 17,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "2",
+    "ResultDescription": "Too high out of range",
+    "LanguageCode": "OBC_0091"
+   },
+   {
+    "SubFunctionID": 102,
+    "ParameterName": "PH2MEAS input AC voltage sensor 2",
+    "BytePosition": 17,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "3",
+    "ResultDescription": "Short to ground",
+    "LanguageCode": "OBC_0091"
+   },
+   {
+    "SubFunctionID": 103,
+    "ParameterName": "PH2MEAS input AC voltage sensor 2",
+    "BytePosition": 17,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "4",
+    "ResultDescription": "Short to battery",
+    "LanguageCode": "OBC_0091"
+   },
+   {
+    "SubFunctionID": 104,
+    "ParameterName": "PH2MEAS input AC voltage sensor 1",
+    "BytePosition": 18,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "0",
+    "ResultDescription": "Normal",
+    "LanguageCode": "OBC_0092"
+   },
+   {
+    "SubFunctionID": 105,
+    "ParameterName": "PH2MEAS input AC voltage sensor 1",
+    "BytePosition": 18,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "1",
+    "ResultDescription": "Too low out of range",
+    "LanguageCode": "OBC_0092"
+   },
+   {
+    "SubFunctionID": 106,
+    "ParameterName": "PH2MEAS input AC voltage sensor 1",
+    "BytePosition": 18,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "2",
+    "ResultDescription": "Too high out of range",
+    "LanguageCode": "OBC_0092"
+   },
+   {
+    "SubFunctionID": 107,
+    "ParameterName": "PH2MEAS input AC voltage sensor 1",
+    "BytePosition": 18,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "3",
+    "ResultDescription": "Short to ground",
+    "LanguageCode": "OBC_0092"
+   },
+   {
+    "SubFunctionID": 108,
+    "ParameterName": "PH2MEAS input AC voltage sensor 1",
+    "BytePosition": 18,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "4",
+    "ResultDescription": "Short to battery",
+    "LanguageCode": "OBC_0092"
+   }
+  ]
+ },
+ {
+  "ParameterID": 24,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x1100",
+  "ParameterName": "Charger input AC frequency",
+  "TotalByteLength": "2",
+  "ReadPermission": "Y",
+  "WritePermission": "N",
+  "ValueParameters": [
+   {
+    "SubFunctionID": 20,
+    "ParameterName": "Charger input AC frequency",
+    "BytePosition": 3,
+    "ByteLength": 2,
+    "Resolution": "1",
+    "Offset": null,
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": "Hz",
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": "0",
+    "MaximumValue": "65",
+    "DataType": "5",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 25,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x1101",
+  "ParameterName": "Chareger available power",
+  "TotalByteLength": "4",
+  "ReadPermission": "Y",
+  "WritePermission": "N",
+  "ValueParameters": [
+   {
+    "SubFunctionID": 21,
+    "ParameterName": "Chareger available power",
+    "BytePosition": 3,
+    "ByteLength": 4,
+    "Resolution": "1",
+    "Offset": null,
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": "W",
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": "0",
+    "MaximumValue": "3500",
+    "DataType": "5",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 26,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x1102",
+  "ParameterName": "Primary board temperature",
+  "TotalByteLength": "1",
+  "ReadPermission": "Y",
+  "WritePermission": "N",
+  "ValueParameters": [
+   {
+    "SubFunctionID": 22,
+    "ParameterName": "Primary board temperature",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "Resolution": "1",
+    "Offset": null,
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": "deg c",
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": "-45",
+    "MaximumValue": "120",
+    "DataType": "5",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 27,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x1103",
+  "ParameterName": "Secondary board temperature",
+  "TotalByteLength": "1",
+  "ReadPermission": "Y",
+  "WritePermission": "N",
+  "ValueParameters": [
+   {
+    "SubFunctionID": 23,
+    "ParameterName": "Secondary board temperature",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "Resolution": "1",
+    "Offset": null,
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": "deg c",
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": "-45",
+    "MaximumValue": "120",
+    "DataType": "5",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 28,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x1104",
+  "ParameterName": "Transformer temperature",
+  "TotalByteLength": "1",
+  "ReadPermission": "Y",
+  "WritePermission": "N",
+  "ValueParameters": [
+   {
+    "SubFunctionID": 24,
+    "ParameterName": "Tranasformer temperature",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "Resolution": "1",
+    "Offset": null,
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": "deg c",
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": "-45",
+    "MaximumValue": "120",
+    "DataType": "5",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 29,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x1105",
+  "ParameterName": "Input AC current",
+  "TotalByteLength": "2",
+  "ReadPermission": "Y",
+  "WritePermission": "N",
+  "ValueParameters": [
+   {
+    "SubFunctionID": 25,
+    "ParameterName": "Input AC current",
+    "BytePosition": 3,
+    "ByteLength": 2,
+    "Resolution": "0.1",
+    "Offset": null,
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": "A",
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": "0",
+    "MaximumValue": "16",
+    "DataType": "5",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 30,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x1106",
+  "ParameterName": "Input AC voltage",
+  "TotalByteLength": "2",
+  "ReadPermission": "Y",
+  "WritePermission": "N",
+  "ValueParameters": [
+   {
+    "SubFunctionID": 26,
+    "ParameterName": "Input AC voltage",
+    "BytePosition": 3,
+    "ByteLength": 2,
+    "Resolution": "1",
+    "Offset": null,
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": "V",
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": "0",
+    "MaximumValue": "275",
+    "DataType": "5",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 31,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x2000",
+  "ParameterName": "CP voltage",
+  "TotalByteLength": "1",
+  "ReadPermission": "Y",
+  "WritePermission": "N",
+  "ValueParameters": [
+   {
+    "SubFunctionID": 27,
+    "ParameterName": "CP voltage",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "Resolution": "1",
+    "Offset": null,
+    "DivisionFactor": "8",
+    "AdditionFactor": "0",
+    "Units": "V",
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": "0",
+    "MaximumValue": "16",
+    "DataType": "5",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 32,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x2001",
+  "ParameterName": "CP duty",
+  "TotalByteLength": "1",
+  "ReadPermission": "Y",
+  "WritePermission": "N",
+  "ValueParameters": [
+   {
+    "SubFunctionID": 28,
+    "ParameterName": "CP duty",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "Resolution": "1",
+    "Offset": null,
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": null,
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": "0",
+    "MaximumValue": "100",
+    "DataType": "5",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 33,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x2002",
+  "ParameterName": "CP Frequency",
+  "TotalByteLength": "2",
+  "ReadPermission": "Y",
+  "WritePermission": "N",
+  "ValueParameters": [
+   {
+    "SubFunctionID": 29,
+    "ParameterName": "CP Frequency",
+    "BytePosition": 3,
+    "ByteLength": 2,
+    "Resolution": "1",
+    "Offset": null,
+    "DivisionFactor": "2",
+    "AdditionFactor": "0",
+    "Units": "Hz",
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": "0",
+    "MaximumValue": "1050",
+    "DataType": "5",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 34,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x2003",
+  "ParameterName": "Output DC current",
+  "TotalByteLength": "2",
+  "ReadPermission": "Y",
+  "WritePermission": "N",
+  "ValueParameters": [
+   {
+    "SubFunctionID": 30,
+    "ParameterName": "Output DC current",
+    "BytePosition": 3,
+    "ByteLength": 2,
+    "Resolution": "0.01",
+    "Offset": null,
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": "A",
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": "0",
+    "MaximumValue": "16",
+    "DataType": "5",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 35,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x2004",
+  "ParameterName": "Output DC voltage",
+  "TotalByteLength": "2",
+  "ReadPermission": "Y",
+  "WritePermission": "N",
+  "ValueParameters": [
+   {
+    "SubFunctionID": 31,
+    "ParameterName": "Output DC voltage",
+    "BytePosition": 3,
+    "ByteLength": 2,
+    "Resolution": "0.1",
+    "Offset": null,
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": "V",
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": "0",
+    "MaximumValue": "430",
+    "DataType": "5",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 36,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x2100",
+  "ParameterName": "HW wakeup output state",
+  "TotalByteLength": "1",
+  "ReadPermission": "Y",
+  "WritePermission": "N",
+  "ValueParameters": [],
+  "ByteParameters": [
+   {
+    "SubFunctionID": 109,
+    "ParameterName": "HW wakeup output state",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "0",
+    "ResultDescription": "Off",
+    "LanguageCode": "OBC_0036"
+   },
+   {
+    "SubFunctionID": 110,
+    "ParameterName": "HW wakeup output state",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "1",
+    "ResultDescription": "ON",
+    "LanguageCode": "OBC_0036"
+   }
+  ]
+ },
+ {
+  "ParameterID": 37,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0xF190",
+  "ParameterName": "Vehicle Identification Number",
+  "TotalByteLength": "24",
+  "ReadPermission": "Y",
+  "WritePermission": "Y",
+  "ValueParameters": [
+   {
+    "SubFunctionID": 32,
+    "ParameterName": "Vehicle Identification Number",
+    "BytePosition": 3,
+    "ByteLength": 17,
+    "Resolution": "1",
+    "Offset": null,
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": null,
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": null,
+    "MaximumValue": null,
+    "DataType": "1",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 38,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x7241",
+  "ParameterName": "ECU Application Software Number",
+  "TotalByteLength": "17",
+  "ReadPermission": "Y",
+  "WritePermission": "Y",
+  "ValueParameters": [
+   {
+    "SubFunctionID": 33,
+    "ParameterName": "ECU Application Software Number",
+    "BytePosition": 3,
+    "ByteLength": 15,
+    "Resolution": "1",
+    "Offset": null,
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": null,
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": null,
+    "MaximumValue": null,
+    "DataType": "1",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 39,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x723E",
+  "ParameterName": "ECU PBL Software Number",
+  "TotalByteLength": "15",
+  "ReadPermission": "Y",
+  "WritePermission": "N",
+  "ValueParameters": [
+   {
+    "SubFunctionID": 34,
+    "ParameterName": "ECU PBL Software Number",
+    "BytePosition": 3,
+    "ByteLength": 15,
+    "Resolution": "1",
+    "Offset": null,
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": null,
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": null,
+    "MaximumValue": null,
+    "DataType": "1",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 40,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x1904",
+  "ParameterName": "Snapshot Data",
+  "TotalByteLength": "100",
+  "ReadPermission": "N",
+  "WritePermission": "N",
+  "ValueParameters": [
+   {
+    "SubFunctionID": 38,
+    "ParameterName": "Primary board temperature",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "Resolution": "1",
+    "Offset": null,
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": "deg C",
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": "-45",
+    "MaximumValue": "120",
+    "DataType": "5",
+    "BitPosition": null
+   },
+   {
+    "SubFunctionID": 39,
+    "ParameterName": "Secondary board temperature",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "Resolution": "1",
+    "Offset": null,
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": "deg C",
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": "-45",
+    "MaximumValue": "120",
+    "DataType": "5",
+    "BitPosition": null
+   },
+   {
+    "SubFunctionID": 40,
+    "ParameterName": "Tranasformer temperature",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "Resolution": "1",
+    "Offset": null,
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": "deg C",
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": "-45",
+    "MaximumValue": "120",
+    "DataType": "5",
+    "BitPosition": null
+   },
+   {
+    "SubFunctionID": 41,
+    "ParameterName": "CP voltage",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "Resolution": "1",
+    "Offset": null,
+    "DivisionFactor": "8",
+    "AdditionFactor": "0",
+    "Units": "V",
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": "0",
+    "MaximumValue": "16",
+    "DataType": "5",
+    "BitPosition": null
+   },
+   {
+    "SubFunctionID": 42,
+    "ParameterName": "CP duty",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "Resolution": "1",
+    "Offset": null,
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": null,
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": "0",
+    "MaximumValue": "100",
+    "DataType": "5",
+    "BitPosition": null
+   },
+   {
+    "SubFunctionID": 43,
+    "ParameterName": "CP Frequency",
+    "BytePosition": 3,
+    "ByteLength": 2,
+    "Resolution": "1",
+    "Offset": null,
+    "DivisionFactor": "2",
+    "AdditionFactor": "0",
+    "Units": "Hz",
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": "0",
+    "MaximumValue": "1050",
+    "DataType": "5",
+    "BitPosition": null
+   },
+   {
+    "SubFunctionID": 44,
+    "ParameterName": "12V power supply voltage",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "Resolution": "1",
+    "Offset": null,
+    "DivisionFactor": "4",
+    "AdditionFactor": "0",
+    "Units": "V",
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": "0",
+    "MaximumValue": "16",
+    "DataType": "5",
+    "BitPosition": null
+   },
+   {
+    "SubFunctionID": 45,
+    "ParameterName": "Output DC current",
+    "BytePosition": 3,
+    "ByteLength": 2,
+    "Resolution": "0.01",
+    "Offset": null,
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": "A",
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": "0",
+    "MaximumValue": "16",
+    "DataType": "5",
+    "BitPosition": null
+   },
+   {
+    "SubFunctionID": 46,
+    "ParameterName": "Output DC voltage",
+    "BytePosition": 3,
+    "ByteLength": 2,
+    "Resolution": "0.1",
+    "Offset": null,
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": "V",
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": "0",
+    "MaximumValue": "430",
+    "DataType": "5",
+    "BitPosition": null
+   },
+   {
+    "SubFunctionID": 47,
+    "ParameterName": "Input AC current",
+    "BytePosition": 3,
+    "ByteLength": 2,
+    "Resolution": "0.1",
+    "Offset": null,
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": "A",
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": "0",
+    "MaximumValue": "16",
+    "DataType": "5",
+    "BitPosition": null
+   },
+   {
+    "SubFunctionID": 48,
+    "ParameterName": "Input AC voltage",
+    "BytePosition": 3,
+    "ByteLength": 2,
+    "Resolution": "1",
+    "Offset": null,
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": "V",
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": "0",
+    "MaximumValue": "275",
+    "DataType": "5",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": [
+   {
+    "SubFunctionID": 111,
+    "ParameterName": "Internal CAN status",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "0",
+    "ResultDescription": "Normal",
+    "LanguageCode": "OBC_0016"
+   },
+   {
+    "SubFunctionID": 112,
+    "ParameterName": "Internal CAN status",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "1",
+    "ResultDescription": "Failed",
+    "LanguageCode": "OBC_0016"
+   },
+   {
+    "SubFunctionID": 113,
+    "ParameterName": "External CAN status",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "0",
+    "ResultDescription": "Normal",
+    "LanguageCode": "OBC_0017"
+   },
+   {
+    "SubFunctionID": 114,
+    "ParameterName": "External CAN status",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "1",
+    "ResultDescription": "Failed",
+    "LanguageCode": "OBC_0017"
+   },
+   {
+    "SubFunctionID": 115,
+    "ParameterName": "External CAN transceiver status",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "0",
+    "ResultDescription": "Normal",
+    "LanguageCode": "OBC_0018"
+   },
+   {
+    "SubFunctionID": 116,
+    "ParameterName": "External CAN transceiver status",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "1",
+    "ResultDescription": "Failed",
+    "LanguageCode": "OBC_0018"
+   },
+   {
+    "SubFunctionID": 117,
+    "ParameterName": "FEE status",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "0",
+    "ResultDescription": "Normal",
+    "LanguageCode": "OBC_0019"
+   },
+   {
+    "SubFunctionID": 118,
+    "ParameterName": "FEE status",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "1",
+    "ResultDescription": "Failed",
+    "LanguageCode": "OBC_0019"
+   },
+   {
+    "SubFunctionID": 119,
+    "ParameterName": "EEPROM Write Error",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "0",
+    "ResultDescription": "Normal",
+    "LanguageCode": "OBC_0020"
+   },
+   {
+    "SubFunctionID": 120,
+    "ParameterName": "EEPROM Write Error",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "1",
+    "ResultDescription": "Failed",
+    "LanguageCode": "OBC_0020"
+   },
+   {
+    "SubFunctionID": 121,
+    "ParameterName": "Internal SCI communication FAIL",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "0",
+    "ResultDescription": "Normal",
+    "LanguageCode": "OBC_0021"
+   },
+   {
+    "SubFunctionID": 122,
+    "ParameterName": "Internal SCI communication FAIL",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "1",
+    "ResultDescription": "Failed",
+    "LanguageCode": "OBC_0021"
+   },
+   {
+    "SubFunctionID": 123,
+    "ParameterName": "Internal SCI communication CRC FAIL",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "0",
+    "ResultDescription": "Normal",
+    "LanguageCode": "OBC_0022"
+   },
+   {
+    "SubFunctionID": 124,
+    "ParameterName": "Internal SCI communication CRC FAIL",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "1",
+    "ResultDescription": "Failed",
+    "LanguageCode": "OBC_0022"
+   },
+   {
+    "SubFunctionID": 125,
+    "ParameterName": "12V Primary sensor",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "0",
+    "ResultDescription": "Normal",
+    "LanguageCode": "OBC_0077"
+   },
+   {
+    "SubFunctionID": 126,
+    "ParameterName": "12V Primary sensor",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "1",
+    "ResultDescription": "Too low out of range",
+    "LanguageCode": "OBC_0077"
+   },
+   {
+    "SubFunctionID": 127,
+    "ParameterName": "12V Primary sensor",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "2",
+    "ResultDescription": "Too high out of range",
+    "LanguageCode": "OBC_0077"
+   },
+   {
+    "SubFunctionID": 128,
+    "ParameterName": "12V Primary sensor",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "3",
+    "ResultDescription": "Short to ground",
+    "LanguageCode": "OBC_0077"
+   },
+   {
+    "SubFunctionID": 129,
+    "ParameterName": "12V Primary sensor",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "4",
+    "ResultDescription": "Short to battery",
+    "LanguageCode": "OBC_0077"
+   },
+   {
+    "SubFunctionID": 130,
+    "ParameterName": "3.3V Primary sensor",
+    "BytePosition": 4,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "0",
+    "ResultDescription": "Normal",
+    "LanguageCode": "OBC_0078"
+   },
+   {
+    "SubFunctionID": 131,
+    "ParameterName": "3.3V Primary sensor",
+    "BytePosition": 4,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "1",
+    "ResultDescription": "Too low out of range",
+    "LanguageCode": "OBC_0078"
+   },
+   {
+    "SubFunctionID": 132,
+    "ParameterName": "3.3V Primary sensor",
+    "BytePosition": 4,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "2",
+    "ResultDescription": "Too high out of range",
+    "LanguageCode": "OBC_0078"
+   },
+   {
+    "SubFunctionID": 133,
+    "ParameterName": "3.3V Primary sensor",
+    "BytePosition": 4,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "3",
+    "ResultDescription": "Short to ground",
+    "LanguageCode": "OBC_0078"
+   },
+   {
+    "SubFunctionID": 134,
+    "ParameterName": "3.3V Primary sensor",
+    "BytePosition": 4,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "4",
+    "ResultDescription": "Short to battery",
+    "LanguageCode": "OBC_0078"
+   },
+   {
+    "SubFunctionID": 135,
+    "ParameterName": "3.3V Secondary sensor",
+    "BytePosition": 5,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "0",
+    "ResultDescription": "Normal",
+    "LanguageCode": "OBC_0079"
+   },
+   {
+    "SubFunctionID": 136,
+    "ParameterName": "3.3V Secondary sensor",
+    "BytePosition": 5,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "1",
+    "ResultDescription": "Too low out of range",
+    "LanguageCode": "OBC_0079"
+   },
+   {
+    "SubFunctionID": 137,
+    "ParameterName": "3.3V Secondary sensor",
+    "BytePosition": 5,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "2",
+    "ResultDescription": "Too high out of range",
+    "LanguageCode": "OBC_0079"
+   },
+   {
+    "SubFunctionID": 138,
+    "ParameterName": "3.3V Secondary sensor",
+    "BytePosition": 5,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "3",
+    "ResultDescription": "Short to ground",
+    "LanguageCode": "OBC_0079"
+   },
+   {
+    "SubFunctionID": 139,
+    "ParameterName": "3.3V Secondary sensor",
+    "BytePosition": 5,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "4",
+    "ResultDescription": "Short to battery",
+    "LanguageCode": "OBC_0079"
+   },
+   {
+    "SubFunctionID": 140,
+    "ParameterName": "Tranasformer temperature sensor",
+    "BytePosition": 6,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "0",
+    "ResultDescription": "Normal",
+    "LanguageCode": "OBC_0080"
+   },
+   {
+    "SubFunctionID": 141,
+    "ParameterName": "Tranasformer temperature sensor",
+    "BytePosition": 6,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "1",
+    "ResultDescription": "Too low out of range",
+    "LanguageCode": "OBC_0080"
+   },
+   {
+    "SubFunctionID": 142,
+    "ParameterName": "Tranasformer temperature sensor",
+    "BytePosition": 6,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "2",
+    "ResultDescription": "Too high out of range",
+    "LanguageCode": "OBC_0080"
+   },
+   {
+    "SubFunctionID": 143,
+    "ParameterName": "Tranasformer temperature sensor",
+    "BytePosition": 6,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "3",
+    "ResultDescription": "Short to ground",
+    "LanguageCode": "OBC_0080"
+   },
+   {
+    "SubFunctionID": 144,
+    "ParameterName": "Tranasformer temperature sensor",
+    "BytePosition": 6,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "4",
+    "ResultDescription": "Short to battery",
+    "LanguageCode": "OBC_0080"
+   },
+   {
+    "SubFunctionID": 145,
+    "ParameterName": "Secondary board temperature sensor",
+    "BytePosition": 7,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "0",
+    "ResultDescription": "Normal",
+    "LanguageCode": "OBC_0081"
+   },
+   {
+    "SubFunctionID": 146,
+    "ParameterName": "Secondary board temperature sensor",
+    "BytePosition": 7,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "1",
+    "ResultDescription": "Too low out of range",
+    "LanguageCode": "OBC_0081"
+   },
+   {
+    "SubFunctionID": 147,
+    "ParameterName": "Secondary board temperature sensor",
+    "BytePosition": 7,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "2",
+    "ResultDescription": "Too high out of range",
+    "LanguageCode": "OBC_0081"
+   },
+   {
+    "SubFunctionID": 148,
+    "ParameterName": "Secondary board temperature sensor",
+    "BytePosition": 7,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "3",
+    "ResultDescription": "Short to ground",
+    "LanguageCode": "OBC_0081"
+   },
+   {
+    "SubFunctionID": 149,
+    "ParameterName": "Secondary board temperature sensor",
+    "BytePosition": 7,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "4",
+    "ResultDescription": "Short to battery",
+    "LanguageCode": "OBC_0081"
+   },
+   {
+    "SubFunctionID": 150,
+    "ParameterName": "Output voltage sensor 3",
+    "BytePosition": 8,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "0",
+    "ResultDescription": "Normal",
+    "LanguageCode": "OBC_0082"
+   },
+   {
+    "SubFunctionID": 151,
+    "ParameterName": "Output voltage sensor 3",
+    "BytePosition": 8,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "1",
+    "ResultDescription": "Too low out of range",
+    "LanguageCode": "OBC_0082"
+   },
+   {
+    "SubFunctionID": 152,
+    "ParameterName": "Output voltage sensor 3",
+    "BytePosition": 8,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "2",
+    "ResultDescription": "Too high out of range",
+    "LanguageCode": "OBC_0082"
+   },
+   {
+    "SubFunctionID": 153,
+    "ParameterName": "Output voltage sensor 3",
+    "BytePosition": 8,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "3",
+    "ResultDescription": "Short to ground",
+    "LanguageCode": "OBC_0082"
+   },
+   {
+    "SubFunctionID": 154,
+    "ParameterName": "Output voltage sensor 3",
+    "BytePosition": 8,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "4",
+    "ResultDescription": "Short to battery",
+    "LanguageCode": "OBC_0082"
+   },
+   {
+    "SubFunctionID": 155,
+    "ParameterName": "Output voltage sensor 2",
+    "BytePosition": 9,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "0",
+    "ResultDescription": "Normal",
+    "LanguageCode": "OBC_0083"
+   },
+   {
+    "SubFunctionID": 156,
+    "ParameterName": "Output voltage sensor 2",
+    "BytePosition": 9,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "1",
+    "ResultDescription": "Too low out of range",
+    "LanguageCode": "OBC_0083"
+   },
+   {
+    "SubFunctionID": 157,
+    "ParameterName": "Output voltage sensor 2",
+    "BytePosition": 9,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "2",
+    "ResultDescription": "Too high out of range",
+    "LanguageCode": "OBC_0083"
+   },
+   {
+    "SubFunctionID": 158,
+    "ParameterName": "Output voltage sensor 2",
+    "BytePosition": 9,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "3",
+    "ResultDescription": "Short to ground",
+    "LanguageCode": "OBC_0083"
+   },
+   {
+    "SubFunctionID": 159,
+    "ParameterName": "Output voltage sensor 2",
+    "BytePosition": 9,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "4",
+    "ResultDescription": "Short to battery",
+    "LanguageCode": "OBC_0083"
+   },
+   {
+    "SubFunctionID": 160,
+    "ParameterName": "Output current sensor 2",
+    "BytePosition": 10,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "0",
+    "ResultDescription": "Normal",
+    "LanguageCode": "OBC_0084"
+   },
+   {
+    "SubFunctionID": 161,
+    "ParameterName": "Output current sensor 2",
+    "BytePosition": 10,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "1",
+    "ResultDescription": "Too low out of range",
+    "LanguageCode": "OBC_0084"
+   },
+   {
+    "SubFunctionID": 162,
+    "ParameterName": "Output current sensor 2",
+    "BytePosition": 10,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "2",
+    "ResultDescription": "Too high out of range",
+    "LanguageCode": "OBC_0084"
+   },
+   {
+    "SubFunctionID": 163,
+    "ParameterName": "Output current sensor 2",
+    "BytePosition": 10,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "3",
+    "ResultDescription": "Short to ground",
+    "LanguageCode": "OBC_0084"
+   },
+   {
+    "SubFunctionID": 164,
+    "ParameterName": "Output current sensor 2",
+    "BytePosition": 10,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "4",
+    "ResultDescription": "Short to battery",
+    "LanguageCode": "OBC_0084"
+   },
+   {
+    "SubFunctionID": 165,
+    "ParameterName": "Output current sensor 1",
+    "BytePosition": 11,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "0",
+    "ResultDescription": "Normal",
+    "LanguageCode": "OBC_0085"
+   },
+   {
+    "SubFunctionID": 166,
+    "ParameterName": "Output current sensor 1",
+    "BytePosition": 11,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "1",
+    "ResultDescription": "Too low out of range",
+    "LanguageCode": "OBC_0085"
+   },
+   {
+    "SubFunctionID": 167,
+    "ParameterName": "Output current sensor 1",
+    "BytePosition": 11,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "2",
+    "ResultDescription": "Too high out of range",
+    "LanguageCode": "OBC_0085"
+   },
+   {
+    "SubFunctionID": 168,
+    "ParameterName": "Output current sensor 1",
+    "BytePosition": 11,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "3",
+    "ResultDescription": "Short to ground",
+    "LanguageCode": "OBC_0085"
+   },
+   {
+    "SubFunctionID": 169,
+    "ParameterName": "Output current sensor 1",
+    "BytePosition": 11,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "4",
+    "ResultDescription": "Short to battery",
+    "LanguageCode": "OBC_0085"
+   },
+   {
+    "SubFunctionID": 170,
+    "ParameterName": "Primary board temperature sensor",
+    "BytePosition": 12,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "0",
+    "ResultDescription": "Normal",
+    "LanguageCode": "OBC_0086"
+   },
+   {
+    "SubFunctionID": 171,
+    "ParameterName": "Primary board temperature sensor",
+    "BytePosition": 12,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "1",
+    "ResultDescription": "Too low out of range",
+    "LanguageCode": "OBC_0086"
+   },
+   {
+    "SubFunctionID": 172,
+    "ParameterName": "Primary board temperature sensor",
+    "BytePosition": 12,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "2",
+    "ResultDescription": "Too high out of range",
+    "LanguageCode": "OBC_0086"
+   },
+   {
+    "SubFunctionID": 173,
+    "ParameterName": "Primary board temperature sensor",
+    "BytePosition": 12,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "3",
+    "ResultDescription": "Short to ground",
+    "LanguageCode": "OBC_0086"
+   },
+   {
+    "SubFunctionID": 174,
+    "ParameterName": "Primary board temperature sensor",
+    "BytePosition": 12,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "4",
+    "ResultDescription": "Short to battery",
+    "LanguageCode": "OBC_0086"
+   },
+   {
+    "SubFunctionID": 175,
+    "ParameterName": "VBOVS sensor",
+    "BytePosition": 13,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "0",
+    "ResultDescription": "Normal",
+    "LanguageCode": "OBC_0087"
+   },
+   {
+    "SubFunctionID": 176,
+    "ParameterName": "VBOVS sensor",
+    "BytePosition": 13,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "1",
+    "ResultDescription": "Too low out of range",
+    "LanguageCode": "OBC_0087"
+   },
+   {
+    "SubFunctionID": 177,
+    "ParameterName": "VBOVS sensor",
+    "BytePosition": 13,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "2",
+    "ResultDescription": "Too high out of range",
+    "LanguageCode": "OBC_0087"
+   },
+   {
+    "SubFunctionID": 178,
+    "ParameterName": "VBOVS sensor",
+    "BytePosition": 13,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "3",
+    "ResultDescription": "Short to ground",
+    "LanguageCode": "OBC_0087"
+   },
+   {
+    "SubFunctionID": 179,
+    "ParameterName": "VBOVS sensor",
+    "BytePosition": 13,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "4",
+    "ResultDescription": "Short to battery",
+    "LanguageCode": "OBC_0087"
+   },
+   {
+    "SubFunctionID": 180,
+    "ParameterName": "VB PFC voltage sensor",
+    "BytePosition": 14,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "0",
+    "ResultDescription": "Normal",
+    "LanguageCode": "OBC_0088"
+   },
+   {
+    "SubFunctionID": 181,
+    "ParameterName": "VB PFC voltage sensor",
+    "BytePosition": 14,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "1",
+    "ResultDescription": "Too low out of range",
+    "LanguageCode": "OBC_0088"
+   },
+   {
+    "SubFunctionID": 182,
+    "ParameterName": "VB PFC voltage sensor",
+    "BytePosition": 14,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "2",
+    "ResultDescription": "Too high out of range",
+    "LanguageCode": "OBC_0088"
+   },
+   {
+    "SubFunctionID": 183,
+    "ParameterName": "VB PFC voltage sensor",
+    "BytePosition": 14,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "3",
+    "ResultDescription": "Short to ground",
+    "LanguageCode": "OBC_0088"
+   },
+   {
+    "SubFunctionID": 184,
+    "ParameterName": "VB PFC voltage sensor",
+    "BytePosition": 14,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "4",
+    "ResultDescription": "Short to battery",
+    "LanguageCode": "OBC_0088"
+   },
+   {
+    "SubFunctionID": 185,
+    "ParameterName": "AC current sensor 2",
+    "BytePosition": 15,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "0",
+    "ResultDescription": "Normal",
+    "LanguageCode": "OBC_0089"
+   },
+   {
+    "SubFunctionID": 186,
+    "ParameterName": "AC current sensor 2",
+    "BytePosition": 15,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "1",
+    "ResultDescription": "Too low out of range",
+    "LanguageCode": "OBC_0089"
+   },
+   {
+    "SubFunctionID": 187,
+    "ParameterName": "AC current sensor 2",
+    "BytePosition": 15,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "2",
+    "ResultDescription": "Too high out of range",
+    "LanguageCode": "OBC_0089"
+   },
+   {
+    "SubFunctionID": 188,
+    "ParameterName": "AC current sensor 2",
+    "BytePosition": 15,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "3",
+    "ResultDescription": "Short to ground",
+    "LanguageCode": "OBC_0089"
+   },
+   {
+    "SubFunctionID": 189,
+    "ParameterName": "AC current sensor 2",
+    "BytePosition": 15,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "4",
+    "ResultDescription": "Short to battery",
+    "LanguageCode": "OBC_0089"
+   },
+   {
+    "SubFunctionID": 190,
+    "ParameterName": "AC current sensor 1",
+    "BytePosition": 16,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "0",
+    "ResultDescription": "Normal",
+    "LanguageCode": "OBC_0090"
+   },
+   {
+    "SubFunctionID": 191,
+    "ParameterName": "AC current sensor 1",
+    "BytePosition": 16,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "1",
+    "ResultDescription": "Too low out of range",
+    "LanguageCode": "OBC_0090"
+   },
+   {
+    "SubFunctionID": 192,
+    "ParameterName": "AC current sensor 1",
+    "BytePosition": 16,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "2",
+    "ResultDescription": "Too high out of range",
+    "LanguageCode": "OBC_0090"
+   },
+   {
+    "SubFunctionID": 193,
+    "ParameterName": "AC current sensor 1",
+    "BytePosition": 16,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "3",
+    "ResultDescription": "Short to ground",
+    "LanguageCode": "OBC_0090"
+   },
+   {
+    "SubFunctionID": 194,
+    "ParameterName": "AC current sensor 1",
+    "BytePosition": 16,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "4",
+    "ResultDescription": "Short to battery",
+    "LanguageCode": "OBC_0090"
+   },
+   {
+    "SubFunctionID": 195,
+    "ParameterName": "PH2MEAS input AC voltage sensor 2",
+    "BytePosition": 17,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "0",
+    "ResultDescription": "Normal",
+    "LanguageCode": "OBC_0091"
+   },
+   {
+    "SubFunctionID": 196,
+    "ParameterName": "PH2MEAS input AC voltage sensor 2",
+    "BytePosition": 17,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "1",
+    "ResultDescription": "Too low out of range",
+    "LanguageCode": "OBC_0091"
+   },
+   {
+    "SubFunctionID": 197,
+    "ParameterName": "PH2MEAS input AC voltage sensor 2",
+    "BytePosition": 17,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "2",
+    "ResultDescription": "Too high out of range",
+    "LanguageCode": "OBC_0091"
+   },
+   {
+    "SubFunctionID": 198,
+    "ParameterName": "PH2MEAS input AC voltage sensor 2",
+    "BytePosition": 17,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "3",
+    "ResultDescription": "Short to ground",
+    "LanguageCode": "OBC_0091"
+   },
+   {
+    "SubFunctionID": 199,
+    "ParameterName": "PH2MEAS input AC voltage sensor 2",
+    "BytePosition": 17,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "4",
+    "ResultDescription": "Short to battery",
+    "LanguageCode": "OBC_0091"
+   },
+   {
+    "SubFunctionID": 200,
+    "ParameterName": "PH2MEAS input AC voltage sensor 1",
+    "BytePosition": 18,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "0",
+    "ResultDescription": "Normal",
+    "LanguageCode": "OBC_0092"
+   },
+   {
+    "SubFunctionID": 201,
+    "ParameterName": "PH2MEAS input AC voltage sensor 1",
+    "BytePosition": 18,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "1",
+    "ResultDescription": "Too low out of range",
+    "LanguageCode": "OBC_0092"
+   },
+   {
+    "SubFunctionID": 202,
+    "ParameterName": "PH2MEAS input AC voltage sensor 1",
+    "BytePosition": 18,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "2",
+    "ResultDescription": "Too high out of range",
+    "LanguageCode": "OBC_0092"
+   },
+   {
+    "SubFunctionID": 203,
+    "ParameterName": "PH2MEAS input AC voltage sensor 1",
+    "BytePosition": 18,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "3",
+    "ResultDescription": "Short to ground",
+    "LanguageCode": "OBC_0092"
+   },
+   {
+    "SubFunctionID": 204,
+    "ParameterName": "PH2MEAS input AC voltage sensor 1",
+    "BytePosition": 18,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "4",
+    "ResultDescription": "Short to battery",
+    "LanguageCode": "OBC_0092"
+   }
+  ]
+ },
+ {
+  "ParameterID": 41,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x131",
+  "ParameterName": "VCU Charging Enable Command",
+  "TotalByteLength": "1",
+  "ReadPermission": "N",
+  "WritePermission": "N",
+  "ValueParameters": [],
+  "ByteParameters": [
+   {
+    "SubFunctionID": 205,
+    "ParameterName": "VCU Charging Enable Command",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "0",
+    "ResultDescription": "Init",
+    "LanguageCode": "OBC_0117"
+   },
+   {
+    "SubFunctionID": 206,
+    "ParameterName": "VCU Charging Enable Command",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "1",
+    "ResultDescription": "Standby",
+    "LanguageCode": "OBC_0117"
+   },
+   {
+    "SubFunctionID": 207,
+    "ParameterName": "VCU Charging Enable Command",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "2",
+    "ResultDescription": "Working",
+    "LanguageCode": "OBC_0117"
+   },
+   {
+    "SubFunctionID": 208,
+    "ParameterName": "VCU Charging Enable Command",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "5",
+    "ResultDescription": "Sleep",
+    "LanguageCode": "OBC_0117"
+   }
+  ]
+ },
+ {
+  "ParameterID": 42,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x132",
+  "ParameterName": "OBC Charging states",
+  "TotalByteLength": "1",
+  "ReadPermission": "N",
+  "WritePermission": "N",
+  "ValueParameters": [],
+  "ByteParameters": [
+   {
+    "SubFunctionID": 209,
+    "ParameterName": "OBC Charging states",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "0",
+    "ResultDescription": "Init",
+    "LanguageCode": "OBC_0118"
+   },
+   {
+    "SubFunctionID": 210,
+    "ParameterName": "OBC Charging states",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "1",
+    "ResultDescription": "Standby",
+    "LanguageCode": "OBC_0118"
+   },
+   {
+    "SubFunctionID": 211,
+    "ParameterName": "OBC Charging states",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "2",
+    "ResultDescription": "Working",
+    "LanguageCode": "OBC_0118"
+   },
+   {
+    "SubFunctionID": 212,
+    "ParameterName": "OBC Charging states",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "4",
+    "ResultDescription": "Fault",
+    "LanguageCode": "OBC_0118"
+   },
+   {
+    "SubFunctionID": 213,
+    "ParameterName": "OBC Charging states",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "5",
+    "ResultDescription": "Sleep",
+    "LanguageCode": "OBC_0118"
+   }
+  ]
+ },
+ {
+  "ParameterID": 43,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x133",
+  "ParameterName": "VCU CC CP Connect states",
+  "TotalByteLength": "1",
+  "ReadPermission": "N",
+  "WritePermission": "N",
+  "ValueParameters": [],
+  "ByteParameters": [
+   {
+    "SubFunctionID": 214,
+    "ParameterName": "VCU CC CP Connect states",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "0",
+    "ResultDescription": "No Detected",
+    "LanguageCode": "OBC_0119"
+   },
+   {
+    "SubFunctionID": 215,
+    "ParameterName": "VCU CC CP Connect states",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "1",
+    "ResultDescription": "Detected",
+    "LanguageCode": "OBC_0119"
+   }
+  ]
+ },
+ {
+  "ParameterID": 44,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x134",
+  "ParameterName": "CP Duty Error States",
+  "TotalByteLength": "1",
+  "ReadPermission": "N",
+  "WritePermission": "N",
+  "ValueParameters": [],
+  "ByteParameters": [
+   {
+    "SubFunctionID": 216,
+    "ParameterName": "CP Duty Error States",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "0",
+    "ResultDescription": "Normal",
+    "LanguageCode": "OBC_0120"
+   },
+   {
+    "SubFunctionID": 217,
+    "ParameterName": "CP Duty Error States",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "1",
+    "ResultDescription": "Error",
+    "LanguageCode": "OBC_0120"
+   }
+  ]
+ },
+ {
+  "ParameterID": 45,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x135",
+  "ParameterName": "CP Frequency Error States",
+  "TotalByteLength": "1",
+  "ReadPermission": "N",
+  "WritePermission": "N",
+  "ValueParameters": [],
+  "ByteParameters": [
+   {
+    "SubFunctionID": 218,
+    "ParameterName": "CP Frequency Error States",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "0",
+    "ResultDescription": "Normal",
+    "LanguageCode": "OBC_0121"
+   },
+   {
+    "SubFunctionID": 219,
+    "ParameterName": "CP Frequency Error States",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "1",
+    "ResultDescription": "Error",
+    "LanguageCode": "OBC_0121"
+   }
+  ]
+ },
+ {
+  "ParameterID": 46,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x136",
+  "ParameterName": "OBC HV Battery Voltage",
+  "TotalByteLength": "2",
+  "ReadPermission": "N",
+  "WritePermission": "N",
+  "ValueParameters": [
+   {
+    "SubFunctionID": 49,
+    "ParameterName": "OBC HV Battery Voltage",
+    "BytePosition": 3,
+    "ByteLength": 2,
+    "Resolution": "0.1",
+    "Offset": null,
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": "V",
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": "0",
+    "MaximumValue": "6553.5",
+    "DataType": "5",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 47,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x137",
+  "ParameterName": "OBC HV Battery Current",
+  "TotalByteLength": "2",
+  "ReadPermission": "N",
+  "WritePermission": "N",
+  "ValueParameters": [
+   {
+    "SubFunctionID": 50,
+    "ParameterName": "OBC HV Battery Current",
+    "BytePosition": 3,
+    "ByteLength": 2,
+    "Resolution": "0.1",
+    "Offset": null,
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": "A",
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": "0",
+    "MaximumValue": "6553.5",
+    "DataType": "5",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 48,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x138",
+  "ParameterName": "OBC AC Voltage",
+  "TotalByteLength": "2",
+  "ReadPermission": "N",
+  "WritePermission": "N",
+  "ValueParameters": [
+   {
+    "SubFunctionID": 51,
+    "ParameterName": "OBC AC Voltage",
+    "BytePosition": 3,
+    "ByteLength": 2,
+    "Resolution": "0.1",
+    "Offset": null,
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": "V",
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": "0",
+    "MaximumValue": "6553.5",
+    "DataType": "5",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 49,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x139",
+  "ParameterName": "OBC AC Current",
+  "TotalByteLength": "2",
+  "ReadPermission": "N",
+  "WritePermission": "N",
+  "ValueParameters": [
+   {
+    "SubFunctionID": 52,
+    "ParameterName": "OBC AC Current",
+    "BytePosition": 3,
+    "ByteLength": 2,
+    "Resolution": "0.1",
+    "Offset": null,
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": "A",
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": "0",
+    "MaximumValue": "6553.5",
+    "DataType": "5",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 50,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x13A",
+  "ParameterName": "OBC PFC Voltage",
+  "TotalByteLength": "2",
+  "ReadPermission": "N",
+  "WritePermission": "N",
+  "ValueParameters": [
+   {
+    "SubFunctionID": 53,
+    "ParameterName": "OBC PFC Voltage",
+    "BytePosition": 3,
+    "ByteLength": 2,
+    "Resolution": "0.1",
+    "Offset": null,
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": "V",
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": "0",
+    "MaximumValue": "6553.5",
+    "DataType": "5",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 51,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x13B",
+  "ParameterName": "OBC Internal Primary Temperaure",
+  "TotalByteLength": "1",
+  "ReadPermission": "N",
+  "WritePermission": "N",
+  "ValueParameters": [
+   {
+    "SubFunctionID": 54,
+    "ParameterName": "OBC Internal Primary Temperaure",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "Resolution": "1",
+    "Offset": null,
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": "oC",
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": "-48",
+    "MaximumValue": "207",
+    "DataType": "5",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 52,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x13C",
+  "ParameterName": "OBC Internal Secondary Temperaure",
+  "TotalByteLength": "1",
+  "ReadPermission": "N",
+  "WritePermission": "N",
+  "ValueParameters": [
+   {
+    "SubFunctionID": 55,
+    "ParameterName": "OBC Internal Secondary Temperaure",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "Resolution": "1",
+    "Offset": null,
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": "oC",
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": "-48",
+    "MaximumValue": "207",
+    "DataType": "5",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 53,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x13D",
+  "ParameterName": "OBC Internal Trans Temperaure",
+  "TotalByteLength": "1",
+  "ReadPermission": "N",
+  "WritePermission": "N",
+  "ValueParameters": [
+   {
+    "SubFunctionID": 56,
+    "ParameterName": "OBC Internal Trans Temperaure",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "Resolution": "1",
+    "Offset": null,
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": "oC",
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": "-48",
+    "MaximumValue": "207",
+    "DataType": "5",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 54,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x1319",
+  "ParameterName": "internal CAN Communication states",
+  "TotalByteLength": "1",
+  "ReadPermission": "N",
+  "WritePermission": "N",
+  "ValueParameters": [],
+  "ByteParameters": [
+   {
+    "SubFunctionID": 220,
+    "ParameterName": "internal CAN Communication states",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "0",
+    "ResultDescription": "Normal",
+    "LanguageCode": "OBC_0130"
+   },
+   {
+    "SubFunctionID": 221,
+    "ParameterName": "internal CAN Communication states",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "1",
+    "ResultDescription": "Error",
+    "LanguageCode": "OBC_0130"
+   }
+  ]
+ },
+ {
+  "ParameterID": 55,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x131A",
+  "ParameterName": "Actual input  frequency  from AC Grid",
+  "TotalByteLength": "2",
+  "ReadPermission": "N",
+  "WritePermission": "N",
+  "ValueParameters": [
+   {
+    "SubFunctionID": 57,
+    "ParameterName": "Actual input  frequency  from AC Grid",
+    "BytePosition": 3,
+    "ByteLength": 2,
+    "Resolution": "1",
+    "Offset": null,
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": "Hz",
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": "0",
+    "MaximumValue": "2000",
+    "DataType": "5",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 56,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x131B",
+  "ParameterName": "OBC CP Duty",
+  "TotalByteLength": "1",
+  "ReadPermission": "N",
+  "WritePermission": "N",
+  "ValueParameters": [
+   {
+    "SubFunctionID": 58,
+    "ParameterName": "OBC CP Duty",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "Resolution": "1",
+    "Offset": null,
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": "%",
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": "0",
+    "MaximumValue": "255",
+    "DataType": "5",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 57,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x131C",
+  "ParameterName": "OBC CP Frequency",
+  "TotalByteLength": "2",
+  "ReadPermission": "N",
+  "WritePermission": "N",
+  "ValueParameters": [
+   {
+    "SubFunctionID": 59,
+    "ParameterName": "OBC CP Frequency",
+    "BytePosition": 3,
+    "ByteLength": 2,
+    "Resolution": "1",
+    "Offset": null,
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": "HZ",
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": "0",
+    "MaximumValue": "65535",
+    "DataType": "5",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 58,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x131D",
+  "ParameterName": "HW wakeup output state",
+  "TotalByteLength": "1",
+  "ReadPermission": "N",
+  "WritePermission": "N",
+  "ValueParameters": [],
+  "ByteParameters": [
+   {
+    "SubFunctionID": 222,
+    "ParameterName": "HW wakeup output state",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "0",
+    "ResultDescription": "Disable",
+    "LanguageCode": "OBC_0134"
+   },
+   {
+    "SubFunctionID": 223,
+    "ParameterName": "HW wakeup output state",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "1",
+    "ResultDescription": "Enable",
+    "LanguageCode": "OBC_0134"
+   }
+  ]
+ },
+ {
+  "ParameterID": 59,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x131E",
+  "ParameterName": "VCU CRC FAIL for OBC",
+  "TotalByteLength": "1",
+  "ReadPermission": "N",
+  "WritePermission": "N",
+  "ValueParameters": [],
+  "ByteParameters": [
+   {
+    "SubFunctionID": 225,
+    "ParameterName": "VCU CRC FAIL for OBC",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "1",
+    "ResultDescription": "Error",
+    "LanguageCode": "OBC_0135"
+   },
+   {
+    "SubFunctionID": 224,
+    "ParameterName": "VCU CRC FAIL for OBC",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "0",
+    "ResultDescription": "Normal",
+    "LanguageCode": "OBC_0135"
+   }
+  ]
+ },
+ {
+  "ParameterID": 60,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x131F",
+  "ParameterName": "OBC Charger available power",
+  "TotalByteLength": "2",
+  "ReadPermission": "N",
+  "WritePermission": "N",
+  "ValueParameters": [
+   {
+    "SubFunctionID": 60,
+    "ParameterName": "OBC Charger available power",
+    "BytePosition": 3,
+    "ByteLength": 2,
+    "Resolution": "1",
+    "Offset": null,
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": "W",
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": "0",
+    "MaximumValue": "65535",
+    "DataType": "5",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 61,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x1320",
+  "ParameterName": "OBC Internal fault",
+  "TotalByteLength": "1",
+  "ReadPermission": "N",
+  "WritePermission": "N",
+  "ValueParameters": [],
+  "ByteParameters": [
+   {
+    "SubFunctionID": 226,
+    "ParameterName": "OBC Internal fault",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "0",
+    "ResultDescription": "Normal",
+    "LanguageCode": "OBC_0137"
+   },
+   {
+    "SubFunctionID": 227,
+    "ParameterName": "OBC Internal fault",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "1",
+    "ResultDescription": "Error",
+    "LanguageCode": "OBC_0137"
+   }
+  ]
+ },
+ {
+  "ParameterID": 62,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x1321",
+  "ParameterName": "OBC External CAN status",
+  "TotalByteLength": "1",
+  "ReadPermission": "N",
+  "WritePermission": "N",
+  "ValueParameters": [],
+  "ByteParameters": [
+   {
+    "SubFunctionID": 228,
+    "ParameterName": "OBC External CAN status",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "0",
+    "ResultDescription": "Normal",
+    "LanguageCode": "OBC_0138"
+   },
+   {
+    "SubFunctionID": 229,
+    "ParameterName": "OBC External CAN status",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "1",
+    "ResultDescription": "Error",
+    "LanguageCode": "OBC_0138"
+   }
+  ]
+ },
+ {
+  "ParameterID": 63,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x1322",
+  "ParameterName": "OBC derating mode",
+  "TotalByteLength": "1",
+  "ReadPermission": "N",
+  "WritePermission": "N",
+  "ValueParameters": [],
+  "ByteParameters": [
+   {
+    "SubFunctionID": 230,
+    "ParameterName": "OBC derating mode",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "0",
+    "ResultDescription": "Normal",
+    "LanguageCode": "OBC_0139"
+   },
+   {
+    "SubFunctionID": 231,
+    "ParameterName": "OBC derating mode",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "01",
+    "ResultDescription": "Derating",
+    "LanguageCode": "OBC_0139"
+   }
+  ]
+ },
+ {
+  "ParameterID": 64,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x1323",
+  "ParameterName": "OBC error flag",
+  "TotalByteLength": "1",
+  "ReadPermission": "N",
+  "WritePermission": "N",
+  "ValueParameters": [],
+  "ByteParameters": [
+   {
+    "SubFunctionID": 232,
+    "ParameterName": "OBC error flag",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "0",
+    "ResultDescription": "Normal",
+    "LanguageCode": "OBC_0140"
+   },
+   {
+    "SubFunctionID": 233,
+    "ParameterName": "OBC error flag",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "1",
+    "ResultDescription": "Error",
+    "LanguageCode": "OBC_0140"
+   }
+  ]
+ },
+ {
+  "ParameterID": 65,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x1324",
+  "ParameterName": "OBC CC ohm",
+  "TotalByteLength": "1",
+  "ReadPermission": "N",
+  "WritePermission": "N",
+  "ValueParameters": [],
+  "ByteParameters": [
+   {
+    "SubFunctionID": 234,
+    "ParameterName": "OBC CC ohm",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "00",
+    "ResultDescription": "Reserved",
+    "LanguageCode": "OBC_0141"
+   },
+   {
+    "SubFunctionID": 235,
+    "ParameterName": "OBC CC ohm",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "01",
+    "ResultDescription": "not connected",
+    "LanguageCode": "OBC_0141"
+   },
+   {
+    "SubFunctionID": 236,
+    "ParameterName": "OBC CC ohm",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "02",
+    "ResultDescription": "semi-jion",
+    "LanguageCode": "OBC_0141"
+   },
+   {
+    "SubFunctionID": 237,
+    "ParameterName": "OBC CC ohm",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "03",
+    "ResultDescription": "1500 Ohm",
+    "LanguageCode": "OBC_0141"
+   },
+   {
+    "SubFunctionID": 238,
+    "ParameterName": "OBC CC ohm",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "04",
+    "ResultDescription": "680 Ohm",
+    "LanguageCode": "OBC_0141"
+   },
+   {
+    "SubFunctionID": 239,
+    "ParameterName": "OBC CC ohm",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "05",
+    "ResultDescription": "220 Ohm",
+    "LanguageCode": "OBC_0141"
+   },
+   {
+    "SubFunctionID": 240,
+    "ParameterName": "OBC CC ohm",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "06",
+    "ResultDescription": "100 Ohm",
+    "LanguageCode": "OBC_0141"
+   },
+   {
+    "SubFunctionID": 241,
+    "ParameterName": "OBC CC ohm",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "07",
+    "ResultDescription": "CC Ground",
+    "LanguageCode": "OBC_0141"
+   }
+  ]
+ },
+ {
+  "ParameterID": 66,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x132A",
+  "ParameterName": "OBC CP Voltage",
+  "TotalByteLength": "1",
+  "ReadPermission": "N",
+  "WritePermission": "N",
+  "ValueParameters": [
+   {
+    "SubFunctionID": 61,
+    "ParameterName": "OBC CP Voltage",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "Resolution": "0.1",
+    "Offset": null,
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": "V",
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": "0",
+    "MaximumValue": "25.5",
+    "DataType": "5",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 67,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0xF0E1",
+  "ParameterName": "OBC Internal Status1",
+  "TotalByteLength": "2",
+  "ReadPermission": "N",
+  "WritePermission": "N",
+  "ValueParameters": [
+   {
+    "SubFunctionID": 62,
+    "ParameterName": "OBC Internal Status1",
+    "BytePosition": 3,
+    "ByteLength": 2,
+    "Resolution": "1",
+    "Offset": null,
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": null,
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": "0",
+    "MaximumValue": "65535",
+    "DataType": "5",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 68,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0xF0E2",
+  "ParameterName": "OBC Internal Status2",
+  "TotalByteLength": "2",
+  "ReadPermission": "N",
+  "WritePermission": "N",
+  "ValueParameters": [
+   {
+    "SubFunctionID": 63,
+    "ParameterName": "OBC Internal Status2",
+    "BytePosition": 3,
+    "ByteLength": 2,
+    "Resolution": "1",
+    "Offset": null,
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": null,
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": "0",
+    "MaximumValue": "65535",
+    "DataType": "5",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 69,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0xF0E3",
+  "ParameterName": "OBC Internal Status3",
+  "TotalByteLength": "2",
+  "ReadPermission": "N",
+  "WritePermission": "N",
+  "ValueParameters": [
+   {
+    "SubFunctionID": 64,
+    "ParameterName": "OBC Internal Status3",
+    "BytePosition": 3,
+    "ByteLength": 2,
+    "Resolution": "1",
+    "Offset": null,
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": null,
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": "0",
+    "MaximumValue": "65535",
+    "DataType": "5",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 70,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0xF0E4",
+  "ParameterName": "OBC Internal Status4",
+  "TotalByteLength": "2",
+  "ReadPermission": "N",
+  "WritePermission": "N",
+  "ValueParameters": [
+   {
+    "SubFunctionID": 65,
+    "ParameterName": "OBC Internal Status4",
+    "BytePosition": 3,
+    "ByteLength": 2,
+    "Resolution": "1",
+    "Offset": null,
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": null,
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": "0",
+    "MaximumValue": "65535",
+    "DataType": "5",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 71,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0xF0E5",
+  "ParameterName": "OBC Primary DSP Software Version",
+  "TotalByteLength": "3",
+  "ReadPermission": "Y",
+  "WritePermission": "N",
+  "ValueParameters": [
+   {
+    "SubFunctionID": 66,
+    "ParameterName": "OBC Primary DSP Software Version",
+    "BytePosition": 3,
+    "ByteLength": 3,
+    "Resolution": "1",
+    "Offset": null,
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": null,
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": null,
+    "MaximumValue": null,
+    "DataType": "3",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 72,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0xF0E6",
+  "ParameterName": "OBC Secondary DSP Software Version",
+  "TotalByteLength": "3",
+  "ReadPermission": "Y",
+  "WritePermission": "N",
+  "ValueParameters": [
+   {
+    "SubFunctionID": 67,
+    "ParameterName": "OBC Secondary DSP Software Version",
+    "BytePosition": 3,
+    "ByteLength": 3,
+    "Resolution": "1",
+    "Offset": null,
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": null,
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": null,
+    "MaximumValue": null,
+    "DataType": "3",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 73,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x1330",
+  "ParameterName": "VCU Charging/Discharge mode command",
+  "TotalByteLength": "1",
+  "ReadPermission": "Y",
+  "WritePermission": "N",
+  "ValueParameters": [],
+  "ByteParameters": [
+   {
+    "SubFunctionID": 242,
+    "ParameterName": "VCU Charging/Discharge mode command",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "0",
+    "ResultDescription": "init mode",
+    "LanguageCode": "OBC_0165"
+   },
+   {
+    "SubFunctionID": 243,
+    "ParameterName": "VCU Charging/Discharge mode command",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "1",
+    "ResultDescription": "Charge mode",
+    "LanguageCode": "OBC_0165"
+   },
+   {
+    "SubFunctionID": 244,
+    "ParameterName": "VCU Charging/Discharge mode command",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "2",
+    "ResultDescription": "VTOL Discharge mode",
+    "LanguageCode": "OBC_0165"
+   },
+   {
+    "SubFunctionID": 246,
+    "ParameterName": "VCU Charging/Discharge mode command",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "3",
+    "ResultDescription": "VTOV Discharge Mode",
+    "LanguageCode": "OBC_0165"
+   },
+   {
+    "SubFunctionID": 247,
+    "ParameterName": "VCU Charging/Discharge mode command",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "4",
+    "ResultDescription": "Reserved",
+    "LanguageCode": "OBC_0165"
+   },
+   {
+    "SubFunctionID": 248,
+    "ParameterName": "VCU Charging/Discharge mode command",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "5",
+    "ResultDescription": "Reserved",
+    "LanguageCode": "OBC_0165"
+   },
+   {
+    "SubFunctionID": 249,
+    "ParameterName": "VCU Charging/Discharge mode command",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "6",
+    "ResultDescription": "Reserved",
+    "LanguageCode": "OBC_0165"
+   },
+   {
+    "SubFunctionID": 250,
+    "ParameterName": "VCU Charging/Discharge mode command",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "7",
+    "ResultDescription": "Invalid",
+    "LanguageCode": "OBC_0165"
+   }
+  ]
+ },
+ {
+  "ParameterID": 74,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x1331",
+  "ParameterName": "VCU Discharge gun connect status",
+  "TotalByteLength": "1",
+  "ReadPermission": "Y",
+  "WritePermission": "N",
+  "ValueParameters": [],
+  "ByteParameters": [
+   {
+    "SubFunctionID": 251,
+    "ParameterName": "VCU Discharge gun connect status",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "0",
+    "ResultDescription": "init",
+    "LanguageCode": "OBC_0184"
+   },
+   {
+    "SubFunctionID": 252,
+    "ParameterName": "VCU Discharge gun connect status",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "1",
+    "ResultDescription": "VTOV Discharge Gun Connect",
+    "LanguageCode": "OBC_0184"
+   },
+   {
+    "SubFunctionID": 253,
+    "ParameterName": "VCU Discharge gun connect status",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "2",
+    "ResultDescription": "VTOL Discharge Gun Connect",
+    "LanguageCode": "OBC_0184"
+   },
+   {
+    "SubFunctionID": 254,
+    "ParameterName": "VCU Discharge gun connect status",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "3",
+    "ResultDescription": "Discharge gun Disconnect",
+    "LanguageCode": "OBC_0184"
+   },
+   {
+    "SubFunctionID": 255,
+    "ParameterName": "VCU Discharge gun connect status",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "4",
+    "ResultDescription": "Discharge gun Half connect",
+    "LanguageCode": "OBC_0184"
+   }
+  ]
+ },
+ {
+  "ParameterID": 75,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x1332",
+  "ParameterName": "OBC Operation Mode",
+  "TotalByteLength": "1",
+  "ReadPermission": "Y",
+  "WritePermission": "N",
+  "ValueParameters": [],
+  "ByteParameters": [
+   {
+    "SubFunctionID": 256,
+    "ParameterName": "OBC Operation Mode",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "0",
+    "ResultDescription": "Init state",
+    "LanguageCode": "OBC_0175"
+   },
+   {
+    "SubFunctionID": 257,
+    "ParameterName": "OBC Operation Mode",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "1",
+    "ResultDescription": "Charge state",
+    "LanguageCode": "OBC_0175"
+   },
+   {
+    "SubFunctionID": 258,
+    "ParameterName": "OBC Operation Mode",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "2",
+    "ResultDescription": "VTOL Discharge state",
+    "LanguageCode": "OBC_0175"
+   },
+   {
+    "SubFunctionID": 259,
+    "ParameterName": "OBC Operation Mode",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "3",
+    "ResultDescription": "VTOV Discharge state",
+    "LanguageCode": "OBC_0175"
+   }
+  ]
+ }
+]

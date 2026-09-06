@@ -1,14 +1,33 @@
 # Machine-readable PID definitions
 
-Full DID definitions for five Nexon EV powertrain ECUs, exported from the Tata TDS
-ECU databases (`TDS 8.9S`, `DB/KPD_EV_*.inf` — Access/Jet files despite the `.inf`
-extension).
+Full DID definitions for every diagnosable ECU on the car, exported from the Tata
+TDS ECU databases — 1,168 DIDs across eight ECUs from TDS 20.0, plus five older
+TDS 8.9S databases kept where they carry more detail.
 
 | File | ECU | DIDs | with scaling | with enums |
 |------|-----|-----:|-------------:|-----------:|
-| `TDS20_BMS_Unified_PIDs.json` | **BMS — TDS 20.0** (`BMS_DB.sdf`, 11-bit `0x785`) | 114 | 105 | 9 |
-| `KPD_EV_BMS_Unified_PIDs.json` | BMS — TDS 8.9S (`KPD_EV_BMS.inf`, 29-bit) | 55 | 48 | 7 |
+**TDS 20.0** — the current factory tool's databases, decrypted from the packed
+install. Prefer these.
+
+| File | ECU | Header | DIDs | scaled | enums |
+|------|-----|--------|-----:|-------:|------:|
+| `TDS20_VECU_Unified_PIDs.json` | Vehicle Control | `0x7E3` | 502 | 328 | 171 |
+| `TDS20_BCM_Unified_PIDs.json` | Body Control | `0x701` | 232 | 89 | 148 |
+| `TDS20_PEPS_Unified_PIDs.json` | Passive Entry/Start | `0x710` | 135 | 85 | 48 |
+| `TDS20_BMS_Unified_PIDs.json` | Battery Management | `0x785` | 114 | 105 | 9 |
+| `TDS20_OBC_Unified_PIDs.json` | On Board Charger | `0x786` | 75 | 46 | 29 |
+| `TDS20_DCDC_Unified_PIDs.json` | DC-DC Converter | `0x784` | 42 | 35 | 8 |
+| `TDS20_IMMO_Unified_PIDs.json` | Immobiliser | `0x704` | 41 | 31 | 10 |
+| `TDS20_MCU_Unified_PIDs.json` | Motor Control | `0x783` | 27 | 27 | 0 |
+
+**TDS 8.9S** — the older generation. Kept because a few are *richer* than their
+TDS 20.0 counterparts: the 8.9S MCU database has 164 DIDs against 27, and the BCS
+has no TDS 20.0 equivalent at all.
+
+| File | ECU | DIDs | scaled | enums |
+|------|-----|-----:|-------:|------:|
 | `KPD_EV_MCU_Unified_PIDs.json` | Motor Control Unit | 164 | 150 | 14 |
+| `KPD_EV_BMS_Unified_PIDs.json` | BMS (29-bit variant) | 55 | 48 | 7 |
 | `KPD_EV_BCS_Unified_PIDs.json` | Battery Cooling System | 40 | 25 | 15 |
 | `KPD_EV_DCDC_Unified_PIDs.json` | DC-DC Converter | 38 | 38 | 0 |
 | `KPD_EV_OBC_Unified_PIDs.json` | On Board Charger | 22 | 22 | 0 |
