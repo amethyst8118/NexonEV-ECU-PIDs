@@ -11,6 +11,7 @@ older material kept for reference and marked as such.
 - [`CORRECTIONS.md`](CORRECTIONS.md) — database errors found, fixed and flagged
 - [`data/`](data/) — machine-readable DID definitions, 1,168 DIDs across eight ECUs
 - [`carscanner/`](carscanner/) — importable CarScanner profiles
+- [`elm327-patch/`](elm327-patch/) — J2534 shim so TDS itself runs on an ELM327
 
 ---
 

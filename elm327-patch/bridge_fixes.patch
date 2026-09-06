@@ -1,0 +1,178 @@
+--- ELM327_Bridge.cs.orig	2026-09-06 12:09:10.596468600 +0530
++++ ELM327_Bridge.cs	2026-09-06 12:19:00.826483600 +0530
+@@ -68,7 +68,10 @@
+             _baud = baud;
+             _port = new SerialPort(portName, baud, Parity.None, 8, StopBits.One);
+             _port.ReadTimeout = 400;
+-            _port.WriteTimeout = 400;
++            // Bluetooth SPP can stall well past 400 ms under load. Reads are
++            // polled via BytesToRead so ReadTimeout barely matters, but a short
++            // WriteTimeout aborts perfectly good writes.
++            _port.WriteTimeout = 2000;
+             _port.DtrEnable = true;
+             _port.RtsEnable = true;
+             _port.Open();
+@@ -268,6 +271,12 @@
+         private static string s_telemetryFilePath = null;
+         private static uint s_currentTxCanId = 0;
+         private static uint s_currentRxCanId = 0;
++        private static long s_droppedForeignFrames = 0;
++        private static int s_logMaxMb = 8;
++        private static long s_logWriteCounter = 0;
++        // Set from elm327.ini ACCEPT_ALL_RESPONDERS - disables the responder
++        // check for anyone who would rather see every frame than lose one.
++        private static bool s_openFilterAcceptAll = false;
+         private static bool s_isConnectedToHardware = false;
+         private static string s_connectionType = "DISCONNECTED";
+         private static string s_connectionEndpoint = "None";
+@@ -393,10 +402,29 @@
+             try
+             {
+                 string entry = string.Format("[{0:yyyy-MM-dd HH:mm:ss.fff}] {1}\r\n", DateTime.Now, msg);
+-                if (!string.IsNullOrEmpty(s_logFilePath))
++                if (string.IsNullOrEmpty(s_logFilePath)) return;
++
++                // Roll the log once it passes the cap. One scan session produced
++                // 8 MB / 110k lines, which is unusable for diagnosis. Checked
++                // every 200 writes so this is not a stat() per line.
++                if (s_logMaxMb > 0 && ++s_logWriteCounter % 200 == 0)
+                 {
+-                    File.AppendAllText(s_logFilePath, entry);
++                    try
++                    {
++                        FileInfo fi = new FileInfo(s_logFilePath);
++                        if (fi.Exists && fi.Length > (long)s_logMaxMb * 1024L * 1024L)
++                        {
++                            string prev = Path.Combine(
++                                Path.GetDirectoryName(s_logFilePath),
++                                Path.GetFileNameWithoutExtension(s_logFilePath) + "_prev.txt");
++                            if (File.Exists(prev)) File.Delete(prev);
++                            File.Move(s_logFilePath, prev);
++                        }
++                    }
++                    catch { }
+                 }
++
++                File.AppendAllText(s_logFilePath, entry);
+             }
+             catch { }
+         }
+@@ -585,6 +613,14 @@
+             {
+                 s_connection = null;
+                 s_isConnectedToHardware = false;
++                // The adapter is reset on the next connect (ATZ), which clears
++                // its header. Forget ours too, or PassThruWriteMsgs will think
++                // ATSH is still current and skip re-sending it.
++                s_currentTxCanId = 0;
++                s_currentRxCanId = 0;
++                s_multiFramePayload.Clear();
++                s_multiFrameRxId = 0;
++                s_expectedMultiLength = -1;
+             }
+         }
+ 
+@@ -595,7 +631,12 @@
+ 
+             try
+             {
+-                s_connection.DiscardInBuffer();
++                // Flushing mid-reassembly discards the consecutive frames we are
++                // still waiting for.
++                if (s_expectedMultiLength < 0)
++                {
++                    s_connection.DiscardInBuffer();
++                }
+                 s_connection.DiscardOutBuffer();
+ 
+                 Log("TX -> " + cmd);
+@@ -640,7 +681,9 @@
+                 Thread.Sleep(50);
+                 s_connection.DiscardInBuffer();
+ 
+-                string r = SendCommand("AT Z", 1000);
++                // ATZ is a full adapter reset and the slowest AT command there is;
++                // 1000 ms can truncate the version banner before it arrives.
++                string r = SendCommand("AT Z", 3000);
+                 if (string.IsNullOrEmpty(r) || (!r.Contains("ELM") && !r.Contains("OBD") && !r.Contains(">")))
+                 {
+                     r = SendCommand("AT", 400);
+@@ -658,7 +701,15 @@
+                 SendCommand("ATSTFF"); // Maximum timeout (~1020ms) for slower ECUs (BMS, BCM, Airbag)
+                 SendCommand("ATAT2");  // Adaptive Timing 2 (fast when ECU answers, generous when slow)
+                 SendCommand("ATCAF1"); // CAN Auto Formatting on (automatic ISO-TP flow control & reassembly)
+-                SendCommand("ATFCSM0");// Flow Control Mode 0 (automatic flow control to ATSH / ATFCSH)
++                // Flow Control Mode 0: the adapter generates flow-control frames
++                // itself, deriving the header from the frame it is replying to.
++                // Verified working - multi-frame reassembly succeeds in the logs.
++                //
++                // Note this makes the per-ECU ATFCSH in PassThruWriteMsgs inert:
++                // ATFCSH is only consulted in mode 1. It is left in place because
++                // it is harmless, and mode 1 would additionally require ATFCSD to
++                // be set before the mode switch or the adapter rejects it.
++                SendCommand("ATFCSM0");
+                 SendCommand("ATSP6");  // ISO 15765-4 CAN (11 bit ID, 500 kbaud) - Tata Passenger Car standard
+ 
+                 if (s_openFilter)
+@@ -715,6 +766,7 @@
+                 sb.AppendFormat("  \"isHardwareConnected\": {0},\n", s_isConnectedToHardware ? "true" : "false");
+                 sb.AppendFormat("  \"protocol\": \"ISO 15765-4 CAN (500k 11-bit)\",\n");
+                 sb.AppendFormat("  \"activeEcuId\": \"0x{0:X3}\",\n", s_currentTxCanId);
++                sb.AppendFormat("  \"droppedForeignFrames\": {0},\n", s_droppedForeignFrames);
+                 sb.AppendFormat("  \"activeEcuName\": \"{0}\",\n", EscapeJson(s_activeEcuName));
+                 sb.AppendFormat("  \"latencyMs\": {0},\n", s_lastLatencyMs);
+                 sb.AppendFormat("  \"totalTxPackets\": {0},\n", s_totalTxPackets);
+@@ -1064,7 +1116,7 @@
+                         {
+                             if (targetRx > 0)
+                             {
+-                                SendCommand(string.Format("ATCRA {0:X3}", targetRx)); // Target ECU hardware receive filter
++                                SendCommand(string.Format("ATCRA {0:X3}", targetRx)); // hardware receive filter
+                             }
+                             else
+                             {
+@@ -1197,6 +1249,18 @@
+                 {
+                     canId = s_currentRxCanId > 0 ? s_currentRxCanId : (requestTxCanId + 8);
+                 }
++                else if (!IsExpectedResponder(canId, requestTxCanId))
++                {
++                    // A frame from an ECU we did not just address. Almost always a
++                    // late reply to an earlier request still draining out of the
++                    // adapter. Accepting it would report one ECU's data as
++                    // another's, which is worse than dropping it.
++                    s_droppedForeignFrames++;
++                    Log(string.Format(
++                        "Dropped frame from 0x{0:X3} ({1}) - request went to 0x{2:X3}, expected reply on 0x{3:X3}",
++                        canId, GetEcuName(canId), requestTxCanId, s_currentRxCanId));
++                    continue;
++                }
+ 
+                 byte[] rawBytes = HexStringToBytes(payloadHex);
+                 if (rawBytes.Length == 0) continue;
+@@ -1301,6 +1365,25 @@
+             }
+         }
+ 
++        /// <summary>
++        /// True when <paramref name="rxCanId"/> is a plausible responder for a
++        /// request sent to <paramref name="txCanId"/>. Accepts the negotiated Rx
++        /// id, the ISO 15765-4 convention of request+8, and any id registered by
++        /// TDS through PassThruStartMsgFilter. Functional requests (0x7DF) accept
++        /// anything, since that is the point of them.
++        /// </summary>
++        private static bool IsExpectedResponder(uint rxCanId, uint txCanId)
++        {
++            if (s_openFilterAcceptAll) return true;
++            if (txCanId == 0x7DF || txCanId == 0) return true;
++            if (s_currentRxCanId != 0 && rxCanId == s_currentRxCanId) return true;
++            if (rxCanId == txCanId + 8) return true;
++            uint mapped;
++            if (s_filterMap.TryGetValue(txCanId, out mapped) && mapped != 0 && rxCanId == mapped)
++                return true;
++            return false;
++        }
++
+         private static bool IsHex(string s)
+         {
+             foreach (char c in s)
