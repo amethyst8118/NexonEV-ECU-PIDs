@@ -47,28 +47,41 @@ Both transports carry the same `34xx` DID block, so nothing else in the file cha
 
 ## Reading `Cell Balance Status [bits]`
 
-`$3479` packs six flags into one byte, and the profile shows it as a **decimal
-number**, not as separate switches. Decode it by ANDing the masks:
+`$3479` packs several flags into one byte, and the profile shows it as a **decimal
+number**, not as separate switches. Decode it by ANDing the masks.
 
-| Mask | Bit | Signal | Set means |
-|------|-----|--------|-----------|
-| `0x01` | 0 | BMS_DerateFlag | power derating active |
-| `0x02` | 1 | **BMS_CellBalanceStatus** | **balancing running now** |
-| `0x04` | 2 | HSC_BCM_LEAKAGE_ENA | leakage detection enabled |
-| `0x08` | 3 | VCU_Charging_Flag | charging |
-| `0x10` | 4 | VCU_HVILDetect | HVIL detection enabled |
-| `0x20` | 5 | **VCU_EqualizationTrigger** | VCU requested balancing |
+> ⚠️ **Two database generations define this DID differently, and the balancing
+> bit moves between them.** Since this profile talks to `785`, the TDS 20.0 table
+> is the one that applies.
 
-Common values, in decimal as CarScanner shows them:
+**TDS 20.0 (`0x785`) — what this profile uses:**
+
+| Mask | Bit | Signal |
+|------|-----|--------|
+| `0x01` | 0 | VCU HVIL Detect Signal |
+| `0x02` | 1 | VCU Insulation Control Command |
+| `0x04` | 2 | **BMS Cell Balance Status — balancing running now** |
+
+Values you would see in decimal:
 
 | Shows | Meaning |
 |-------|---------|
-| `0` | parked, idle |
-| `8` | charging, not balancing |
-| `40` | charging, VCU asked — BMS declined, conditions not met |
-| `42` | charging **and balancing** |
-| `16` | driving |
-| `17` | driving, power derating active |
+| `0` | idle |
+| `1` | HVIL detection on |
+| `4` | **balancing** |
+| `5` | HVIL + balancing |
+| `7` | HVIL + insulation control + balancing |
+
+**TDS 8.9S (29-bit `0x1BDA96F1`) — the older pack**, where balancing is `0x02`
+and the byte also carries derate, charging and the VCU equalization trigger at
+`0x20`. Full table in [`../Nexon_EV_All_PIDs.md`](../Nexon_EV_All_PIDs.md).
+
+Reading the wrong table does not fail visibly — on TDS 20.0, `0x02` is
+*insulation control*, not balancing. A quick check: if `22 340E` returns data,
+you are on the TDS 20.0 database.
+
+On TDS 20.0 the older packed bits also got their own DIDs — `$340E` operating
+mode and `$340F` derate flag — which are easier to read than bit-masking.
 
 **On the range.** The six documented masks OR together to `0x3F`, so any combination
 of *known* flags lands between 0 and 63. The DID is a full byte, though, and bits 6

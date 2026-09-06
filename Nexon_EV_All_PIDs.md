@@ -214,7 +214,9 @@ you will actually reach from an OBD adapter answer on **11-bit**: the **VECU** a
 ## 1B. BMS — Nexon EV Max (KPD / K1AIO-K2AIO)
 
 > The Nexon EV Max battery pack, `34xx` DID block, target `0x96`. Extracted from
-> all four DID tables of `KPD_EV_BMS.inf` (TDS 8.9S), cross-checked against the
+> two database generations — TDS 20.0's `BMS_DB.sdf` (109 DIDs, 11-bit `0x785`,
+> decrypted with the provider password found in `BMS.dll`) and the older
+> `KPD_EV_BMS.inf` from TDS 8.9S (55 DIDs, 29-bit) — cross-checked against the
 > Gotion, CESL and Kratos BMS databases and against Tata's own BMS DTC service
 > manuals, and independently corroborated by the community `tata-ev-bms` project
 > (reverse-engineered on a 2023 Nexon EV Max). DID assignments are further confirmed
@@ -240,11 +242,13 @@ special wiring.
 | Frame format | 11-bit standard (`ATSP6`) |
 | Physical bus | diagnostic CAN — OBD pins 6 / 14 |
 
-This is the address the Tata Punch EV answers on, and the one the community
-`tata-ev-bms` app uses on a Nexon EV Max. It is what the CarScanner profile in
-[`carscanner/`](carscanner/) ships with.
+**This is what the current factory tool itself uses.** TDS 20.0's own
+`BMS_DB.sdf` records `TesterAddress 0x785`, `ECUAddress 0x78D`,
+`CanFrameFormat 1` (11-bit), session `0x03`, 500 kbps, `STMin 10`. The Tata Punch
+EV answers here too, and the community `tata-ev-bms` app uses it on a Nexon EV Max.
+It is what the CarScanner profile in [`carscanner/`](carscanner/) ships with.
 
-**29-bit (extended) — the factory tool's identity**
+**29-bit (extended) — the older 8.9S database**
 
 | Setting | Value |
 |---------|-------|
@@ -353,17 +357,43 @@ not recorded in the database.
 
 ### Bit-packed status — `$3479`
 
-One read of `22 3479` returns six independent flags in a single byte. The masks
-are explicit in the database, so this decode is reliable.
+> ⚠️ **The two database generations disagree on this DID.** Check which one
+> applies to your car before trusting a decode — the balancing bit moves.
+
+**TDS 20.0 (`BMS_DB.sdf`, 11-bit `0x785`)** — use this if the BMS answers on `785`:
+
+| Mask | Bit | Signal | 0 | set |
+|------|-----|--------|---|-----|
+| `0x01` | 0 | VCU HVIL Detect Signal | disable | enable |
+| `0x02` | 1 | VCU Insulation Control Command | disable | enable |
+| `0x04` | 2 | **BMS Cell Balance Status Flag** | disable | **enable** |
+
+**TDS 8.9S (`KPD_EV_BMS.inf`, 29-bit `0x1BDA96F1`)** — the older pack:
 
 | Mask | Bit | Signal | 0 | 1 |
 |------|-----|--------|---|---|
 | `0x01` | 0 | BMS_DerateFlag | disable | enable |
-| `0x02` | 1 | BMS_CellBalanceStatus | disable | enable |
+| `0x02` | 1 | **BMS_CellBalanceStatus** | disable | **enable** |
 | `0x04` | 2 | HSC_BCM_LEAKAGE_ENA | disable | enable |
 | `0x08` | 3 | VCU_Charging_Flag | disable | enable |
 | `0x10` | 4 | VCU_HVILDetect | disable | enable |
 | `0x20` | 5 | VCU_EqualizationTrigger | disable | enable |
+
+So balancing is **`0x04` on TDS 20.0** but **`0x02` on 8.9S**, and `0x02` means
+insulation control on the newer one. Reading the wrong table does not fail
+visibly — it silently reports the wrong signal.
+
+Two things help you tell them apart:
+
+- **Which address answers.** `0x785` → TDS 20.0 table; `0x1BDA96F1` on pins 3/11
+  → 8.9S table.
+- **`$340E` and `$340F` exist only on TDS 20.0.** If `22 340E` returns data, you
+  are on the newer database, and operating mode and derate have their own DIDs
+  rather than being packed into `$3479`.
+
+`BMS_DB.sdf` also carries stale `ByteType` rows (`ParameterId` 86/87) holding the
+8.9S layout with no matching DID — leftovers from the older generation, not a
+third variant.
 
 #### Reading cell balancing
 
@@ -411,18 +441,25 @@ delta under load is mostly internal-resistance spread and shrinks when you stop.
 | BMS_PreRlyClsd | `0` | open |
 | BMS_PreRlyClsd | `1` | close |
 
-> ✔ **Confirmed packed.** Tata's Kanger1.0 AIO BMS DTC document states, for the
-> negative contactor (`P1235`, `P3072`) *and* separately for the positive contactor
-> (`P1236`), that "its ON/OFF status will be populated in diagnostics through DID
-> parameter 3404" — so one DID genuinely reports multiple contactors.
->
-> ⚠️ All three signals carry mask `FF`, which every other Tata BMS avoids by
-> giving the relays **separate DIDs** (`$3006` positive, `$3007` negative,
-> `$3008` pre-charge). The `FF` masks are an authoring slip. The bit assignment
-> is **not recoverable from the database**: in `$3479`, where the masks were
-> filled in properly, the row order (`02 10 01 04 20 08`) does not follow bit
-> order — so row order here proves nothing. Read the raw byte and toggle
-> each relay to map the bits.
+> ✔ **Bit assignment resolved.** The 8.9S database gives all three relay signals
+> mask `FF`, which made the bit order unrecoverable. TDS 20.0's `BMS_DB.sdf` fills
+> the masks in properly:
+
+| Mask | Bit | Signal | 0 | set |
+|------|-----|--------|---|-----|
+| `0x01` | 0 | BDU Precharge Relay Status | Open | Closed |
+| `0x02` | 1 | BDU Main Negative Relay Status | Open | Closed |
+| `0x04` | 2 | BDU Main Positive Relay Status | Open | Closed |
+
+Note the `ResultByte` in the database is the **masked value**, not `0`/`1` — main
+positive closed reads as `4`, not `1`. Test with `byte & mask`, not equality.
+
+Tata's Kanger1.0 AIO DTC document corroborates the packing: for the negative
+contactor (`P1235`, `P3072`) *and* separately the positive one (`P1236`), it says
+"its ON/OFF status will be populated in diagnostics through DID parameter 3404".
+
+The 8.9S row order (`MaiRlyN`, `MaiRlyP`, `PreRly`) does **not** match this bit
+order, which is why guessing from row order would have been wrong.
 
 **`3405` BMS_InitState**
 
@@ -481,23 +518,77 @@ throughout Tata's BMS DTC manuals:
 | `3` | THIRD FAULT LEVEL |
 | `4` | FOURTH FAULT LEVEL |
 
-**`$347A` BMS_OperMod** — do **not** assume a mapping here. Kratos and Gotion
-both define `BMS_OperMod` and they disagree outright, so KPD's is unknown:
+**Operating mode — resolved.** TDS 20.0 exposes it as its own DID, `$340E`
+**BMS Operation Mode**, with a full enum:
 
-| Value | Kratos | Gotion |
-|-------|--------|--------|
-| `0` | Initializing | Initializing |
-| `1` | Ready | Standby |
-| `2` | Charging | PreCharge |
-| `3` | Run | HVActive |
-| `4` | Error | Emergency Power down |
-| `5` | Sleep | PreChargeFailure |
-| `6` | Fault | Fault |
-| `7` | Ready to Sleep | – |
-| `8` | Insulation check routine | – |
+| Value | Meaning |
+|-------|---------|
+| `0` | Power-on self-test |
+| `1` | Stand By |
+| `2` | Precharge |
+| `3` | Hvactive |
+| `4` | HVPowerdown |
+| `5` | PreChargeFailure |
+| `6` | Fault |
+| `0x0F` | Ready to Sleep |
+
+This is close to Gotion's scheme and unlike Kratos's, which is why the two could
+not be reconciled earlier — picking either would have been wrong.
+
+`$347A BMS_OperMod` on the older 8.9S database has no enum of its own. If `$340E`
+answers on your car, prefer it. Likewise `$340F` **BMS Derate Flag** (mask `0x01`)
+is a standalone DID on TDS 20.0 rather than a bit inside `$3479`.
 
 **`$3483` VCU_BMSModeReq** — the mode the VCU is requesting; no sibling database
 defines an enum for it.
+
+### New DIDs in the TDS 20.0 database
+
+`BMS_DB.sdf` from TDS 20.0 carries **109 DIDs** against 55 in the 8.9S file.
+Beyond the identification blocks (`72xx`, `F19x`, `A00B`, `7400`), these live
+signals are new — most notably a whole thermal-runaway sensing group and
+per-relay side voltages that the older database has no equivalent for.
+
+| DID | Signal | B | Unit | Conversion |
+|-----|--------|---|------|------------|
+| `3407` | BMS_MinTempBattPackSubSysNo | 1 | pos | `raw` |
+| `3408` | BMS_MaxTempBattPackSubSysNo | 1 | pos | `raw` |
+| `340E` | BMS Operation Mode | 1 | – | `enum / bits` |
+| `340F` | BMS Derate Flag | 1 | – | `enum / bits` |
+| `3416` | BMS_MaxCellVoltSubSysNo | 1 | mV | `raw` |
+| `3418` | BMS_MaxCellVoltSubSysNo | 1 | pos | `raw` |
+| `3490` | BatteryTV_V1 | 2 | – | `raw × 0.01` |
+| `3491` | BatteryTV_V5 | 2 | – | `raw × 0.1` |
+| `3495` | BMS_MaxTempBoxNO | 1 | – | `raw` |
+| `3496` | BMS_MinTempBoxNo | 1 | – | `raw` |
+| `3497` | BMS_InletTemp2 | 1 | – | `raw − 50` |
+| `3498` | BMS_OutletTemp2 | 1 | – | `raw − 50` |
+| `3527` | BMS_Crash_Signal | 2 | NA | `raw` |
+| `3528` | Fast Charging Positive relay side voltage | 2 | V | `raw × 0.01` |
+| `3529` | Battery Main Positive relay side voltage | 2 | V | `raw × 0.01` |
+| `352A` | Fast Charging Negative relay side voltage | 2 | V | `raw × 0.01` |
+| `352B` | Battery Main Negative relay side voltage | 2 | V | `raw × 0.01` |
+| `353A` | Smoke Sensor Logic | 2 | – | `enum / bits` |
+| `353B` | Thermal Runaway Reason | 1 | – | `raw` |
+| `353C` | BMS Fault Rolling Counter | 1 | – | `raw` |
+| `353D` | BMS SOC Calibration Flag | 1 | – | `raw` |
+| `353E` | Cummulative Charge Capacity | 4 | Ah | `raw` |
+| `353F` | Cummulative Discharge Capacity | 4 | Ah | `raw` |
+| `3540` | Aerosol Concentration Value | 2 | – | `raw` |
+| `3565` | BMS HVIL Hardwire Signal | 1 | – | `raw` |
+| `3566` | SOC Accumulation since last 100% Charge | 2 | – | `raw` |
+| `3567` | Mapped Ah Accumulation Value | 4 | – | `raw` |
+| `3568` | BMS Calculated SOC Reference | 2 | – | `raw × 0.1` |
+
+The safety group is the significant addition: `$3527` crash signal, `$353A`
+smoke sensor, `$353B` thermal runaway reason, `$3540` aerosol concentration and
+`$3565` HVIL hardwire. Together with `$3528`–`$352B` (voltage on each side of
+the four contactors) they give a far better picture of pack safety state than
+the 8.9S set allowed.
+
+`$353E`/`$353F` cumulative charge and discharge capacity, and `$3566`–`$3568`
+(SOC accumulation since last full charge, mapped Ah, calculated SOC reference)
+are what you would want for tracking real capacity fade over time.
 
 ### Documented thresholds
 
