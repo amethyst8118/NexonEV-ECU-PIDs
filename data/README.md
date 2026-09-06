@@ -20,29 +20,14 @@ install. Prefer these.
 | `TDS20_IMMO_Unified_PIDs.json` | Immobiliser | `0x704` | 41 | 31 | 10 |
 | `TDS20_MCU_Unified_PIDs.json` | Motor Control | `0x783` | 27 | 27 | 0 |
 
-**TDS 8.9S** — the older generation. Kept because a few are *richer* than their
-TDS 20.0 counterparts: the 8.9S MCU database has 164 DIDs against 27, and the BCS
-has no TDS 20.0 equivalent at all.
+**TDS 8.9S** — only the two that are *not* superseded are kept. The rest were
+removed: their TDS 20.0 equivalents are newer, larger and correctly addressed.
 
-| File | ECU | DIDs | scaled | enums |
-|------|-----|-----:|-------:|------:|
-| `KPD_EV_MCU_Unified_PIDs.json` | Motor Control Unit | 164 | 150 | 14 |
-| `KPD_EV_BMS_Unified_PIDs.json` | BMS (29-bit variant) | 55 | 48 | 7 |
-| `KPD_EV_BCS_Unified_PIDs.json` | Battery Cooling System | 40 | 25 | 15 |
-| `KPD_EV_DCDC_Unified_PIDs.json` | DC-DC Converter | 38 | 38 | 0 |
-| `KPD_EV_OBC_Unified_PIDs.json` | On Board Charger | 22 | 22 | 0 |
+| File | ECU | DIDs | Why kept |
+|------|-----|-----:|----------|
+| `KPD_EV_MCU_Unified_PIDs.json` | Motor Control Unit | 164 | TDS 20.0's MCU database has only 27 |
+| `KPD_EV_BCS_Unified_PIDs.json` | Battery Cooling System | 40 | no TDS 20.0 equivalent exists |
 
-The two BMS files are **different database generations of the same ECU** and they
-disagree on some bit-packed DIDs — `$3479`'s balancing bit is `0x04` on TDS 20.0
-but `0x02` on 8.9S. Prefer the TDS 20.0 file; it is what the current tool ships
-and it matches the `0x785` addressing. Note its `FormulaDescription` ends in
-`- Offset`, not `+ Offset`: that database stores offset magnitudes to subtract
-(temperature `40`, current `3200`) where 8.9S stored them signed.
-
-These are the raw definitions. For addressing, bus wiring, corrections and the
-caveats that matter in practice, read
-[`../Nexon_EV_All_PIDs.md`](../Nexon_EV_All_PIDs.md) — several DB fields are wrong
-or incomplete and are corrected there, not here.
 
 ## Schema
 

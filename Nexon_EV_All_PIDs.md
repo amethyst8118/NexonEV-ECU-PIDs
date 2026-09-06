@@ -1,8 +1,15 @@
 # Nexon EV - Complete ECU Diagnostic PIDs Reference
 
-All ECUs run **500 kbps CAN**. Most use **Extended Frame (29-bit)** addressing, but the two
-you will actually reach from an OBD adapter answer on **11-bit**: the **VECU** at `0x7E3` /
-`0x7EB`, and the **BMS** at `0x785` / `0x78D`.
+Every diagnosable ECU on this car runs **500 kbps CAN with 11-bit addressing** and is
+reachable from the standard OBD-II socket. Sections 0–3C are generated from the
+**TDS 20.0** ECU databases, decrypted from the packed install; later sections are
+older material kept for reference and marked as such.
+
+- [`READING_DTCS.md`](READING_DTCS.md) — how to pull fault codes, with worked examples
+- [`DECODE_TABLES.md`](DECODE_TABLES.md) — what every coded DID value means, 423 DIDs
+- [`CELL_BALANCING.md`](CELL_BALANCING.md) — `$3479` in detail
+- [`data/`](data/) — machine-readable DID definitions, 1,168 DIDs across eight ECUs
+- [`carscanner/`](carscanner/) — importable CarScanner profiles
 
 ---
 
@@ -27,6 +34,9 @@ The powertrain runs `783` MCU → `784` DCDC → `785` BMS → `786` OBC, respon
 always request + 8.
 
 ### Reading DTCs
+
+Full guide with worked examples, code decoding and the status byte:
+[`READING_DTCS.md`](READING_DTCS.md).
 
 All eight use standard UDS `ReadDTCInformation`. From an ELM327:
 
@@ -57,6 +67,11 @@ clearing an active fault only hides it until the next drive cycle.
 ---
 
 ## 1. BMS (Battery Management System) - Gotion ECU
+
+> ℹ️ **Legacy section.** Carried over from the original revision of this file and
+> **not** regenerated from the TDS 20.0 databases — there is no TDS 20.0 source for
+> this ECU/variant. Treat the values as unverified.
+
 
 ### CAN IDs
 | Direction | CAN ID |
@@ -261,732 +276,784 @@ clearing an active fault only hides it until the next drive cycle.
 
 ---
 
-## 1B. BMS — Nexon EV Max (KPD / K1AIO-K2AIO)
+## 1B. BMS — Battery Management System
 
-> The Nexon EV Max battery pack, `34xx` DID block, target `0x96`. Extracted from
-> two database generations — TDS 20.0's `BMS_DB.sdf` (109 DIDs, 11-bit `0x785`,
-> decrypted with the provider password found in `BMS.dll`) and the older
-> `KPD_EV_BMS.inf` from TDS 8.9S (55 DIDs, 29-bit) — cross-checked against the
-> Gotion, CESL and Kratos BMS databases and against Tata's own BMS DTC service
-> manuals, and independently corroborated by the community `tata-ev-bms` project
-> (reverse-engineered on a 2023 Nexon EV Max). DID assignments are further confirmed
-> by Tata's own *Kanger1.0 AIO BMS DTC Troubleshooting Document* v2.0 shipped inside
-> TDS 20.0 (`Reference Files/OSPREY/BMS/BMS_K1AIO_DTC.pdf`, and the K2AIO twin), which
-> names `3400`, `3404`, `3409`, `340B`, `3415` and `3417` explicitly.
+> Source: **TDS 20.0 `BMS_DB.sdf`**, decrypted from the packed install. This is
+> the database the current factory tool ships. It supersedes the older TDS 8.9S
+> `KPD_EV_BMS.inf` (55 DIDs, 29-bit) that earlier revisions of this file used.
 
-Confidence markers used below: ✔ corroborated by an independent source ·
-△ corrected or adjusted, with the reason given · ? unverified, calibrate on
-the car.
-
-### Bus, session and transport
-
-The same `34xx` DID block is reachable two ways. Try 11-bit first — it needs no
-special wiring.
-
-**11-bit (standard) — use this with generic tools**
+### Bus
 
 | Setting | Value |
 |---------|-------|
-| Request (Tester → ECU) | **`0x785`** |
-| Response (ECU → Tester) | `0x78D` |
-| Frame format | 11-bit standard (`ATSP6`) |
-| Physical bus | diagnostic CAN — OBD pins 6 / 14 |
+| Request | **`0x785`** |
+| Response | **`0x78D`** |
+| Frame | 11-bit standard, 500 kbps |
+| Session | `10 03` before reads |
+| Padding | 8 bytes, `STMin` 10 |
 
-**This is what the current factory tool itself uses.** TDS 20.0's own
-`BMS_DB.sdf` records `TesterAddress 0x785`, `ECUAddress 0x78D`,
-`CanFrameFormat 1` (11-bit), session `0x03`, 500 kbps, `STMin 10`. The Tata Punch
-EV answers here too, and the community `tata-ev-bms` app uses it on a Nexon EV Max.
-It is what the CarScanner profile in [`carscanner/`](carscanner/) ships with.
+Straight from the database's own `DiagnocommSettings` — `TesterAddress 0x785`,
+`ECUAddress 0x78D`, `CanFrameFormat 1`.
 
-**29-bit (extended) — the older 8.9S database**
+### Scalar PIDs
 
-| Setting | Value |
-|---------|-------|
-| Request (Tester → ECU) | `0x1BDA96F1` |
-| Response (ECU → Tester) | `0x1BDAF196` |
-| Frame format | 29-bit extended (`CanFrameFormat=2`) |
-| Physical bus | **Powertrain CAN — OBD pins 3 (H) / 11 (L)** |
-
-Common to both: **500 kbps**, session `10 03` extended (`DiagnosticMode=0x03`),
-frames padded to 8 bytes (`SendAlways8Bytes=TRUE`), 3 ms inter-byte delay.
-
-> ⚠️ If `0x785` is silent, your gateway is not forwarding diagnostics to the
-> BMS and you need the 29-bit route on pins 3/11. On the car this was tested
-> against, a sweep from pins 6/14 found `785` silent while `7E3` answered on the
-> same run; an 11-bit sweep of `780`–`7E7` and a 29-bit sweep including
-> `1BDA96F1` were both silent there. The DIDs and scalings are identical either
-> way — only the transport changes.
-
-Any response longer than 7 payload bytes uses ISO-TP: the ECU sends a First Frame
-(`10 LL ...`) and will not continue until you reply with a Flow Control frame
-(`30 00 00`). Every identification PID below is multi-frame.
-
-### Services
-
-| Purpose | Request |
-|---------|---------|
-| Read data by identifier | `22 <DID>` |
-| Read DTCs | `19 02 FF` |
-| Read freeze-frame / environment data | `19 06 <DTC hi> <DTC mid> <DTC lo> 03` |
-| Clear DTCs | `14 FF FF FF` |
-| Routine — Save Parameter | `31 01 02 22`; `31 02 02 22` stop, `31 03 02 22` status |
-
-### Key live values
-
-The subset worth logging. `raw` is the big-endian integer of the payload bytes,
-which begin at byte 4 of the response (`62 <hi> <lo> <data…>`).
-
-| DID | Signal | B | Unit | Conversion | |
-|-----|--------|---|------|------------|---|
-| `3400` | BMS_BattCurVoltage | 2 | V | `raw × 0.1` | ✔ |
-| `3401` | BMS_BattCurCurrent | 2 | A | `raw × 0.1 − 3200` | ✔ |
-| `3402` | BMS_SOC | 2 | % | `raw × 0.1` | ✔ |
-| `3403` | BMS_SOH | 2 | % | `raw × 0.1` | ✔ |
-| `3415` | BMS_MaxCellVolt | 2 | mV | `raw` | ✔ |
-| `3417` | BMS_MinCellVolt | 2 | mV | `raw` | ✔ |
-| `34D5` | BMS_CellVolDiff | 2 | mV | `raw` | ✔ |
-| `3419` | BMS_MaxCellVoltNo | 1 | – | `raw` | ✔ |
-| `341A` | BMS_MinCellVoltNo | 1 | – | `raw` | ✔ |
-| `3409` | BMS_MaxPresentTemp | 1 | °C | `raw − 40` | ✔ |
-| `340B` | BMS_MinPresentTemp | 1 | °C | `raw − 40` | ✔ |
-| `3412` | BMS_BattPresentAverageTemp | 1 | °C | `raw − 40` | ✔ |
-| `3413` | BMS_InsulationResValue | 2 | kΩ | `raw` |  |
-| `3492` | BMS_PowerSupply voltage | 2 | V | `raw × 0.001` | △ |
-
-### All scalar PIDs
-
-| DID | Signal | B | Unit | Conversion | Plausible range | |
-|-----|--------|---|------|------------|-----------------|---|
-| `3400` | BMS_BattCurVoltage | 2 | V | `raw × 0.1` | 0 … 450 | ✔ |
-| `3401` | BMS_BattCurCurrent | 2 | A | `raw × 0.1 − 3200` | -400 … 400 | ✔ |
-| `3402` | BMS_SOC | 2 | % | `raw × 0.1` | 0 … 100 | ✔ |
-| `3403` | BMS_SOH | 2 | % | `raw × 0.1` | 0 … 100 | ✔ |
-| `3406` | BMS_HeartbeatSignal | 1 | – | `raw` | 0 … 255 |  |
-| `3409` | BMS_MaxPresentTemp | 1 | °C | `raw − 40` | -40 … 80 | ✔ |
-| `340A` | BMS_MaxTempProbeNo | 1 | – | `raw` | 0 … 255 |  |
-| `340B` | BMS_MinPresentTemp | 1 | °C | `raw − 40` | -40 … 80 | ✔ |
-| `340C` | BMS_MinTempProbeNo | 1 | – | `raw` | 0 … 255 |  |
-| `340D` | BMS_FltRank | 1 | – | `raw` | 0 … 255 |  |
-| `3410` | BMS_InletTemp | 1 | °C | `raw − 40` | -40 … 80 |  |
-| `3411` | BMS_OutletTemp | 1 | °C | `raw − 40` | -40 … 80 | ✔ |
-| `3412` | BMS_BattPresentAverageTemp | 1 | °C | `raw − 40` | -40 … 80 | ✔ |
-| `3413` | BMS_InsulationResValue | 2 | kΩ | `raw` | 0 … 10000 |  |
-| `3415` | BMS_MaxCellVolt | 2 | mV | `raw` | 2500 … 4500 | ✔ |
-| `3417` | BMS_MinCellVolt | 2 | mV | `raw` | 2500 … 4500 | ✔ |
-| `3419` | BMS_MaxCellVoltNo | 1 | – | `raw` | 0 … 255 | ✔ |
-| `341A` | BMS_MinCellVoltNo | 1 | – | `raw` | 0 … 255 | ✔ |
-| `341B` | BMS_TotalTempProbeNumber | 1 | – | `raw` | 0 … 255 |  |
-| `347A` | BMS_OperMod | 1 | – | `raw` | 0 … 255 |  |
-| `347B` | BMS_MaxAllowContinusChrgCurr | 2 | A | `raw × 0.1` | 0 … 400 |  |
-| `347C` | BMS_MaxAllowContinusDisChrgCurr | 2 | A | `raw × 0.1` | 0 … 400 |  |
-| `347D` | BMS_AllowedMaxContinusOutPower | 2 | kW | `raw × 0.1` | 0 … 150 | △ |
-| `347E` | BMS_AllowedMaxPeakOutPower | 2 | kW | `raw × 0.1` | 0 … 150 | △ |
-| `347F` | BMS_AllowedMaxPeakFBPower | 2 | kW | `raw × 0.1` | 0 … 150 | △ |
-| `3480` | BMS_AllowedMaxContinusFBPower | 2 | kW | `raw × 0.1` | 0 … 150 | △ |
-| `3481` | VeDATM_U_NegBusbarVolt1 | 2 | V | `raw × 0.1` | 0 … 450 |  |
-| `3482` | VeDATM_U_PosBusbarVolt1 | 2 | V | `raw × 0.1` | 0 … 450 |  |
-| `3483` | VCU_BMSModeReq | 1 | – | `raw` | 0 … 255 |  |
-| `3484` | MCU_Vdc | 2 | V | `raw` | 0 … 450 | ? |
-| `3492` | BMS_PowerSupply voltage | 2 | V | `raw × 0.001` | 0 … 16 | △ |
-| `34D5` | BMS_CellVolDiff | 2 | mV | `raw` | 0 … 500 | ✔ |
-
-Ranges are sensible display bounds, not database values — the DB records only
-the raw integer span.
-
-- `347D` **BMS_AllowedMaxContinusOutPower** — unit corrected — the DB says A, but Gotion's BMS DB carries the same four signal names at the same 0.1 resolution with unit KW
-- `347E` **BMS_AllowedMaxPeakOutPower** — unit corrected — the DB says A, but Gotion's BMS DB carries the same four signal names at the same 0.1 resolution with unit KW
-- `347F` **BMS_AllowedMaxPeakFBPower** — unit corrected — the DB says A, but Gotion's BMS DB carries the same four signal names at the same 0.1 resolution with unit KW
-- `3480` **BMS_AllowedMaxContinusFBPower** — unit corrected — the DB says A, but Gotion's BMS DB carries the same four signal names at the same 0.1 resolution with unit KW
-- `3484` **MCU_Vdc** — res=1 V per the DB; no sibling database defines this signal — verify against pack voltage
-- `3492` **BMS_PowerSupply voltage** — res 0.001 means the raw value is millivolts; other packs use 0.1 or 0.01, so do not substitute theirs
-
-`3485` **BMS_RealTime** is 6 bytes and is not a scalar. CESL's BMS splits the same clock
-into six DIDs — seconds, minutes, hours, month, day, year — so these are
-almost certainly the same six fields packed into one read. The byte order is
-not recorded in the database.
-
-### Bit-packed status — `$3479`
-
-> ⚠️ **The two database generations disagree on this DID.** Check which one
-> applies to your car before trusting a decode — the balancing bit moves.
-
-**TDS 20.0 (`BMS_DB.sdf`, 11-bit `0x785`)** — use this if the BMS answers on `785`:
-
-| Mask | Bit | Signal | 0 | set |
-|------|-----|--------|---|-----|
-| `0x01` | 0 | VCU HVIL Detect Signal | disable | enable |
-| `0x02` | 1 | VCU Insulation Control Command | disable | enable |
-| `0x04` | 2 | **BMS Cell Balance Status Flag** | disable | **enable** |
-
-**TDS 8.9S (`KPD_EV_BMS.inf`, 29-bit `0x1BDA96F1`)** — the older pack:
-
-| Mask | Bit | Signal | 0 | 1 |
-|------|-----|--------|---|---|
-| `0x01` | 0 | BMS_DerateFlag | disable | enable |
-| `0x02` | 1 | **BMS_CellBalanceStatus** | disable | **enable** |
-| `0x04` | 2 | HSC_BCM_LEAKAGE_ENA | disable | enable |
-| `0x08` | 3 | VCU_Charging_Flag | disable | enable |
-| `0x10` | 4 | VCU_HVILDetect | disable | enable |
-| `0x20` | 5 | VCU_EqualizationTrigger | disable | enable |
-
-So balancing is **`0x04` on TDS 20.0** but **`0x02` on 8.9S**, and `0x02` means
-insulation control on the newer one. Reading the wrong table does not fail
-visibly — it silently reports the wrong signal.
-
-Two things help you tell them apart:
-
-- **Which address answers.** `0x785` → TDS 20.0 table; `0x1BDA96F1` on pins 3/11
-  → 8.9S table.
-- **`$340E` and `$340F` exist only on TDS 20.0.** If `22 340E` returns data, you
-  are on the newer database, and operating mode and derate have their own DIDs
-  rather than being packed into `$3479`.
-
-`BMS_DB.sdf` also carries stale `ByteType` rows (`ParameterId` 86/87) holding the
-8.9S layout with no matching DID — leftovers from the older generation, not a
-third variant.
-
-#### Reading cell balancing
-
-Bits 5 and 1 are a command/response pair and say more together than apart:
-
-| `0x20` trigger | `0x02` status | Meaning |
-|---|---|---|
-| set | clear | VCU asked for balancing, BMS declined — conditions not met |
-| set | set | balancing actively running |
-| clear | set | BMS balancing on its own logic |
-| clear | clear | idle |
-
-The VECU carries the same command as **`$34BC` HV Battery cell equalization
-command** on 11-bit `0x7E3`, so the request side is visible from OBD pins 6/14
-even though the BMS's own status is not.
-
-Balancing on this pack is **passive (dissipative)**. Tata's BMS DTC manual states
-the BMS *"perform the balancing by dissipating the heat through balancing
-resistor"*, which is why balancing raises board temperature. Three consequences:
-
-- it can only bleed **high** cells down, never raise a low one — a low outlier
-  cell will never be corrected by balancing;
-- it is slow (tens of mA), so closing a 50 mV gap takes hours, not minutes;
-- it runs during and after **charging** — `0x08 VCU_Charging_Flag` in the same
-  byte is the gate — so bit 1 clear while driving is normal, not a fault.
-
-Read `$34D5` cell-voltage difference **at rest**. The manuals separate static
-(at-rest, `P3007`) from dynamic (under-load, `P3009`) difference faults; a large
-delta under load is mostly internal-resistance spread and shrinks when you stop.
-
-> KPD's DTC list contains **no cell-balancing hardware fault**, while Gotion has
-> `P3054-96` and Kratos has per-pack slave balancing faults. On this pack `$3479`
-> bit 1 is the only visibility into whether the balancing hardware still works.
-
-### State / enumerated PIDs
-
-**`3404` BMS_MaiRlyNClsd**
-
-| Signal | Value | Meaning |
-|--------|-------|---------|
-| BMS_MaiRlyNClsd | `0` | open |
-| BMS_MaiRlyNClsd | `1` | close |
-| BMS_MaiRlyPClsd | `0` | open |
-| BMS_MaiRlyPClsd | `1` | close |
-| BMS_PreRlyClsd | `0` | open |
-| BMS_PreRlyClsd | `1` | close |
-
-> ✔ **Bit assignment resolved.** The 8.9S database gives all three relay signals
-> mask `FF`, which made the bit order unrecoverable. TDS 20.0's `BMS_DB.sdf` fills
-> the masks in properly:
-
-| Mask | Bit | Signal | 0 | set |
-|------|-----|--------|---|-----|
-| `0x01` | 0 | BDU Precharge Relay Status | Open | Closed |
-| `0x02` | 1 | BDU Main Negative Relay Status | Open | Closed |
-| `0x04` | 2 | BDU Main Positive Relay Status | Open | Closed |
-
-Note the `ResultByte` in the database is the **masked value**, not `0`/`1` — main
-positive closed reads as `4`, not `1`. Test with `byte & mask`, not equality.
-
-Tata's Kanger1.0 AIO DTC document corroborates the packing: for the negative
-contactor (`P1235`, `P3072`) *and* separately the positive one (`P1236`), it says
-"its ON/OFF status will be populated in diagnostics through DID parameter 3404".
-
-The 8.9S row order (`MaiRlyN`, `MaiRlyP`, `PreRly`) does **not** match this bit
-order, which is why guessing from row order would have been wrong.
-
-**`3405` BMS_InitState**
-
-| Value | Meaning |
-|-------|---------|
-| `0` | initialing |
-| `1` | init OK |
-
-**`3493` BMS_SOC_CalibrationFlag**
-
-| Value | Meaning |
-|-------|---------|
-| `0` | not reached |
-| `1` | reached |
-
-**`3494` BMS_SOCCalActFlag**
-
-| Value | Meaning |
-|-------|---------|
-| `0` | Not Calibrated |
-| `1` | SOC 100% calibration |
-| `2` | SOC 99% calibration |
-| `3` | SOC 95% calibration |
-| `4` | SOC 0% calibration |
-
-**`3414` BMS_Insulation_Enable**
-
-| Value | Meaning |
-|-------|---------|
-| `0` | disable |
-| `1` | enable |
-
-**`341C` BMS_ChargingPortConnectionStatus**
-
-| Value | Meaning |
-|-------|---------|
-| `0` | connect |
-| `1` | disconnect |
-
-> ⚠️ Polarity is inverted from the obvious reading: **`0` = connected**.
-
-### Codes with no decode table in this database
-
-Three single-byte codes have no enum in `KPD_EV_BMS.inf`. Sibling databases define
-the same signal names, which gives a probable but unconfirmed decode.
-
-**`$340D` BMS_FltRank** — CESL's identically-named signal enumerates as below,
-and the levels line up with the "first / second / third level alarm" wording used
-throughout Tata's BMS DTC manuals:
-
-| Value | Meaning |
-|-------|---------|
-| `0` | NO FAULT |
-| `1` | FIRST FAULT LEVEL |
-| `2` | SECOND FAULT LEVEL |
-| `3` | THIRD FAULT LEVEL |
-| `4` | FOURTH FAULT LEVEL |
-
-**Operating mode — resolved.** TDS 20.0 exposes it as its own DID, `$340E`
-**BMS Operation Mode**, with a full enum:
-
-| Value | Meaning |
-|-------|---------|
-| `0` | Power-on self-test |
-| `1` | Stand By |
-| `2` | Precharge |
-| `3` | Hvactive |
-| `4` | HVPowerdown |
-| `5` | PreChargeFailure |
-| `6` | Fault |
-| `0x0F` | Ready to Sleep |
-
-This is close to Gotion's scheme and unlike Kratos's, which is why the two could
-not be reconciled earlier — picking either would have been wrong.
-
-`$347A BMS_OperMod` on the older 8.9S database has no enum of its own. If `$340E`
-answers on your car, prefer it. Likewise `$340F` **BMS Derate Flag** (mask `0x01`)
-is a standalone DID on TDS 20.0 rather than a bit inside `$3479`.
-
-**`$3483` VCU_BMSModeReq** — the mode the VCU is requesting; no sibling database
-defines an enum for it.
-
-### New DIDs in the TDS 20.0 database
-
-`BMS_DB.sdf` from TDS 20.0 carries **109 DIDs** against 55 in the 8.9S file.
-Beyond the identification blocks (`72xx`, `F19x`, `A00B`, `7400`), these live
-signals are new — most notably a whole thermal-runaway sensing group and
-per-relay side voltages that the older database has no equivalent for.
+`Value = Raw × Resolution − Offset`, big-endian, payload starts after `62 <hi> <lo>`.
 
 | DID | Signal | B | Unit | Conversion |
 |-----|--------|---|------|------------|
-| `3407` | BMS_MinTempBattPackSubSysNo | 1 | pos | `raw` |
-| `3408` | BMS_MaxTempBattPackSubSysNo | 1 | pos | `raw` |
-| `340E` | BMS Operation Mode | 1 | – | `enum / bits` |
-| `340F` | BMS Derate Flag | 1 | – | `enum / bits` |
-| `3416` | BMS_MaxCellVoltSubSysNo | 1 | mV | `raw` |
-| `3418` | BMS_MaxCellVoltSubSysNo | 1 | pos | `raw` |
-| `3490` | BatteryTV_V1 | 2 | – | `raw × 0.01` |
-| `3491` | BatteryTV_V5 | 2 | – | `raw × 0.1` |
-| `3495` | BMS_MaxTempBoxNO | 1 | – | `raw` |
-| `3496` | BMS_MinTempBoxNo | 1 | – | `raw` |
-| `3497` | BMS_InletTemp2 | 1 | – | `raw − 50` |
-| `3498` | BMS_OutletTemp2 | 1 | – | `raw − 50` |
-| `3527` | BMS_Crash_Signal | 2 | NA | `raw` |
-| `3528` | Fast Charging Positive relay side voltage | 2 | V | `raw × 0.01` |
-| `3529` | Battery Main Positive relay side voltage | 2 | V | `raw × 0.01` |
-| `352A` | Fast Charging Negative relay side voltage | 2 | V | `raw × 0.01` |
-| `352B` | Battery Main Negative relay side voltage | 2 | V | `raw × 0.01` |
-| `353A` | Smoke Sensor Logic | 2 | – | `enum / bits` |
-| `353B` | Thermal Runaway Reason | 1 | – | `raw` |
-| `353C` | BMS Fault Rolling Counter | 1 | – | `raw` |
-| `353D` | BMS SOC Calibration Flag | 1 | – | `raw` |
-| `353E` | Cummulative Charge Capacity | 4 | Ah | `raw` |
-| `353F` | Cummulative Discharge Capacity | 4 | Ah | `raw` |
-| `3540` | Aerosol Concentration Value | 2 | – | `raw` |
-| `3565` | BMS HVIL Hardwire Signal | 1 | – | `raw` |
-| `3566` | SOC Accumulation since last 100% Charge | 2 | – | `raw` |
-| `3567` | Mapped Ah Accumulation Value | 4 | – | `raw` |
-| `3568` | BMS Calculated SOC Reference | 2 | – | `raw × 0.1` |
+| `$3400` | BMS_BattCurVoltage | 2 | V | `raw × 0.1` |
+| `$3401` | BMS_BattCurCurrent | 2 | A | `raw × 0.1 − 3200` |
+| `$3402` | BMS_SOC | 2 | % | `raw × 0.1` |
+| `$3403` | BMS_SOH | 2 | % | `raw × 0.1` |
+| `$3406` | BMS Heartbeat Signal / Alive Counter | 1 | - | `raw` |
+| `$3407` | BMS_MinTempBattPackSubSysNo | 1 | pos | `raw` |
+| `$3408` | BMS_MaxTempBattPackSubSysNo | 1 | pos | `raw` |
+| `$3409` | BMS_MaxPresentTemp | 1 | °C | `raw − 40` |
+| `$340A` | BMS_MaxTempProbeNo | 1 | pos | `raw` |
+| `$340B` | BMS_MinPresentTemp | 1 | °C | `raw − 40` |
+| `$340C` | BMS_MinTempProbeNo | 1 | pos | `raw` |
+| `$340D` | BMS_FLTRank | 1 | – | `raw` |
+| `$3410` | BMS Battery Coolant Inlet Temperature | 1 | °C | `raw − 40` |
+| `$3411` | BMS_OutletTemp | 1 | oC | `raw − 40` |
+| `$3411` | BMS Battery Coolant Outlet Temperature | 1 | °C | `raw − 40` |
+| `$3412` | BMS Battery Average Temperature | 1 | °C | `raw − 40` |
+| `$3413` | BMS_InsulationResValue | 2 | KΩ | `raw` |
+| `$3415` | BMS_MaxCellVolt | 2 | mV | `raw` |
+| `$3416` | BMS_MaxCellVoltSubSysNo | 1 | mV | `raw` |
+| `$3417` | BMS_MinCellVolt | 2 | mV | `raw` |
+| `$3418` | BMS_MaxCellVoltSubSysNo | 1 | pos | `raw` |
+| `$3419` | BMS Max Cell Voltage No. | 1 | Pos | `raw` |
+| `$341A` | BMS Min Cell Voltage No. | 1 | pos | `raw` |
+| `$347A` | BMS_OperMod | 1 | – | `raw` |
+| `$347B` | BMS_MaxAllowContinusChrgCurr | 2 | A | `raw × 0.1` |
+| `$347B` | BMS Max Allowed Charging Current | 2 | A | `raw × 0.1` |
+| `$347C` | BMS_MaxAllowContinusDisChrgCurr | 2 | A | `raw × 0.1` |
+| `$347D` | BMS_AllowedMaxContinusOutPower | 2 | W | `raw × 0.1` |
+| `$347E` | BMS_AllowedMaxPeakOutPower | 2 | W | `raw × 0.1` |
+| `$347E` | BMS Max Allowed Discharge Power | 2 | kW | `raw × 0.1` |
+| `$347F` | BMS Max Allowed Regen Power | 2 | kW | `raw × 0.1` |
+| `$3480` | BMS_AllowedMaxContinusFBPower | 2 | W | `raw × 0.1` |
+| `$3481` | VeDATM_U_NegBusbarVolt1 | 2 | mV | `raw` |
+| `$3482` | VeDATM_U_PosBusbarVolt1 | 2 | V | `raw × 0.1` |
+| `$3483` | VCU_BMSModeReq | 1 | – | `raw` |
+| `$3484` | VCU Busbar Voltage | 2 | V | `raw` |
+| `$3485` | BMS_RealTime | 6 | – | `raw` |
+| `$3490` | BatteryTV_V1 | 2 | – | `raw × 0.01` |
+| `$3491` | BatteryTV_V5 | 2 | – | `raw × 0.1` |
+| `$3492` | BMS LV Power Supply Voltage | 1 | – | `raw × 0.001` |
+| `$3495` | BMS_MaxTempBoxNO | 1 | – | `raw` |
+| `$3496` | BMS_MinTempBoxNo | 1 | – | `raw` |
+| `$3497` | BMS_InletTemp2 | 1 | – | `raw − 50` |
+| `$3498` | BMS_OutletTemp2 | 1 | – | `raw − 50` |
+| `$34D5` | BMS_CellVolDiff | 2 | mV | `raw` |
+| `$3527` | BMS_Crash_Signal | 1 | NA | `raw` |
+| `$3528` | Fast Charging Positive relay side voltage | 2 | V | `raw × 0.01` |
+| `$3529` | Battery Main Positive relay side voltage | 2 | V | `raw × 0.01` |
+| `$352A` | Fast Charging Negative relay side voltage | 2 | V | `raw × 0.01` |
+| `$352B` | Battery Main Negative relay side voltage | 2 | V | `raw × 0.01` |
+| `$353B` | Thermal Runaway Reason | 1 | – | `raw` |
+| `$353C` | BMS Fault Rolling Counter | 1 | – | `raw` |
+| `$353D` | BMS SOC Calibration Flag | 1 | – | `raw` |
+| `$353E` | Cummulative Charge Capacity | 4 | Ah | `raw` |
+| `$353F` | Cummulative Discharge Capacity | 4 | Ah | `raw` |
+| `$3540` | Aerosol Concentration Value | 2 | – | `raw` |
+| `$3565` | BMS HVIL Hardwire Signal | 1 | – | `raw` |
+| `$3566` | SOC Accumulation since last 100% Charge | 2 | – | `raw` |
+| `$3567` | Mapped Ah Accumulation Value | 4 | – | `raw` |
+| `$3568` | BMS Calculated SOC Reference | 2 | – | `raw × 0.1` |
 
-The safety group is the significant addition: `$3527` crash signal, `$353A`
-smoke sensor, `$353B` thermal runaway reason, `$3540` aerosol concentration and
-`$3565` HVIL hardwire. Together with `$3528`–`$352B` (voltage on each side of
-the four contactors) they give a far better picture of pack safety state than
-the 8.9S set allowed.
+### Coded PIDs
 
-`$353E`/`$353F` cumulative charge and discharge capacity, and `$3566`–`$3568`
-(SOC accumulation since last full charge, mapped Ah, calculated SOC reference)
-are what you would want for tracking real capacity fade over time.
+These return a code, not a number. Full value meanings are in
+[`DECODE_TABLES.md`](DECODE_TABLES.md#bms--battery-management-system).
 
-### Documented thresholds
+| DID | Signal | Signals in byte |
+|-----|--------|-----------------|
+| `$3404` | BMS Main Positive Relay Status | 3 |
+| `$3405` | BMS Initialization State | 1 (plain enum) |
+| `$340E` | BMS Operation Mode | 1 (plain enum) |
+| `$340F` | BMS Derate Flag | 1 (plain enum) |
+| `$3414` | BMS Insulation Enable/Disable Command | 1 (plain enum) |
+| `$3479` | BMS Cell Balance Status Flag | 3 |
+| `$3493` | VCU Flag | 3 |
+| `$353A` | Smoke Sensor Logic | 1 (plain enum) |
 
-Values Tata publishes in the Kanger1.0 AIO BMS DTC document. The `34xx` calibration
-limits themselves are not published, but these are:
+**Cell balancing** has its own writeup — the bit moved between database
+generations and the database's own compare values are inconsistent. See
+[`CELL_BALANCING.md`](CELL_BALANCING.md).
 
-| Quantity | DIDs | Threshold | Source |
-|----------|------|-----------|--------|
-| Pack temperature spread | `$3409` − `$340B` | **> 6 °C** after a 6-hour rest = replace pack | `P1220-22` |
-| LV supply high | `$3492` | **> 32 V** | `P1233-17` |
-| LV supply low | `$3492` | **< 9 V** (BMS will not wake below 9 V; charge back above 12 V) | `P1234-16` |
+### Faults
 
-The temperature check has a defined procedure: leave the vehicle **isolated for at
-least 6 hours** without operating, then read `$3409` and `$340B` and take the
-difference. Below 6 °C the pack is considered recoverable.
+256 codes in `DTCMaster`, plus pack-specific `DTCMaster_K1AIO` / `_K2AIO` (72
+each) matching the `BMS_K1AIO_DTC.pdf` service documents inside TDS 20.0. Read
+with `19 02 FF` — see [`READING_DTCS.md`](READING_DTCS.md).
 
-Cell-voltage difference is split the same way as on the other packs — **static**
-(`P3069-1C`, at rest) and **dynamic** (`P1208-1C`, under load), both reading
-`$3415` and `$3417`. Notably the dynamic fault's documented healing condition is
-*"vehicle slow charging over next few ignition cycles"* — i.e. it is expected to
-clear itself through **balancing during slow charge**, which is the clearest
-statement in any of these manuals of what balancing is actually for.
+### Published thresholds
 
-### Diagnostic trouble codes
+| Quantity | DIDs | Threshold | DTC |
+|----------|------|-----------|-----|
+| Pack temperature spread | `$3409` − `$340B` | > 6 °C after a 6-hour rest = replace pack | `P1220-22` |
+| LV supply high | `$3492` | > 32 V | `P1233-17` |
+| LV supply low | `$3492` | < 9 V; will not wake below 9 V | `P1234-16` |
 
-45 codes, read with `19 02 FF`. `$340D` reports the current fault level.
-
-| Code | Description |
-|------|-------------|
-| `P3001-00` | Highest Cell Voltage Too High Fault |
-| `P3002-00` | Lowest Cell voltage too low fault |
-| `P3003-00` | BMS cell Voltage difference fault |
-| `P3004-00` | Pack Over Voltage fault |
-| `P3005-00` | Pack Under voltage fault |
-| `P3006-00` | Pack Voltage Mismatch Error |
-| `P3007-00` | Fast Charge Over Current Fault |
-| `P3008-00` | Slow Charge Over Current Fault |
-| `P3009-00` | Discharge Over Current Fault |
-| `P300A-00` | Current Sensor fault |
-| `P300B-00` | Current sensor Offline failure |
-| `P300C-00` | Highest Cell temperature too high fault |
-| `P300D-00` | Lowest Cell temperature Too Low Fault |
-| `P300E-00` | Battery Circuit High Voltage Interlock Fault |
-| `P300F-00` | Positive Contactor Hardware Fault |
-| `P3010-00` | Negative Contactor Hardware Fault |
-| `P3011-00` | BCS Node Absent |
-| `P3012-00` | Pre-Charge Fault |
-| `P3013-00` | High Voltage Isolation Fault (Insulation fault) |
-| `P3014-00` | External Communication fault |
-| `P3015-00` | LV Power Supply High Fault |
-| `P3016-00` | LV Power Supply Low Fault |
-| `P3017-00` | Cell Voltage Samplying Fault |
-| `P3018-00` | BMS Hardware fault |
-| `P3019-00` | AFE Communication fault |
-| `P3020-00` | SOC Jump |
-| `P3021-00` | Low SOC |
-| `P3022-00` | SOH Low Alarm |
-| `P3023-00` | EEPROM Read or Write fault |
-| `P3024-00` | BMS Onboard Temperature fault |
-| `P3025-00` | Cell Temperature Sensor Failure |
-| `P3026-00` | Over Discharge Regen Current Fault |
-| `P3027-00` | TempDiff Alarm(dT) |
-| `P3028-00` | Battery Pack Undervoltage Alarm |
-| `P3029-00` | Module Under voltage 2 |
-| `P302A-00` | Module charging Over current 2 |
-| `P302B-00` | Module Discharging Over current 2 |
-| `P302C-00` | Module SOC Low 2 |
-| `P302D-00` | Insulation Resistance Low2 (kΩ) |
-| `P302E-00` | Cell Voltage Under Voltage Alarm |
-| `P302F-00` | Battery Under Voltage 2 |
-| `P3030-00` | Battery Charging Over Temperature 2 |
-| `P3031-00` | Battery Charging/discharging Under Temperature 2 |
-| `P3032-00` | Battery Discharging Over Temperature 2 |
-| `P3033-00` | Difference of Battery Voltage 2 |
-
-### Identification PIDs
-
-| DID | Name | Bytes |
-|-----|------|-------|
-| `F18C` | Supplier ECU Serial Number | 8 |
-| `F192` | Supplier ECU part number | 8 |
-| `F191` | TML ECU hardware number | 15 |
-| `F187` | TML Container Part Number ( Assembly No) | 15 |
-| `F19C` | TML Software calibration identification Number | 16 |
-| `F188` | TML ECU software number | 15 |
-| `F198` | Reprogramming Counter | 2 |
-| `F199` | Date of Last Programming in the format [ DD - MM - YYYY ] | 4 |
-| `F190` | Vehicle Identification Number | 17 |
-| `F197` | Variant Dataset Identification Number (Variant Coding) | 5 |
-| `F1A0` | Vehicle configuration Number | 15 |
-| `F1A1` | Parameter Part Number | 17 |
-| `F1A2` | Programming Shop Code | 5 |
-| `F1A3` | Unique ID for Flashing / OTA | 20 |
-| `F1A4` | Reserved for Future Use | 20 |
-
-`22 F197` returns the variant-coding string — use it to confirm you are talking
-to the BMS and not another ECU.
-
-### Do not borrow scalings from another Tata pack
-
-The four BMS suppliers use genuinely different calibrations for identically-named
-signals. Applying the wrong one produces plausible-looking but wrong numbers:
-
-| Signal | KPD (this pack) | Gotion | CESL | Kratos |
-|--------|-----------------|--------|------|--------|
-| Pack current | `×0.1 − 3200` | `×0.1 − 600` | `×0.5 − 1000` | `×0.5 − 1000` |
-| SOC | `×0.1` | `×0.1` | `×0.5` | `×0.5` |
-| Cell voltage | `raw` mV | `×0.01` V | `×0.001` V | `×0.001` V |
-| Temperature | `raw − 40` | `raw − 50` | `raw − 40` | `raw − 40` |
-
-The KPD column is the one corroborated by `tata-ev-bms`, which independently
-derived `(raw − 32000) × 0.1` for pack current — algebraically identical to
-`raw × 0.1 − 3200`.
+Cell-voltage difference splits into static (`P3069-1C`, at rest) and dynamic
+(`P1208-1C`, under load) — read `$34D5` with the car stopped.
 
 
-## 2. VECU (Vehicle Control Unit) — Nexon EV (VECU_R15.2)
 
-> **11-bit addressing** (not 29-bit): this ECU answers on the diagnostic CAN.
-> Extracted from TDS 20.0 (VECU database) + scaling cross-checked against the
-> MCU / OBC / DCDC / BMS databases. Verified live: this address self-identifies
-> as `VECU_R15.2` via `22 F197`.
+## 2. VECU — Vehicle Control Unit
 
-### CAN IDs
-| Direction | CAN ID |
-|-----------|--------|
-| Request (Tester → ECU) | `0x7E3` (11-bit) |
-| Response (ECU → Tester) | `0x7EB` (11-bit) |
+> Source: **TDS 20.0 `DB_VECU_DiagnosticsDB.mdb`** — 502 DIDs. Supersedes the 183 carved out of process memory in earlier revisions of this file, which were a partial copy with unreliable scaling.
 
-*Enter extended session (`10 03`) before reads.*
+| Setting | Value |
+|---------|-------|
+| Request | **`0x7E3`** |
+| Response | **`0x7EB`** |
+| Frame | 11-bit standard, 500 kbps |
+| Session | `10 01` before reads |
 
-### Live Data PIDs (Service 0x22)
-Scaled values below are sourced from the MCU/OBC/DCDC/BMS databases for the same
-signal; `direct` = raw integer (scaling not in a verified source — calibrate).
-| DID | Name | Bytes | Unit | Formula |
-|-----|------|-------|------|---------|
-| `$3436` | Charging Gun Lock/Unlock Command | 1 | - | direct |
-| `$3456` | VCU- Park Brake Sensor Value | 1 | - | direct |
-| `$348B` | Vehicle Forward Speed Limit | 1 | - | direct |
-| `$3499` | Fan Controller PWM Out freq | 2 | Hz | direct |
-| `$349A` | Fan Controller PWM Out dutycycle | 1 | - | direct |
-| `$349C` | Crash PWM input on time | 1 | - | direct |
-| `$349E` | Crash PWM input freq | 1 | - | direct |
-| `$349F` | Gun unlock fascia switch Status | 1 | - | direct |
-| `$34A0` | Gun lock feedback Status | 1 | - | direct |
-| `$34A1` | Gun unlock feedback Status | 1 | - | direct |
-| `$34A2` | Fan controller feedback Status | 1 | - | direct |
-| `$34A3` | Reverse Lamp command | 1 | - | direct |
-| `$34A4` | Traction E drive Output Speed | 2 | RPM | -15000 offset |
-| `$34A5` | Traction E drive Output Torque | 2 | Nm | -510 offset |
-| `$34A6` | Traction E drive HV Current | 2 | A | ×0.5 - 510 |
-| `$34A7` | Traction E drive HV Voltage | 2 | V | ×0.5 |
-| `$34A8` | Traction E drive Requested State | 1 | - | direct |
-| `$34A9` | Traction E drive Requested Torque | 2 | Nm | -510 offset |
-| `$34AA` | Traction E drive Requested Speed | 2 | RPM | -15000 offset |
-| `$34AB` | Traction E drive Requested Torque Direction | 1 | - | direct |
-| `$34AC` | HV Battery Requested operating mode | 1 | - | direct |
-| `$34AD` | HV Battery Busbar voltage | 2 | V | ×0.1 |
-| `$34AE` | OBC Active Control | 1 | - | direct |
-| `$34AF` | OBC Sleep Control | 1 | - | direct |
-| `$34B0` | OBC Charging Status | 1 | - | direct |
-| `$34B1` | OBC CP Status | 1 | - | direct |
-| `$34B2` | OBC CC Status | 1 | - | direct |
-| `$34B3` | OBC Cp Dutycycle | 1 | - | direct |
-| `$34B4` | OBC Cp Frequency | 2 | - | direct |
-| `$34B5` | HV Battery Fault Rank | 1 | - | direct |
-| `$34B6` | MCU Fault Grade | 1 | - | direct |
-| `$34B7` | OBC Fault  Status | 1 | - | direct |
-| `$34B8` | DCDC System Status | 1 | - | direct |
-| `$34B9` | AC request from FATC | 1 | - | direct |
-| `$34BA` | Heating Power request from FATC | 1 | % | direct |
-| `$34BB` | Cooling Power request from FATC | 1 | % | direct |
-| `$34BC` | HV Battery  cell equalization command | 1 | - | direct |
-| `$34BD` | Diagnostic Lamp Status | 1 | - | direct |
-| `$34BE` | VCU Wakeup Mode | 1 | - | direct |
-| `$34BF` | VECU Supply Voltage | 1 | - | direct |
-| `$34C0` | Vacuum pressure value in brake booster | 1 | - | ×0.01 |
-| `$34C1` | Status of Immo operation | 1 | - | direct |
-| `$34C2` | VCU PP validity check status | 1 | - | direct |
-| `$34C3` | VCU CP amplitude validity check status | 1 | - | direct |
-| `$34C4` | VCU CP dutycycle validity check status | 1 | - | direct |
-| `$34C5` | HV Critical Alert indication on IPC | 1 | - | direct |
-| `$34C6` | Limphome Alert indication on IPC | 1 | - | direct |
-| `$34C7` | OBC Wake Up request | 1 | - | direct |
-| `$34C8` | Gun Lock/Unlock Feedback Status from BSW | 1 | - | direct |
-| `$34C9` | Charging Shutdown Reason | 1 | - | direct |
-| `$34CA` | Charging Shutdown Procedure Status | 1 | - | direct |
-| `$34CB` | CCS Fast charging Gun Status | 1 | - | direct |
-| `$34CD` | Slow Charging Diagnostic State | 1 | - | direct |
-| `$34CE` | Fast Charging Sequence on vehicle | 1 | - | direct |
-| `$34CF` | Slow Charging Sequence on vehicle | 1 | - | direct |
-| `$34D0` | CCS Fast charging Relay Status | 1 | - | direct |
-| `$34D1` | Remote Immobilizer Enable/ Disable | 1 | - | direct |
-| `$34D2` | Remote Immobilizer Function Status | 1 | - | direct |
-| `$34D3` | PEPS Auto learning feature request | 1 | - | direct |
-| `$34D4` | PEPS Auto-learning feature status | 1 | - | direct |
-| `$34DC` | AC Inlet power line Temp Sensor Count Value | 1 | - | direct |
-| `$34DD` | Fast charging voltage sensor analog input value | 1 | - | direct |
-| `$34DE` | Cruise control switch analog input count value | 1 | - | direct |
-| `$34DF` | Eco & Sports mode switches analog input count value | 1 | - | direct |
-| `$34E0` | Regen control switch analog input count | 1 | - | direct |
-| `$34E1` | 3 in 1 unit DC-DC Output voltage | 2 | V | ×0.1 |
-| `$34E2` | 3 in 1 unit DC-DC Input Current | 2 | A | ×0.1 |
-| `$34E3` | 3 in 1 unit DC-DC Input voltage | 2 | V | ×0.1 |
-| `$3545` | V2X Switch Status analog input | 1 | - | direct |
-| `$354B` | EEPROM Value initialization through VECU | 1 | - | direct |
-| `$355F` | Mandatory Slow Charging | 1 | - | direct |
-| `$3560` | Thermal Runaway from BMS | 1 | - | direct |
-| `$3561` | Battery HVIL Sense PWM dutycycle | 1 | - | direct |
-| `$3562` | Battery HVIL Sense PWM Freq | 1 | - | direct |
-| `$3563` | BMS Crash Signal | 1 | - | direct |
-| `$3569` | Adaptive Cruise Control Engaged from ESP | 1 | - | direct |
-| `$356A` | ACC Torque Requested from ESP | 2 | - | direct |
-| `$356B` | ACC Torque Request Enable from ESP | 1 | - | direct |
-| `$356D` | Park Brake State from VCU | 1 | - | direct |
-| `$3570` | Adaptive Cruise Control System State to VECU | 1 | - | direct |
-| `$3571` | ADAS Steering Switch State Ack to VECU | 1 | - | direct |
-| `$35A1` | DTC Information from Hv Battery | 1 | - | direct |
-| `$35A2` | HV Battery Insulation Low Fault | 1 | - | direct |
-| `$35A3` | HV battery Cell Volt Sampling Fault | 1 | - | direct |
-| `$35A4` | HV battery Pre charge Failure Fault | 1 | - | direct |
-| `$35A5` | HV battery Power Supply low Alarm | 1 | - | direct |
-| `$35A6` | HV battery Power Supply high Alarm | 1 | - | direct |
-| `$35A7` | HV battery Cell Tempertaure DiffOver Alarm | 1 | - | direct |
-| `$35A8` | EEPROM Value initialization through VECU | 1 | °C | -40 offset |
-| `$35A9` | HV battery Temperature sensor 2 | 1 | °C | -40 offset |
-| `$35AA` | HV battery Temperature sensor 3 | 1 | °C | -40 offset |
-| `$35AB` | HV battery Temperature sensor 4 | 1 | °C | -40 offset |
-| `$35AC` | HV battery Temperature sensor 5 | 1 | °C | -40 offset |
-| `$35AD` | HV battery Temperature sensor 6 | 1 | °C | -40 offset |
-| `$35AE` | HV battery Temperature sensor 7 | 1 | °C | -40 offset |
-| `$35AF` | HV battery Temperature sensor 8 | 1 | °C | -40 offset |
-| `$35B0` | HV battery Cummulative Charge Capacity | 2 | - | direct |
-| `$35B1` | HV battery Cummulative Disharge Capacity | 2 | - | direct |
-| `$35B2` | HV battery SmokeSensor Fail fault | 1 | - | direct |
-| `$35B3` | HV battery fast charging +ve contactor weld detection | 1 | - | direct |
-| `$35B4` | HV battery fast charging -ve contactor weld detection | 1 | - | direct |
-| `$35B5` | 3in1 OBC operation mode | 1 | - | direct |
-| `$35B6` | OBC Output maximum power | 2 | - | direct |
-| `$35B7` | Compressor Inverter Temperature | 1 | - | -50 offset |
-| `$35B8` | Compressor Speed | 1 | - | ×50 |
-| `$35B9` | Compressor status | 1 | - | direct |
-| `$35BA` | Battery HVIL Sense PWM dutycycle | 1 | V | ×2 |
-| `$35BB` | Compressor Input current | 1 | - | direct |
-| `$35BC` | APA System State | 1 | - | direct |
-| `$35BD` | Primary motor HV Current | 2 | A | ×0.5 - 510 |
-| `$35BE` | Primary Motor Output Speed | 2 | - | direct |
-| `$35BF` | Secondary motor maximum regeneration torque | 1 | - | direct |
-| `$35C0` | Primary motor maximum regeneration torque | 1 | - | direct |
-| `$35C1` | Secondary motor torque increase request from ESP | 2 | - | ×0.1 - 500 |
-| `$35C2` | secondary motor torque limit fast  request from ESP | 5 | - | ×0.1 - 500 |
-| `$35C3` | TP2 Status from ESP | 1 | - | direct |
-| `$35C4` | TP2 Active from ESP | 1 | - | direct |
-| `$35C5` | APA Torque Reqeust enable from ESP | 1 | - | direct |
-| `$35C6` | APA Interface from ESP | 1 | - | direct |
-| `$35C7` | Driving Direction Request from ESP | 1 | - | direct |
-| `$35C8` | VCU Minimum Maximum Mode from ESP | 1 | - | direct |
-| `$35C9` | ABS  vehicle speed from ESP | 2 | - | direct |
-| `$35CA` | Mode Detect signal from ESP | 1 | - | direct |
-| `$35CB` | Mode Detect signal from ESP Status | 1 | - | direct |
-| `$35CC` | Codriver PTC temp value from FATC to VECU | 1 | °C | -40 offset |
-| `$35CD` | Codriver heating power value from FATC to VECU | 1 | - | direct |
-| `$35CF` | Drive mode Display from VCU | 1 | - | direct |
-| `$35D0` | Apa Interface from VCU to ESP | 1 | - | direct |
-| `$35D1` | Electric Motor State from VCU | 1 | - | direct |
-| `$35D2` | TP2  Interface from VCU to ESP | 1 | - | direct |
-| `$35D3` | Codriver Heating Power feedback value from VCU | 1 | - | direct |
-| `$35D4` | VCU AC Charge limit from VCU | 1 | - | direct |
-| `$35D5` | VCU FC Charge Limit from VCU | 1 | - | direct |
-| `$35D6` | Mode Selection switch State from VCU | 1 | - | direct |
-| `$35D7` | Primary motor State | 1 | - | direct |
-| `$35D8` | Primary motor Voltage HV | 2 | V | ×0.5 |
-| `$35D9` | Primary motor Active Short Circuit Status | 1 | - | direct |
-| `$35DA` | Secondary motor HV Current | 2 | A | ×0.5 - 510 |
-| `$35DB` | Secondary motor Output Speed | 2 | - | direct |
-| `$35DC` | Secondary motor Output Torque | 2 | - | -510 offset |
-| `$35DD` | Secondary motor  State | 1 | - | direct |
-| `$35DE` | Secondary motor Voltage HV | 2 | V | ×0.5 |
-| `$35DF` | Secondary motor Faultgrade | 1 | - | direct |
-| `$35E0` | Secondary motor 12V SuppyLV | 1 | - | direct |
-| `$35E1` | Secondary motor Maximum Torque | 2 | - | direct |
-| `$35E2` | Secondary motor Minimum Torque | 2 | - | direct |
-| `$35E3` | Secondary motor ElectricMachineTemp | 1 | - | direct |
-| `$35E4` | Secondary motor InverterTemperature | 1 | - | direct |
-| `$35E5` | Dual PTC1 Contactor low side enable | 1 | - | direct |
-| `$35E6` | Dual PTC2 Contactor Low side enable | 1 | - | direct |
-| `$35E7` | Dual PTC2 Contactor High side enable | 1 | - | direct |
-| `$35E8` | Dual PTC1 Contactor High side enable | 1 | - | direct |
-| `$35E9` | Front Edrive Power supply Relay Enable | 1 | - | direct |
-| `$35EA` | Front Edrive Ignition enable | 1 | - | direct |
-| `$35EC` | Custom Terrain Mode acknowlegment from ESP | 1 | - | direct |
-| `$35ED` | Custom Steering Mode acknowlegment from EPAS | 1 | - | direct |
-| `$35EE` | Custom Mode HU request Type from HU  to VCU | 1 | - | direct |
-| `$35EF` | Custom Drive mode  user request from HU to  VCU | 1 | - | direct |
-| `$35F0` | Custom  terrain  Mode user request from HU to VCEU | 1 | - | direct |
-| `$35F1` | Custom steering Mode user request from HU to VCEU | 1 | - | direct |
-| `$35F2` | Custom Regen Mode user request from HU to  VCEU | 1 | - | direct |
-| `$35F3` | Custom Mode combined User request from HU to VCU | 1 | - | direct |
-| `$35F4` | Custom mode status request from VCU | 1 | - | direct |
-| `$35F5` | Custom steering mode request from VCU | 1 | - | direct |
-| `$35F6` | Custom terrain mode status request from VCU | 1 | - | direct |
-| `$35F7` | Custom Mode combined Request from VCU to Partner ECU | 1 | - | direct |
-| `$35F8` | Custom terrain mode current state from VCU | 1 | - | direct |
-| `$35F9` | Custom Drive mode current  state from VCU | 1 | - | direct |
-| `$35FA` | Custom steering mode current state from VCU | 1 | - | direct |
-| `$35FB` | Custom Regen mode current state from VCU | 1 | - | direct |
-| `$35FC` | Custom mode combined Current State from VCU | 1 | - | direct |
-| `$35FD` | Custom Mode saved settings in VECU for drive and regen mode | 1 | - | direct |
-| `$35FE` | Custom Mode saved settings in VECU for steering | 1 | - | direct |
-| `$35FF` | Custom Mode saved settings in VECU for AWD | 1 | - | direct |
-| `$3600` | Custom Mode saved settings in VECU for RWD | 1 | - | direct |
-| `$3601` | VCU-HU Autolearning Status of Custom Mode | 1 | - | direct |
-| `$3602` | Custom Mode Settings update State | 1 | - | direct |
-| `$3603` | Custom Mode Execution State | 1 | - | direct |
-| `$3604` | Mandatory Slow charging Distance | 1 | - | direct |
-| `$4223` | Status of AES-SK SecretKey | 1 | - | direct |
-| `$4224` | No of AES-SK Write LeftOut | 1 | - | direct |
-| `$727F` | FOTA Variant coding 1 | 2 | - | direct |
-| `$7280` | FOTA Variant coding 2 | 4 | - | direct |
+### Scalar PIDs (298)
 
----
+| DID | Signal | B | Unit | Conversion |
+|-----|--------|---|------|------------|
+| `$125B` | AES_SK Secret Key | 16 | - | `raw` |
+| `$341D` | HV Battery Current | 2 | A | `raw × 0.1 − 600` |
+| `$341E` | HV Battery Voltage | 2 | V | `raw × 0.1` |
+| `$341F` | HV Battery Negative Contactor State | 1 | – | `raw` |
+| `$3420` | HV Battery Positive Contactor State | 1 | – | `raw` |
+| `$3421` | HV Battery SOC | 2 | – | `raw × 0.1` |
+| `$3422` | HV Battery State of Health | 1 | % | `raw` |
+| `$3423` | Battery Cell Temperature Max | 1 | °C | `raw − 50` |
+| `$3424` | Battery Cell Temperature Min | 1 | °C | `raw − 50` |
+| `$3425` | Compressor_Speed_rpm | 2 | rpm | `raw` |
+| `$3426` | PDU +Ve Bus bar temperature | 1 | DegC | `raw − 40` |
+| `$3427` | PDU -Ve Bus bar temperature | 1 | DegC | `raw − 40` |
+| `$3428` | Charing current limit requested by VCU (Slow + Fast) | 1 | A | `raw − 40` |
+| `$3429` | HV DC-DC converter input Voltage | 2 | V | `raw × 0.1` |
+| `$342A` | LV DC-DC converter Output Voltage | 1 | V | `raw × 0.1` |
+| `$342B` | Comp_HV_DC Bus Voltage | 1 | V | `raw × 2` |
+| `$342C` | Comp_HV_DC Bus Current | 1 | A | `raw × 0.1` |
+| `$342D` | HV Isolation Level | 2 | kΩ | `raw` |
+| `$342E` | Accelerator pedal sensor 1 position | 1 | V | `raw × 0.01953125` |
+| `$342F` | Accelerator pedal sensor 2 position | 1 | V | `raw × 0.01953125` |
+| `$3430` | Accelerator pedal position | 1 | V | `raw × 0.02` |
+| `$3431` | Brake pedal sensor 1 position | 1 | V | `raw × 0.01953125` |
+| `$3432` | Brake pedal sensor 2 position | 1 | V | `raw × 0.01953125` |
+| `$3433` | Brake pedal position | 1 | V | `raw × 0.02` |
+| `$3436` | Charging Gun H bridge Parameters | 1 | – | `raw` |
+| `$3437` | Battery cooling pump PWM Dutycycle | 1 | % | `raw` |
+| `$3438` | Battery cooling pump PWM Freq | 1 | Hz | `raw` |
+| `$3439` | Traction cooling pump PWM Dutycycle | 1 | % | `raw` |
+| `$343A` | Traction cooling pump PWM Freq | 1 | Hz | `raw` |
+| `$343B` | HV DC-DC converter input Current | 1 | A | `raw × 0.1` |
+| `$343C` | HV DC-DC converter output current | 2 | A | `raw × 0.1` |
+| `$343D` | Vehicle Ignition Status | 1 | – | `raw` |
+| `$343E` | Crank Switch Status | 1 | – | `raw` |
+| `$343F` | Park Brake Status | 1 | – | `raw` |
+| `$3440` | Charger ON Sense Status | 1 | – | `raw` |
+| `$3441` | Vehicle inlet Gun Lock feedback Value | 1 | – | `raw × 0.01953125` |
+| `$3442` | PDU Cover Switch Status | 1 | – | `raw` |
+| `$3443` | Brake pedal switch Status | 1 | – | `raw` |
+| `$3444` | BMS Keep alive relay Enable Status | 1 | – | `raw` |
+| `$3445` | AC linear Pressure Sensor | 1 | – | `raw × 0.01953125` |
+| `$3446` | E-drive supply relay Enable Status | 1 | – | `raw` |
+| `$3447` | Battery Key ON Supply relay Enable Status | 1 | – | `raw` |
+| `$3448` | E-drive Ignition Enable Status | 1 | – | `raw` |
+| `$3449` | Brake Vacuum Pump Relay Enable | 1 | – | `raw` |
+| `$344B` | Charging Inlet Lock and unlock Command | 1 | – | `raw` |
+| `$344C` | Cabin cooling solenoid valve On Cmd | 1 | – | `raw` |
+| `$344D` | Battery cooling solenoid valve On Cmd | 1 | – | `raw` |
+| `$344E` | Traction MCU Contactor On Cmd | 1 | – | `raw` |
+| `$344F` | PTC Contactor ON Cmd | 1 | – | `raw` |
+| `$3450` | DC Charging  +ve Coil Contactor ON Cmd | 1 | – | `raw` |
+| `$3451` | DC Charging  -ve Coil Contactor ON Cmd | 1 | – | `raw` |
+| `$3452` | Traction Cooling Fan fast Enable Command | 1 | – | `raw` |
+| `$3453` | Traction Cooling Fan Slow Enable Command | 1 | – | `raw` |
+| `$3454` | HV Battery Equalization Trigger Status (Cell Balancing) | 1 | – | `raw` |
+| `$3455` | DCDC Hardware Wakeup relay Enable Cmd | 1 | – | `raw` |
+| `$3456` | VCU- Park Brake Sensor Value | 1 | – | `raw` |
+| `$3456` | Cooling Fan relay Enable Cmd | 1 | – | `raw` |
+| `$3456` | VCU- Park Brake Sensor Value | 1 | – | `raw` |
+| `$3456` | VCU- Park Brake Sensor Value | 1 | – | `raw` |
+| `$345D` | Maximum reverse vehicle speed | 1 | km/h | `raw` |
+| `$345E` | Vehicle HVIL Sense PWM dutycycle | 1 | % | `raw` |
+| `$345F` | Vehicle HVIL Sense PWM Freq | 1 | Hz | `raw` |
+| `$3460` | PDU HVIL Sense PWM dutycycle | 1 | % | `raw` |
+| `$3461` | PDU HVIL Sense Value Freq | 1 | Hz | `raw` |
+| `$3462` | Vehicle Speed | 2 | m/s | `raw × 0.03125` |
+| `$3463` | Gear Selector PRND Switch | 1 | – | `raw` |
+| `$3464` | Park brake dutycycle PWM | 1 | % | `raw` |
+| `$3465` | Park brake frequency PWM | 1 | Hz | `raw` |
+| `$3468` | Brake vacuum pressure sense Value | 1 | Kpa | `raw − 120` |
+| `$3469` | Vehicle inlet PP signal | 1 | – | `raw × 0.01953125` |
+| `$346A` | Vehicle inlet CP signal PWM Amplitude | 1 | V | `raw × 0.01953125` |
+| `$346B` | Vehicle inlet CP signal PWM DutyCycle | 2 | % | `raw × 0.01` |
+| `$346C` | Vehicle inlet CP signal PWM Freq | 2 | Hz | `raw` |
+| `$346D` | CP S2 switch Enable | 1 | – | `raw` |
+| `$346E` | CP S2 switch Enable Status | 1 | – | `raw` |
+| `$346F` | Telematics ECU Wakeup | 1 | – | `raw` |
+| `$3470` | Vehicle inlet Temp +ve sensor value | 1 | DegC | `raw − 40` |
+| `$3471` | Vehicle inlet Temp -ve sensor value | 1 | DegC | `raw − 40` |
+| `$3472` | Motor winding temperature value | 1 | DegC | `raw − 40` |
+| `$3473` | Inverter Temperature Value | 1 | DegC | `raw − 40` |
+| `$3474` | DC_DC Convererter_Temperature | 1 | DegC | `raw − 40` |
+| `$3475` | Compressor Temperature | 1 | DegC | `raw − 40` |
+| `$3476` | OBC Temperature | 1 | DegC | `raw − 40` |
+| `$3477` | Battery Cell Voltage Max | 2 | V | `raw × 0.01` |
+| `$3478` | Battery Cell Voltage Min | 2 | V | `raw × 0.01` |
+| `$348A` | Valet Mode Speed Configuration | 1 | – | `raw` |
+| `$348B` | Vehicle Forward Speed Limit | 1 | – | `raw` |
+| `$348B` | Vehicle Forward Speed Limit | 1 | – | `raw` |
+| `$348B` | Vehicle Forward Speed Limit | 1 | – | `raw` |
+| `$348C` | MCU Contactor Weld Status | 1 | – | `raw` |
+| `$348C` | Powertrain Config State 2 | 1 | – | `raw` |
+| `$3499` | Fan Controller PWM Out freq | 2 | Hz | `raw` |
+| `$3499` | Fan Controller PWM Out freq | 2 | Hz | `raw` |
+| `$349A` | Fan Controller PWM Out dutycycle | 1 | % | `raw` |
+| `$349A` | Fan Controller PWM Out dutycycle | 1 | % | `raw` |
+| `$349B` | Crash PWM input dutycycle | 1 | % | `raw` |
+| `$349C` | Crash PWM input on time | 2 | – | `raw` |
+| `$349D` | Crash PWM input off time | 2 | – | `raw` |
+| `$349E` | Crash PWM input freq | 1 | Hz | `raw` |
+| `$349F` | Gun unlock fascia switch Status | 1 | – | `raw` |
+| `$349F` | Gun unlock fascia switch Status | 1 | – | `raw` |
+| `$34A0` | Gun lock feedback Status | 1 | – | `raw` |
+| `$34A0` | Gun lock feedback Status | 1 | – | `raw` |
+| `$34A1` | Gun unlock feedback Status | 1 | – | `raw` |
+| `$34A1` | Gun unlock feedback Status | 1 | – | `raw` |
+| `$34A2` | Fan controller feedback Status | 1 | – | `raw × 0.01953125` |
+| `$34A2` | Fan controller feedback Status | 1 | – | `raw × 0.01953125` |
+| `$34A3` | Reverse Lamp command | 1 | – | `raw` |
+| `$34A3` | Reverse Lamp Command | 1 | – | `raw` |
+| `$34A4` | Traction E drive Output Speed | 2 | rpm | `raw − 17000` |
+| `$34A4` | Traction E drive Output Speed | 2 | rpm | `raw − 17000` |
+| `$34A5` | Traction E drive Output Torque | 2 | Nm | `raw − 510` |
+| `$34A5` | Traction E drive Output Torque | 2 | Nm | `raw − 510` |
+| `$34A6` | Traction E drive HV Current | 2 | A | `raw × 0.5 − 510` |
+| `$34A6` | Traction E drive HV Current | 2 | A | `raw × 0.5 − 510` |
+| `$34A7` | Traction E drive HV Voltage | 2 | V | `raw × 0.5` |
+| `$34A7` | Traction E drive HV Voltage | 2 | V | `raw × 0.5` |
+| `$34A9` | Traction E drive Requested Torque | 2 | Nm | `raw − 510` |
+| `$34A9` | Traction E drive Requested Torque | 2 | Nm | `raw − 510` |
+| `$34AA` | Traction E drive Requested Speed | 2 | rpm | `raw − 17000` |
+| `$34AA` | Traction E drive Requested Speed | 2 | rpm | `raw − 17000` |
+| `$34AB` | Traction E drive Requested Torque Direction | 1 | – | `raw` |
+| `$34AB` | Traction E drive Requested Torque Direction | 1 | – | `raw` |
+| `$34AD` | HV Battery Busbar voltage | 1 | V | `raw` |
+| `$34AD` | HV Battery Busbar voltage | 2 | V | `raw` |
+| `$34AE` | OBC Active Control | 1 | – | `raw` |
+| `$34AE` | OBC Active Control | 1 | – | `raw` |
+| `$34AF` | OBC Sleep Control | 1 | – | `raw` |
+| `$34AF` | OBC Sleep Control | 1 | – | `raw` |
+| `$34B0` | OBC Charging Status | 1 | – | `raw` |
+| `$34B0` | OBC Charging Status | 1 | – | `raw` |
+| `$34B1` | OBC CP Status | 1 | – | `raw` |
+| `$34B1` | OBC CP Status | 1 | – | `raw` |
+| `$34B2` | OBC CC Status | 1 | – | `raw` |
+| `$34B2` | OBC CC Status | 1 | – | `raw` |
+| `$34B3` | OBC Cp Dutycycle | 1 | % | `raw` |
+| `$34B3` | OBC Cp Dutycycle | 1 | % | `raw` |
+| `$34B4` | OBC Cp Frequency | 2 | Hz | `raw` |
+| `$34B4` | OBC Cp Frequency | 2 | Hz | `raw` |
+| `$34BA` | Heating Power request from FATC | 1 | % | `raw` |
+| `$34BA` | Heating Power request from FATC | 1 | % | `raw` |
+| `$34BB` | Cooling Power request from FATC | 1 | % | `raw` |
+| `$34BB` | Cooling Power request from FATC | 1 | % | `raw` |
+| `$34BD` | Diagnostic Lamp Status | 1 | – | `raw` |
+| `$34BD` | Diagnostic Lamp Status | 1 | – | `raw` |
+| `$34BE` | VCU Wakeup Mode | 1 | – | `raw` |
+| `$34BE` | VCU Wakeup Mode | 1 | – | `raw` |
+| `$34BF` | VECU Supply Voltage | 1 | – | `raw × 0.1` |
+| `$34BF` | VECU Supply Voltage | 1 | – | `raw × 0.1` |
+| `$34C0` | Vacuum pressure value in brake booster | 1 | – | `raw × 0.01` |
+| `$34C0` | Vacuum pressure value in brake booster | 1 | – | `raw × 0.01` |
+| `$34C1` | Status of Immo operation | 1 | – | `raw` |
+| `$34C1` | Status of Immo operation | 1 | – | `raw` |
+| `$34C2` | VCU PP validity check status | 1 | – | `raw` |
+| `$34C2` | VCU PP validity check status | 1 | – | `raw` |
+| `$34C3` | VCU CP amplitude validity check status | 1 | – | `raw` |
+| `$34C3` | VCU CP amplitude validity check status | 1 | – | `raw` |
+| `$34C4` | VCU CP dutycycle validity check status | 1 | – | `raw` |
+| `$34C4` | VCU CP dutycycle validity check status | 1 | – | `raw` |
+| `$34C7` | OBC Wake Up request | 1 | – | `raw` |
+| `$34C7` | OBC Wake Up request | 1 | – | `raw` |
+| `$34CA` | Charging Shutdown Procedure Status | 1 | – | `raw` |
+| `$34CB` | CCS Fast charging Gun Status | 1 | – | `raw` |
+| `$34CC` | Fast Charging Diagnostic State | 1 | – | `raw` |
+| `$34CD` | Slow Charging Diagnostic State | 1 | – | `raw` |
+| `$34CF` | Slow Charging Sequence on vehicle | 1 | – | `raw` |
+| `$34D7` | DC Charging  -ve Coil Contactor High side  ON Cmd | 1 | – | `raw` |
+| `$34D8` | Traction MCU Contactor  High side On Cmd | 1 | – | `raw` |
+| `$34D9` | DC Charging  +ve Coil Contactor High side  ON Cmd | 1 | – | `raw` |
+| `$34DA` | PTC Contactor High side ON Cmd | 1 | – | `raw` |
+| `$34DB` | AC Inlet Neutral line Temp Sensor Count Value | 1 | – | `raw` |
+| `$34DC` | AC Inlet power line Temp Sensor Count Value | 1 | – | `raw` |
+| `$34DD` | Fast charging voltage sensor analog input value | 1 | – | `raw` |
+| `$34DE` | Cruise control switch analog input count value | 1 | – | `raw` |
+| `$34DF` | Eco & Sports mode switches analog input count value | 1 | – | `raw` |
+| `$34E0` | Regen control switch analog input count | 1 | – | `raw` |
+| `$34E1` | 3 in 1 unit DC-DC Output voltage | 1 | V | `raw × 0.1` |
+| `$34E2` | 3 in 1 unit DC-DC Input Current | 1 | A | `raw × 0.1` |
+| `$34E3` | 3 in 1 unit DC-DC Input voltage | 2 | V | `raw × 0.02` |
+| `$34E4` | 3 in 1 unit DC-DC Output Current | 2 | A | `raw × 0.01` |
+| `$34E7` | 3 in 1 unit  DC-DC temperature | 1 | °C | `raw − 48` |
+| `$34E8` | 3 in 1 unit OBC DC Voltage | 2 | V | `raw × 0.02` |
+| `$34E9` | 3 in 1 unit OBC DC Current | 2 | A | `raw × 0.02` |
+| `$34EB` | 3 in 1 unit OBC AC Current | 1 | A | `raw` |
+| `$34EC` | 3 in 1 unit OBC AC Voltage | 2 | V | `raw × 0.02` |
+| `$34EE` | VCU  to 3 in 1 unit DC-DC Output Voltage command | 1 | V | `raw × 0.1` |
+| `$34F0` | VCU  to 3 in 1 unit Charging CP Voltage | 1 | V | `raw × 0.1` |
+| `$34F1` | VCU  to 3 in 1 unit Charging CP Duty cycle | 1 | – | `raw` |
+| `$34F2` | VCU  to 3 in 1 unit Charging CP Frequency | 2 | – | `raw` |
+| `$34F4` | VCU  to 3 in 1 unit  OBC DC current command | 2 | A | `raw × 0.02` |
+| `$34F5` | AC Inlet temperature sense value on neutral line | 1 | °C | `raw − 40` |
+| `$34F6` | AC Inlet temperature sense value on positive line | 1 | °C | `raw − 40` |
+| `$34F7` | Brake Pedal position from ESP | 1 | % | `raw × 0.5` |
+| `$34F8` | Traget recuperation torque from ESP | 2 | – | `raw × 0.1` |
+| `$34FD` | Brake Pedal sensor 2 value from ESP | 2 | volts | `raw × 0.01` |
+| `$34FF` | Brake Pedal sensor 1 value from ESP | 2 | volts | `raw × 0.01` |
+| `$3500` | Target Motor Torque Increase request from ESP | 2 | – | `raw × 0.1 − 500` |
+| `$3501` | Target Motor torque limit fast request from ESP | 2 | – | `raw × 0.1 − 500` |
+| `$350A` | PTC Temperature sensor value from FATC | 1 | °C | `raw − 40` |
+| `$3515` | Desired Cruise Speed from VCU | 1 | – | `raw` |
+| `$3516` | Max available Regeneration torque | 2 | Nm | `raw × 0.25 − 2048` |
+| `$3517` | Driver Requested torque | 2 | Nm | `raw × 0.25 − 2048` |
+| `$3519` | Recuperation Actual torque from VCU | 2 | Nm | `raw × 0.25 − 2048` |
+| `$351F` | CCS Vehicle inlet voltage measured by ASW | 2 | V | `raw × 0.1` |
+| `$3520` | CCS Charging current request to station | 2 | A | `raw × 0.03125` |
+| `$3521` | CCS Charging voltage request to station | 2 | V | `raw × 0.1` |
+| `$3522` | CCS Charging current measured from station | 2 | A | `raw × 0.03125` |
+| `$3523` | CCS Charging voltage measured from station | 2 | V | `raw × 0.1` |
+| `$352F` | Charging current limit requested by VCU (Slow + Fast) | 2 | A | `raw × 0.1` |
+| `$3536` | FC -ve contactor line Voltage measured at EVSE side from BMS | 2 | V | `raw × 0.2` |
+| `$3537` | HV battery Main +ve contactor Voltage measured at load side from BMS | 2 | V | `raw × 0.2` |
+| `$3538` | FC +ve contactor line Voltage measured at EVSE side from BMS | 2 | V | `raw × 0.2` |
+| `$3539` | HV battery Main -ve contactor Voltage measured at load side from BMS | 2 | V | `raw × 0.2` |
+| `$3541` | Sports Switch Status | 1 | – | `raw` |
+| `$3542` | Brake Complement Switch Status | 1 | – | `raw` |
+| `$3543` | Eco Switch Status | 1 | – | `raw` |
+| `$3544` | Cruise Control Switch Analog Input Count Value - SW 2 | 2 | – | `raw` |
+| `$3545` | V2X Switch Status Analog Input | 1 | – | `raw` |
+| `$3545` | V2X Switch Status analog input | 1 | % | `raw × 0.02` |
+| `$3548` | VCU Wakeup Request To MSS | 1 | – | `raw` |
+| `$354A` | 3in1 Bidirectional OBC Wakeup From VCU | 1 | – | `raw` |
+| `$354B` | EEPROM Value initialization through VECU | 1 | – | `raw` |
+| `$355F` | Mandatory Slow Charging | 1 | – | `raw` |
+| `$3560` | Thermal Runaway from BMS | 1 | – | `raw` |
+| `$3561` | Battery HVIL Sense PWM dutycycle | 1 | % | `raw` |
+| `$3562` | Battery HVIL Sense PWM Freq | 1 | HZ | `raw` |
+| `$3563` | BMS Crash Signal | 1 | – | `raw` |
+| `$3564` | Mandatory Slow charging Distance | 2 | – | `raw` |
+| `$356A` | ACC Torque Requested from ESP | 1 | – | `raw` |
+| `$358F` | CAN frames enable/disable of VECU | 1 | – | `raw` |
+| `$3590` | DTE EEPROM Write through VECU | 2 | – | `raw` |
+| `$3597` | MCU Max Torque Info | 2 | Nm | `raw − 510` |
+| `$3598` | MCU Min Torque Info | 2 | Nm | `raw − 510` |
+| `$3599` | Tin1 PDU KL30 Voltage Value | 1 | V | `raw × 0.1` |
+| `$359B` | MCU Idc Max Info | 2 | A | `raw × 0.5` |
+| `$359C` | MCU Idc Min Info | 2 | A | `raw × 0.5 − 510` |
+| `$35A1` | DTC Information from Hv Battery | 1 | – | `raw` |
+| `$35A2` | HV Battery Insulation Low Fault | 1 | – | `raw` |
+| `$35A3` | HV battery Cell Volt Sampling Fault | 1 | – | `raw` |
+| `$35A4` | HV battery Pre charge Failure Fault | 1 | – | `raw` |
+| `$35A5` | HV battery Power Supply low Alarm | 1 | – | `raw` |
+| `$35A6` | HV battery Power Supply high Alarm | 1 | – | `raw` |
+| `$35A7` | HV battery Cell Tempertaure DiffOver Alarm | 1 | – | `raw` |
+| `$35A8` | HV battery Temperature sensor 1 | 1 | DegC | `raw − 40` |
+| `$35A9` | HV battery Temperature sensor 2 | 1 | DegC | `raw − 40` |
+| `$35AA` | HV battery Temperature sensor 3 | 1 | DegC | `raw − 40` |
+| `$35AB` | HV battery Temperature sensor 4 | 1 | DegC | `raw − 40` |
+| `$35AC` | HV battery Temperature sensor 5 | 1 | DegC | `raw − 40` |
+| `$35AD` | HV battery Temperature sensor 6 | 1 | DegC | `raw − 40` |
+| `$35AE` | HV battery Temperature sensor 7 | 1 | DegC | `raw − 40` |
+| `$35AF` | HV battery Temperature sensor 8 | 1 | DegC | `raw − 40` |
+| `$35B0` | HV battery Cummulative Charge Capacity | 2 | °C | `raw` |
+| `$35B1` | HV battery Cummulative Disharge Capacity | 2 | °C | `raw` |
+| `$35B2` | HV battery SmokeSensor Fail fault | 1 | – | `raw` |
+| `$35B3` | HV battery fast charging +ve contactor weld detection | 1 | – | `raw` |
+| `$35B4` | HV battery fast charging -ve contactor weld detection | 1 | – | `raw` |
+| `$35B6` | OBC Output maximum power | 2 | Watt | `raw × 0.01` |
+| `$35B7` | Compressor Inverter Temperature | 1 | Degc | `raw − 50` |
+| `$35B8` | Compressor Speed | 1 | RPM | `raw × 50` |
+| `$35BA` | Compressor  input Voltage | 1 | V | `raw × 2` |
+| `$35BB` | Compressor Input current | 1 | mA | `raw × 0.5` |
+| `$35BD` | Primary motor HV Current | 2 | mA | `raw × 0.5 − 100` |
+| `$35BE` | Primary Motor Output Speed | 2 | RPM | `raw − 20000` |
+| `$35BF` | Secondary motor maximum regeneration torque | 1 | nm | `raw` |
+| `$35C0` | Primary motor maximum regeneration torque | 1 | nm | `raw` |
+| `$35C1` | Secondary motor torque increase request from ESP | 2 | nm | `raw × 0.1 − 500` |
+| `$35C9` | ABS  vehicle speed from ESP | 2 | RPM | `raw × 0.03125` |
+| `$35CC` | Codriver PTC temp value from FATC to VECU | 1 | DegC | `raw − 40` |
+| `$35CD` | Codriver heating power value from FATC to VECU | 1 | J | `raw` |
+| `$35D3` | Codriver Heating Power feedback value from VCU | 1 | J | `raw` |
+| `$35D4` | VCU AC Charge limit from VCU | 1 | % | `raw` |
+| `$35D5` | VCU FC Charge Limit from VCU | 1 | % | `raw` |
+| `$35D8` | Primary motor Voltage HV | 2 | V | `raw × 0.5` |
+| `$35DA` | Secondary motor HV Current | 2 | mA | `raw × 0.5 − 1000` |
+| `$35DB` | Secondary motor Output Speed | 2 | RPM | `raw − 20000` |
+| `$35DC` | Secondary motor Output Torque | 2 | nm | `raw − 510` |
+| `$35DE` | Secondary motor Voltage HV | 2 | V | `raw × 0.5` |
+| `$35E1` | Secondary motor Maximum Torque | 2 | nm | `raw − 510` |
+| `$35E2` | Secondary motor Minimum Torque | 2 | nm | `raw − 510` |
+| `$35E3` | Secondary motor ElectricMachineTemp | 1 | DegC | `raw − 40` |
+| `$35E4` | Secondary motor InverterTemperature | 1 | DegC | `raw − 40` |
+| `$35E5` | Dual PTC1 Contactor low side enable | 1 | – | `raw` |
+| `$35E6` | Dual PTC2 Contactor Low side enable | 1 | – | `raw` |
+| `$35E7` | Dual PTC2 Contactor High side enable | 1 | – | `raw` |
+| `$35E8` | Dual PTC1 Contactor High side enable | 1 | – | `raw` |
+| `$35E9` | Front Edrive Power supply Relay Enable | 1 | – | `raw` |
+| `$35EA` | Front Edrive Ignition enable | 1 | – | `raw` |
+| `$360A` | MCU Rear HVIL Sense PWM DutyCycle | 1 | % | `raw` |
+| `$360B` | MCU Rear HVIL Sense PWM Frequency | 1 | Hz | `raw` |
+| `$360C` | MCU Front HVIL Sense PWM DutyCycle | 1 | % | `raw` |
+| `$360D` | MCU Front HVIL Sense PWM Frequency | 1 | Hz | `raw` |
+| `$3623` | EXV PT Sensor Pressure | 1 | Bar | `raw × 0.01 − 1` |
+| `$3624` | EXV PT Sensor Temperature | 1 | °C | `raw − 40` |
+| `$3625` | BLDC Fan controller | 1 | 1 | `raw` |
+| `$4224` | No of AES-SK Write LeftOut | 1 | – | `raw` |
+| `$4224` | No of AES-SK Write LeftOut | 1 | – | `raw` |
+| `$4224` | No of AES-SK Write LeftOut | 1 | – | `raw` |
+| `$7002` | Control Module Input Power "B" | 1 | V | `raw` |
 
-## 3. DCDC (DC-DC Converter)
+### Coded PIDs (166)
 
-### CAN IDs
-| Direction | CAN ID |
-|-----------|--------|
-| Request | `0x1BDA8FF1` |
-| Response | `0x1BDAF18F` |
+Value meanings in [`DECODE_TABLES.md`](DECODE_TABLES.md#vecu--vehicle-control-unit).
 
-### Key PIDs
-| DID | Name | Bytes | Unit |
-|-----|------|-------|------|
-| `$130F` | DCDC Enable Command | 1 | - |
-| `$1310` | DCDC Input Voltage | 2 | V |
-| `$1311` | DCDC Input Current | 1 | A |
-| `$1312` | DCDC Output Voltage | 2 | V |
-| `$1313` | DCDC Output Current | 2 | A |
-| `$1314` | DCDC Internal Temperature | 1 | °C |
-| `$1317` | 24V Power Supply Voltage | 2 | V |
-| `$1318` | KL15 Wake Up Voltage | 1 | V |
-| `$1325` | DCDC Derating Mode | 1 | - |
-| `$1326` | DCDC Error Flag | 1 | - |
-| `$1329` | DCDC VCU Communication | 1 | - |
-| `$F0F1` | DCDC Internal Status | 1 | - |
+| DID | Signal | Signals in byte |
+|-----|--------|-----------------|
+| `$3436` | Charging Gun Lock/Unlock Command | 1 |
+| `$3436` | Charging Gun Lock/Unlock Command | 1 |
+| `$3436` | Charging Gun Lock/Unlock Command | 1 |
+| `$3457` | VCU Power Mode | 1 |
+| `$3458` | HV Battery Operating Mode | 1 |
+| `$3459` | Traction E drive Operating Mode | 1 |
+| `$345A` | HV Battery Equalization Status Feedback (Cell Balancing) | 1 |
+| `$345B` | Vehicle Status | 1 |
+| `$345C` | Compressor Diagnostic Status 1 | 8 |
+| `$345D` | Compressor Diagnostic Status 2 | 6 |
+| `$3486` | Remote Valet Mode Status | 1 |
+| `$3487` | DC Fast charging Contactor Status | 1 |
+| `$3488` | Vehicle Status Post crash detect | 1 |
+| `$3489` | Crash Detect Status | 1 |
+| `$348D` | Powertrain Variant Configuration | 1 |
+| `$348E` | VECU Features Variant Configuration | 12 |
+| `$34A8` | Traction E drive Requested State | 1 |
+| `$34A8` | Traction E drive Requested State | 1 |
+| `$34AC` | HV Battery Requested operating mode | 1 |
+| `$34AC` | HV Battery Requested operating mode | 1 |
+| `$34B5` | HV Battery Fault Rank | 1 |
+| `$34B5` | HV Battery Fault Rank | 1 |
+| `$34B6` | MCU Fault Grade | 1 |
+| `$34B6` | MCU Fault Grade | 1 |
+| `$34B7` | OBC Fault  Status | 1 |
+| `$34B7` | OBC Fault  Status | 1 |
+| `$34B8` | DCDC System Status | 1 |
+| `$34B8` | DCDC System Status | 1 |
+| `$34B9` | AC request from FATC | 1 |
+| `$34B9` | AC request from FATC | 1 |
+| `$34BC` | HV Battery  cell equalization command | 1 |
+| `$34C5` | HV Critical Alert indication on IPC | 1 |
+| `$34C5` | HV Critical Alert indication on IPC | 1 |
+| `$34C6` | Limphome Alert indication on IPC | 1 |
+| `$34C6` | Limphome Alert indication on IPC | 1 |
+| `$34C8` | Gun Lock/Unlock Feedback Status from BSW | 1 |
+| `$34C8` | Gun Lock/Unlock Feedback Status from BSW | 1 |
+| `$34C9` | Charging Shutdown Reason | 1 |
+| `$34C9` | Charging Shutdown Reason | 1 |
+| `$34CD` | Charing current limitation source (Slow charging) | 1 |
+| `$34CE` | Fast Charging Sequence on vehicle | 1 |
+| `$34CE` | Fast Charging Sequence on vehicle | 1 |
+| `$34CF` | Slow Charging Sequence on vehicle | 1 |
+| `$34CF` | Slow Charging Sequence on vehicle | 1 |
+| `$34D0` | CCS Fast charging Relay Status | 1 |
+| `$34D0` | CCS Fast charging Relay Status | 1 |
+| `$34D1` | Remote Immobilizer Enable/ Disable | 1 |
+| `$34D2` | Remote Immobilizer Function Status | 1 |
+| `$34D3` | PEPS Auto learning feature request | 1 |
+| `$34D4` | PEPS Auto-learning feature status | 1 |
+| `$34D6` | Charging Socket Actuator Type | 1 |
+| `$34E5` | 3 in 1 unit DC-DC Current Status | 1 |
+| `$34E6` | 3 in 1 unit  checksum fault | 1 |
+| `$34EA` | 3 in 1 unit OBC Current Status | 1 |
+| `$34ED` | 3 in 1 unit OBC CRC Checksum Fault status | 1 |
+| `$34EF` | VCU  to 3 in 1 unit DC-DC Enable command | 1 |
+| `$34F3` | VCU  to 3 in 1 unit Charging system Operation command | 1 |
+| `$34F9` | Auto-Park brake error state from ESP | 1 |
+| `$34FA` | Auto Vehicle hold State from ESP | 1 |
+| `$34FB` | Brake Pedal sensor 2 status from ESP | 1 |
+| `$34FC` | Auto-Park brake state from ESP | 1 |
+| `$34FE` | Brake Pedal sensor 1 status from ESP | 1 |
+| `$3502` | ABS active status from ABS/ESP | 1 |
+| `$3503` | TCS Active status from ESP | 1 |
+| `$3504` | ESP Active status from ESP | 1 |
+| `$3505` | ESP request to VCU for shut down cruise control function | 1 |
+| `$3506` | Hill Hold control Active state from ESP | 1 |
+| `$3507` | Hill Descent control Active state from ESP | 1 |
+| `$3508` | Feedback signal status from ESP to enable sports mode | 1 |
+| `$3509` | Feedback signal from ESP to enable sports mode | 1 |
+| `$350B` | Gear Selection Switch State Status | 1 |
+| `$350C` | Remote Immo Request from TCU | 1 |
+| `$350D` | Cruise Switch (Acc/ Dec) selection State | 1 |
+| `$350E` | Cruise state VCU (Disabled/ Not active/ Active) | 1 |
+| `$350F` | Drive Mode Selection Switch State by driver | 1 |
+| `$3510` | Regeneration level for Display from VCU | 1 |
+| `$3511` | Drive Mode (City/Eco/Sport) for Display from VCU | 1 |
+| `$3512` | Cruise function state of vehicle determined by VCU | 1 |
+| `$3513` | Drive Mode selection (possible/not possible) | 1 |
+| `$3514` | Regen Level selection (possible/not possible) | 1 |
+| `$3518` | Recuperation brake state from VCU (Enable/Disable) | 1 |
+| `$351A` | Co-driver door state from BCM | 1 |
+| `$351B` | Driver door state from BCM | 1 |
+| `$351C` | Rear right side door state from BCM | 1 |
+| `$351D` | Rear left side door state from BCM | 1 |
+| `$351E` | CCS Charge Permission (EV ready) | 1 |
+| `$3524` | CCS Isolation check status from station | 1 |
+| `$3525` | Powertrain VCU Function Mode | 1 |
+| `$3526` | Compressor State | 1 |
+| `$352C` | Regeneration selection switch state from IPC to VCU | 1 |
+| `$352D` | Cruise Speed change state from IPC to VCU | 1 |
+| `$352E` | Cruise Switch Selection State from IPC to VCU | 1 |
+| `$3530` | Charging current limitation source (Slow Charging) | 1 |
+| `$3531` | BMS Key On feedback to VCU | 1 |
+| `$3532` | BMS FC +ve Relay feedback to VCU | 1 |
+| `$3533` | BMS FC -ve Relay feedback to VCU | 1 |
+| `$3534` | Fast charging Relay Close Cmd from VCU to BMS | 1 |
+| `$3535` | Fast charging gun detection Flag signal from VCU to BMS | 1 |
+| `$3546` | MSS Position Request To VCU | 1 |
+| `$3547` | MSS Position Display From VCU To MSS | 1 |
+| `$3549` | Regen Level Via Paddle Shifter | 1 |
+| `$3569` | Adaptive Cruise Control Engaged from ESP | 1 |
+| `$356B` | ACC Torque Request Enable from ESP | 1 |
+| `$356C` | Adaptive Cruise Control State from VCU | 1 |
+| `$356D` | Park Brake State from VCU | 1 |
+| `$356E` | Slow Charging Full Required | 1 |
+| `$356F` | DCFC Contactor State | 1 |
+| `$3570` | Adaptive Cruise Control System State to VECU | 1 |
+| `$3571` | ADAS Steering Switch State Ack to VECU | 1 |
+| `$3591` | Diagnostic State from ESP to VECU | 1 |
+| `$3592` | Regen Brake Lamp Request | 1 |
+| `$3593` | VCU Cruise Mode to IPC | 1 |
+| `$3596` | MCU  Inverter 12V supply | 1 |
+| `$359A` | Tin1 Charging CC status | 1 |
+| `$359E` | BMS Negative Contactor Weld Fault | 1 |
+| `$359F` | BMS Positive Contactor Weld Fault | 1 |
+| `$35A0` | BCM Crank Source | 1 |
+| `$35B5` | 3in1 OBC operation mode | 1 |
+| `$35B9` | Compressor status | 1 |
+| `$35BC` | APA System State | 1 |
+| `$35C3` | TP2 Status from ESP | 1 |
+| `$35C4` | TP2 Active from ESP | 1 |
+| `$35C5` | APA Torque Reqeust enable from ESP | 1 |
+| `$35C6` | APA Interface from ESP | 1 |
+| `$35C7` | Driving Direction Request from ESP | 1 |
+| `$35C8` | VCU Minimum Maximum Mode from ESP | 1 |
+| `$35CA` | Mode Detect signal from ESP | 1 |
+| `$35CB` | Mode Detect signal from ESP Status | 1 |
+| `$35CE` | Mode Detect signal from TAS | 1 |
+| `$35CF` | Drive mode Display from VCU | 1 |
+| `$35D0` | Apa Interface from VCU to ESP | 1 |
+| `$35D1` | Electric Motor State from VCU | 1 |
+| `$35D2` | TP2  Interface from VCU to ESP | 1 |
+| `$35D6` | Mode Selection switch State from VCU | 1 |
+| `$35D7` | Primary motor State | 1 |
+| `$35D9` | Primary motor Active Short Circuit Status | 1 |
+| `$35DD` | Secondary motor  State | 1 |
+| `$35DF` | Secondary motor Faultgrade | 1 |
+| `$35E0` | Secondary motor 12V SuppyLV | 1 |
+| `$35EC` | Custom Terrain Mode acknowlegment from ESP | 1 |
+| `$35ED` | Custom Steering Mode acknowlegment from EPAS | 1 |
+| `$35EE` | Custom Mode HU request Type from HU  to VCU | 1 |
+| `$35EF` | Custom Drive mode  user request from HU to  VCU | 1 |
+| `$35F0` | Custom  terrain  Mode user request from HU to VCEU | 1 |
+| `$35F1` | Custom steering Mode user request from HU to VCEU | 1 |
+| `$35F2` | Custom Regen Mode user request from HU to  VCEU | 1 |
+| `$35F3` | Custom Mode combined User request from HU to VCU | 1 |
+| `$35F4` | Custom mode status request from VCU | 1 |
+| `$35F5` | Custom steering mode request from VCU | 1 |
+| `$35F6` | Custom terrain mode status request from VCU | 1 |
+| `$35F7` | Custom Mode combined Request from VCU to Partner ECU | 1 |
+| `$35F8` | Custom terrain mode current state from VCU | 1 |
+| `$35F9` | Custom Drive mode current  state from VCU | 1 |
+| `$35FA` | Custom steering mode current state from VCU | 1 |
+| `$35FB` | Custom Regen mode current state from VCU | 1 |
+| `$35FC` | Custom mode combined Current State from VCU | 1 |
+| `$35FD` | Custom Mode saved settings in VECU for drive and regen mode | 8 |
+| `$35FE` | Custom Mode saved settings in VECU for steering | 1 |
+| `$35FF` | Custom Mode saved settings in VECU for AWD 4×4 | 1 |
+| `$3600` | Custom Mode saved settings in VECU for RWD 4×2 | 1 |
+| `$3601` | VCU-HU Autolearning Status of Custom Mode | 1 |
+| `$3602` | Custom Mode Settings update State | 1 |
+| `$3603` | Custom Mode Execution State | 1 |
+| `$3604` | Custom Mode denied Reason | 1 |
+| `$4223` | Status of AES-SK SecretKey | 1 |
+| `$4223` | Status of AES-SK SecretKey | 1 |
 
----
+252 fault codes — read with `19 02 FF`, see [`READING_DTCS.md`](READING_DTCS.md).
+
+
+## 3. DCDC — DC-DC Converter
+
+> Source: **TDS 20.0 `DCDC_EV.sdf`**.
+
+| Setting | Value |
+|---------|-------|
+| Request | **`0x784`** |
+| Response | **`0x78C`** |
+| Frame | 11-bit standard, 500 kbps |
+| Session | `10 03` before reads |
+
+### Scalar PIDs (16)
+
+| DID | Signal | B | Unit | Conversion |
+|-----|--------|---|------|------------|
+| `$1310` | DCDC Input Voltage | 2 | V | `raw × 0.1` |
+| `$1311` | DCDC Input Current | 2 | A | `raw × 0.1` |
+| `$1312` | DCDC Output Voltage | 1 | V | `raw × 0.1` |
+| `$1313` | DCDC Output Current | 2 | A | `raw × 0.1` |
+| `$1314` | DCDC Internal SR MOS Temperature | 1 | oC | `raw` |
+| `$1315` | DCDC Internal MT MOS Temperature | 1 | oC | `raw` |
+| `$1316` | DCDC Internal Pri MOS Temperature | 1 | oC | `raw` |
+| `$1317` | 12V Power Supply Voltage | 1 | V | `raw × 0.1` |
+| `$1318` | KL15 Wake Up Voltage | 1 | V | `raw × 0.1` |
+| `$1327` | DCDC output current request | 2 | A | `raw × 0.01` |
+| `$1328` | DCDC output power request | 2 | W | `raw` |
+| `$F010` | EOL DataIdentifier | 8 | – | `raw` |
+| `$F0F1` | DCDC internal status 1 | 2 | – | `raw` |
+| `$F0F2` | DCDC internal status 2 | 2 | – | `raw` |
+| `$F0F3` | DCDC internal status 3 | 2 | – | `raw` |
+| `$F0F4` | DCDC Gateway Software Version | 2 | – | `raw` |
+
+### Coded PIDs (5)
+
+Value meanings in [`DECODE_TABLES.md`](DECODE_TABLES.md#dcdc--dc-dc-converter).
+
+| DID | Signal | Signals in byte |
+|-----|--------|-----------------|
+| `$130E` | DCDC working states | 1 |
+| `$130F` | DCDC Enable Command | 1 |
+| `$1325` | DCDC derating mode | 1 |
+| `$1326` | DCDC error flag | 1 |
+| `$1329` | DCDC VCU CRC FAIL | 1 |
+
+17 fault codes — read with `19 02 FF`, see [`READING_DTCS.md`](READING_DTCS.md).
+
+
+## 3B. MCU — Motor Control Unit
+
+> Source: **TDS 20.0 `MCU_DiagnosticsDB.sdf`**. Note the older TDS 8.9S MCU database carries 164 DIDs against these 27 and is kept in [`data/`](data/) for that reason.
+
+| Setting | Value |
+|---------|-------|
+| Request | **`0x783`** |
+| Response | **`0x78B`** |
+| Frame | 11-bit standard, 500 kbps |
+| Session | `10 03` before reads |
+
+### Scalar PIDs (15)
+
+| DID | Signal | B | Unit | Conversion |
+|-----|--------|---|------|------------|
+| `$0506` | E drive maximum torque limit feedback | 2 | Nm | `raw` |
+| `$0507` | E drive maximum regenerative(Brake torque) torque limit feedback | 2 | Nm | `raw` |
+| `$0508` | E drive maximum speed limit feedback | 2 | Rpm | `raw` |
+| `$0509` | E drive minimum speed limit. (Reverse direction) feedback. | 2 | Rpm | `raw` |
+| `$0510` | Rotional speed of E drive | 2 | Rpm | `raw` |
+| `$0511` | Output torque which is currently provided by the electric machine | 2 | Nm | `raw` |
+| `$0512` | HV current drawn from the DC link by the E drive | 2 | A | `raw × 0.5` |
+| `$0513` | HV voltage of the DC link measured by the E drive | 2 | V | `raw × 0.5` |
+| `$0514` | The present mode of the E drive | 1 | - | `raw` |
+| `$0515` | Current temperature of electric machine | 1 | °C | `raw` |
+| `$0516` | Current temperature of inverter | 1 | °C | `raw` |
+| `$0517` | Power consumed or generated by E Drive | 2 | Kw | `raw` |
+| `$0518` | E drive phase A  current | 2 | A | `raw × 0.5` |
+| `$0519` | E drive phase B  current | 2 | A | `raw × 0.5` |
+| `$0520` | E drive phase C  current | 2 | A | `raw × 0.5` |
+
+89 fault codes — read with `19 02 FF`, see [`READING_DTCS.md`](READING_DTCS.md).
+
+
+## 3C. OBC — On Board Charger
+
+> Source: **TDS 20.0 `OBC_EV.sdf`**.
+
+| Setting | Value |
+|---------|-------|
+| Request | **`0x786`** |
+| Response | **`0x78E`** |
+| Frame | 11-bit standard, 500 kbps |
+| Session | `10 01` before reads |
+
+### Scalar PIDs (26)
+
+| DID | Signal | B | Unit | Conversion |
+|-----|--------|---|------|------------|
+| `$0200` | Reprogramming counter (successfully reprogramming) | 2 | – | `raw` |
+| `$0201` | Reprogramming attempt counter | 2 | – | `raw` |
+| `$1000` | 12V power supply voltage | 1 | V | `raw` |
+| `$1100` | Charger input AC frequency | 2 | Hz | `raw` |
+| `$1101` | Chareger available power | 4 | W | `raw` |
+| `$1102` | Primary board temperature | 1 | deg c | `raw` |
+| `$1103` | Secondary board temperature | 1 | deg c | `raw` |
+| `$1104` | Transformer temperature | 1 | deg c | `raw` |
+| `$1105` | Input AC current | 2 | A | `raw × 0.1` |
+| `$1106` | Input AC voltage | 2 | V | `raw` |
+| `$131A` | Actual input  frequency  from AC Grid | 2 | Hz | `raw` |
+| `$131B` | OBC CP Duty | 1 | % | `raw` |
+| `$131C` | OBC CP Frequency | 2 | HZ | `raw` |
+| `$131F` | OBC Charger available power | 2 | W | `raw` |
+| `$132A` | OBC CP Voltage | 1 | V | `raw × 0.1` |
+| `$2000` | CP voltage | 1 | V | `raw` |
+| `$2001` | CP duty | 1 | – | `raw` |
+| `$2002` | CP Frequency | 2 | Hz | `raw` |
+| `$2003` | Output DC current | 2 | A | `raw × 0.01` |
+| `$2004` | Output DC voltage | 2 | V | `raw × 0.1` |
+| `$F0E1` | OBC Internal Status1 | 2 | – | `raw` |
+| `$F0E2` | OBC Internal Status2 | 2 | – | `raw` |
+| `$F0E3` | OBC Internal Status3 | 2 | – | `raw` |
+| `$F0E4` | OBC Internal Status4 | 2 | – | `raw` |
+| `$F0E5` | OBC Primary DSP Software Version | 3 | – | `raw` |
+| `$F0E6` | OBC Secondary DSP Software Version | 3 | – | `raw` |
+
+### Coded PIDs (23)
+
+Value meanings in [`DECODE_TABLES.md`](DECODE_TABLES.md#obc--on-board-charger).
+
+| DID | Signal | Signals in byte |
+|-----|--------|-----------------|
+| `$0210` | CP line status | 1 |
+| `$0211` | Charger state | 1 |
+| `$0212` | Internal CAN status | 1 |
+| `$0213` | External CAN status | 1 |
+| `$0214` | External CAN transceiver status | 1 |
+| `$0215` | FEE status | 1 |
+| `$0216` | EEPROM Write Error | 1 |
+| `$0217` | Internal SCI communication FAIL | 1 |
+| `$0218` | Internal SCI communication CRC FAIL | 1 |
+| `$0219` | OBD sensors | 16 |
+| `$1319` | internal CAN Communication states | 1 |
+| `$131D` | HW wakeup output state | 1 |
+| `$131E` | VCU CRC FAIL for OBC | 1 |
+| `$1320` | OBC Internal fault | 1 |
+| `$1321` | OBC External CAN status | 1 |
+| `$1322` | OBC derating mode | 1 |
+| `$1323` | OBC error flag | 1 |
+| `$1324` | OBC CC ohm | 1 |
+| `$1330` | VCU Charging/Discharge mode command | 1 |
+| `$1331` | VCU Discharge gun connect status | 1 |
+| `$1332` | OBC Operation Mode | 1 |
+| `$1904` | Snapshot Data | 23 |
+| `$2100` | HW wakeup output state | 1 |
+
+31 fault codes — read with `19 02 FF`, see [`READING_DTCS.md`](READING_DTCS.md).
+
+
 
 ## 4. AC / HVAC (Climate Control)
+
+> ℹ️ **Legacy section.** Carried over from the original revision of this file and
+> **not** regenerated from the TDS 20.0 databases — there is no TDS 20.0 source for
+> this ECU/variant. Treat the values as unverified.
+
 
 ### CAN IDs
 | Direction | CAN ID |
@@ -1035,6 +1102,11 @@ signal; `direct` = raw integer (scaling not in a verified source — calibrate).
 
 ## 5. BCS (Battery Cooling System)
 
+> ℹ️ **Legacy section.** Carried over from the original revision of this file and
+> **not** regenerated from the TDS 20.0 databases — there is no TDS 20.0 source for
+> this ECU/variant. Treat the values as unverified.
+
+
 ### CAN IDs
 | Direction | CAN ID |
 |-----------|--------|
@@ -1073,6 +1145,11 @@ signal; `direct` = raw integer (scaling not in a verified source — calibrate).
 
 ## 6. AUX (Auxiliary Inverter / MCU)
 
+> ℹ️ **Legacy section.** Carried over from the original revision of this file and
+> **not** regenerated from the TDS 20.0 databases — there is no TDS 20.0 source for
+> this ECU/variant. Treat the values as unverified.
+
+
 ### CAN IDs
 | Direction | CAN ID |
 |-----------|--------|
@@ -1099,6 +1176,11 @@ signal; `direct` = raw integer (scaling not in a verified source — calibrate).
 
 ## 7. TCP (Thermal Coolant Pump)
 
+> ℹ️ **Legacy section.** Carried over from the original revision of this file and
+> **not** regenerated from the TDS 20.0 databases — there is no TDS 20.0 source for
+> this ECU/variant. Treat the values as unverified.
+
+
 ### CAN IDs
 | Direction | CAN ID |
 |-----------|--------|
@@ -1116,6 +1198,11 @@ signal; `direct` = raw integer (scaling not in a verified source — calibrate).
 ---
 
 ## 8. EBS3 (Electronic Braking System)
+
+> ℹ️ **Legacy section.** Carried over from the original revision of this file and
+> **not** regenerated from the TDS 20.0 databases — there is no TDS 20.0 source for
+> this ECU/variant. Treat the values as unverified.
+
 
 ### CAN IDs
 | Direction | CAN ID |
@@ -1151,6 +1238,11 @@ signal; `direct` = raw integer (scaling not in a verified source — calibrate).
 ---
 
 ## 9. BMS Multi-Pack (CESL EV - 4 pack variant)
+
+> ℹ️ **Legacy section.** Carried over from the original revision of this file and
+> **not** regenerated from the TDS 20.0 databases — there is no TDS 20.0 source for
+> this ECU/variant. Treat the values as unverified.
+
 
 For vehicles with multiple battery packs (buses/commercial):
 
