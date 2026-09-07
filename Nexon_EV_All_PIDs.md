@@ -9,6 +9,7 @@ older material kept for reference and marked as such.
 - [`ROUTINE_CONTROL.md`](ROUTINE_CONTROL.md) — `0x31` routines and `0x2F` actuator tests, and which ECUs have none
 - [`DECODE_TABLES.md`](DECODE_TABLES.md) — what every coded DID value means, 423 DIDs
 - [`CELL_BALANCING.md`](CELL_BALANCING.md) — `$3479` in detail
+- [`tools/`](tools/) — test the VECU's `0x2F` actuators over a Bluetooth ELM327, with an offline simulator
 - [`data/`](data/) — machine-readable DID definitions, 1,181 DIDs across eight ECUs
 - [`carscanner/`](carscanner/) — importable CarScanner profiles, one folder per platform and one file per ECU ([zip](carscanner/CarScanner_Profiles.zip) — single files download as `.txt`)
 - [`elm327-patch/`](elm327-patch/) — J2534 shim so TDS itself runs on an ELM327

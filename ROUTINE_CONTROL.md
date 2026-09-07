@@ -10,6 +10,9 @@ been executed on a car.** Read the safety section before you send anything.
 > **Nothing here is needed to read data.** If you only want sensor values or fault
 > codes, use [`Nexon_EV_All_PIDs.md`](Nexon_EV_All_PIDs.md) and
 > [`READING_DTCS.md`](READING_DTCS.md), and skip this file entirely.
+>
+> To actually drive the actuators in the last section, see
+> [`tools/`](tools/).
 
 ## The service
 
@@ -280,8 +283,27 @@ Seven controllable outputs, all in the `34xx` DID range, all 4 bytes:
 | `$344D` | Battery Cooling Solenoid Valve | bit `0x03` | Closed / Open |
 | `$3436` | **Charging Gun Lock/Unlock Command** | bit `0x03` | — |
 
-All seven support On and Off; **none reports status** (`IOLI_Status = N`), so you
-command blind and read the effect back through the ordinary `0x22` sensors.
+All seven support On and Off, and all seven are marked `IOLI_Status = N`.
+
+**That does not mean you are commanding blind.** It means there is no status
+sub-function on `0x2F` — but **every one of these seven DIDs is separately
+readable with `0x22`**, under the same DID number. `22 34 39` returns the traction
+pump's PWM duty cycle as a percentage; `22 34 53` returns the slow fan's enable
+command. So you can take control, read the DID back, and see whether it landed.
+
+Several nearby sensors move with them, which is a second check:
+
+| Actuator | Read back | Should also move |
+|----------|-----------|------------------|
+| `$3439` traction pump | `$3439` | `$343A` pump PWM freq, `$3473` inverter temp |
+| `$3437` battery pump | `$3437` | `$3438` pump PWM freq, `$3423`/`$3424` cell temps |
+| `$3452` `$3453` fans | `$3452` `$3453` | `$34BB` cooling power request from FATC |
+| `$344C` cabin valve | `$344C` | `$34BB` |
+| `$344D` battery valve | `$344D` | `$3423`/`$3424` |
+| `$3436` gun lock | `$3436` | `$3441` gun lock feedback, `$349F` fascia switch |
+
+[`tools/vecu_actuator_test.py`](tools/vecu_actuator_test.py) does exactly this over
+a Bluetooth ELM327 — baseline, command, read back while holding, release, confirm.
 
 `$3436` is the one to be careful with. Releasing the charging gun lock on a car that
 is mid-session on a DC fast charger means unlatching a connector carrying hundreds
