@@ -40,62 +40,79 @@ The byte can only take eight documented values. Read yours off this table:
 
 **Balancing is running whenever the value is 4 or higher** (4, 5, 6 or 7).
 
-Anything above `7` means a bit the database does not define is set — which does
-happen: a real car returned **16**. See the section below. Values above 7 are not
-an error, they are the database being incomplete.
+Anything above `7` means a bit the database does not define is set — which
+happens: real readings of `14` and `16` have both been seen. Values above 7 are not
+an error, they are the database being incomplete. See below.
 
-## Observed on the car: `16`
+## Observed on the car: 3, 7, 14, 16
 
-A real reading from a Nexon EV via CarScanner on `0x785` was **16**.
+Four values read from a Nexon EV via CarScanner on `0x785`. Together they say more
+than any one of them alone.
 
-`16` = `0x10` = **bit 4**, and none of the three bits TDS 20.0 defines are set:
+| Value | Binary | Bits set |
+|------:|--------|----------|
+| `3` | `00000011` | 0, 1 |
+| `7` | `00000111` | 0, 1, 2 |
+| `14` | `00001110` | 1, 2, 3 |
+| `16` | `00010000` | 4 |
 
-```
-0x10 & 0x01 = 0   VCU HVIL Detect      : clear
-0x10 & 0x02 = 0   Insulation Control   : clear
-0x10 & 0x04 = 0   Cell Balance Status  : clear   <- not balancing
-```
+### Bits 3 and 4 are real, and TDS 20.0 does not define them
 
-**Balancing was not running**, and that conclusion holds whichever bit map
-applies — balancing is `0x04` on TDS 20.0 and `0x02` on 8.9S, and neither bit is
-set in `16`. So the practical answer does not depend on resolving the layout.
+Across the four readings, **bits 0, 1, 2, 3 and 4 all get used**. TDS 20.0's
+database defines only bits 0–2. So its table is not merely incomplete in theory —
+this car uses at least two bits beyond it. Only bit 5 was never seen set.
 
-Bit 4 itself is **not defined in TDS 20.0's database at all**. It *is* defined in
-TDS 8.9S, as `VCU_HVILDetect` — the high-voltage interlock loop being monitored.
+### Balancing was running at 7 and 14 — under either map
 
-A value of exactly 16 under the 8.9S map reads as: HVIL monitoring active, no
-derate, not balancing, not charging, no equalization requested. That is precisely
-what a car sitting with ignition on and nothing plugged in should report, which is
-good circumstantial support for the 8.9S map applying to this pack even though it
-answers on the newer `0x785` address.
+This is the robust part, because the two candidate layouts agree:
 
-Note this also settles something the earlier bus sweep got wrong: **the BMS does
-answer on `0x785` from the standard OBD port**. Only the BMS defines `$3479` —
-no other ECU on the car could have produced this reading.
+| Value | Balancing per TDS 20.0 (`0x04`) | Balancing per 8.9S (`0x02`) | Verdict |
+|------:|:---:|:---:|---|
+| `3` | no | yes | ambiguous |
+| `7` | **yes** | **yes** | **balancing** |
+| `14` | **yes** | **yes** | **balancing** |
+| `16` | no | no | not balancing |
 
-### Telling the two layouts apart, on the car
+So `7` and `14` are balancing regardless of which table is correct, and `16` is
+not. Only `3` depends on the layout.
 
-Plug into an AC charger and watch `$3479`:
+### 14 is the most informative reading
 
-| It becomes | Layout in force | Then balancing will read |
-|---|---|---|
-| **24** (`16 + 8`) | TDS 8.9S — `0x08` is `VCU_Charging_Flag` | **18** (`16 + 2`) |
-| **stays 16** | TDS 20.0 — charging is not in this byte | **20** (`16 + 4`) |
+Bit 3 is the charging flag in the 8.9S map. That makes `14` =
+**charging + balancing** (plus an insulation/leakage monitor) under *both* readings
+of the byte. That is exactly the state Tata's manuals describe — passive balancing
+running during a charge — and it is good evidence the byte is being decoded
+sensibly rather than being noise.
 
-The charging bit is the useful discriminator because it is the one thing you can
-deliberately turn on. Once you know which map applies, the balancing bit follows
-from the same table.
+### Neither map explains everything
 
-Two DIDs corroborate bit 4 being HVIL:
+Being honest about what does not fit:
 
-- **`$3565` BMS HVIL Hardwire Signal** on the BMS itself (`0x785`).
-- **`$3561` Battery HVIL Sense PWM dutycycle** on the VECU (`0x7E3`).
+- Under **8.9S**, balancing (`0x02`) would be set in 3 of the 4 readings, and the
+  derate flag (`0x01`) in 2 of 4. Balancing is occasional and derate is a fault
+  condition; neither should be that common.
+- Under **TDS 20.0**, HVIL detect is bit 0 — but it is clear in `14`, when the car
+  is charging and the interlock certainly is being monitored.
+- `16` appears **alone**, sharing no bits with the other three. That is a strange
+  pattern for a plain bitfield and may mean the byte carries a distinct state when
+  the pack is not HV-active.
 
-If both show the interlock healthy while `$3479` reads 16, bit 4 is HVIL.
+Frequency across the four samples, for whoever picks this up next:
 
-And to confirm which database generation the firmware matches, read **`$340E`
-BMS Operation Mode**. It exists only in TDS 20.0; if the ECU answers with data
-rather than a negative response, the firmware is the newer generation.
+| Bit | Seen | TDS 20.0 says | 8.9S says |
+|----:|-----:|---------------|-----------|
+| 0 | 2/4 | HVIL Detect | Derate Flag |
+| 1 | 3/4 | Insulation Control | **Cell Balancing** |
+| 2 | 2/4 | **Cell Balancing** | Leakage Detect Enable |
+| 3 | 1/4 | *undefined* | Charging Flag |
+| 4 | 1/4 | *undefined* | HVIL Detect |
+| 5 | 0/4 | *undefined* | Equalization Trigger |
+
+### What would settle it
+
+Note the value **while plugged into an AC charger**. If bit 3 (`+8`) is the
+charging flag, it will be set the whole time you are charging and clear the moment
+you unplug. Confirming that pins bit 3 and, with it, which map the rest follows.
 
 ## Test with the mask, not equality
 
