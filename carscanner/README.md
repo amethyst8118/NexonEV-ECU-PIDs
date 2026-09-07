@@ -18,14 +18,30 @@ The zip sidesteps it entirely.
 
 | File | Sensors | Header | Response | ECU |
 |------|--------:|--------|----------|-----|
-| `NexonEV_BMS.csp` | 65 | `785` | `78D` | Battery Management |
-| `NexonEV_VECU.csp` | 462 | `7E3` | `7EB` | Vehicle Control |
-| `NexonEV_OBC.csp` | 47 | `786` | `78E` | On Board Charger |
+| `NexonEV_BMS.csp` | 42 | `785` | `78D` | Battery Management |
+| `NexonEV_VECU.csp` | 233 | `7E3` | `7EB` | Vehicle Control |
+| `NexonEV_OBC.csp` | 29 | `786` | `78E` | On Board Charger |
 | `NexonEV_DCDC.csp` | 20 | `784` | `78C` | DC-DC Converter |
 | `NexonEV_MCU.csp` | 15 | `783` | `78B` | Motor Control |
-| `NexonEV_VECU_battery.csp` | 26 | `7E3` | `7EB` | VECU, battery subset |
+| `NexonEV_VECU_battery.csp` | 23 | `7E3` | `7EB` | VECU, battery subset |
 
-All 11-bit at 500 kbps, generated from the **TDS 20.0** databases. `BCM` is set to
+All 11-bit at 500 kbps, generated from the **TDS 20.0** databases.
+
+Every profile is filtered to DIDs this car will actually answer:
+
+- **Permission.** A DID whose permission column reads `None` is not exposed by the
+  ECU. 20 such DIDs were being polled on the BMS and 18 on the OBC; they would
+  simply never return data.
+- **Platform.** The VECU database lists the same DID once per vehicle platform,
+  with a Y/N column for each. A Nexon EV is KANGER 2.0 / 3.0, so only rows flagged
+  `K2` or `K3` apply — 174 of the VECU's rows belong to CURVV, ETURNA, ROWA, Nano,
+  OSPREY or ChallengerEV and describe different signals on those cars.
+- **Duplicates.** What the per-platform rows collapse into once filtered. Where a
+  DID still appears twice, the later row wins: it carries the current name and
+  unit, and the earlier one is a superseded entry left in the table.
+
+That took the VECU profile from 462 sensors to 233 and the BMS from 65 to 42,
+which also makes round-robin polling roughly twice as fast. `BCM` is set to
 the session command each ECU's database specifies (`1003`, or `1001` for VECU and
 OBC), so the session is entered before every read.
 
