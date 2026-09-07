@@ -27,8 +27,7 @@ once as `kW`. Arithmetic settles it: at resolution 0.1 with two bytes the maximu
 representable value is 6553.5. A 105 kW pack cannot be expressed in watts at
 0.1 W/bit, but 105 kW is 1050 counts at 0.1 kW/bit.
 
-The older TDS 8.9S database labelled the same four signals `A`, which is wrong in a
-third way — they are named `OutPower` and `FBPower`.
+The signal names settle any remaining doubt: `OutPower` and `FBPower`.
 
 ### Cumulative capacity is Ah, not °C
 
@@ -78,13 +77,13 @@ higher than it should, the offset is 40.
 
 ### `$3481` — BMS negative busbar voltage
 
-TDS 20.0 says resolution 1 in **mV**. TDS 8.9S said 0.1 in **V** — a factor of 100
-apart.
+Declared as resolution 1 in **mV**, where the neighbouring positive busbar `$3482`
+is 0.1 V. The asymmetry is easy to misread as an error but is physically right: the
+negative busbar sits close to chassis potential, so a millivolt scale suits it,
+while `$3482` carries pack potential and needs volts.
 
-TDS 20.0 is preferred here, and on physical grounds: the negative busbar sits close
-to chassis potential, so a millivolt scale is sensible where a 0.1 V scale is not.
-The positive busbar `$3482` is 0.1 V in both databases, which fits — it is the one
-carrying pack potential.
+Left as declared. Worth a sanity check on the car all the same — if `$3481` reads
+in the hundreds rather than near zero, the unit is wrong.
 
 ## Checked and found correct
 

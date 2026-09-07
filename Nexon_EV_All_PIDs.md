@@ -281,8 +281,7 @@ clearing an active fault only hides it until the next drive cycle.
 ## 1B. BMS — Battery Management System
 
 > Source: **TDS 20.0 `BMS_DB.sdf`**, decrypted from the packed install. This is
-> the database the current factory tool ships. It supersedes the older TDS 8.9S
-> `KPD_EV_BMS.inf` (55 DIDs, 29-bit) that earlier revisions of this file used.
+> the database the current factory tool ships.
 
 ### Bus
 
@@ -942,7 +941,7 @@ Value meanings in [`DECODE_TABLES.md`](DECODE_TABLES.md#dcdc--dc-dc-converter).
 
 ## 3B. MCU — Motor Control Unit
 
-> Source: **TDS 20.0 `MCU_DiagnosticsDB.sdf`**. Note the older TDS 8.9S MCU database carries 164 DIDs against these 27 and is kept in [`data/`](data/) for that reason.
+> Source: **TDS 20.0 `MCU_DiagnosticsDB.sdf`**. Only 27 DIDs — most motor detail is reported by the VECU on `0x7E3` rather than by the MCU directly.
 
 | Setting | Value |
 |---------|-------|

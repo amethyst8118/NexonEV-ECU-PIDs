@@ -1,8 +1,10 @@
 # Cell balancing — `$3479` and everything around it
 
-Cell balancing status is not a number you read off; it is one bit inside a packed
-byte, and the byte's layout changed between database generations. This is the
-complete picture for the **TDS 20.0** BMS (`0x785`).
+Balancing status is not a number you read off. It is one bit inside a packed byte,
+and TDS 20.0's own BMS database describes that byte **twice, inconsistently**. This
+is what the database actually contains, and how to read it without guessing.
+
+Source throughout: `BMS_DB.sdf` from TDS 20.0. Request `0x785`, response `0x78D`.
 
 ## `$3479` — the flag byte
 
@@ -11,7 +13,7 @@ complete picture for the **TDS 20.0** BMS (`0x785`).
 62 34 79 XX      response, XX is the flag byte
 ```
 
-Three signals share the byte:
+The live definition (`ParameterId` 109) gives three signals:
 
 | Mask | Bit | Signal |
 |------|-----|--------|
@@ -19,114 +21,87 @@ Three signals share the byte:
 | `0x02` | 1 | VCU Insulation Control Command |
 | `0x04` | 2 | **BMS Cell Balance Status** |
 
-Only three bits are defined here. Bits 3–7 have no definition in TDS 20.0 — but
-bit 4 **has been seen set on a real car**, so the database is incomplete rather
-than the upper bits being unused. See *Observed on the car* below.
+Balancing is **`0x04`**. Bits 3–7 have no definition on this row.
 
-## Every value
+## Values under the live definition
 
-The byte can only take eight documented values. Read yours off this table:
+| Value | HVIL | Insulation | **Balancing** |
+|------:|:----:|:----------:|:-------------:|
+| `0` | – | – | – |
+| `1` | ✓ | – | – |
+| `2` | – | ✓ | – |
+| `3` | ✓ | ✓ | – |
+| `4` | – | – | **✓** |
+| `5` | ✓ | – | **✓** |
+| `6` | – | ✓ | **✓** |
+| `7` | ✓ | ✓ | **✓** |
 
-| Value | Binary | HVIL | Insulation | **Balancing** |
-|------:|--------|:----:|:----------:|:-------------:|
-| `0` | `00000000` | – | – | – |
-| `1` | `00000001` | ✓ | – | – |
-| `2` | `00000010` | – | ✓ | – |
-| `3` | `00000011` | ✓ | ✓ | – |
-| `4` | `00000100` | – | – | **✓** |
-| `5` | `00000101` | ✓ | – | **✓** |
-| `6` | `00000110` | – | ✓ | **✓** |
-| `7` | `00000111` | ✓ | ✓ | **✓** |
+`raw & 0x04` is the balancing test. A value **above 7** means a bit outside this
+definition is set — which is expected rather than anomalous, for the reason below.
 
-**Balancing is running whenever the value is 4 or higher** (4, 5, 6 or 7).
+## The database contradicts itself
 
-Anything above `7` means a bit the database does not define is set — which
-happens: real readings of `14` and `16` have both been seen. Values above 7 are not
-an error, they are the database being incomplete. See below.
+`BMS_DB.sdf` contains a **second, orphaned definition** of the same concept.
+`ParameterId` 86 has a complete set of decode rows but **no matching row in
+`DataIdentifiers`** — the DID it belonged to was deleted from the table while its
+decode rows were left behind. `ParameterId` 85, 87 and 90 are missing the same way;
+87 is the relay-status equivalent.
 
-## Observed on the car: 3, 7, 14, 16
+What the orphaned rows define:
 
-Four values read from a Nexon EV via CarScanner on `0x785`. Together they say more
-than any one of them alone.
+| Mask | Bit | Signal |
+|------|-----|--------|
+| `0x01` | 0 | Battery Derate Status |
+| `0x02` | 1 | **BMS_CellBalanceStatus** |
+| `0x04` | 2 | Insulation Measurement Enable |
+| `0x08` | 3 | Charging Enabled Status |
+| `0x20` | 5 | Initiation of cell balancing by vehicle |
 
-| Value | Binary | Bits set |
-|------:|--------|----------|
-| `3` | `00000011` | 0, 1 |
-| `7` | `00000111` | 0, 1, 2 |
-| `14` | `00001110` | 1, 2, 3 |
-| `16` | `00010000` | 4 |
+Set against the live definition:
 
-### Bits 3 and 4 are real, and TDS 20.0 does not define them
+| Bit | Live (`$3479`, pid 109) | Orphaned (pid 86) |
+|----:|-------------------------|-------------------|
+| 0 | VCU HVIL Detect | Battery Derate Status |
+| 1 | VCU Insulation Control | **Cell Balance Status** |
+| 2 | **Cell Balance Status** | Insulation Measurement Enable |
+| 3 | – | Charging Enabled Status |
+| 5 | – | Initiation of balancing by vehicle |
 
-Across the four readings, **bits 0, 1, 2, 3 and 4 all get used**. TDS 20.0's
-database defines only bits 0–2. So its table is not merely incomplete in theory —
-this car uses at least two bits beyond it. Only bit 5 was never seen set.
+**Balancing and insulation are swapped between the two.** That is the trap: read
+the wrong one and you get "insulation" where you meant "balancing", or the reverse,
+with nothing to warn you.
 
-### Balancing was running at 7 and 14 — under either map
+The orphaned set also fills in bits the live definition leaves blank — bit 3
+(charging) and bit 5 (a balancing request from the vehicle). So a byte value above
+7 is not corruption; it is a bit the live row simply does not describe.
 
-This is the robust part, because the two candidate layouts agree:
+The same pattern shows on `$3404`: the live definition puts the relays on
+`0x01`/`0x02`/`0x04`, while the orphaned pid 87 rows put them on
+`0x02`/`0x04`/`0x08`.
 
-| Value | Balancing per TDS 20.0 (`0x04`) | Balancing per 8.9S (`0x02`) | Verdict |
-|------:|:---:|:---:|---|
-| `3` | no | yes | ambiguous |
-| `7` | **yes** | **yes** | **balancing** |
-| `14` | **yes** | **yes** | **balancing** |
-| `16` | no | no | not balancing |
+## Reading it safely
 
-So `7` and `14` are balancing regardless of which table is correct, and `16` is
-not. Only `3` depends on the layout.
+With two candidate maps, the reliable approach is to trust only what they agree on
+and treat the rest as unknown until it is measured.
 
-### 14 is the most informative reading
+```python
+raw = read_did(0x3479)
 
-Bit 3 is the charging flag in the 8.9S map. That makes `14` =
-**charging + balancing** (plus an insulation/leakage monitor) under *both* readings
-of the byte. That is exactly the state Tata's manuals describe — passive balancing
-running during a charge — and it is good evidence the byte is being decoded
-sensibly rather than being noise.
+balancing_live   = bool(raw & 0x04)   # live definition
+balancing_orphan = bool(raw & 0x02)   # orphaned definition
 
-### Neither map explains everything
+if balancing_live and balancing_orphan:
+    state = "balancing"          # both agree
+elif not balancing_live and not balancing_orphan:
+    state = "not balancing"      # both agree
+else:
+    state = "unresolved"         # the maps disagree - do not guess
+```
 
-Being honest about what does not fit:
-
-- Under **8.9S**, balancing (`0x02`) would be set in 3 of the 4 readings, and the
-  derate flag (`0x01`) in 2 of 4. Balancing is occasional and derate is a fault
-  condition; neither should be that common.
-- Under **TDS 20.0**, HVIL detect is bit 0 — but it is clear in `14`, when the car
-  is charging and the interlock certainly is being monitored.
-- `16` appears **alone**, sharing no bits with the other three. That is a strange
-  pattern for a plain bitfield and may mean the byte carries a distinct state when
-  the pack is not HV-active.
-
-Frequency across the four samples, for whoever picks this up next:
-
-| Bit | Seen | TDS 20.0 says | 8.9S says |
-|----:|-----:|---------------|-----------|
-| 0 | 2/4 | HVIL Detect | Derate Flag |
-| 1 | 3/4 | Insulation Control | **Cell Balancing** |
-| 2 | 2/4 | **Cell Balancing** | Leakage Detect Enable |
-| 3 | 1/4 | *undefined* | Charging Flag |
-| 4 | 1/4 | *undefined* | HVIL Detect |
-| 5 | 0/4 | *undefined* | Equalization Trigger |
-
-### What would settle it
-
-Note the value **while plugged into an AC charger**. If bit 3 (`+8`) is the
-charging flag, it will be set the whole time you are charging and clear the moment
-you unplug. Confirming that pins bit 3 and, with it, which map the rest follows.
-
-## Test with the mask, not equality
-
-The database's `ResultByte` column is **inconsistent** on this DID:
-
-| Mask | Stored "enable" value |
-|------|----------------------|
-| `0x01` | `1` |
-| `0x02` | `2` — the masked value |
-| `0x04` | `1` — *not* the masked value |
-
-Two of the three use the masked value, one uses `1`. So comparing the byte against
-`ResultByte` gives the wrong answer for at least one signal whichever convention
-you assume.
+Always test with `raw & mask`, never equality. The database's own `ResultByte`
+column is inconsistent on this DID — `0x02` stores its masked value (`2`) while
+`0x04` stores `1` — so comparing the byte against `ResultByte` gives the wrong
+answer for at least one signal whichever convention you assume.
 
 ```python
 balancing = bool(raw & 0x04)      # correct
@@ -134,42 +109,43 @@ balancing = (raw == 4)            # wrong: misses 5, 6, 7
 balancing = (raw & 0x04) == 1     # wrong: 0x04 & 4 is 4, never 1
 ```
 
-Always `raw & mask != 0`.
+## Settling it on the car
 
-## The other generation
+Bit 3 is the discriminator, because charging is the one condition you can switch on
+deliberately.
 
-The older TDS 8.9S database (`KPD_EV_BMS.inf`, 29-bit `0x1BDA96F1`) defines the
-same DID completely differently:
+**Read `$3479` plugged into an AC charger, then again unplugged.**
 
-| Mask | TDS 20.0 (`0x785`) | TDS 8.9S (29-bit) |
-|------|--------------------|-------------------|
-| `0x01` | VCU HVIL Detect | BMS Derate Flag |
-| `0x02` | VCU Insulation Control | **BMS Cell Balance Status** |
-| `0x04` | **BMS Cell Balance Status** | HSC BCM Leakage Enable |
-| `0x08` | – | VCU Charging Flag |
-| `0x10` | – | VCU HVIL Detect |
-| `0x20` | – | VCU Equalization Trigger |
+- If a `+8` appears while charging and clears when you unplug, **bit 3 is the
+  charging flag** — this firmware follows the orphaned definition, and balancing is
+  therefore `0x02`.
+- If nothing changes, charging is not in this byte, and the live definition
+  (balancing on `0x04`) stands.
 
-**Balancing moves from `0x02` to `0x04`**, and on the newer database `0x02` means
-insulation control instead. Reading the wrong table does not fail visibly — it
-reports a different signal with full confidence.
+Two DIDs corroborate independently:
 
-To tell which applies: **`22 340E` returns data only on TDS 20.0.** If it answers,
-use the `0x04` table.
+- **`$3565`** BMS HVIL Hardwire Signal, on the BMS itself.
+- **`$3561`** Battery HVIL Sense PWM duty cycle, on the VECU (`0x7E3`).
+
+And **`$3493` VCU Flag** carries charging state as its own DID — `0x01` fast
+charging, `0x02` charging enabled, `0x04` slow charging. Reading it alongside
+`$3479` tells you whether the car is charging without needing to decide what bit 3
+means.
 
 ## Related DIDs
 
-On TDS 20.0 several things that were bits inside `$3479` on the old database became
-DIDs of their own, which is easier to read:
+Several things that share the packed byte also exist as DIDs of their own, which
+are unambiguous and worth preferring:
 
 | DID | Signal | Type |
 |-----|--------|------|
 | `$340E` | BMS Operation Mode | enum, 8 states |
 | `$340F` | BMS Derate Flag | `0x01` mask |
-| `$3493` | VCU Flag — fast charge, charging enabled, slow charge | 3 bits |
+| `$3493` | VCU Flag — fast / enabled / slow charging | 3 bits |
 | `$34D5` | Cell voltage difference | mV |
 | `$3415` / `$3417` | Max / min cell voltage | mV |
 | `$3419` / `$341A` | Which cell is highest / lowest | index |
+| `$3565` | BMS HVIL Hardwire Signal | 1 byte |
 
 `$340E` operating mode:
 
@@ -184,17 +160,6 @@ DIDs of their own, which is easier to read:
 | `6` | Fault |
 | `0x0F` | Ready to Sleep |
 
-`$3493` VCU Flag:
-
-| Mask | Signal |
-|------|--------|
-| `0x01` | VCU Fast Charging Flag |
-| `0x02` | Charging Enabled Status |
-| `0x04` | VCU Slow Charging Flag |
-
-Reading `$3479` and `$3493` together tells you both whether balancing is running
-and whether the car is charging — the condition it normally runs under.
-
 ## What balancing actually does here
 
 It is **passive (dissipative)**. Tata's BMS DTC manual states the BMS *"perform the
@@ -205,7 +170,7 @@ raises board temperature. Three consequences:
   will never be corrected by balancing;
 - it is slow, on the order of tens of milliamps, so closing a 50 mV spread takes
   hours rather than minutes;
-- it runs during and after **charging**, so `$3479` bit 2 clear while you are
+- it runs during and after **charging**, so a clear balancing bit while you are
   driving is normal and not a fault.
 
 The clearest official statement of its purpose is the healing condition Tata gives
@@ -220,11 +185,11 @@ difference faults into static (`P3069-1C`, at rest) and dynamic (`P1208-1C`, und
 load) precisely because a large delta under load is mostly internal-resistance
 spread between cells and shrinks once you stop.
 
-A healthy balancing session looks like: plugged into AC, high state of charge,
-`$3479 & 0x04` set, and `$34D5` shrinking over hours with `$3419` reporting the
-same cell index as the highest throughout.
+A healthy balancing session: plugged into AC, high state of charge, the balancing
+bit set, and `$34D5` shrinking over hours with `$3419` reporting the same cell
+index as the highest throughout.
 
-> The BMS has **no cell-balancing hardware fault code**. Gotion packs have
-> `P3054-96` and Kratos has per-pack slave balancing faults; this one has neither.
-> `$3479` bit 2 is your only visibility into whether the balancing hardware still
-> works, which makes it worth logging rather than glancing at.
+> The BMS has **no cell-balancing hardware fault code**. Other Tata packs do —
+> Gotion has `P3054-96` and Kratos has per-pack slave balancing faults — but this
+> one has neither. `$3479` is your only visibility into whether the balancing
+> hardware still works, which makes it worth logging rather than glancing at.

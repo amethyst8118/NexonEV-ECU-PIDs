@@ -1,13 +1,8 @@
 # Machine-readable PID definitions
 
-Full DID definitions for every diagnosable ECU on the car, exported from the Tata
-TDS ECU databases — 1,168 DIDs across eight ECUs from TDS 20.0, plus five older
-TDS 8.9S databases kept where they carry more detail.
-
-| File | ECU | DIDs | with scaling | with enums |
-|------|-----|-----:|-------------:|-----------:|
-**TDS 20.0** — the current factory tool's databases, decrypted from the packed
-install. Prefer these.
+Full DID definitions for every diagnosable ECU on the car — **1,168 DIDs across
+eight ECUs**, exported from the TDS 20.0 databases decrypted out of the packed
+install. These are what the current factory tool ships.
 
 | File | ECU | Header | DIDs | scaled | enums |
 |------|-----|--------|-----:|-------:|------:|
@@ -19,15 +14,6 @@ install. Prefer these.
 | `TDS20_DCDC_Unified_PIDs.json` | DC-DC Converter | `0x784` | 42 | 35 | 8 |
 | `TDS20_IMMO_Unified_PIDs.json` | Immobiliser | `0x704` | 41 | 31 | 10 |
 | `TDS20_MCU_Unified_PIDs.json` | Motor Control | `0x783` | 27 | 27 | 0 |
-
-**TDS 8.9S** — only the two that are *not* superseded are kept. The rest were
-removed: their TDS 20.0 equivalents are newer, larger and correctly addressed.
-
-| File | ECU | DIDs | Why kept |
-|------|-----|-----:|----------|
-| `KPD_EV_MCU_Unified_PIDs.json` | Motor Control Unit | 164 | TDS 20.0's MCU database has only 27 |
-| `KPD_EV_BCS_Unified_PIDs.json` | Battery Cooling System | 40 | no TDS 20.0 equivalent exists |
-
 
 ## Schema
 
