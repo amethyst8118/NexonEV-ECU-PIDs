@@ -9,7 +9,7 @@ older material kept for reference and marked as such.
 - [`DECODE_TABLES.md`](DECODE_TABLES.md) — what every coded DID value means, 423 DIDs
 - [`CELL_BALANCING.md`](CELL_BALANCING.md) — `$3479` in detail
 - [`CORRECTIONS.md`](CORRECTIONS.md) — database errors found, fixed and flagged
-- [`data/`](data/) — machine-readable DID definitions, 1,168 DIDs across eight ECUs
+- [`data/`](data/) — machine-readable DID definitions, 1,181 DIDs across eight ECUs
 - [`carscanner/`](carscanner/) — importable CarScanner profiles ([zip](carscanner/NexonEV_CarScanner_Profiles.zip) — single files download as `.txt`)
 - [`elm327-patch/`](elm327-patch/) — J2534 shim so TDS itself runs on an ELM327
 
@@ -30,7 +30,7 @@ from each ECU's `DiagnocommSettings` table in the TDS 20.0 databases.
 | **DCDC** — DC-DC Converter | `0x784` | `0x78C` | `10 03` | 42 | 17 |
 | **BMS** — Battery Management | `0x785` | `0x78D` | `10 03` | 114 | 256 |
 | **OBC** — On Board Charger | `0x786` | `0x78E` | `10 01` | 75 | 31 |
-| **VECU** — Vehicle Control | `0x7E3` | `0x7EB` | `10 01` | 502 | 252 |
+| **VECU** — Vehicle Control | `0x7E3` | `0x7EB` | `10 01` | 515 | 285 |
 
 The powertrain runs `783` MCU → `784` DCDC → `785` BMS → `786` OBC, response
 always request + 8.

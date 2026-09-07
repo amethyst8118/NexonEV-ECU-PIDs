@@ -2,7 +2,7 @@
 
 Every diagnosable ECU on this car answers standard UDS `ReadDTCInformation` on
 **11-bit CAN at 500 kbps**, from the ordinary OBD-II socket. A plain ELM327 is
-enough. There are **1,125 defined fault codes** across the eight ECUs, and the
+enough. There are **1,158 defined fault codes** across the eight ECUs, and the
 `DTCMaster` tables in [`data/`](data/) decode them to text.
 
 ## The commands
@@ -25,7 +25,7 @@ enough. There are **1,125 defined fault codes** across the eight ECUs, and the
 | DCDC — Converter | `0x784` | `0x78C` | `10 03` | 17 |
 | BMS — Battery | `0x785` | `0x78D` | `10 03` | 256 |
 | OBC — Charger | `0x786` | `0x78E` | `10 01` | 31 |
-| VECU — Vehicle Control | `0x7E3` | `0x7EB` | `10 01` | 252 |
+| VECU — Vehicle Control | `0x7E3` | `0x7EB` | `10 01` | 285 |
 
 Response id is always request + 8.
 
@@ -119,8 +119,13 @@ The BMS ships three DTC sets and the right one depends on the pack:
 | `DTCMaster_Limber` | 68 | Limber platform |
 
 The K1AIO and K2AIO tables match the `BMS_K1AIO_DTC.pdf` / `BMS_K2AIO_DTC.pdf`
-service documents that ship inside TDS 20.0. The VECU similarly carries
-per-platform tables (`_K2`, `_K3`, `_Tamor`, `_Nova`, `_Limber`, and others).
+service documents that ship inside TDS. The VECU similarly carries per-platform
+tables (`_K2`, `_K3`, `_Tamor`, `_Nova`, `_Limber`, and others).
+
+For a Nexon EV use **`tblDTCMaster_K2`** (195 codes) or **`tblDTCMaster_K3`** (201).
+The 285-code general table above is the union across platforms and includes codes
+this car does not implement. Both Nexon tables are unchanged between TDS 20.0 and
+21.0; the 33 codes 21.0 added all landed in the general table.
 
 ## Before you clear anything
 

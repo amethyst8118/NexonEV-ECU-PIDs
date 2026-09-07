@@ -23001,5 +23001,454 @@
    }
   ],
   "ByteParameters": []
+ },
+ {
+  "ParameterID": 530,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x3675",
+  "ParameterName": "6in1 Compressor HVIL  Duty Cycle",
+  "TotalByteLength": "1",
+  "ReadPermission": "Y",
+  "WritePermission": "N",
+  "ValueParameters": [
+   {
+    "SubFunctionID": 363,
+    "ParameterName": "6in1 Compressor HVIL  Duty Cycle",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "Resolution": "1",
+    "Offset": "0",
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": null,
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": "0",
+    "MaximumValue": "1",
+    "DataType": "5",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 531,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x3676",
+  "ParameterName": "6in1 Compressor HVIL  Frequency",
+  "TotalByteLength": "1",
+  "ReadPermission": "Y",
+  "WritePermission": "N",
+  "ValueParameters": [
+   {
+    "SubFunctionID": 364,
+    "ParameterName": "6in1 Compressor HVIL  Frequency",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "Resolution": "1",
+    "Offset": "0",
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": null,
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": "0",
+    "MaximumValue": "1",
+    "DataType": "5",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 532,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x3677",
+  "ParameterName": "6in1 ACSC HVIL Duty Cycle",
+  "TotalByteLength": "1",
+  "ReadPermission": "Y",
+  "WritePermission": "N",
+  "ValueParameters": [
+   {
+    "SubFunctionID": 365,
+    "ParameterName": "6in1 ACSC HVIL Duty Cycle",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "Resolution": "1",
+    "Offset": "0",
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": null,
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": "0",
+    "MaximumValue": "1",
+    "DataType": "5",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 533,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x3678",
+  "ParameterName": "6in1 ACSC HVIL Frequency",
+  "TotalByteLength": "1",
+  "ReadPermission": "Y",
+  "WritePermission": "N",
+  "ValueParameters": [
+   {
+    "SubFunctionID": 366,
+    "ParameterName": "6in1 ACSC HVIL Frequency",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "Resolution": "1",
+    "Offset": "0",
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": null,
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": "0",
+    "MaximumValue": "1",
+    "DataType": "5",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 535,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x367B",
+  "ParameterName": "PTC HVIL  duty cycle",
+  "TotalByteLength": "1",
+  "ReadPermission": "Y",
+  "WritePermission": "N",
+  "ValueParameters": [
+   {
+    "SubFunctionID": 368,
+    "ParameterName": "PTC HVIL  duty cycle",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "Resolution": "1",
+    "Offset": "0",
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": "Hz",
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": "0",
+    "MaximumValue": "100",
+    "DataType": "5",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 534,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x355E",
+  "ParameterName": "Inverter Coolant Temperature",
+  "TotalByteLength": "1",
+  "ReadPermission": "Y",
+  "WritePermission": "N",
+  "ValueParameters": [
+   {
+    "SubFunctionID": 367,
+    "ParameterName": "Inverter Coolant Temperature",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "Resolution": "0.5",
+    "Offset": "-45",
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": null,
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": "0",
+    "MaximumValue": "110",
+    "DataType": "5",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 536,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x367C",
+  "ParameterName": "PTC HVIL  frequency",
+  "TotalByteLength": "1",
+  "ReadPermission": "Y",
+  "WritePermission": "N",
+  "ValueParameters": [
+   {
+    "SubFunctionID": 369,
+    "ParameterName": "PTC HVIL  frequency",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "Resolution": "1",
+    "Offset": "0",
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": "Hz",
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": "0",
+    "MaximumValue": "100",
+    "DataType": "5",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 537,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x367D",
+  "ParameterName": "VCU DCDC Precharge Voltage Request",
+  "TotalByteLength": "2",
+  "ReadPermission": "Y",
+  "WritePermission": "N",
+  "ValueParameters": [
+   {
+    "SubFunctionID": 370,
+    "ParameterName": "VCU DCDC Precharge Voltage Request",
+    "BytePosition": 3,
+    "ByteLength": 2,
+    "Resolution": "0.01",
+    "Offset": "0",
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": "V",
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": "0",
+    "MaximumValue": "600",
+    "DataType": "5",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 538,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x3615",
+  "ParameterName": "Xin1 KL30 Voltage",
+  "TotalByteLength": "1",
+  "ReadPermission": "Y",
+  "WritePermission": "N",
+  "ValueParameters": [
+   {
+    "SubFunctionID": 371,
+    "ParameterName": "Xin1 KL30 Voltage",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "Resolution": "1",
+    "Offset": "0",
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": "V",
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": "0",
+    "MaximumValue": "255",
+    "DataType": "5",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 539,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x367F",
+  "ParameterName": "Xin1 KL15 Voltage",
+  "TotalByteLength": "1",
+  "ReadPermission": "Y",
+  "WritePermission": "N",
+  "ValueParameters": [
+   {
+    "SubFunctionID": 372,
+    "ParameterName": "Xin1 KL15 Voltage",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "Resolution": "1",
+    "Offset": "0",
+    "DivisionFactor": "1",
+    "AdditionFactor": "0",
+    "Units": "V",
+    "FormulaType": "1",
+    "FormulaDescription": "Value = (Raw * Resolution / DivisionFactor) + AdditionFactor - Offset",
+    "DecimalPrecision": "2",
+    "MinimumValue": "0",
+    "MaximumValue": "255",
+    "DataType": "5",
+    "BitPosition": null
+   }
+  ],
+  "ByteParameters": []
+ },
+ {
+  "ParameterID": 540,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x3680",
+  "ParameterName": "Xin1 DCDC Precharge Fault Status",
+  "TotalByteLength": "1",
+  "ReadPermission": "Y",
+  "WritePermission": "N",
+  "ValueParameters": [],
+  "ByteParameters": [
+   {
+    "SubFunctionID": 2044,
+    "ParameterName": "Xin1 DCDC Precharge Fault Status",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "00",
+    "ResultDescription": "Normal",
+    "LanguageCode": "VECU_01518"
+   },
+   {
+    "SubFunctionID": 2045,
+    "ParameterName": "Xin1 DCDC Precharge Fault Status",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "01",
+    "ResultDescription": "Abnormal",
+    "LanguageCode": "VECU_01518"
+   }
+  ]
+ },
+ {
+  "ParameterID": 541,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x3673",
+  "ParameterName": "DCDC Precharge Status",
+  "TotalByteLength": "1",
+  "ReadPermission": "Y",
+  "WritePermission": "N",
+  "ValueParameters": [],
+  "ByteParameters": [
+   {
+    "SubFunctionID": 2046,
+    "ParameterName": "DCDC Precharge Status",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "00",
+    "ResultDescription": "init",
+    "LanguageCode": "VECU_01519"
+   },
+   {
+    "SubFunctionID": 2047,
+    "ParameterName": "DCDC Precharge Status",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "01",
+    "ResultDescription": "precharging",
+    "LanguageCode": "VECU_01519"
+   },
+   {
+    "SubFunctionID": 2048,
+    "ParameterName": "DCDC Precharge Status",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "02",
+    "ResultDescription": "precharge success",
+    "LanguageCode": "VECU_01519"
+   },
+   {
+    "SubFunctionID": 2049,
+    "ParameterName": "DCDC Precharge Status",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "03",
+    "ResultDescription": "precharge failed",
+    "LanguageCode": "VECU_01519"
+   }
+  ]
+ },
+ {
+  "ParameterID": 542,
+  "ServiceId": "0x22",
+  "ServiceName": "ReadDataByIdentifier (0x22)",
+  "DidHex": "0x367E",
+  "ParameterName": "VCU BMS Precharge Request Status",
+  "TotalByteLength": "1",
+  "ReadPermission": "Y",
+  "WritePermission": "N",
+  "ValueParameters": [],
+  "ByteParameters": [
+   {
+    "SubFunctionID": 2050,
+    "ParameterName": "VCU BMS Precharge Request Status",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "00",
+    "ResultDescription": "initializing",
+    "LanguageCode": "VECU_01520"
+   },
+   {
+    "SubFunctionID": 2051,
+    "ParameterName": "VCU BMS Precharge Request Status",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "01",
+    "ResultDescription": "vcu/dcdc implement precharge",
+    "LanguageCode": "VECU_01520"
+   },
+   {
+    "SubFunctionID": 2052,
+    "ParameterName": "VCU BMS Precharge Request Status",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "02",
+    "ResultDescription": "BMS implement precharge",
+    "LanguageCode": "VECU_01520"
+   },
+   {
+    "SubFunctionID": 2053,
+    "ParameterName": "VCU BMS Precharge Request Status",
+    "BytePosition": 3,
+    "ByteLength": 1,
+    "MaskingCondition": "FF",
+    "ResultByte": "03",
+    "ResultDescription": "vcu/dcdc implement precharge, then BMS implement precharge",
+    "LanguageCode": "VECU_01520"
+   }
+  ]
  }
 ]
