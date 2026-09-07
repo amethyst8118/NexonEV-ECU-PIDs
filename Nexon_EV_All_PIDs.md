@@ -6,6 +6,7 @@ reachable from the standard OBD-II socket. Sections 0–3C are generated from th
 older material kept for reference and marked as such.
 
 - [`READING_DTCS.md`](READING_DTCS.md) — how to pull fault codes, with worked examples
+- [`ROUTINE_CONTROL.md`](ROUTINE_CONTROL.md) — `0x31` routines and `0x2F` actuator tests, and which ECUs have none
 - [`DECODE_TABLES.md`](DECODE_TABLES.md) — what every coded DID value means, 423 DIDs
 - [`CELL_BALANCING.md`](CELL_BALANCING.md) — `$3479` in detail
 - [`data/`](data/) — machine-readable DID definitions, 1,181 DIDs across eight ECUs
