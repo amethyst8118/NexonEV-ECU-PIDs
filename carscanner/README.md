@@ -49,6 +49,18 @@ OBC), so the session is entered before every read.
 > round-robin, so enabling all of them makes each update crawl. Put the handful you
 > want on a dashboard page and leave the rest hidden.
 
+## Other Tata EVs
+
+The profiles above are for a **Nexon EV**. The VECU is the one ECU whose DIDs
+differ by vehicle platform, and [`platforms/`](platforms/) has a profile for each
+of the eleven — Punch, Tiago, Curvv, Eturna, Challenger, Nano and the export
+builds.
+
+That matters because the same DID means different things on different cars:
+`$345D` is "Maximum reverse vehicle speed" on one platform and "Compressor
+Diagnostic Status 2" on another. The other EV ECUs do not vary, so the BMS, MCU,
+DCDC and OBC files here serve every platform.
+
 ## Scaling lives in the formula, not in MUL/DIV/OFS
 
 This is worth knowing if you edit these or write your own.
