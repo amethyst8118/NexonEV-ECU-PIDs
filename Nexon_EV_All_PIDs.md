@@ -8,7 +8,6 @@ older material kept for reference and marked as such.
 - [`READING_DTCS.md`](READING_DTCS.md) — how to pull fault codes, with worked examples
 - [`DECODE_TABLES.md`](DECODE_TABLES.md) — what every coded DID value means, 423 DIDs
 - [`CELL_BALANCING.md`](CELL_BALANCING.md) — `$3479` in detail
-- [`CORRECTIONS.md`](CORRECTIONS.md) — database errors found, fixed and flagged
 - [`data/`](data/) — machine-readable DID definitions, 1,181 DIDs across eight ECUs
 - [`carscanner/`](carscanner/) — importable CarScanner profiles, one folder per platform and one file per ECU ([zip](carscanner/CarScanner_Profiles.zip) — single files download as `.txt`)
 - [`elm327-patch/`](elm327-patch/) — J2534 shim so TDS itself runs on an ELM327

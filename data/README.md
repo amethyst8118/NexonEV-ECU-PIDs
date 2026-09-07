@@ -18,6 +18,41 @@ content-identical to 20.0, and the VECU here is the 21.0 copy (515 DIDs, up from
 | `TDS20_IMMO_Unified_PIDs.json` | Immobiliser | `0x704` | 41 | 31 | 10 |
 | `TDS20_MCU_Unified_PIDs.json` | Motor Control | `0x783` | 27 | 27 | 0 |
 
+## Corrections
+
+The databases contain a few authoring errors. The raw exports above are left
+**exactly as Tata ships them**, so it stays clear what came from them and what came
+from us. Corrections live in [`corrections.json`](corrections.json) and are applied
+only to generated output — the CarScanner profiles and the tables in the docs.
+
+Every scalar signal across all eight ECUs was audited. What was changed:
+
+| DID | ECU | Database says | Corrected to | Why |
+|-----|-----|---------------|--------------|-----|
+| `$347D` `$347E` `$3480` | BMS | `W` | **`kW`** | the database lists `$347E` as both `W` and `kW`; at 0.1 resolution two bytes top out at 6553.5, so a 105 kW pack cannot be watts |
+| `$35B0` `$35B1` | VECU | `C` | **`Ah`** | the BMS defines the identical signals at `$353E`/`$353F` as `Ah` — they are charge counters, not temperatures |
+
+Units added where missing and unambiguous from the signal name: `$3421` and
+`$3568` (`%`), `$3492` and `$34BF` (`V`), `$3497` and `$3498` (`°C`).
+
+### A unit shown as `(X ?)`
+
+Four signals look wrong but cannot be resolved from the files. They are **marked,
+not altered** — a confident wrong value is worse than a visible doubt:
+
+- **`$3428`** VECU charging current limit — one byte carrying a `40` offset, which
+  is the coolant-temperature pattern. `$352F` is the same signal at 0.1 with no
+  offset. **Prefer `$352F`**; the profiles already do.
+- **`$3497` / `$3498`** BMS inlet/outlet temperature 2 — offset `50` where every
+  other coolant temperature uses `40`. Read one against `$3410` on the car; if it
+  is 10 °C high, the offset is 40.
+- **`$3481`** BMS negative busbar — resolution 1 in mV where the positive busbar
+  `$3482` is 0.1 V. The asymmetry is probably right, since the negative busbar sits
+  near chassis potential. If it reads in the hundreds rather than near zero, the
+  unit is wrong.
+
+`corrections.json` carries the reasoning for each entry in machine-readable form.
+
 ## Schema
 
 Each file is a JSON array of DID objects. The layout matches the `*_Unified_PIDs.json`

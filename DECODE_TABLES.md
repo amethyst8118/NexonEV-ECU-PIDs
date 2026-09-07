@@ -9,6 +9,10 @@ Scalar DIDs (voltages, temperatures, currents) are not repeated here; they are i
 [`data/`](data/) with their scaling, and the notable ones in
 [`Nexon_EV_All_PIDs.md`](Nexon_EV_All_PIDs.md).
 
+Entries marked ⚠️ carry values **not** present in the current database — they are
+inherited from a retired definition of the same DID and are unverified. Everything
+else comes straight from the shipping `ByteParameters` rows.
+
 ## How to read these
 
 **Simple enum** — one signal, the whole byte is the code. Compare the value
@@ -2030,6 +2034,48 @@ Mask `0x01`.
 |-------|---------|
 | `0` | Disable |
 | `1` | Enable |
+
+### `$3494` — BMS SOC Calibration Action  ⚠️ inherited
+
+**Not in the current database.** `$3494` is defined in TDS 20/21 but ships no
+decode rows, and is marked permission `None` — the ECU does not serve it. The
+values below come from the retired TDS 8.9S definition of the same DID and are
+**unverified against a car**.
+
+| Value | Meaning |
+|-------|---------|
+| `0` | Not Calibrated |
+| `1` | SOC 100% calibration |
+| `2` | SOC 99% calibration |
+| `3` | SOC 95% calibration |
+| `4` | SOC 0% calibration |
+
+Because the DID is not exposed, a reading of `0` most likely means *no data
+rendered as zero* rather than *Not Calibrated*. The two are indistinguishable on
+a gauge, so do not read anything into a zero here.
+
+### `$353D` — BMS SOC Calibration Flag  ⚠️ undocumented
+
+The current SOC calibration flag, and it **is** readable — but the database ships
+no decode rows for it. Its retired predecessor `$3493` used:
+
+| Value | Meaning |
+|-------|---------|
+| `0` | not reached |
+| `1` | reached |
+
+That mapping is a reasonable guess for `$353D` and nothing more. Confirm it by
+watching the value across a full charge to 100%.
+
+> ⚠️ **`$3493` no longer means SOC calibration.** In TDS 8.9S it was
+> `BMS_SOC_CalibrationFlag`; in TDS 20/21 the DID was reused for **VCU Flag**
+> (fast charging / charging enabled / slow charging — see above). A profile that
+> still labels `$3493` as a calibration flag will show you charging state under a
+> calibration name.
+
+For what SOC calibration actually tracks, `$3566` *SOC Accumulation since last
+100% Charge* and `$3568` *BMS Calculated SOC Reference* are both readable and more
+informative than either flag.
 
 ### `$7220` — Configuration Data - Tester Serial Number
 

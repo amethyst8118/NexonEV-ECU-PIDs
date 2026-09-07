@@ -118,8 +118,9 @@ per-bit switches that could silently show the wrong signal.
   renders as meaningless numbers.
 - **Units are in the sensor name**, e.g. `HV Battery Voltage (V)`. CarScanner's
   unit field is an internal enum whose mapping is undocumented.
-- **A unit shown as `(X ?)`** is flagged as suspect in
-  [`../CORRECTIONS.md`](../CORRECTIONS.md).
+- **A unit shown as `(X ?)`** is a signal whose scaling looks wrong but could not
+  be resolved from the databases — see the corrections notes in
+  [`../data/README.md`](../data/README.md).
 - **MIN/MAX are display bounds** derived from the raw range, not limits read from
   the car.
 - **Only 1- and 2-byte signals are included.** Wider ones are strings, packed

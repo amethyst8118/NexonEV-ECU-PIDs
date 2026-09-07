@@ -4,7 +4,7 @@
   "The *_Unified_PIDs.json files are left exactly as the Tata databases have them,",
   "so it stays clear what came from Tata and what came from us. Anything generated",
   "for downstream use - the CarScanner profiles, the markdown reference - applies",
-  "this overlay. Every entry states its evidence. See ../CORRECTIONS.md."
+  "this overlay. Every entry states its evidence; README.md summarises them."
  ],
  "unit_fix": {
   "BMS:347D": {"from": "W", "to": "kW", "why": "same DB lists $347E as both W and kW; 0.1 W/bit cannot represent a 105 kW pack in 2 bytes, 0.1 kW/bit can"},
