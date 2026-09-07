@@ -19,7 +19,7 @@ On Windows you may need to turn off *Hide extensions for known file types* first
 
 | Folder | Cars | VECU sensors |
 |--------|------|-------------:|
-| [`nexon-ev/`](nexon-ev/) | **Nexon EV** — start here | 233 |
+| [`nexon-ev/`](nexon-ev/) | **Nexon EV** — start here | 235 |
 | [`platforms/kanger-2.0/`](platforms/kanger-2.0/) | Nexon EV, Punch EV, Tiago EV, Curvv EV | 218 |
 | [`platforms/kanger-3.0/`](platforms/kanger-3.0/) | Nexon EV, Punch EV, Curvv EV | 202 |
 | [`platforms/osprey/`](platforms/osprey/) | Nexon EV, Punch EV, Tiago EV, Curvv EV | 138 |
@@ -46,8 +46,9 @@ actually been used against a car.
 | `DCDC.csp` | DC-DC Converter | `784` | `78C` | `10 03` |
 | `MCU.csp` | Motor Control | `783` | `78B` | `10 03` |
 
-`nexon-ev/` additionally has `VECU-battery.csp` — 23 sensors covering SOC, pack
-voltage and current, cell min/max, temperatures, contactors and charging state.
+`nexon-ev/` additionally has `VECU-battery.csp` — 25 sensors covering SOC, pack
+voltage and current, cell min/max, temperatures, contactors, charging state and
+cell balancing.
 **Start with that one**: it gives you the useful battery picture without the
 polling cost of the full VECU set.
 
@@ -107,6 +108,11 @@ Value meanings for every coded DID are in
 [`../DECODE_TABLES.md`](../DECODE_TABLES.md). For cell balancing,
 **`$3479 & 0x04`** set means balancing is running — see
 [`../CELL_BALANCING.md`](../CELL_BALANCING.md).
+
+The Nexon VECU files also carry `$3454` and `$34BC`, the VCU's own balancing
+status and command, as plain `0`/`1` sensors. Tata does **not** flag either for
+K2 or K3, so they may read nothing on your car — that is expected, not a fault.
+Where they disagree with `$3479`, believe `$3479`.
 
 CarScanner's bit-extraction fields (`SBI`, `BIT`) were never confirmed against a
 working example, so these ship as whole-byte readings rather than as guessed

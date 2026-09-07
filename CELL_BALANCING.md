@@ -113,6 +113,56 @@ Useful confirmations:
 - **`$340F`** BMS Derate Flag — the signal that used to share the packed byte.
 - **`$3565`** BMS HVIL Hardwire Signal, and **`$3561`** on the VECU (`0x7E3`).
 
+## The VECU's own view
+
+`$3479` is the BMS's answer, on `0x785`. The **VECU** carries its own cell-balancing
+signals on `0x7E3`, and unlike `$3479` they are plain booleans rather than bits in a
+packed byte.
+
+| DID | Signal | Read | Values |
+|-----|--------|:----:|--------|
+| `$3454` | HV Battery Equalization **Trigger Status** | **Y** | `0` no balance, `1` balancing ON |
+| `$34BC` | HV Battery cell equalization **command** | **Y** | `0` no action, `1` equalization command |
+| `$345A` | HV Battery Equalization **Status Feedback** | N | `0` no balance, `1` balancing ON |
+
+`$345A` is the row that defines the meanings, and it is the one you cannot read —
+`ReadPermission = N`, so `22 345A` returns NRC `0x31`. `$3454` is the same signal
+with read access, and `$34BC` is the command that causes it rather than the state
+that results.
+
+```
+22 3454          request       (header 7E3, response 7EB, session 10 01)
+62 34 54 01      balancing ON
+```
+
+### These are not flagged for a Nexon
+
+All three are `BaseVariant = Y` with **`K2 = N` and `K3 = N`** — the two platform
+columns that cover a Nexon EV. Tata does not list them for this car.
+
+That flag is not noise. Every VECU DID confirmed working on a real Nexon — `$3421`
+SOC, `$341D`/`$341E` pack current and voltage, `$3477`/`$3478` cell voltage max and
+min, `$3462` speed — is flagged on **all eleven** platform columns, K2 and K3
+included. 223 readable VECU DIDs sit in the `BaseVariant`-only bucket, and the
+working ones are not among them.
+
+They are nonetheless **included in the Nexon profiles**, for two reasons: no other
+VECU DID reuses `$3454` or `$34BC`, so there is no risk of reading a different
+signal under this name, and an unsupported DID simply answers NRC `0x31`. The cost
+of being wrong is a blank sensor. The cost of omitting them is not knowing.
+
+**Treat a reading here as unconfirmed** until it agrees with the BMS. If `$3454`
+reads `1` while `$3479 & 0x04` is `0`, believe `$3479` — it is the BMS's own
+account of its own hardware, and it is the one that has been seen working.
+
+### Which to prefer
+
+| Want | Use |
+|------|-----|
+| Is the pack balancing right now | `$3479 & 0x04` on the BMS — verified |
+| A second opinion from the VCU | `$3454` on the VECU — unverified on K2/K3 |
+| Whether the VCU is *asking* for balancing | `$34BC` — unverified on K2/K3 |
+
 ## Related DIDs
 
 Several things that share the packed byte also exist as DIDs of their own, which

@@ -74,6 +74,20 @@ Request `0x7E3` · response `0x7EB` · 171 enumerated DIDs, 4 of them bit-packed
 | `2` | Reserved |
 | `3` | Reserved |
 
+### `$3454` — HV Battery Equalization Trigger Status (Cell Balancing)
+
+Readable. The database stores this as a scaled value (range 0–1) rather than an
+enum, so it carries no value rows of its own; the meanings are those of `$345A`,
+which describes the same signal.
+
+| Value | Meaning |
+|-------|---------|
+| `0` | No cell balance |
+| `1` | Cell balancing ON |
+
+⚠️ Flagged `BaseVariant` only — `K2` and `K3` are `N`, so Tata does not list it
+for a Nexon EV. See [`CELL_BALANCING.md`](CELL_BALANCING.md).
+
 ### `$3457` — VCU Power Mode
 
 | Value | Meaning |
@@ -114,6 +128,9 @@ Request `0x7E3` · response `0x7EB` · 171 enumerated DIDs, 4 of them bit-packed
 | `8` | Fault |
 
 ### `$345A` — HV Battery Equalization Status Feedback (Cell Balancing)
+
+⚠️ **Not readable.** `ReadPermission = N`, so `22 345A` returns NRC `0x31`. It is
+listed because it is the row that *defines* these meanings, which `$3454` reuses.
 
 | Value | Meaning |
 |-------|---------|
@@ -390,7 +407,11 @@ Request `0x7E3` · response `0x7EB` · 171 enumerated DIDs, 4 of them bit-packed
 | `0` | Deactivated |
 | `1` | Activated |
 
-### `$34BC` — HV Battery  cell equalization command
+### `$34BC` — HV Battery cell equalization command
+
+Readable. This is the *command* the VCU issues, not the pack's reported state —
+`$3454` is the status. ⚠️ Flagged `BaseVariant` and `ChallengerEV` only; `K2` and
+`K3` are `N`.
 
 | Value | Meaning |
 |-------|---------|
