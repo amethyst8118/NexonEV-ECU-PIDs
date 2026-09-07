@@ -1,74 +1,89 @@
 # CarScanner custom PID profiles
 
-Import via **Settings → Custom PIDs → Import**. Files are plain JSON, editable in
-any text editor.
+One folder per vehicle platform, one file per ECU. Grab the folder matching your
+car and import all of it.
+
+Import via **Settings → Custom PIDs → Import**.
 
 ## Downloading
 
-**Grab [`NexonEV_CarScanner_Profiles.zip`](NexonEV_CarScanner_Profiles.zip)** and
-extract it. That is the reliable route.
+**Grab [`CarScanner_Profiles.zip`](CarScanner_Profiles.zip)** and extract it — it
+contains the whole tree.
 
 GitHub serves any extension it does not recognise as `text/plain`, so downloading
-a `.csp` on its own arrives as **`NexonEV_BMS.csp.txt`** and CarScanner will not
-offer it in the import picker. Nothing is wrong with the file — rename it back to
-`.csp` and it imports fine. On Windows you may need to turn off *Hide extensions
-for known file types* in Explorer's View options to do that.
+a `.csp` on its own arrives as **`VECU.csp.txt`** and CarScanner will not offer it
+in the import picker. Nothing is wrong with the file — rename it back to `.csp`.
+On Windows you may need to turn off *Hide extensions for known file types* first.
 
-The zip sidesteps it entirely.
+## Which folder?
 
-| File | Sensors | Header | Response | ECU |
-|------|--------:|--------|----------|-----|
-| `NexonEV_BMS.csp` | 42 | `785` | `78D` | Battery Management |
-| `NexonEV_VECU.csp` | 233 | `7E3` | `7EB` | Vehicle Control |
-| `NexonEV_OBC.csp` | 29 | `786` | `78E` | On Board Charger |
-| `NexonEV_DCDC.csp` | 20 | `784` | `78C` | DC-DC Converter |
-| `NexonEV_MCU.csp` | 15 | `783` | `78B` | Motor Control |
-| `NexonEV_VECU_battery.csp` | 23 | `7E3` | `7EB` | VECU, battery subset |
+| Folder | Cars | VECU sensors |
+|--------|------|-------------:|
+| [`nexon-ev/`](nexon-ev/) | **Nexon EV** — start here | 233 |
+| [`platforms/kanger-2.0/`](platforms/kanger-2.0/) | Nexon EV, Punch EV, Tiago EV, Curvv EV | 218 |
+| [`platforms/kanger-3.0/`](platforms/kanger-3.0/) | Nexon EV, Punch EV, Curvv EV | 202 |
+| [`platforms/osprey/`](platforms/osprey/) | Nexon EV, Punch EV, Tiago EV, Curvv EV | 138 |
+| [`platforms/punch-40/`](platforms/punch-40/) | **Punch 40** (Nova MCE) | 215 |
+| [`platforms/curvv/`](platforms/curvv/) | Curvv EV | 222 |
+| [`platforms/eturna/`](platforms/eturna/) | Eturna | 315 |
+| [`platforms/challenger-ev/`](platforms/challenger-ev/) | Challenger EV | 190 |
+| [`platforms/row-a/`](platforms/row-a/) | export / rest-of-world build | 314 |
+| [`platforms/nano/`](platforms/nano/) | Nano EV | 16 |
+| [`platforms/mid-variant/`](platforms/mid-variant/) | mid-spec common set | 164 |
+| [`platforms/base/`](platforms/base/) | common set, all platforms | 402 |
 
-All 11-bit at 500 kbps, generated from the **TDS 20.0** databases.
+**Driving a Nexon EV? Use [`nexon-ev/`](nexon-ev/).** It merges KANGER 2.0 and 3.0
+into one VECU file, adds a trimmed battery subset, and is the only set that has
+actually been used against a car.
 
-Every profile is filtered to DIDs this car will actually answer:
+## What is in each folder
 
-- **Permission.** A DID whose permission column reads `None` is not exposed by the
-  ECU. 20 such DIDs were being polled on the BMS and 18 on the OBC; they would
-  simply never return data.
-- **Platform.** The VECU database lists the same DID once per vehicle platform,
-  with a Y/N column for each. A Nexon EV is KANGER 2.0 / 3.0, so only rows flagged
-  `K2` or `K3` apply — 174 of the VECU's rows belong to CURVV, ETURNA, ROWA, Nano,
-  OSPREY or ChallengerEV and describe different signals on those cars.
-- **Duplicates.** What the per-platform rows collapse into once filtered. Where a
-  DID still appears twice, the later row wins: it carries the current name and
-  unit, and the earlier one is a superseded entry left in the table.
+| File | ECU | Header | Response | Session |
+|------|-----|--------|----------|---------|
+| `VECU.csp` | Vehicle Control | `7E3` | `7EB` | `10 01` |
+| `BMS.csp` | Battery Management | `785` | `78D` | `10 03` |
+| `OBC.csp` | On Board Charger | `786` | `78E` | `10 01` |
+| `DCDC.csp` | DC-DC Converter | `784` | `78C` | `10 03` |
+| `MCU.csp` | Motor Control | `783` | `78B` | `10 03` |
 
-That took the VECU profile from 462 sensors to 233 and the BMS from 65 to 42,
-which also makes round-robin polling roughly twice as fast. `BCM` is set to
-the session command each ECU's database specifies (`1003`, or `1001` for VECU and
-OBC), so the session is entered before every read.
+`nexon-ev/` additionally has `VECU-battery.csp` — 23 sensors covering SOC, pack
+voltage and current, cell min/max, temperatures, contactors and charging state.
+**Start with that one**: it gives you the useful battery picture without the
+polling cost of the full VECU set.
 
-> **`NexonEV_VECU.csp` has 462 sensors.** CarScanner polls every *visible* sensor
-> round-robin, so enabling all of them makes each update crawl. Put the handful you
-> want on a dashboard page and leave the rest hidden.
+All 11-bit at 500 kbps. Sensor ids are unique within a folder, so importing
+several files from the same folder never clashes.
 
-## Other Tata EVs
+## Only the VECU differs between platforms
 
-The profiles above are for a **Nexon EV**. The VECU is the one ECU whose DIDs
-differ by vehicle platform, and [`platforms/`](platforms/) has a profile for each
-of the eleven — Punch, Tiago, Curvv, Eturna, Challenger, Nano and the export
-builds.
+`BMS.csp`, `MCU.csp`, `DCDC.csp` and `OBC.csp` are **identical in every folder** —
+those ECUs have no platform variation in Tata's databases. They are duplicated
+into each folder so a folder is self-contained rather than something you assemble
+by hand.
 
-That matters because the same DID means different things on different cars:
-`$345D` is "Maximum reverse vehicle speed" on one platform and "Compressor
-Diagnostic Status 2" on another. The other EV ECUs do not vary, so the BMS, MCU,
-DCDC and OBC files here serve every platform.
+The VECU is the exception, and the reason these are split at all: its database
+lists **the same DID once per platform, and the meaning changes with it**.
+
+| DID | On one platform | On another |
+|-----|-----------------|------------|
+| `$345D` | Maximum reverse vehicle speed | Compressor Diagnostic Status 2 |
+| `$348C` | MCU Contactor Weld Status | Powertrain Config State 2 |
+| `$3456` | Park Brake Sensor Value | Cooling Fan relay Enable Cmd |
+| `$7205` | Calibration Version | Safety Secret Key |
+
+Loading the wrong platform's VECU file does not fail visibly. It reports a
+plausible number under the wrong name.
+
+Why the other four do not vary is set out in
+[`platforms/README.md`](platforms/README.md).
 
 ## Scaling lives in the formula, not in MUL/DIV/OFS
 
-This is worth knowing if you edit these or write your own.
+Worth knowing if you edit these or write your own.
 
-CarScanner **ignores the `MUL`, `DIV` and `OFS` fields** in a `.csp`. It evaluates
-only `FR`, the formula string. A profile that puts the scaling in `MUL`/`DIV`/`OFS`
-displays the raw integer instead — pack voltage reads `3507` rather than `350.7`,
-temperatures read `84` rather than `34`.
+CarScanner **ignores the `MUL`, `DIV` and `OFS` fields**. It evaluates only `FR`,
+the formula string. A profile that puts scaling in `MUL`/`DIV`/`OFS` displays the
+raw integer instead — pack voltage reading `3507` rather than `350.7`.
 
 So the scaling is baked into `FR`:
 
@@ -78,10 +93,9 @@ So the scaling is baked into `FR`:
 | `$341D` | HV Battery Current | `(A*256+B)/10-600` |
 | `$3478` | Cell Voltage Min | `(A*256+B)/100` |
 | `$3423` | Cell Temperature Max | `A-50` |
-| `$3426` | PDU +Ve bus bar temp | `A-40` |
 
-`MUL`/`DIV`/`OFS` are left at identity (`1`/`1`/`0`) so that a build which *does*
-honour them cannot double-scale the value.
+`MUL`/`DIV`/`OFS` are left at identity so a build that *does* honour them cannot
+double-scale.
 
 ## Coded sensors
 
@@ -90,12 +104,9 @@ measurement. `[bits]` means several flags share the byte — test `value & mask`
 never equality.
 
 Value meanings for every coded DID are in
-[`../DECODE_TABLES.md`](../DECODE_TABLES.md).
-
-For cell balancing specifically: **`$3479 & 0x04`** set means balancing is running,
-so any of 4, 5, 6 or 7. The database also contains an older, retired description of
-that byte putting balancing on `0x02`; it is superseded and should not be used —
-[`../CELL_BALANCING.md`](../CELL_BALANCING.md) sets out the evidence.
+[`../DECODE_TABLES.md`](../DECODE_TABLES.md). For cell balancing,
+**`$3479 & 0x04`** set means balancing is running — see
+[`../CELL_BALANCING.md`](../CELL_BALANCING.md).
 
 CarScanner's bit-extraction fields (`SBI`, `BIT`) were never confirmed against a
 working example, so these ship as whole-byte readings rather than as guessed
@@ -106,17 +117,22 @@ per-bit switches that could silently show the wrong signal.
 - **Identification PIDs are omitted.** They return ASCII strings that CarScanner
   renders as meaningless numbers.
 - **Units are in the sensor name**, e.g. `HV Battery Voltage (V)`. CarScanner's
-  unit field is an internal enum whose mapping is undocumented, so it is left at 0.
+  unit field is an internal enum whose mapping is undocumented.
+- **A unit shown as `(X ?)`** is flagged as suspect in
+  [`../CORRECTIONS.md`](../CORRECTIONS.md).
 - **MIN/MAX are display bounds** derived from the raw range, not limits read from
-  the car. A gauge will peg rather than show an out-of-range reading.
+  the car.
 - **Only 1- and 2-byte signals are included.** Wider ones are strings, packed
-  records or multi-frame, and none of those render usefully as a gauge.
+  records or multi-frame, none of which render usefully as a gauge.
+- **DIDs marked unreadable in the database are excluded**, so the profiles do not
+  poll for data the ECU will never return.
 
 ## If a profile reads nothing
 
-Load `NexonEV_VECU.csp` first — the VECU is the most reliably reachable ECU on the
-car. If its sensors populate and another profile's do not, the adapter and app are
-fine and the problem is that ECU not answering on its header.
+Load `VECU.csp` first — the VECU is the most reliably reachable ECU on the car. If
+its sensors populate and another file's do not, the adapter and app are fine and
+that ECU is simply not answering on its header.
 
-Full DID definitions, including everything excluded from these profiles, are in
-[`../data/`](../data/).
+**Only the Nexon EV profiles have been used against a real car.** The other
+platforms rest on Tata's own platform flags. A wrong reading on a Punch, Tiago or
+Curvv is a finding worth reporting, not a fact.

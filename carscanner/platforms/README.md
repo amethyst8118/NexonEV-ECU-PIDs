@@ -1,29 +1,49 @@
-# Per-platform VECU profiles
+# Platform folders
 
-CarScanner profiles for the **Vehicle Control Unit** on every Tata EV platform,
-generated from the TDS 21.0 `VECU_DiagnosticsDB.mdb`.
+One folder per Tata EV platform. Each is self-contained — five ECU profiles,
+import the lot.
 
-| Profile | Sensors | Platform | Cars |
-|---------|--------:|----------|------|
-| `VECU_K2.csp` | 218 | KANGER 2.0 | Nexon EV, Punch EV, Tiago EV, Curvv EV |
-| `VECU_K3.csp` | 202 | KANGER 3.0 | Nexon EV, Punch EV, Curvv EV |
-| `VECU_OSPREY.csp` | 138 | Osprey | Nexon EV, Punch EV, Tiago EV, Curvv EV |
-| `VECU_CURVV.csp` | 222 | Curvv | Curvv EV |
-| `VECU_ETURNA.csp` | 315 | Eturna | Eturna |
-| `VECU_ROWA.csp` | 314 | ROW-A | export / rest-of-world build |
-| `VECU_ChallengerEV.csp` | 190 | Challenger | Challenger EV |
-| `VECU_NOVAMCE.csp` | 215 | Nova MCE | 6-in-1 integrated powertrain |
-| `VECU_MidVariant.csp` | 164 | Mid variant | mid-spec common set |
-| `VECU_NanoVariant.csp` | 16 | Nano | Nano EV |
-| `VECU_BaseVariant.csp` | 402 | Base | the common set, all platforms |
+| Folder | Platform | Cars | VECU sensors |
+|--------|----------|------|-------------:|
+| [`kanger-2.0/`](kanger-2.0/) | KANGER 2.0 | Nexon EV, Punch EV, Tiago EV, Curvv EV | 218 |
+| [`kanger-3.0/`](kanger-3.0/) | KANGER 3.0 | Nexon EV, Punch EV, Curvv EV | 202 |
+| [`osprey/`](osprey/) | Osprey | Nexon EV, Punch EV, Tiago EV, Curvv EV | 138 |
+| [`punch-40/`](punch-40/) | Nova MCE | **Punch 40** | 215 |
+| [`curvv/`](curvv/) | Curvv | Curvv EV | 222 |
+| [`eturna/`](eturna/) | Eturna | Eturna | 315 |
+| [`challenger-ev/`](challenger-ev/) | Challenger | Challenger EV | 190 |
+| [`row-a/`](row-a/) | ROW-A | export / rest-of-world build | 314 |
+| [`nano/`](nano/) | Nano | Nano EV | 16 |
+| [`mid-variant/`](mid-variant/) | Mid variant | mid-spec common set | 164 |
+| [`base/`](base/) | Base | common set, all platforms | 402 |
 
-All on header `0x7E3`, response `0x7EB`, 11-bit at 500 kbps, session `10 01`.
+For a **Nexon EV**, use [`../nexon-ev/`](../nexon-ev/) instead — it merges KANGER
+2.0 and 3.0 and adds a trimmed battery subset.
 
-## Why these are separate files
+Every folder contains `VECU.csp`, `BMS.csp`, `MCU.csp`, `DCDC.csp` and `OBC.csp`.
 
-The VECU database lists **the same DID once per platform**, each row carrying a
-Y/N column for every platform. That is not redundancy — **the same DID often means
-a different signal on a different car**:
+## Only `VECU.csp` differs between folders
+
+The other four are byte-identical everywhere. They are copied into each folder so
+a folder is something you grab whole, not something you assemble.
+
+That is not a shortcut — it is what the databases say. Each ECU was checked:
+
+- **BMS** — no platform columns at all. Identical DIDs, scalings and permissions
+  on every variant. Only the *fault codes* differ by pack (`K1AIO`/`K2AIO` vs
+  `Limber`), and K1AIO and K2AIO are themselves identical to each other.
+- **PEPS, BCM** — no platform columns.
+- **MCU** — one `BaseVariant` column, no per-platform split.
+- **DCDC** — has `BaseVariant` *and* `K2` columns, but they flag **the same 26
+  DIDs**. Splitting would produce two identical files.
+- **OBC** — genuinely differs (39 rows flagged `K2`), but **30 of those are
+  write-only configuration DIDs**. Only 3 readable sensors are K2-specific, so a
+  separate OBC file would be misleading rather than useful.
+
+## Why the VECU has to be split
+
+Its database lists **the same DID once per platform**, with a Y/N column for each.
+That is not redundancy — the same DID often carries a different signal:
 
 | DID | On one platform | On another |
 |-----|-----------------|------------|
@@ -32,53 +52,28 @@ a different signal on a different car**:
 | `$3456` | Park Brake Sensor Value | Cooling Fan relay Enable Cmd |
 | `$7205` | Calibration Version | Safety Secret Key |
 
-Loading the wrong platform's profile does not fail visibly. It reports a
-plausible-looking value under the wrong name, which is worse than reading nothing.
+Load the wrong folder and CarScanner shows a plausible number under the wrong
+name, with nothing to warn you.
 
-**Pick the one profile matching your car and ignore the rest.**
+## Picking between two that both list your car
 
-## Which one do I want?
+A Nexon EV appears under KANGER 2.0, KANGER 3.0 *and* Osprey. KANGER covers the
+powertrain and Osprey the body electronics, and 2.0 versus 3.0 is which generation
+of control unit is fitted.
 
-Look your model up in the table above. If two apply — a Nexon EV is listed under
-both KANGER 2.0 and 3.0 — start with **`VECU_K2.csp`**, and if a sensor reads
-nothing, try the K3 file. The two overlap heavily; the difference is which
-generation of the control unit is fitted.
+Start with `kanger-2.0`. If a sensor stays blank, try `kanger-3.0` — they overlap
+heavily. Or just use [`../nexon-ev/`](../nexon-ev/), which merges both.
 
-For a **Nexon EV** specifically, the curated set in the [parent folder](..) is a
-better starting point: it merges K2 and K3 and includes the BMS, MCU, DCDC and
-OBC alongside.
-
-`VECU_BaseVariant.csp` is the union of DIDs common to everything. It is the widest
-net and the least precise — useful for probing an unknown car, not for daily use.
-
-## Only the VECU is here
-
-The other EV ECUs do not meaningfully vary by platform, so one profile serves all
-of them and they live in the [parent folder](..):
-
-- **BMS** — no platform columns at all. The DID set, scalings and permissions are
-  identical for every variant. Only the *fault codes* differ by pack
-  (`K1AIO`/`K2AIO` vs `Limber`), and K1AIO and K2AIO are themselves identical.
-- **PEPS, BCM** — no platform columns.
-- **DCDC** — has `BaseVariant` and `K2` columns, but they are identical: the same
-  26 DIDs flagged in both.
-- **OBC** — does differ, but 30 of its 39 `K2` rows are write-only configuration
-  DIDs. Only 3 readable sensors are K2-specific, so a separate file would be
-  misleading rather than useful.
+`base/` is the union of DIDs common to everything: the widest net and the least
+precise. Useful for probing an unknown car, not for daily use.
 
 ## Caveats
 
-These carry the same properties as every profile in this repo:
+Same as every profile here — scaling baked into `FR`, `[code]`/`[bits]` sensors
+return values to look up in [`../../DECODE_TABLES.md`](../../DECODE_TABLES.md),
+identification DIDs omitted, unreadable DIDs excluded. Full notes in
+[`../README.md`](../README.md).
 
-- scaling is baked into the `FR` formula, because CarScanner ignores
-  `MUL`/`DIV`/`OFS`;
-- sensors named `[code]` or `[bits]` return a value to look up in
-  [`../../DECODE_TABLES.md`](../../DECODE_TABLES.md), not a measurement;
-- identification DIDs are omitted — they return ASCII that renders as junk;
-- a unit shown as `(X ?)` is flagged in [`../../CORRECTIONS.md`](../../CORRECTIONS.md);
-- DIDs marked unreadable in the database are excluded.
-
-**These are unverified on anything but a Nexon EV.** The platform flags come from
-Tata's own database, but only the Nexon profiles have been used against a real
-car. Treat a reading that looks wrong on another model as a finding worth
-reporting, not as a fact.
+**Only the Nexon EV profiles have been used against a real car.** Everything here
+rests on Tata's own platform flags, which are good evidence but not a test. Treat
+a wrong-looking reading on another model as a finding, not a fact.

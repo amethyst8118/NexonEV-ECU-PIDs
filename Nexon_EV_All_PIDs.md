@@ -10,8 +10,7 @@ older material kept for reference and marked as such.
 - [`CELL_BALANCING.md`](CELL_BALANCING.md) — `$3479` in detail
 - [`CORRECTIONS.md`](CORRECTIONS.md) — database errors found, fixed and flagged
 - [`data/`](data/) — machine-readable DID definitions, 1,181 DIDs across eight ECUs
-- [`carscanner/`](carscanner/) — importable CarScanner profiles ([zip](carscanner/NexonEV_CarScanner_Profiles.zip) — single files download as `.txt`)
-- [`carscanner/platforms/`](carscanner/platforms/) — VECU profiles for all eleven Tata EV platforms
+- [`carscanner/`](carscanner/) — importable CarScanner profiles, one folder per platform and one file per ECU ([zip](carscanner/CarScanner_Profiles.zip) — single files download as `.txt`)
 - [`elm327-patch/`](elm327-patch/) — J2534 shim so TDS itself runs on an ELM327
 
 ---
