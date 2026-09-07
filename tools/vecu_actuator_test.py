@@ -163,6 +163,20 @@ BY_KEY = dict((a.key, a) for a in ACTUATORS)
 _SAFE = re.compile(r"^[AB0-9+\-*/(). ]+$")
 
 
+def find_echo(data, sid_hex, did):
+    """Locate the '<response sid><did>' echo inside a reply.
+
+    Clone adapters vary in whether they prefix a CAN header and an ISO-TP
+    length byte, so never trust a fixed offset - find the echo instead.
+    """
+    try:
+        want = bytes.fromhex(sid_hex + did)
+    except ValueError:
+        return None
+    idx = data.find(want)
+    return None if idx < 0 else data[idx:]
+
+
 def apply_formula(fr, data):
     """Evaluate a CarScanner FR string over the payload bytes."""
     if not _SAFE.match(fr):
@@ -246,12 +260,23 @@ class Elm327(object):
             self.log.flush()
         return lines
 
-    def at(self, cmd, expect_ok=True):
+    def at(self, cmd, required=False):
+        """Send an AT command. Returns True if the adapter acknowledged it.
+
+        Clone adapters answer '?' to commands they do not implement. For the
+        optional ones that is fine, so only the required set complains.
+        """
         lines = self.raw(cmd)
-        ok = any("OK" in l or "ELM" in l or "v" in l.lower() for l in lines)
-        if expect_ok and not ok:
-            print("    ! %s did not acknowledge: %s" % (cmd, lines))
-        return lines
+        joined = " ".join(lines).upper()
+        ok = "OK" in joined or "ELM" in joined
+        if not ok:
+            why = joined or "no reply"
+            if required:
+                print("    ! %s REJECTED (%s)" % (cmd, why))
+                print("    ! This one matters - the adapter may not be usable.")
+            elif self.verbose:
+                print("    - %s not supported (%s)" % (cmd, why))
+        return ok
 
     # -- UDS -------------------------------------------------------------
     def uds(self, payload_hex, wait=5.0):
@@ -282,15 +307,21 @@ class Elm327(object):
             return None, "NRC 0x%02X - %s" % (code, NRC.get(code, "unknown"))
         return data, None
 
-    def read_did(self, did):
-        data, err = self.uds("22" + did)
-        if err:
+    def read_did(self, did, retries=1):
+        """Read a DID. Retries once on a transient miss - a clone adapter with
+        no ATST support has a short ECU timeout and drops the odd reply."""
+        transient = ("NO DATA", "no reply", "unparsable", "0x78")
+        for attempt in range(retries + 1):
+            data, err = self.uds("22" + did)
+            if err is None:
+                frame = find_echo(data, "62", did)
+                if frame is not None:
+                    return frame[3:], None
+                err = "no 62%s echo in %s" % (did, data.hex())
+            if attempt < retries and any(t in err for t in transient):
+                time.sleep(0.15)
+                continue
             return None, err
-        want = bytes.fromhex("62" + did)
-        idx = data.find(want)
-        if idx < 0:
-            return None, "no 62%s echo in %s" % (did, data.hex())
-        return data[idx + 3:], None
 
     def tester_present(self):
         self.uds("3E00", wait=1.5)
@@ -367,16 +398,37 @@ def init_elm(elm, args):
     print("[*] Initialising adapter")
     elm.raw("ATZ", wait=6.0)
     time.sleep(0.5)
-    for cmd in ("ATE0", "ATL0", "ATS0", "ATH0"):
-        elm.at(cmd)
+    elm.at("ATE0", required=True)          # echo off, before anything is parsed
     ident = elm.raw("ATI")
     print("    adapter: %s" % (" ".join(ident) or "unknown"))
-    elm.at("ATSP6")                        # 11-bit CAN, 500 kbps
-    elm.at("ATSH" + VECU_TX)
-    elm.at("ATCRA" + VECU_RX)
-    elm.at("ATFCSH" + VECU_TX)
-    elm.at("ATSTFF")                       # generous per-request timeout
-    elm.at("ATAT" + str(args.adaptive))
+
+    # Without these three there is no point continuing.
+    for cmd in ("ATSP6",                   # 11-bit CAN, 500 kbps
+                "ATSH" + VECU_TX):         # talk to the VECU
+        elm.at(cmd, required=True)
+
+    # Everything below is a nicety. Clone adapters reject some of these with
+    # '?', and none of them change the outcome here: every reply this script
+    # asks for is a single frame, so flow-control setup is never exercised,
+    # and the response parser finds the service echo rather than trusting a
+    # fixed offset, so headers and spaces may be on or off.
+    optional = [
+        ("ATL0", "linefeeds off"),
+        ("ATS0", "spaces off"),
+        ("ATH0", "headers off"),
+        ("ATCRA" + VECU_RX, "accept only VECU replies"),
+        ("ATFCSH" + VECU_TX, "flow-control header"),
+        ("ATSTFF", "long response timeout"),
+        ("ATAT" + str(args.adaptive), "adaptive timing"),
+    ]
+    missing = [(c, d) for c, d in optional if not elm.at(c)]
+    if missing:
+        print("    adapter rejected %d optional command(s): %s"
+              % (len(missing), ", ".join(c for c, _ in missing)))
+        print("    Normal on clone adapters, and harmless for this script.")
+        if any(c.startswith("ATST") for c, _ in missing):
+            print("    (no ATST means a short ECU timeout - if you see NO DATA,")
+            print("     that is why; the script retries reads once.)")
 
 
 def enter_session(elm, preferred):
@@ -477,17 +529,22 @@ def run_actuator(elm, sess, act, state, hold, armed):
             print("    ! these seven are flagged BaseVariant/MidVariant/NanoVariant.")
         return
     print("    accepted: %s" % data.hex())
-    # resolve the frame-shape question while we are here
-    body = data[3:] if len(data) >= 3 else b""
-    if len(data) == 4:
-        print("    reply is 4 bytes -> '6F hi lo <state>', state = 0x%02X" % data[3])
+    # Resolve the frame-shape question while we are here. Work from the echo,
+    # not from byte 0 - the adapter may have prefixed a header/length byte.
+    frame = find_echo(data, "6F", act.did)
+    if frame is None:
+        print("    ? no 6F%s echo in the reply; cannot judge the frame shape"
+              % act.did)
+    elif len(frame) == 4:
+        print("    reply is 4 bytes -> '6F hi lo <state>', state = 0x%02X" % frame[3])
         print("    (matches the database's ByteLength 4; no control-option echo)")
-    elif len(data) >= 5:
+    elif len(frame) >= 5:
         print("    reply is %d bytes -> '6F hi lo <option> <state>', "
-              "option = 0x%02X state = 0x%02X" % (len(data), data[3], data[4]))
+              "option = 0x%02X state = 0x%02X" % (len(frame), frame[3], frame[4]))
         print("    (strict UDS shape, not what the database's ByteLength 4 implied)")
-    elif body:
-        print("    unexpected reply shape, body = %s" % body.hex())
+    else:
+        print("    reply is only %d bytes: %s - shorter than any expected shape"
+              % (len(frame), frame.hex()))
 
     try:
         print("\n[*] Holding %d s - reading back and keeping tester-present alive" % hold)

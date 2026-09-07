@@ -12,6 +12,7 @@ traction battery on the other end of the cable.
     python sim_elm327.py --scenario nrc_security
 
 Scenarios:
+    clone          adapter rejects ATFCSH/ATCRA/ATSTFF and sends headers + spaces
     happy          stationary, not charging, ECU accepts everything
     moving         vehicle speed non-zero - interlock must refuse
     charging       charger connected - interlock must refuse
@@ -86,16 +87,35 @@ class FakeSerial(object):
             cmd = line.decode("ascii", "ignore").strip().upper()
             if cmd:
                 self.sent.append(cmd)
-                self._out += (self._reply(cmd) + "\r\r>").encode("ascii")
+                resp = self._reply(cmd)
+                if self.scenario == "clone":
+                    resp = self._as_clone_frame(resp)
+                self._out += (resp + "\r\r>").encode("ascii")
         return len(data)
 
+    def _as_clone_frame(self, resp):
+        """A clone that acks ATH0/ATS0 and then sends headers and spaces anyway,
+        with an ISO-TP length byte in front. Exercises find_echo()."""
+        if not resp or resp in ("OK", "?") or resp.startswith(("ELM", "\r")):
+            return resp
+        try:
+            b = bytes.fromhex(resp)
+        except ValueError:
+            return resp
+        return "7EB %02X %s" % (len(b), " ".join("%02X" % x for x in b))
+
     # -- behaviour --------------------------------------------------------
+    # AT commands a cheap clone typically does not implement.
+    CLONE_REJECTS = ("ATFCSH", "ATFCSM", "ATFCSD", "ATSTFF", "ATCRA", "ATAT")
+
     def _reply(self, cmd):
         if cmd.startswith("AT"):
             if cmd == "ATI":
                 return "ELM327 v1.5 (simulated)"
             if cmd == "ATZ":
                 return "\r\rELM327 v1.5 (simulated)"
+            if self.scenario == "clone" and cmd.startswith(self.CLONE_REJECTS):
+                return "?"
             return "OK"
         h = cmd.replace(" ", "")
         try:
@@ -174,6 +194,7 @@ SCENARIOS = {
     "nrc_range":     (["--actuator", "cabin-valve", "--level", "1", "--arm"], 0),
     "frame5":        (["--actuator", "traction-pump", "--level", "60", "--arm"], 0),
     "release_fails": (["--actuator", "fan-slow", "--level", "1", "--arm"], 0),
+    "clone":         (["--actuator", "fan-slow", "--level", "1", "--arm"], 0),
 }
 
 
