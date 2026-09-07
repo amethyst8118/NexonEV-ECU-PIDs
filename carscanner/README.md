@@ -78,9 +78,12 @@ measurement. `[bits]` means several flags share the byte — test `value & mask`
 never equality.
 
 Value meanings for every coded DID are in
-[`../DECODE_TABLES.md`](../DECODE_TABLES.md). Cell balancing specifically is in
-[`../CELL_BALANCING.md`](../CELL_BALANCING.md) — on the BMS, `$3479 & 0x04` set
-means balancing is running, so any value of 4 or more.
+[`../DECODE_TABLES.md`](../DECODE_TABLES.md).
+
+For cell balancing specifically: **`$3479 & 0x04`** set means balancing is running,
+so any of 4, 5, 6 or 7. The database also contains an older, retired description of
+that byte putting balancing on `0x02`; it is superseded and should not be used —
+[`../CELL_BALANCING.md`](../CELL_BALANCING.md) sets out the evidence.
 
 CarScanner's bit-extraction fields (`SBI`, `BIT`) were never confirmed against a
 working example, so these ship as whole-byte readings rather than as guessed

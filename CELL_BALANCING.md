@@ -1,8 +1,9 @@
 # Cell balancing — `$3479` and everything around it
 
-Balancing status is not a number you read off. It is one bit inside a packed byte,
-and TDS 20.0's own BMS database describes that byte **twice, inconsistently**. This
-is what the database actually contains, and how to read it without guessing.
+Balancing status is not a number you read off — it is one bit inside a packed byte.
+The database contains a second, older description of that byte which assigns the
+bit differently, and it is easy to mistake for an alternative reading. It is not:
+it is a retired ancestor. **Balancing is `0x04`.**
 
 Source throughout: `BMS_DB.sdf` from TDS 20.0. Request `0x785`, response `0x78D`.
 
@@ -36,72 +37,61 @@ Balancing is **`0x04`**. Bits 3–7 have no definition on this row.
 | `6` | – | ✓ | **✓** |
 | `7` | ✓ | ✓ | **✓** |
 
-`raw & 0x04` is the balancing test. A value **above 7** means a bit outside this
-definition is set — which is expected rather than anomalous, for the reason below.
+`raw & 0x04` is the balancing test. A value **above 7** means a bit nothing in the
+current database describes — see below, and treat it as a genuine unknown.
 
-## The database contradicts itself
+## The second definition is retired, not an alternative
 
-`BMS_DB.sdf` contains a **second, orphaned definition** of the same concept.
-`ParameterId` 86 has a complete set of decode rows but **no matching row in
-`DataIdentifiers`** — the DID it belonged to was deleted from the table while its
-decode rows were left behind. `ParameterId` 85, 87 and 90 are missing the same way;
-87 is the relay-status equivalent.
+`BMS_DB.sdf` contains a second set of decode rows for a similar byte, under
+`ParameterId` 86, which puts balancing on `0x02` instead. Three things establish
+that it is superseded rather than a parallel map.
 
-What the orphaned rows define:
+**It has no DID row at all.** Every live decode group points at a row in
+`DataIdentifiers`; `ParameterId` 86 and 87 do not. Their DID rows were deleted
+outright, which is a stronger retirement than the `None` permission used elsewhere
+in the same table.
 
-| Mask | Bit | Signal |
-|------|-----|--------|
-| `0x01` | 0 | Battery Derate Status |
-| `0x02` | 1 | **BMS_CellBalanceStatus** |
-| `0x04` | 2 | Insulation Measurement Enable |
-| `0x08` | 3 | Charging Enabled Status |
-| `0x20` | 5 | Initiation of cell balancing by vehicle |
+**Its ParameterId places it a generation earlier.** Every live enumerated DID sits
+at `ParameterId` 109–131. The orphans are 86 and 87. That matches the pattern
+visible throughout this database, where a revised row is appended with a higher id
+and the original is disabled or removed.
 
-Set against the live definition:
+**Its signals have named successors.** The retired byte was not reinterpreted — it
+was split into four separate DIDs:
 
-| Bit | Live (`$3479`, pid 109) | Orphaned (pid 86) |
-|----:|-------------------------|-------------------|
-| 0 | VCU HVIL Detect | Battery Derate Status |
-| 1 | VCU Insulation Control | **Cell Balance Status** |
-| 2 | **Cell Balance Status** | Insulation Measurement Enable |
-| 3 | – | Charging Enabled Status |
-| 5 | – | Initiation of balancing by vehicle |
+| Retired (pid 86) | Now lives at |
+|------------------|--------------|
+| `0x01` Battery Derate Status | **`$340F`** BMS Derate Flag, mask `0x01` |
+| `0x02` BMS_CellBalanceStatus | **`$3479`** BMS Cell Balance Status Flag, mask **`0x04`** |
+| `0x04` Insulation Measurement Enable | **`$3414`** BMS Insulation Function Enable/Disable |
+| `0x08` Charging Enabled Status | **`$3493`** VCU Flag, mask `0x02` |
+| `0x20` Initiation of cell balancing by vehicle | no successor in the current table |
 
-**Balancing and insulation are swapped between the two.** That is the trap: read
-the wrong one and you get "insulation" where you meant "balancing", or the reverse,
-with nothing to warn you.
+Two of those carry the **identical signal name** across the move — *Battery Derate
+Status* and *Charging Enabled Status* — which is what makes this a documented
+migration rather than a guess.
 
-The orphaned set also fills in bits the live definition leaves blank — bit 3
-(charging) and bit 5 (a balancing request from the vehicle). So a byte value above
-7 is not corruption; it is a bit the live row simply does not describe.
+The relay byte went the same way: retired `ParameterId` 87 held the three
+contactors on `0x02`/`0x04`/`0x08`, and the current `$3404` holds the same three on
+`0x01`/`0x02`/`0x04`. Re-laid-out, not reinterpreted.
 
-The same pattern shows on `$3404`: the live definition puts the relays on
-`0x01`/`0x02`/`0x04`, while the orphaned pid 87 rows put them on
-`0x02`/`0x04`/`0x08`.
+### What this means for the upper bits
+
+Because charging moved to `$3493` and derate moved to `$340F`, bits 3–7 of `$3479`
+carry **no known meaning at all** on the current firmware. A value above 7 is not
+the old map showing through — the old map's signals are elsewhere now. If you see
+one, it is genuinely undocumented, and worth reporting.
 
 ## Reading it safely
 
-With two candidate maps, the reliable approach is to trust only what they agree on
-and treat the rest as unknown until it is measured.
-
 ```python
-raw = read_did(0x3479)
-
-balancing_live   = bool(raw & 0x04)   # live definition
-balancing_orphan = bool(raw & 0x02)   # orphaned definition
-
-if balancing_live and balancing_orphan:
-    state = "balancing"          # both agree
-elif not balancing_live and not balancing_orphan:
-    state = "not balancing"      # both agree
-else:
-    state = "unresolved"         # the maps disagree - do not guess
+balancing = bool(read_did(0x3479) & 0x04)
 ```
 
-Always test with `raw & mask`, never equality. The database's own `ResultByte`
-column is inconsistent on this DID — `0x02` stores its masked value (`2`) while
-`0x04` stores `1` — so comparing the byte against `ResultByte` gives the wrong
-answer for at least one signal whichever convention you assume.
+Test with `raw & mask`, never equality. The database's `ResultByte` column is
+inconsistent on this DID — `0x02` stores its masked value (`2`) while `0x04` stores
+`1` — so comparing the byte against `ResultByte` gives the wrong answer for at
+least one signal whichever convention you assume.
 
 ```python
 balancing = bool(raw & 0x04)      # correct
@@ -109,28 +99,19 @@ balancing = (raw == 4)            # wrong: misses 5, 6, 7
 balancing = (raw & 0x04) == 1     # wrong: 0x04 & 4 is 4, never 1
 ```
 
-## Settling it on the car
+## Cross-checking on the car
 
-Bit 3 is the discriminator, because charging is the one condition you can switch on
-deliberately.
+`$3479` no longer carries charging state, so read **`$3493` VCU Flag** alongside it:
+`0x01` fast charging, `0x02` charging enabled, `0x04` slow charging. Together they
+tell you whether balancing is running *and* whether the car is in the condition
+that normally triggers it.
 
-**Read `$3479` plugged into an AC charger, then again unplugged.**
+Useful confirmations:
 
-- If a `+8` appears while charging and clears when you unplug, **bit 3 is the
-  charging flag** — this firmware follows the orphaned definition, and balancing is
-  therefore `0x02`.
-- If nothing changes, charging is not in this byte, and the live definition
-  (balancing on `0x04`) stands.
-
-Two DIDs corroborate independently:
-
-- **`$3565`** BMS HVIL Hardwire Signal, on the BMS itself.
-- **`$3561`** Battery HVIL Sense PWM duty cycle, on the VECU (`0x7E3`).
-
-And **`$3493` VCU Flag** carries charging state as its own DID — `0x01` fast
-charging, `0x02` charging enabled, `0x04` slow charging. Reading it alongside
-`$3479` tells you whether the car is charging without needing to decide what bit 3
-means.
+- **`$340E`** BMS Operation Mode — should read `3` (Hvactive) or `2` (Precharge)
+  while the pack is live.
+- **`$340F`** BMS Derate Flag — the signal that used to share the packed byte.
+- **`$3565`** BMS HVIL Hardwire Signal, and **`$3561`** on the VECU (`0x7E3`).
 
 ## Related DIDs
 
